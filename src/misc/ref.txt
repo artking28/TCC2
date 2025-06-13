@@ -1,0 +1,11 @@
+
+Link das paginas:
+    https://www.camara.leg.br/busca-portal?contextoBusca=BuscaProposicoes&pagina=1&order=relevancia&abaEspecifica=true&tipos=PEC,PLP,PL,MPV,PLV,PDL,PRC,REQ,RIC,RCP,MSC,INC
+
+Selector pro link das leis:
+    "div#lista-resultados > ul h6 > a"
+
+Link para o documento:
+    "h3.inteiroTeor a"
+    
+    
