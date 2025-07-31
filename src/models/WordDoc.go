@@ -5,41 +5,34 @@ import (
 	"gorm.io/gorm"
 )
 
-type WordDoc struct {
-	ID        uint64 `json:"id"        gorm:"column:id;primary_key;auto_increment;notnull"`
-	DocID     uint64 `json:"docId"     gorm:"column:docId;notnull;uniqueIndex:compositeindex"`
-	WordID    uint64 `json:"wordId"    gorm:"column:wordId;notnull;uniqueIndex:compositeindex"`
-	Frequency uint   `json:"frequency" gorm:"column:frequency;notnull"`
+type InverseNGram struct {
+		Wd0Id uint64 `gorm:"column:wd0Id;uniqueIndex:compositeindex;notnull"`
+		Wd1Id uint64 `gorm:"column:wd1Id;uniqueIndex:compositeindex;"`
+		Wd2Id uint64 `gorm:"column:wd2Id;uniqueIndex:compositeindex;"`
+		DocId uint64 `gorm:"column:docId;uniqueIndex:compositeindex;notnull"`
+		Count uint64 `gorm:"column:count;notnull"`
+		Jump0 uint8  `gorm:"column:jump0;"`
+		Jump1 uint8  `gorm:"column:jump1;"`
+		
+		Document Document `gorm:"foreignKey:DocId;references:Id"`
+		Wd0 Word `gorm:"foreignKey:Wd0Id;references:Id"`
+		Wd1 Word `gorm:"foreignKey:Wd1Id;references:Id"`
+		Wd2 Word `gorm:"foreignKey:Wd2Id;references:Id"`
+	}
 
-	// Many-to-one
-	Word Word `json:"word" gorm:"foreignKey:WordID;references:ID"`
-	Doc  Doc  `json:"doc"  gorm:"foreignKey:DocID;references:ID"`
+func (this* InverseNGram) ToString() string {
+	id := fmt.Sprintf("%s-%s-%s", this.Wd0.Value, this.Wd1.Value, this.Wd2.Value)
+	return fmt.Sprintf("{ id: %s; count: %d; docId: %d }", id, this.Count, this.DocId)
 }
 
-func (this* WordDoc) ToString() string {
-	return fmt.Sprintf("{ id: %d; word: %s; wordId: %d; docId: %d }", this.ID, this.Word.Value, this.WordID, this.DocID)
-}
-
-func (this* WordDoc) TableName() string {
+func (this* InverseNGram) TableName() string {
 	return "WORD_DOC"
 }
 
-func (this *WordDoc) GetId() uint64 {
-	return this.ID
+func (this *InverseNGram) GetId() uint64 {
+	return 0
 }
 
-func (this *WordDoc) BeforeCreate(_ gorm.DB) error {
+func (this *InverseNGram) BeforeCreate(_ gorm.DB) error {
 	return nil
-}
-
-func GetInverseIndex(docs []WordDoc) (ret map[string]map[uint64]uint) {
-    ret = make(map[string]map[uint64]uint)
-    for _, doc := range docs {
-        wordKey := doc.Word.Value
-        if _, exists := ret[wordKey]; !exists {
-            ret[wordKey] = make(map[uint64]uint)
-        }
-        ret[wordKey][doc.DocID] = doc.Frequency
-    }
-    return ret
 }

@@ -6,7 +6,7 @@ import (
 )
 
 func LoadAccents() ([]string, error) {
-	out, err := os.ReadFile("../misc/replaces.json")
+	out, err := os.ReadFile("misc/replaces.json")
 	if err != nil {
 		return nil, err
 	}
