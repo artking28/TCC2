@@ -2,6 +2,7 @@ package models
 
 import (
 	"fmt"
+
 	"gorm.io/gorm"
 )
 
@@ -16,11 +17,11 @@ func NewWord(value string) *Word {
 	}
 }
 
-func (this* Word) ToString() string {
+func (this *Word) ToString() string {
 	return fmt.Sprintf("{ id: %d; value: %s }", this.ID, this.Value)
 }
 
-func (this* Word) TableName() string {
+func (this *Word) TableName() string {
 	return "WORD"
 }
 
@@ -28,6 +29,6 @@ func (this *Word) GetId() uint64 {
 	return this.ID
 }
 
-func (this *Word) BeforeCreate(_ gorm.DB) error {
+func (this *Word) BeforeCreate(_ *gorm.DB) error {
 	return nil
 }

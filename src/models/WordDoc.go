@@ -15,10 +15,10 @@ type InverseNGram struct {
 	Jump0 int8   `gorm:"column:jump0;"`
 	Jump1 int8   `gorm:"column:jump1;"`
 
-	Document Document `gorm:"foreignKey:DocId;references:Id"`
-	Wd0      Word     `gorm:"foreignKey:Wd0Id;references:Id"`
-	Wd1      Word     `gorm:"foreignKey:Wd1Id;references:Id"`
-	Wd2      Word     `gorm:"foreignKey:Wd2Id;references:Id"`
+	Document *Document `gorm:"foreignKey:DocId;references:ID"`
+	Wd0      *Word     `gorm:"foreignKey:Wd0Id;references:ID"`
+	Wd1      *Word     `gorm:"foreignKey:Wd1Id;references:ID"`
+	Wd2      *Word     `gorm:"foreignKey:Wd2Id;references:ID"`
 }
 
 func NewInverseNGram() *InverseNGram {
@@ -45,6 +45,6 @@ func (this *InverseNGram) GetId() uint64 {
 	return 0
 }
 
-func (this *InverseNGram) BeforeCreate(_ gorm.DB) error {
+func (this *InverseNGram) BeforeCreate(_ *gorm.DB) error {
 	return nil
 }
