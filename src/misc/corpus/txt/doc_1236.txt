@@ -1,0 +1,393 @@
+PROJETO DE LEI Nº
+
+, DE 2025
+
+(Do Sr. AMOM MANDEL)
+
+Estabelece medidas de proteção a
+crianças e adolescentes no acesso e
+uso dos meios digitais, mediante
+instrumentos de verificação etária,
+controle parental e classificação de
+conteúdos disponibilizados na internet.
+
+PL n.3434/2025
+
+Gabinete do Deputado Federal AMOM MANDEL – CIDADANIA/AM
+
+Apresentação: 15/07/2025 17:23:37.083 - Mesa
+
+CÂMARA DOS DEPUTADOS
+
+O Congresso Nacional decreta:
+
+Art. 1º Esta Lei estabelece medidas de proteção a crianças e adolescentes
+no acesso e uso dos meios digitais, mediante instrumentos de verificação etária,
+controle parental e classificação de conteúdos disponibilizados na internet.
+§ 1º Esta Lei aplica-se às aplicações de internet cujos serviços sejam
+ofertados a usuários residentes no Brasil, independentemente da localização da
+sede do seu provedor ou da infraestrutura utilizada para a prestação do serviço.
+§ 2º Regulamentação estabelecerá as hipóteses de inexigência, pelas
+aplicações de internet, do cumprimento das obrigações previstas nesta Lei, com
+base no número de usuários da aplicação e na probabilidade de acesso da
+aplicação por crianças e adolescentes, entre outros critérios.
+§ 3º Para efeito desta Lei, são consideradas as definições de “internet”,
+“terminal” e “aplicações de internet” estabelecidas pela Lei nº 12.965, de 23 de abril
+
+Art. 2º As lojas de aplicativos de internet deverão condicionar o
+descarregamento por criança ou adolescente das aplicações de internet
+___________________________________________________________________________
+Câmara dos Deputados | Anexo IV Gabinete 760 | – CEP: 70160-900 –
+Brasília-DF
+Tel (61) 3215-5760 | dep.amommandel@camara.leg.br
+
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD253137669900
+Assinado eletronicamente pelo(a) Dep. Amom Mandel
+
+*CD253137669900*
+
+de 2014 – Marco Civil da Internet.
+
+disponibilizadas em suas plataformas à autorização de um dos pais ou do
+responsável.
+§ 1º A loja de aplicativos de internet deverá realizar a aferição da idade do
+usuário por meio de mecanismos com elevado grau de confiabilidade, na forma da
+
+PL n.3434/2025
+
+Gabinete do Deputado Federal AMOM MANDEL – CIDADANIA/AM
+
+Apresentação: 15/07/2025 17:23:37.083 - Mesa
+
+CÂMARA DOS DEPUTADOS
+
+regulamentação.
+§ 2º A loja de aplicativos de internet deverá disponibilizar ferramenta que
+permita aos provedores das aplicações de internet disponibilizadas em suas
+plataformas acessar informações sobre a idade do usuário que descarregar a
+aplicação de internet por meio da plataforma.
+§ 3º O tratamento dos dados pessoais coletados para a aferição da idade do
+usuário deverá ser realizado exclusivamente para esta finalidade.
+§ 4º Considera-se loja de aplicativos de internet o provedor de aplicações de
+internet que disponibiliza e distribui por meio da sua plataforma aplicações de
+internet de sua propriedade ou desenvolvidas por terceiros para uso em terminais
+de outros usuários.
+§ 5º Para efeito das obrigações de que trata este artigo, equiparam-se às
+lojas de aplicativos de internet os fornecedores dos sistemas operacionais de
+dispositivos eletrônicos comercializados no Brasil que permitam o descarregamento
+de aplicações de internet para uso por meio do dispositivo.
+
+Art. 3º As aplicações de internet deverão classificar e sinalizar, com base em
+faixas
+
+etárias,
+
+os
+
+conteúdos
+
+considerados
+
+inadequados
+
+para
+
+crianças
+
+e
+
+adolescentes que forem disponibilizados em suas plataformas, inclusive por
+terceiros, na forma da regulamentação.
+
+adolescentes a conteúdos em desacordo com a sua faixa etária.
+
+___________________________________________________________________________
+Câmara dos Deputados | Anexo IV Gabinete 760 | – CEP: 70160-900 –
+Brasília-DF
+Tel (61) 3215-5760 | dep.amommandel@camara.leg.br
+
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD253137669900
+Assinado eletronicamente pelo(a) Dep. Amom Mandel
+
+*CD253137669900*
+
+§ 1º A aplicação de internet deverá vedar o acesso de crianças e
+
+§ 2º A classificação etária deverá considerar o desenvolvimento progressivo
+das capacidades das crianças e adolescentes.
+§ 3º Para efeito do cumprimento do disposto neste artigo, a aferição da idade
+do usuário pela aplicação de internet deverá ser realizada por meio do acesso à
+
+PL n.3434/2025
+
+Gabinete do Deputado Federal AMOM MANDEL – CIDADANIA/AM
+
+Apresentação: 15/07/2025 17:23:37.083 - Mesa
+
+CÂMARA DOS DEPUTADOS
+
+ferramenta de que trata o § 2º do art. 2º disponibilizada pela loja de aplicativos de
+internet ou pelo fornecedor do sistema operacional do terminal utilizado pelo
+usuário, sem prejuízo da realização de verificações complementares pela aplicação.
+
+Art. 4º As aplicações de internet deverão, na forma da regulamentação,
+disponibilizar ferramentas de controle parental de fácil acesso e usabilidade que
+ofereçam aos pais e responsáveis de crianças e adolescentes que sejam usuários
+da aplicação pelo menos as seguintes funcionalidades:
+I – possibilidade de restrição e bloqueio, total ou parcial:
+a) do acesso e da visibilidade de conteúdos e perfis com base na
+classificação etária;
+b) à realização de operações financeiras e comerciais por criança ou
+adolescente;
+c) ao compartilhamento da geolocalização e de outros dados pessoais de
+criança ou adolescente com usuários não autorizados;
+d) do uso de recursos utilizados pela aplicação para induzir a extensão do
+seu tempo de uso ou que possam estimular o seu uso compulsivo;
+e) da possibilidade de comunicação entre a criança ou adolescente e outros
+usuários por meio da aplicação;
+
+controle parental por criança ou adolescente;
+g) o carregamento de conteúdos audiovisuais;
+II – visualização e controle do tempo de uso da aplicação;
+___________________________________________________________________________
+Câmara dos Deputados | Anexo IV Gabinete 760 | – CEP: 70160-900 –
+Brasília-DF
+Tel (61) 3215-5760 | dep.amommandel@camara.leg.br
+
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD253137669900
+Assinado eletronicamente pelo(a) Dep. Amom Mandel
+
+*CD253137669900*
+
+f) a mudanças não autorizadas nas configurações das ferramentas de
+
+III – visualização das contas e perfis dos usuários com os quais a criança ou
+o adolescente mantém interação;
+IV – controle das configurações de privacidade e segurança da conta ou perfil
+da criança ou adolescente; e
+
+PL n.3434/2025
+
+Gabinete do Deputado Federal AMOM MANDEL – CIDADANIA/AM
+
+Apresentação: 15/07/2025 17:23:37.083 - Mesa
+
+CÂMARA DOS DEPUTADOS
+
+V – sinalização de forma destacada na plataforma de que as ferramentas de
+controle parental estão ativadas.
+§ 1º O provedor da aplicação deverá dar ampla publicidade da existência das
+ferramentas de que trata o caput, inclusive durante a instalação e o uso da
+aplicação.
+§ 2º O tratamento dos dados pessoais de crianças e adolescentes coletados
+para garantir o funcionamento das ferramentas de controle parental deverá ser
+realizado exclusivamente para essa finalidade.
+§ 3º Na instalação da aplicação, as ferramentas de controle parental deverão
+ser pré-configuradas de modo a oferecer o mais elevado nível de privacidade e
+segurança disponibilizado pela aplicação.
+
+Art. 5º Esta Lei entra em vigor 180 (cento e oitenta) dias após a sua
+publicação.
+
+JUSTIFICAÇÃO
+A democratização do acesso à internet, se por um lado oportuniza benefícios
+nas mais diversas esferas da vida humana, pelo outro introduz riscos e ameaças
+cometidos no mundo cibernético causam especial preocupação em relação aos
+seus efeitos sobre crianças e adolescentes, cujo nível de amadurecimento e
+___________________________________________________________________________
+Câmara dos Deputados | Anexo IV Gabinete 760 | – CEP: 70160-900 –
+Brasília-DF
+Tel (61) 3215-5760 | dep.amommandel@camara.leg.br
+
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD253137669900
+Assinado eletronicamente pelo(a) Dep. Amom Mandel
+
+*CD253137669900*
+
+para os cidadãos. O uso inadequado dos meios digitais e a escalada de crimes
+
+percepção da realidade por vezes impede o correto discernimento sobre os reais
+perigos advindos das redes virtuais.
+A matéria tem sido objeto de grande discussão em nível global, motivando
+diversos países a adotar políticas que visam garantir maior segurança e privacidade
+
+PL n.3434/2025
+
+Gabinete do Deputado Federal AMOM MANDEL – CIDADANIA/AM
+
+Apresentação: 15/07/2025 17:23:37.083 - Mesa
+
+CÂMARA DOS DEPUTADOS
+
+no acesso de menores à internet. A título de ilustração, ao aprovar o Regulamento
+dos Serviços Digitais , em 2022, a União Europeia instituiu importantes medidas de
+proteção a crianças e adolescentes nos meios cibernéticos, como a adoção de
+instrumentos de controle parental e de verificação da idade dos usuários de
+aplicativos de internet.
+No Brasil, em alinhamento a essa tendência, o Conselho Nacional dos
+Direitos das Crianças e dos Adolescentes – Conanda – expediu a Resolução nº 245,
+de 5 de abril de 2024, que “Dispõe sobre os direitos das crianças e adolescentes em
+ambiente digital”. A norma representou importante avanço sobre o tema no País, ao
+impor responsabilidades e deveres de cuidado aos provedores de internet na oferta
+de serviços ao público jovem.
+Há operações de combate ao armazenamento de conteúdo relacionado a
+abuso sexual infantil na internet, como, por exemplo, a Operação Coletores 3, que
+recentemente prendeu um idoso na Zona Leste de Manaus, Amazonas, por possuir
+dois celulares, dois HDs externos e três pen-drives contendo pornografia infantil,
+contudo, essas operações esporádicas não são o suficiente para combater o
+problema.
+Apesar do inegável mérito da iniciativa promovida pelo Conanda, a ausência
+dispositivos legais que ofereçam o necessário suporte jurídico à imposição de
+obrigações às plataformas digitais quanto à proteção de crianças e adolescentes no
+ambiente virtual. O projeto de lei ora oferecido visa suprir essa lacuna do
+___________________________________________________________________________
+Câmara dos Deputados | Anexo IV Gabinete 760 | – CEP: 70160-900 –
+Brasília-DF
+Tel (61) 3215-5760 | dep.amommandel@camara.leg.br
+
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD253137669900
+Assinado eletronicamente pelo(a) Dep. Amom Mandel
+
+*CD253137669900*
+
+de legislação federal específica sobre a matéria demanda a aprovação de
+
+ordenamento legal brasileiro, ao propor medidas de proteção a menores no uso dos
+meios digitais. Nesse sentido, a iniciativa impõe aos provedores de aplicativos de
+internet a obrigação da oferta de três instrumentos essenciais para aumentar a
+privacidade e segurança no acesso à internet: verificação etária, controle parental e
+classificação de conteúdos.
+
+PL n.3434/2025
+
+Gabinete do Deputado Federal AMOM MANDEL – CIDADANIA/AM
+
+Apresentação: 15/07/2025 17:23:37.083 - Mesa
+
+CÂMARA DOS DEPUTADOS
+
+De acordo com o projeto, as lojas de aplicativos de internet só poderão
+permitir o download de aplicações disponibilizadas em suas plataformas por
+crianças e adolescentes com a autorização de um dos pais ou do responsável. No
+que diz respeito à aferição da idade dos usuários, o projeto concentra a
+responsabilidade pela verificação etária nas lojas de aplicativos, desonerando as
+demais aplicações de internet dessa obrigação. A proposição também determina
+que a informação sobre a idade do usuário obtida pela loja de aplicativos deverá ser
+repassada para o provedor de cada aplicação baixada pelo menor, por meio de
+interface previamente definida. A intenção da medida é permitir que as aplicações
+disponham dos dados necessários para aplicar as restrições de acesso a conteúdo
+e demais controles estabelecidos pelo projeto.
+A estratégia escolhida de centralizar os mecanismos de verificação etária nas
+lojas de aplicativos leva em consideração a gigantesca soma de aplicações
+ofertadas hoje no mercado, cujo download é disponibilizado por intermédio de
+limitado número de lojas virtuais. O objetivo, portanto, é mitigar o risco de
+comprometimento dos dados pessoais de crianças e adolescentes, por meio da
+centralização da gestão das informações que comprovam a idade dos usuários nas
+lojas de aplicativos. Além disso, a proposta evita que os pais e responsáveis sejam
+obrigados
+
+a
+
+conhecer e
+
+gerenciar
+
+as ferramentas
+
+de
+
+verificação
+
+etária
+
+que poderia desestimular o uso de tais instrumentos.
+
+___________________________________________________________________________
+Câmara dos Deputados | Anexo IV Gabinete 760 | – CEP: 70160-900 –
+Brasília-DF
+Tel (61) 3215-5760 | dep.amommandel@camara.leg.br
+
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD253137669900
+Assinado eletronicamente pelo(a) Dep. Amom Mandel
+
+*CD253137669900*
+
+disponibilizadas por todos os aplicativos utilizados pela criança ou adolescente, o
+
+O projeto também determina que as aplicações de internet deverão classificar
+e sinalizar, com base em faixas etárias, os conteúdos considerados inadequados
+para crianças e adolescentes que forem disponibilizados em suas plataformas,
+inclusive por terceiros. Estabelece ainda que as aplicações deverão vedar o acesso
+de menores a conteúdos em desacordo com a sua faixa etária, levando em
+
+PL n.3434/2025
+
+Gabinete do Deputado Federal AMOM MANDEL – CIDADANIA/AM
+
+Apresentação: 15/07/2025 17:23:37.083 - Mesa
+
+CÂMARA DOS DEPUTADOS
+
+consideração a classificação realizada pela plataforma e os dados sobre a idade do
+usuário informados pela loja de aplicativos.
+Em complemento, a proposição torna obrigatória a oferta de ferramentas de
+controle parental pelas aplicações de internet, que deverão contar com um conjunto
+mínimo de funcionalidades. Dentre essas funcionalidades, incluem-se instrumentos
+que permitam aos pais e responsáveis limitar o acesso e a visibilidade de conteúdos
+e perfis com base na classificação etária, bloquear a realização de operações
+financeiras e comerciais e restringir o compartilhamento de dados pessoais.
+Também deverão ser oferecidos mecanismos para desativar os recursos utilizados
+pela aplicação para induzir a extensão do seu tempo de uso ou que possam
+estimular o seu uso compulsivo, como barras de rolagem infinitas, reprodução
+automática de vídeos, recompensas e notificações persistentes. Tais ferramentas
+deverão ainda permitir o controle do tempo de uso da aplicação e a visualização dos
+perfis dos usuários com os quais a criança ou o adolescente mantém comunicação,
+entre outros recursos.
+Por fim, dada a imensa quantidade e diversidade de aplicativos disponíveis
+no mercado, a iniciativa atribui à regulamentação a possibilidade de dispensar
+categorias de aplicações de internet do cumprimento das obrigações estabelecidas
+pelo projeto, com base em critérios como o número de usuários e a probabilidade de
+dias, de forma a permitir que os provedores possam adaptar suas plataformas às
+determinações estabelecidas pela proposição.
+___________________________________________________________________________
+Câmara dos Deputados | Anexo IV Gabinete 760 | – CEP: 70160-900 –
+Brasília-DF
+Tel (61) 3215-5760 | dep.amommandel@camara.leg.br
+
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD253137669900
+Assinado eletronicamente pelo(a) Dep. Amom Mandel
+
+*CD253137669900*
+
+uso da aplicação por crianças e adolescentes. Estabelece ainda vacatio legis de 180
+
+Entendemos que as medidas propostas representam uma importante e
+necessária contribuição desta Casa para oferecer maior segurança e privacidade no
+acesso de crianças e adolescentes aos meios digitais, motivo pelo qual clamamos
+pelo apoio dos nobres Pares para a sua aprovação.
+
+de 2025.
+
+___________________________________________________________________________
+Câmara dos Deputados | Anexo IV Gabinete 760 | – CEP: 70160-900 –
+Brasília-DF
+Tel (61) 3215-5760 | dep.amommandel@camara.leg.br
+
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD253137669900
+Assinado eletronicamente pelo(a) Dep. Amom Mandel
+
+*CD253137669900*
+
+Sala das Sessões, em
+de
+Deputado AMOM MANDEL
+
+PL n.3434/2025
+
+Gabinete do Deputado Federal AMOM MANDEL – CIDADANIA/AM
+
+Apresentação: 15/07/2025 17:23:37.083 - Mesa
+
+CÂMARA DOS DEPUTADOS
+
+

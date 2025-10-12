@@ -1,0 +1,193 @@
+PROJETO DE LEI Nº
+
+, DE
+
+DE 2025
+
+(Do Senhor Marcos Tavares)
+Institui o Prontuário Eletrônico Nacional Único
+(PENU), integrado ao Cadastro de Pessoas
+Físicas (CPF), de uso obrigatório em todo o
+
+PL n.4365/2025
+
+DEPUTADO FEDERAL MARCOS TAVARES
+
+Apresentação: 02/09/2025 14:33:05.330 - Mesa
+
+CÂMARA DOS DEPUTADOS
+
+território nacional, para registro padronizado e
+seguro das informações de saúde dos cidadãos,
+abrangendo o Sistema Único de Saúde (SUS) e
+a rede privada, e dá outras providências.
+O CONGRESSO NACIONAL decreta:
+Art. 1º Fica instituído o Prontuário Eletrônico Nacional Único (PENU),
+como sistema oficial de registro de informações de saúde da população
+brasileira, de caráter individual, permanente, sigiloso e acessível em todo o
+território nacional.
+Art. 2º O PENU será integrado ao Cadastro de Pessoas Físicas (CPF),
+constituindo-se como identificador único de saúde de cada cidadão.
+Art. 3º O PENU deverá conter, no mínimo, as seguintes informações:
+I – histórico de consultas, diagnósticos, prescrições e procedimentos
+médicos;
+II – exames laboratoriais e de imagem realizados;
+III – registro de internações hospitalares e atendimentos de urgência e
+emergência;
+IV – histórico vacinal;
+V – dados de alergias, doenças crônicas e condições de risco;
+VII – dados de telemedicina e atendimentos remotos, quando aplicável.
+Art. 4º O sistema deverá garantir:
+I – interoperabilidade entre unidades do SUS e a saúde suplementar
+(planos privados e clínicas particulares);
+II – uso de tecnologia blockchain para garantir integridade, inviolabilidade
+e rastreabilidade de acessos;
+_________________________________________________________________________________________________________________________
+Praça dos Três Poderes - Anexo IV – Gabinete 611 - Câmara dos Deputados - CEP: 70.160-900 – Brasília/DF
+Contato: (61) 3215-5611 e-mail: dep.marcostavares@camara.leg.br
+
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD254995214700
+Assinado eletronicamente pelo(a) Dep. Marcos Tavares
+
+*CD254995214700*
+
+VI – informações sobre uso contínuo de medicamentos;
+
+III – acesso imediato e seguro aos profissionais de saúde devidamente
+autorizados;
+IV – direito do paciente de acessar e compartilhar suas informações,
+inclusive por meio de aplicativo digital próprio;
+V – uso de Inteligência Artificial para apoio ao diagnóstico, prevenção de
+doenças crônicas e gestão epidemiológica, observada a legislação de proteção
+
+PL n.4365/2025
+
+DEPUTADO FEDERAL MARCOS TAVARES
+
+Apresentação: 02/09/2025 14:33:05.330 - Mesa
+
+CÂMARA DOS DEPUTADOS
+
+de dados pessoais.
+Art. 5º O acesso ao PENU será regulado pela Lei Geral de Proteção de
+Dados (LGPD – Lei nº 13.709/2018), sendo vedada a utilização das informações
+para fins comerciais, discriminatórios ou não autorizados.
+Art. 6º O financiamento do PENU será realizado com recursos da União,
+por meio do Fundo Nacional de Saúde, podendo contar com:
+I – emendas parlamentares individuais e de bancada;
+II – parcerias público-privadas em tecnologia da informação, observada a
+legislação vigente;
+III – cooperação internacional em saúde digital.
+Art. 7º Compete ao Ministério da Saúde coordenar a implementação e a
+manutenção do PENU, em articulação com a Agência Nacional de Saúde
+Suplementar (ANS), estados, municípios e entidades privadas da saúde.
+Art. 8º O Poder Executivo regulamentará esta Lei no prazo de 90 (noventa)
+dias a contar da data de sua publicação.
+Art. 9º Esta Lei entra em vigor após decorridos 180 (cento e oitenta) dias
+de sua publicação.
+de
+
+de 2025.
+
+MARCOS TAVARES
+Deputado Federal
+PDT-RJ
+
+_________________________________________________________________________________________________________________________
+Praça dos Três Poderes - Anexo IV – Gabinete 611 - Câmara dos Deputados - CEP: 70.160-900 – Brasília/DF
+Contato: (61) 3215-5611 e-mail: dep.marcostavares@camara.leg.br
+
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD254995214700
+Assinado eletronicamente pelo(a) Dep. Marcos Tavares
+
+*CD254995214700*
+
+Sala das Sessões, em
+
+JUSTIFICATIVA
+O presente Projeto de Lei propõe a criação do Prontuário Eletrônico
+Nacional Único (PENU), iniciativa inédita e inovadora no país, que visa integrar,
+em uma única plataforma digital, todas as informações de saúde do cidadão
+brasileiro, vinculadas ao seu CPF, abrangendo tanto o Sistema Único de Saúde
+
+PL n.4365/2025
+
+DEPUTADO FEDERAL MARCOS TAVARES
+
+Apresentação: 02/09/2025 14:33:05.330 - Mesa
+
+CÂMARA DOS DEPUTADOS
+
+(SUS) quanto a saúde suplementar.
+O Brasil sofre hoje com a fragmentação de dados clínicos: pacientes
+frequentemente realizam exames e procedimentos repetidos por falta de
+integração entre serviços, gerando desperdício estimado entre 20% e 30% dos
+gastos em saúde, conforme estudos da Organização Pan-Americana da Saúde
+(OPAS). Essa realidade impacta negativamente a eficiência do SUS, aumenta os
+custos da saúde suplementar e compromete a qualidade do atendimento aos
+cidadãos.
+A implementação de um prontuário eletrônico nacional unificado terá
+impacto direto na redução de custos, na agilidade dos atendimentos e na
+precisão diagnóstica. Em situações de urgência, como acidentes ou emergências
+médicas, médicos poderão acessar imediatamente o histórico clínico do paciente,
+evitando erros e salvando vidas. Além disso, o sistema possibilitará o
+acompanhamento contínuo de pacientes crônicos, integrando dados de
+consultas, telemedicina, exames e internações.
+A proposta também fortalece a vigilância epidemiológica em âmbito
+nacional. Ao reunir dados em tempo real, o PENU permitirá a identificação
+precoce de surtos e epidemias, subsidiando ações de contenção mais rápidas e
+eficientes. Essa integração está alinhada ao conceito de “Saúde Única” (One
+Health), defendido pela Organização Mundial da Saúde (OMS), que considera a
+Do ponto de vista tecnológico, o uso de blockchain e inteligência artificial
+garantirá segurança, confiabilidade e inovação. A rastreabilidade do acesso
+assegurará que qualquer uso indevido seja identificado, reforçando a proteção de
+dados sensíveis, conforme determina a Lei Geral de Proteção de Dados (LGPD).
+Além disso, o paciente será protagonista, com pleno acesso às suas informações
+de saúde por meio de aplicativos digitais.
+_________________________________________________________________________________________________________________________
+Praça dos Três Poderes - Anexo IV – Gabinete 611 - Câmara dos Deputados - CEP: 70.160-900 – Brasília/DF
+Contato: (61) 3215-5611 e-mail: dep.marcostavares@camara.leg.br
+
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD254995214700
+Assinado eletronicamente pelo(a) Dep. Marcos Tavares
+
+*CD254995214700*
+
+saúde humana, animal e ambiental de forma interconectada.
+
+Por fim, esta proposição se fundamenta no artigo 6º da Constituição
+Federal, que reconhece a saúde como direito social, e no artigo 196, que a
+estabelece como direito de todos e dever do Estado, garantido mediante políticas
+sociais e econômicas que visem à redução do risco de doenças e ao acesso
+universal e igualitário às ações e serviços de saúde. O Prontuário Eletrônico
+Nacional Único (PENU) é, portanto, um passo decisivo rumo a um sistema de
+
+PL n.4365/2025
+
+DEPUTADO FEDERAL MARCOS TAVARES
+
+Apresentação: 02/09/2025 14:33:05.330 - Mesa
+
+CÂMARA DOS DEPUTADOS
+
+saúde mais moderno, transparente, eficiente e centrado no cidadão.
+Sala das Sessões, em
+
+de
+
+de 2025.
+
+*CD254995214700*
+
+MARCOS TAVARES
+Deputado Federal
+PDT-RJ
+
+_________________________________________________________________________________________________________________________
+Praça dos Três Poderes - Anexo IV – Gabinete 611 - Câmara dos Deputados - CEP: 70.160-900 – Brasília/DF
+Contato: (61) 3215-5611 e-mail: dep.marcostavares@camara.leg.br
+
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD254995214700
+Assinado eletronicamente pelo(a) Dep. Marcos Tavares
+
+

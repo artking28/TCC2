@@ -1,0 +1,429 @@
+.... , DE 2024.
+
+(Da Sra. Júlia Zanatta e outros)
+
+PEC n.35/2025
+
+PROPOSTA DE EMENDA À CONSTITUIÇÃO Nº
+
+Apresentação: 23/09/2025 10:25:23.600 - Mesa
+
+CÂMARA DOS DEPUTADOS
+Gabinete da Deputada JÚLIA ZANATTA – PL/SC
+
+Altera a Constituição Federal para
+acrescentar os §§ 4º e 5º ao art. 164 para
+determinar que a criação, emissão e
+circulação de qualquer moeda digital do
+Banco Central (CBDC) ou outro ativo digital
+requer aprovação das duas Casas do
+Congresso Nacional, bem como para
+determinar que a extinção do papel-moeda
+forçada no território nacional é vedada, salvo
+se aprovada em cada uma das duas Casas
+do Congresso Nacional.
+As Mesas da Câmara dos Deputados e do Senado Federal,
+nos termos do § 3º do art. 60 da Constituição Federal, promulgam a seguinte
+Emenda ao texto constitucional:
+Art. 1º Acrescenta os §§4º e 5º ao art. 164 da Constituição
+Federal de 1988, que passa a vigorar com os seguintes acréscimos:
+“Art. 164........................................................................................
+...............................................................................................................................
+§ 4º A criação, emissão e circulação de qualquer moeda digital
+de banco central (CBDC) ou outro ativo digital emitido pela União, requer
+(NR)
+§ 5º A extinção do papel-moeda como meio de pagamento de
+curso forçado no território nacional é vedada, salvo se aprovada por dois terços
+dos membros de cada uma das Casas do Congresso Nacional. (NR)”
+Art. 2º Esta Lei entra em vigor na data de sua publicação.
+Câmara dos Deputados | Anexo IV – 4º andar – Gabinete 448 | 70100-970 Brasília DF
+Tel (61) 3215-5448 | dep.juliazanatta@camara.leg.br
+
+Para verificar as assinaturas, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD243829156600
+Assinado eletronicamente pelo(a) Dep. Julia Zanatta e outros
+
+*CD243829156600*
+
+aprovação da maioria qualificada nas duas Casas do Congresso Nacional.
+
+A introdução de Moedas Digitais de Bancos Centrais (CBDCs)
+gerou intensos debates devido aos riscos para a privacidade e liberdade
+financeira dos cidadãos. Conforme analistas do Cato Institute, as CBDCs
+
+PEC n.35/2025
+
+JUSTIFICAÇÃO
+
+Apresentação: 23/09/2025 10:25:23.600 - Mesa
+
+CÂMARA DOS DEPUTADOS
+Gabinete da Deputada JÚLIA ZANATTA – PL/SC
+
+ameaçam a privacidade ao permitir que governos rastreiem transações
+detalhadamente, facilitando uma vigilância estatal sem precedentes e
+comprometendo a autonomia financeira individual. 1
+O economista Nouriel Roubini também aponta que, ao contrário
+das criptomoedas descentralizadas, as CBDCs, sendo controladas pelo
+Estado, podem ser usadas para censura e controle social. Essa centralização
+favorece a imposição de restrições arbitrárias, abrindo espaço para um tipo de
+interferência que pode facilmente ser explorado de forma autoritária. 2
+Outro ponto de alerta é o impacto das CBDCs no sistema
+bancário tradicional. Ao permitir que cidadãos mantenham fundos diretamente
+com o banco central, essas moedas podem reduzir a necessidade de depósitos
+em bancos comerciais, desestabilizando a economia ao enfraquecer sua
+função de intermediação e concessão de crédito, conforme destaca o Financial
+Services Committee, que enfatiza a importância de preservar o papel dos
+bancos comerciais para a estabilidade econômica. 3
+Adicionalmente,
+
+há
+
+preocupações
+
+com
+
+a
+
+segurança
+
+cibernética. A centralização dos dados financeiros em uma CBDC operada pelo
+banco central aumenta a vulnerabilidade a ataques de larga escala.
+Especialistas da plataforma River sublinham que proteger a segurança de uma
+
+1
+
+https://www.cato.org/visual-feature/risks-of-cbdcs
+
+2
+
+https://br.cointelegraph.com/news/crypto-critic-nouriel-roubini-central-bankdigital-currencies-wont-be-on-blockchain
+3
+
+https://financialservices.house.gov/news/documentsingle.aspx?
+DocumentID=409278
+Câmara dos Deputados | Anexo IV – 4º andar – Gabinete 448 | 70100-970 Brasília DF
+Tel (61) 3215-5448 | dep.juliazanatta@camara.leg.br
+
+Para verificar as assinaturas, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD243829156600
+Assinado eletronicamente pelo(a) Dep. Julia Zanatta e outros
+
+*CD243829156600*
+
+CBDC exige medidas cibernéticas de alta complexidade, sem as quais a
+
+comprometidas.4
+O cofundador da Ethereum, Vitalik Buterin, também expressou
+reservas em relação às CBDCs, afirmando que elas "estão indo na direção
+errada". Para Buterin, ao invés de promover a descentralização, as CBDCs
+
+PEC n.35/2025
+
+privacidade e a integridade do sistema financeiro nacional podem ser
+
+Apresentação: 23/09/2025 10:25:23.600 - Mesa
+
+CÂMARA DOS DEPUTADOS
+Gabinete da Deputada JÚLIA ZANATTA – PL/SC
+
+fortalecem o controle estatal, o que ameaça a autonomia financeira dos
+cidadãos. Ele ressalta que essa falta de inovação descentralizadora torna as
+CBDCs instrumentos de controle, e não de avanço econômico. 5
+No Brasil, a implementação do Drex – versão nacional da
+CBDC – traz preocupações adicionais devido à sua programabilidade. Em
+evento recente, Eric Altafim, diretor do Itaú Unibanco, destacou que o Drex
+poderia direcionar pagamentos do Bolsa Família exclusivamente para a compra
+de alimentos ou limitar transações dentro de um raio geográfico específico.
+Essas características criam uma via de controle governamental potencialmente
+invasiva sobre os gastos dos cidadãos.6
+Além disso, tramitam projetos de lei no Congresso que buscam
+proibir o uso de dinheiro físico, como o PL 4068/2020. A combinação entre o
+uso obrigatório de uma moeda digital estatal e a eliminação do papel-moeda
+configuraria uma ameaça direta à liberdade financeira, uma vez que forçaria
+todas as transações a ocorrerem dentro de um sistema monitorado pelo
+governo.7
+Proibir ou limitar o Drex é, portanto, essencial para proteger a
+liberdade dos brasileiros e preservar uma sociedade livre e democrática. Como
+moeda digital centralizada, o Drex facilita um controle estatal perigoso,
+
+4
+
+https://river.com/learn/risks-of-cbdc
+
+5
+
+https://exame.com/future-of-money/criador-da-ethereum-critica-moedas-digitaisde-bancos-centrais-estao-indo-na-direcao-errada
+6
+
+https://br.cointelegraph.com/news/drex-may-expand-state-control-over-moneyuse
+7
+
+https://www.campograndenews.com.br/enquetes/voce-concorda-com-a-extincaodo-dinheiro-em-especie-no-brasil
+Câmara dos Deputados | Anexo IV – 4º andar – Gabinete 448 | 70100-970 Brasília DF
+Tel (61) 3215-5448 | dep.juliazanatta@camara.leg.br
+
+Para verificar as assinaturas, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD243829156600
+Assinado eletronicamente pelo(a) Dep. Julia Zanatta e outros
+
+*CD243829156600*
+
+eliminando alternativas de transações privadas. Este projeto de emenda à
+
+sistema financeiro, preservando a autonomia dos cidadãos e assegurando que
+o poder de decisão sobre suas finanças permaneça em suas próprias mãos.
+Desta forma, norteado pelas premissas acima contamos com o
+apoio dos Nobres Pares para a discussão e a aprovação da presente Proposta
+
+PEC n.35/2025
+
+Constituição visa impedir que o Estado detenha controle absoluto sobre o
+
+Apresentação: 23/09/2025 10:25:23.600 - Mesa
+
+CÂMARA DOS DEPUTADOS
+Gabinete da Deputada JÚLIA ZANATTA – PL/SC
+
+de Emenda à Constituição.
+
+Sala das Sessões, em 03 de novembro de 2024.
+
+*CD243829156600*
+
+Deputada Federal Júlia Zanatta (PL/SC).
+
+Câmara dos Deputados | Anexo IV – 4º andar – Gabinete 448 | 70100-970 Brasília DF
+Tel (61) 3215-5448 | dep.juliazanatta@camara.leg.br
+
+Para verificar as assinaturas, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD243829156600
+Assinado eletronicamente pelo(a) Dep. Julia Zanatta e outros
+
+Deputado(s)
+1 Dep. Julia Zanatta (PL/SC)
+2 Dep. José Medeiros (PL/MT)
+3 Dep. Marcos Pollon (PL/MS)
+4 Dep. Gustavo Gayer (PL/GO)
+5 Dep. Daniela Reinehr (PL/SC)
+6 Dep. Roberto Duarte (REPUBLIC/AC)
+7 Dep. Sargento Gonçalves (PL/RN)
+8 Dep. Bia Kicis (PL/DF)
+9 Dep. Silvia Waiãpi (PL/AP)
+10 Dep. Delegado Paulo Bilynskyj (PL/SP)
+11 Dep. Zé Trovão (PL/SC)
+12 Dep. Gilson Marques (NOVO/SC)
+13 Dep. Chris Tonietto (PL/RJ)
+14 Dep. Altineu Côrtes (PL/RJ)
+15 Dep. Mario Frias (PL/SP)
+16 Dep. Dra. Mayra Pinheiro (PL/CE)
+17 Dep. Luiz Lima (PL/RJ)
+18 Dep. Daniel Freitas (PL/SC)
+19 Dep. Gláucia Santiago (PL/MG)
+20 Dep. Sargento Fahur (PSD/PR)
+21 Dep. Jefferson Campos (PL/SP)
+22 Dep. Roberta Roma (PL/BA)
+23 Dep. Pr. Marco Feliciano (PL/SP)
+24 Dep. General Girão (PL/RN)
+25 Dep. Reinhold Stephanes (PSD/PR)
+26 Dep. Coronel Assis (UNIÃO/MT)
+27 Dep. Lincoln Portela (PL/MG)
+28 Dep. Delegado Caveira (PL/PA)
+29 Dep. Zucco (PL/RS)
+30 Dep. Lafayette de Andrada (REPUBLIC/MG)
+31 Dep. Luiz Fernando Vampiro (MDB/SC)
+32 Dep. Sóstenes Cavalcante (PL/RJ)
+Para verificar as assinaturas, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD243829156600
+Assinado eletronicamente pelo(a) Dep. Julia Zanatta e outros
+
+PEC n.35/2025
+
+Proposta de Emenda à Constituição
+
+Apresentação: 23/09/2025 10:25:23.600 - Mesa
+
+CÂMARA DOS DEPUTADOS
+Infoleg - Autenticador
+
+35 Dep. Coronel Ulysses (UNIÃO/AC)
+36 Dep. Mauricio Marcon (PODE/RS)
+37 Dep. Messias Donato (REPUBLIC/ES)
+38 Dep. Cobalchini (MDB/SC)
+39 Dep. Lula da Fonte (PP/PE)
+40 Dep. Eduardo da Fonte (PP/PE)
+41 Dep. Pezenti (MDB/SC)
+42 Dep. Padovani (UNIÃO/PR)
+43 Dep. Carla Zambelli (PL/SP)
+44 Dep. Diego Garcia (REPUBLIC/PR)
+45 Dep. Paulo Freire Costa (PL/SP)
+46 Dep. Ricardo Guidi (PL/SC)
+47 Dep. General Pazuello (PL/RJ)
+48 Dep. Marcelo Moraes (PL/RS)
+49 Dep. Professor Alcides (PL/GO)
+50 Dep. Bibo Nunes (PL/RS)
+51 Dep. José Nelto (UNIÃO/GO)
+52 Dep. Adriana Ventura (NOVO/SP)
+53 Dep. Coronel Chrisóstomo (PL/RO)
+54 Dep. Soraya Santos (PL/RJ)
+55 Dep. Filipe Martins (PL/TO)
+56 Dep. Lucas Redecker (PSDB/RS)
+57 Dep. Dani Cunha (UNIÃO/RJ)
+58 Dep. Allan Garcês (PP/MA)
+59 Dep. Marcelo Crivella (REPUBLIC/RJ)
+60 Dep. Delegado Éder Mauro (PL/PA)
+61 Dep. Duarte Jr. (PSB/MA)
+62 Dep. Bacelar (PV/BA)
+63 Dep. Gisela Simona (UNIÃO/MT)
+64 Dep. Sanderson (PL/RS)
+65 Dep. Zé Vitor (PL/MG)
+66 Dep. Luiz Carlos Motta (PL/SP)
+67 Dep. Capitão Alden (PL/BA)
+68 Dep. Kim Kataguiri (UNIÃO/SP)
+69 Dep. Coronel Meira (PL/PE)
+70 Dep. Rosangela Moro (UNIÃO/SP)
+Para verificar as assinaturas, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD243829156600
+Assinado eletronicamente pelo(a) Dep. Julia Zanatta e outros
+
+PEC n.35/2025
+
+34 Dep. Ismael Alexandrino (PSD/GO)
+
+Apresentação: 23/09/2025 10:25:23.600 - Mesa
+
+33 Dep. Giovani Cherini (PL/RS)
+
+73 Dep. Osmar Terra (MDB/RS)
+74 Dep. Doutor Luizinho (PP/RJ)
+75 Dep. Adilson Barroso (PL/SP)
+76 Dep. Eros Biondini (PL/MG)
+77 Dep. Abilio Brunini (PL/MT)
+78 Dep. Luiz Philippe de Orleans e Bra (PL/SP)
+79 Dep. Nelson Barbudo (PL/MT)
+80 Dep. Capitão Alberto Neto (PL/AM)
+81 Dep. Eduardo Bolsonaro (PL/SP)
+82 Dep. Delegado Ramagem (PL/RJ)
+83 Dep. Cabo Gilberto Silva (PL/PB)
+84 Dep. Gilvan da Federal (PL/ES)
+85 Dep. Dr. Zacharias Calil (UNIÃO/GO)
+86 Dep. Carlos Henrique Gaguim (UNIÃO/TO)
+87 Dep. Eli Borges (PL/TO)
+88 Dep. Marco Brasil (PP/PR)
+89 Dep. Douglas Viegas (UNIÃO/SP)
+90 Dep. Mauricio do Vôlei (PL/MG)
+91 Dep. Tião Medeiros (PP/PR)
+92 Dep. Arthur Oliveira Maia (UNIÃO/BA)
+93 Dep. Laura Carneiro (PSD/RJ)
+94 Dep. Alfredo Gaspar (UNIÃO/AL)
+95 Dep. Eduardo Velloso (UNIÃO/AC)
+96 Dep. Ismael (PSD/SC)
+97 Dep. Any Ortiz (CIDADANIA/RS) - Fdr PSDB-CIDADANIA
+98 Dep. Roberto Monteiro Pai (PL/RJ)
+99 Dep. Nikolas Ferreira (PL/MG)
+100 Dep. Pastor Eurico (PL/PE)
+101 Dep. Ricardo Salles (NOVO/SP)
+102 Dep. Jorge Goetten (REPUBLIC/SC)
+103 Dep. Dr. Jaziel (PL/CE)
+104 Dep. Sargento Portugal (PODE/RJ)
+105 Dep. Magda Mofatto (PRD/GO)
+106 Dep. Pedro Lupion (PP/PR)
+107 Dep. Carmen Zanotto (CIDADANIA/SC)
+108 Dep. Fabio Schiochet (UNIÃO/SC)
+Para verificar as assinaturas, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD243829156600
+Assinado eletronicamente pelo(a) Dep. Julia Zanatta e outros
+
+PEC n.35/2025
+
+72 Dep. Caroline de Toni (PL/SC)
+
+Apresentação: 23/09/2025 10:25:23.600 - Mesa
+
+71 Dep. Alberto Fraga (PL/DF)
+
+111 Dep. Alceu Moreira (MDB/RS)
+112 Dep. Silvye Alves (UNIÃO/GO)
+113 Dep. Rodrigo Valadares (UNIÃO/SE)
+114 Dep. Luiz Carlos Busato (UNIÃO/RS)
+115 Dep. Luiz Gastão (PSD/CE)
+116 Dep. Renan Ferreirinha (PSD/RJ)
+117 Dep. Paulo Litro (PSD/PR)
+118 Dep. Rodrigo Estacho (PSD/PR)
+119 Dep. Misael Varella (PSD/MG)
+120 Dep. Greyce Elias (AVANTE/MG)
+121 Dep. João Carlos Bacelar (PL/BA)
+122 Dep. Delegado da Cunha (PP/SP)
+123 Dep. Delegado Marcelo Freitas (UNIÃO/MG)
+124 Dep. Ronaldo Nogueira (REPUBLIC/RS)
+125 Dep. Daniel Agrobom (PL/GO)
+126 Dep. Amom Mandel (CIDADANIA/AM)
+127 Dep. Marcel van Hattem (NOVO/RS)
+128 Dep. Junio Amaral (PL/MG)
+129 Dep. Joaquim Passarinho (PL/PA)
+130 Dep. Filipe Barros (PL/PR)
+131 Dep. Helio Lopes (PL/RJ)
+132 Dep. Evair Vieira de Melo (PP/ES)
+133 Dep. Carlos Jordy (PL/RJ)
+134 Dep. Clarissa Tércio (PP/PE)
+135 Dep. Franciane Bayer (REPUBLIC/RS)
+136 Dep. Rodrigo da Zaeli (PL/MT)
+137 Dep. Nicoletti (UNIÃO/RR)
+138 Dep. Dayany Bittencourt (UNIÃO/CE)
+139 Dep. Delegado Bruno Lima (PP/SP)
+140 Dep. Dr. Fernando Máximo (UNIÃO/RO)
+141 Dep. Felipe Francischini (UNIÃO/PR)
+142 Dep. Vermelho (PL/PR)
+143 Dep. Pastor Sargento Isidório (AVANTE/BA)
+144 Dep. Geovania de Sá (PSDB/SC)
+145 Dep. André Fernandes (PL/CE)
+146 Dep. Pinheirinho (PP/MG)
+Para verificar as assinaturas, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD243829156600
+Assinado eletronicamente pelo(a) Dep. Julia Zanatta e outros
+
+PEC n.35/2025
+
+110 Dep. Rosana Valle (PL/SP)
+
+Apresentação: 23/09/2025 10:25:23.600 - Mesa
+
+109 Dep. Rodolfo Nogueira (PL/MS)
+
+149 Dep. Carla Dickson (UNIÃO/RN)
+150 Dep. Dr. Victor Linhalis (PODE/ES)
+151 Dep. Emidinho Madeira (PL/MG)
+152 Dep. Matheus Noronha (PL/CE)
+153 Dep. Delegado Matheus Laiola (UNIÃO/PR)
+154 Dep. André Ferreira (PL/PE)
+155 Dep. Adail Filho (REPUBLIC/AM)
+156 Dep. Murillo Gouvea (UNIÃO/RJ)
+157 Dep. Missionário José Olimpio (PL/SP)
+158 Dep. Domingos Sávio (PL/MG)
+159 Dep. Pastor Gil (PL/MA)
+160 Dep. Junior Lourenço (PL/MA)
+161 Dep. Luciano Alves (PSD/PR)
+162 Dep. Vinicius Carvalho (REPUBLIC/SP)
+163 Dep. Olival Marques (MDB/PA)
+164 Dep. Pompeo de Mattos (PDT/RS)
+165 Dep. Antonio Carlos Rodrigues (PL/SP)
+166 Dep. Alex Santana (REPUBLIC/BA)
+167 Dep. Coronel Fernanda (PL/MT)
+168 Dep. Giacobo (PL/PR)
+169 Dep. Icaro de Valmir (PL/SE)
+170 Dep. Rosângela Reis (PL/MG)
+171 Dep. Wellington Roberto (PL/PB)
+172 Dep. Delegado Fabio Costa (PP/AL)
+173 Dep. Marcio Alvino (PL/SP)
+174 Dep. Marx Beltrão (PP/AL)
+175 Dep. Vinicius Gurgel (PL/AP)
+176 Dep. Fernando Rodolfo (PL/PE)
+177 Dep. Covatti Filho (PP/RS)
+178 Dep. Fred Linhares (REPUBLIC/DF)
+179 Dep. Albuquerque (REPUBLIC/RR)
+180 Dep. Marcelo Álvaro Antônio (PL/MG)
+
+Para verificar as assinaturas, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD243829156600
+Assinado eletronicamente pelo(a) Dep. Julia Zanatta e outros
+
+PEC n.35/2025
+
+148 Dep. Dr. Frederico (PRD/MG)
+
+Apresentação: 23/09/2025 10:25:23.600 - Mesa
+
+147 Dep. Pastor Diniz (UNIÃO/RR)
+
+

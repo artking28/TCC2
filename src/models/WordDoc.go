@@ -2,30 +2,42 @@ package models
 
 import (
 	"fmt"
+
 	"gorm.io/gorm"
 )
 
 type InverseNGram struct {
-		Wd0Id uint64 `gorm:"column:wd0Id;uniqueIndex:compositeindex;notnull"`
-		Wd1Id uint64 `gorm:"column:wd1Id;uniqueIndex:compositeindex;"`
-		Wd2Id uint64 `gorm:"column:wd2Id;uniqueIndex:compositeindex;"`
-		DocId uint64 `gorm:"column:docId;uniqueIndex:compositeindex;notnull"`
-		Count uint64 `gorm:"column:count;notnull"`
-		Jump0 uint8  `gorm:"column:jump0;"`
-		Jump1 uint8  `gorm:"column:jump1;"`
-		
-		Document Document `gorm:"foreignKey:DocId;references:Id"`
-		Wd0 Word `gorm:"foreignKey:Wd0Id;references:Id"`
-		Wd1 Word `gorm:"foreignKey:Wd1Id;references:Id"`
-		Wd2 Word `gorm:"foreignKey:Wd2Id;references:Id"`
-	}
+	Wd0Id uint64 `gorm:"column:wd0Id;uniqueIndex:compositeindex;notnull"`
+	Wd1Id uint64 `gorm:"column:wd1Id;uniqueIndex:compositeindex;"`
+	Wd2Id uint64 `gorm:"column:wd2Id;uniqueIndex:compositeindex;"`
+	DocId uint64 `gorm:"column:docId;uniqueIndex:compositeindex;notnull"`
+	Count uint64 `gorm:"column:count;notnull"`
+	Jump0 int8   `gorm:"column:jump0;"`
+	Jump1 int8   `gorm:"column:jump1;"`
 
-func (this* InverseNGram) ToString() string {
+	Document Document `gorm:"foreignKey:DocId;references:Id"`
+	Wd0      Word     `gorm:"foreignKey:Wd0Id;references:Id"`
+	Wd1      Word     `gorm:"foreignKey:Wd1Id;references:Id"`
+	Wd2      Word     `gorm:"foreignKey:Wd2Id;references:Id"`
+}
+
+func NewInverseNGram() *InverseNGram {
+	return &InverseNGram{
+		Wd0Id: 0,
+		Wd1Id: 0,
+		Wd2Id: 0,
+		DocId: 0,
+		Jump0: -1,
+		Jump1: -1,
+	}
+}
+
+func (this *InverseNGram) ToString() string {
 	id := fmt.Sprintf("%s-%s-%s", this.Wd0.Value, this.Wd1.Value, this.Wd2.Value)
 	return fmt.Sprintf("{ id: %s; count: %d; docId: %d }", id, this.Count, this.DocId)
 }
 
-func (this* InverseNGram) TableName() string {
+func (this *InverseNGram) TableName() string {
 	return "WORD_DOC"
 }
 

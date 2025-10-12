@@ -1,0 +1,111 @@
+PROJETO DE LEI Nº
+
+, DE 2025
+
+(Do Sr. DR. ZACHARIAS CALIL)
+
+PL n.4362/2025
+
+Gabinete do Deputado Dr. Zacharias Calil
+
+Apresentação: 02/09/2025 14:22:54.970 - Mesa
+
+CÂMARA DOS DEPUTADOS
+
+Altera a Lei nº 13.787, de 27 de dezembro de
+2018, para dispor sobre o prazo de guarda das
+imagens decorrentes de exames médicos e dá
+outras providências.
+O CONGRESSO NACIONAL decreta:
+Art. 1º A Lei nº 13.787, de 27 de dezembro de 2018, passa a vigorar com as
+seguintes alterações:
+“Art. 6º-A. As imagens geradas a partir de exames médicos poderão ser
+armazenadas exclusivamente em meio digital, pelo prazo mínimo de 5 (cinco)
+anos, contados da data de sua realização, salvo se norma técnica específica
+estabelecer prazo superior.
+§ 1º Os laudos médicos correspondentes deverão ser armazenados, também
+em meio digital, pelo prazo mínimo de 20 (vinte) anos.
+§ 2º A guarda de laudos e imagens deverá observar os critérios de segurança,
+rastreabilidade e integridade definidos em normas técnicas e nas
+regulamentações da Autoridade Nacional de Proteção de Dados (ANPD) e do
+Conselho Federal de Medicina (CFM).
+§ 3º O paciente deverá ser informado, no momento da realização do exame,
+acerca dos prazos de guarda das imagens e dos laudos, bem como dos seus
+direitos de acesso a tais documentos.”
+Art. 2º Esta Lei entra em vigor na data de sua publicação.
+
+A presente proposição visa aperfeiçoar a Lei nº 13.787/2018, que
+disciplina a digitalização, o armazenamento e o manuseio de prontuários do
+paciente. Especificamente, propõe-se a adequação do prazo mínimo de guarda
+das imagens médicas para 5 anos, mantendo o laudo correspondente por 20
+anos, ambos em meio digital seguro.
+Essa mudança é justificada por razões técnicas, jurídicas e
+econômicas, a saber:
+
+Câmara dos Deputados, Anexo IV Gabinete 616, CEP 70160-900 – Brasília/DF
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD254229860300
+Telefone:(61) 3215-5616 – Fax: (61) 3215-2616
+Assinado eletronicamente pelo(a) Dep. Dr. Zacharias Calil
+
+*CD254229860300*
+
+JUSTIFICAÇÃO
+
+O avanço da tecnologia da informação permitiu a adoção segura
+de meios digitais para o arquivamento de exames e laudos. A digitalização com
+padrões DICOM, armazenamento em nuvem criptografada e rastreabilidade
+por blockchain ou log digital atendem plenamente aos requisitos da Resolução
+CFM nº 2.227/2018, da RDC/Anvisa nº 302/2005, e das normas da ANPD.
+
+PL n.4362/2025
+
+Gabinete do Deputado Dr. Zacharias Calil
+
+Apresentação: 02/09/2025 14:22:54.970 - Mesa
+
+CÂMARA DOS DEPUTADOS
+
+A exigência de guarda de imagens por 20 anos acarreta alto custo
+financeiro e de infraestrutura, especialmente para serviços públicos e pequenos
+prestadores. O prazo de 5 anos está em conformidade com a prática
+internacional e com o ciclo clínico da maioria dos exames diagnósticos por
+imagem, como mamografias, tomografias, ressonâncias e ultrassonografias.
+A jurisprudência brasileira tem reconhecido que as ações de
+responsabilidade civil decorrentes de erro médico estão sujeitas ao prazo
+prescricional de cinco anos, em consonância com o regime do Código de
+Defesa do Consumidor. Além disso, consolidou-se o entendimento de que a
+obrigação de guarda dos exames médicos se relaciona principalmente ao laudo
+conclusivo, sendo a preservação das imagens relevante apenas quando houver
+nexo causal entre a sua ausência e eventual dano alegado pelo paciente.
+O laudo médico, devidamente assinado digitalmente, é o principal
+elemento de valor clínico, pericial e judicial. A guarda por 20 anos do laudo
+garante segurança jurídica ao paciente e ao profissional. A redução do tempo
+de armazenamento da imagem evita acúmulos desnecessários e facilita o fluxo
+da assistência.
+
+Sala das Sessões, em
+
+de
+
+de 2025.
+
+Deputado DR. ZACHARIAS CALIL
+União Brasil/GO
+
+Câmara dos Deputados, Anexo IV Gabinete 616, CEP 70160-900 – Brasília/DF
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD254229860300
+Telefone:(61) 3215-5616 – Fax: (61) 3215-2616
+Assinado eletronicamente pelo(a) Dep. Dr. Zacharias Calil
+
+*CD254229860300*
+
+Diante do exposto, solicito o apoio dos nobres Parlamentares para
+a aprovação deste Projeto de Lei, que moderniza e desburocratiza a legislação
+vigente, alinhando-a à prática internacional, à racionalidade técnica e à
+proteção do interesse público. A proposta respeita os princípios da
+economicidade, da eficiência e da dignidade da pessoa humana, além de estar
+em plena conformidade com a Lei Geral de Proteção de Dados (Lei nº
+13.709/2018) e com a Lei Complementar nº 95/1998, no que se refere à
+clareza, precisão e estrutura normativa.
+
+

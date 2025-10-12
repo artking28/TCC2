@@ -1,0 +1,201 @@
+, DE 2025
+
+(Do Sr. MARANGONI)
+Altera a Lei Complementar nº 214, de
+16 de janeiro de 2025, para dispor sobre
+operações e prestações de serviços de
+segurança da informação e segurança
+cibernética.
+
+PLP n.213/2025
+
+PROJETO DE LEI COMPLEMENTAR Nº
+
+Apresentação: 03/10/2025 14:21:15.103 - Mesa
+
+CÂMARA DOS DEPUTADOS
+Deputado Federal MARANGONI
+
+O Congresso Nacional decreta:
+Art. 1º O art. 142 da Lei Complementar nº 214, de 16 de
+janeiro de 2025, passa a vigorar com a seguinte alteração:
+“Art. 142.......................................
+.................................................
+II – operações e prestações de serviços de
+segurança da informação e segurança cibernética
+desenvolvidos por sociedade estabelecida e que
+disponha de representante legal no Brasil,
+relacionados no Anexo XI desta Lei Complementar,
+com a especificação das respectivas classificações
+da NBS e da NCM/SH.” (NR).
+Art. 2º Esta Lei entra em vigor na data de sua publicação.
+
+O presente Projeto de Lei Complementar busca corrigir uma
+distorção normativa relevante contida no art. 142, II, da Lei
+Complementar nº 214/2025, cuja redação, ao condicionar a fruição
+do benefício fiscal à exigência de sócio brasileiro com no mínimo 20%
+do capital social, acaba por afrontar princípios constitucionais caros
+ao novo sistema tributário, além de gerar insegurança jurídica,
+desestimular investimentos e enfraquecer a política de segurança
+cibernética do Estado brasileiro. A Emenda Constitucional nº
+132/2023, que instituiu o sistema do IVA dual (IBS e CBS),
+estabeleceu em seu texto princípios estruturantes de neutralidade,
+isonomia e livre concorrência, todos voltados a evitar que a
+tributação interfira artificialmente nas decisões de consumo, produção
+e investimento. Ao condicionar o benefício a um requisito de
+Praça dos Três Poderes - Câmara dos Deputados
+Gabinete: 609 - Anexo IV - CEP: 70160-900 - Brasília - DF
+Telefones: (61) 3215-5609 - Email: dep.marangoni@camara.gov.br
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD250951401400
+Assinado eletronicamente pelo(a) Dep. Marangoni
+
+*CD250951401400*
+
+JUSTIFICATIVA
+
+PLP n.213/2025
+
+composição societária nacional, a LC 214/2025 cria uma diferenciação
+arbitrária que não encontra respaldo na Constituição Federal. O texto
+vigente, ao exigir participação mínima de capital nacional, introduz
+critério estranho ao espírito da reforma tributária e incompatível com
+a ordem constitucional tributária, pois a distinção por nacionalidade
+do capital afronta o princípio da igualdade tributária (art. 150, II, da
+Constituição), compromete a neutralidade fiscal consagrada pelo
+constituinte derivado e interfere indevidamente na livre iniciativa e na
+livre concorrência, princípios inscritos no art. 170 da Carta Magna.
+
+Apresentação: 03/10/2025 14:21:15.103 - Mesa
+
+CÂMARA DOS DEPUTADOS
+Deputado Federal MARANGONI
+
+Além disso, a exigência atual gera efeitos negativos diretos
+sobre a inovação e a competitividade do setor de tecnologia. A área
+de segurança da informação e de cibersegurança depende
+intensamente de modelos de financiamento por venture capital e
+coinvestimento internacional, que são a espinha dorsal do
+ecossistema tecnológico global. Ao restringir a participação a
+empresas com capital nacional mínimo, o Brasil cria barreira artificial
+que prejudica justamente aquelas empresas inovadoras que, embora
+plenamente estabelecidas no país, atraem recursos externos
+indispensáveis para sua expansão e escalabilidade. Essa distorção
+Praça dos Três Poderes - Câmara dos Deputados
+Gabinete: 609 - Anexo IV - CEP: 70160-900 - Brasília - DF
+Telefones: (61) 3215-5609 - Email: dep.marangoni@camara.gov.br
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD250951401400
+Assinado eletronicamente pelo(a) Dep. Marangoni
+
+*CD250951401400*
+
+A medida ora proposta, portanto, não cria benefício novo nem
+amplia renúncia fiscal; trata-se de um ajuste cirúrgico destinado a
+realinhar a legislação infraconstitucional ao espírito e à letra da
+Constituição, afastando risco de inconstitucionalidade material e
+garantindo a harmonia entre a LC 214/2025 e a EC 132/2023. Ao
+propor a substituição do critério de composição societária por um
+critério de presença jurídica no Brasil, busca-se focar no que
+realmente importa do ponto de vista fiscal e regulatório: a efetiva
+sujeição da empresa à jurisdição nacional. Nesse sentido, a exigência
+de que a sociedade esteja estabelecida no país e disponha de
+representante legal garante a plena submissão do contribuinte ao
+Poder Judiciário, à Receita Federal e às autoridades administrativas
+competentes. Nosso ordenamento já contempla essa lógica em
+dispositivos fundamentais, como o art. 75, inciso X, e §3º do Código
+de Processo Civil, que reconhece a plena legitimidade de pessoas
+jurídicas estrangeiras com filial, agência ou sucursal no Brasil, desde
+que representadas por administrador ou representante legal. O que
+importa, portanto, não é a origem do capital, mas a capacidade
+efetiva do Estado de exercer seu poder de polícia e sua competência
+tributária, assegurando fiscalização, autuação e responsabilização.
+
+O cenário atual de risco cibernético torna essa correção ainda
+mais urgente. No primeiro semestre de 2025, o Brasil concentrou
+84% das 374 bilhões de tentativas de ataques cibernéticos
+registradas na América Latina, configurando-se como principal alvo
+da região. Em 2024, as fraudes via Pix atingiram o montante de R$
+4,9 bilhões, o que representou um aumento de 70% em relação ao
+ano anterior, evidenciando a vulnerabilidade do sistema financeiro
+nacional. O comércio eletrônico brasileiro, por sua vez, registrou 2,8
+milhões de tentativas de fraude, que somaram R$ 3 bilhões em
+prejuízos. Diante desse quadro, torna-se um equívoco estratégico
+limitar a oferta de provedores de cibersegurança em razão de
+critérios societários sem pertinência com a qualidade ou a segurança
+do serviço. O país precisa ampliar sua base de empresas habilitadas a
+fornecer serviços de cibersegurança, independentemente da origem
+do capital, desde que sujeitas integralmente às leis nacionais, de
+forma a garantir soluções mais avançadas, inovadoras e resilientes.
+O ajuste legislativo proposto é, portanto, uma medida de
+racionalidade jurídica e de estratégia nacional. Ele garante a
+compatibilidade constitucional do regime, elimina barreiras
+desproporcionais, reforça a capacidade de supervisão do Estado sem
+comprometer a fiscalização, estimula o desenvolvimento tecnológico
+interno ao proteger inclusive startups brasileiras que dependem de
+capital externo, amplia a oferta de soluções de segurança em
+território nacional, concretiza a finalidade teleológica do art. 142 da
+LC 214/2025 — que é promover soberania e proteção cibernética — e
+assegura que a legislação brasileira esteja alinhada à prática de
+outros ordenamentos modernos que privilegiam a presença jurídica
+no território como critério de sujeição ao poder estatal.
+Trata-se, em suma, de um projeto de correção técnica,
+constitucional e estratégica, que não aumenta renúncia fiscal, não
+cria novas hipóteses de benefício e não amplia o rol de bens e
+serviços beneficiados, mas apenas redefine o critério de elegibilidade
+em consonância com a Constituição, com a lógica do sistema jurídico
+Praça dos Três Poderes - Câmara dos Deputados
+Gabinete: 609 - Anexo IV - CEP: 70160-900 - Brasília - DF
+Telefones: (61) 3215-5609 - Email: dep.marangoni@camara.gov.br
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD250951401400
+Assinado eletronicamente pelo(a) Dep. Marangoni
+
+PLP n.213/2025
+
+*CD250951401400*
+
+não apenas enfraquece o ambiente de negócios nacional, mas
+também coloca o Brasil em desvantagem competitiva em relação a
+outros países, que buscam atrair investimentos internacionais para
+fortalecer sua soberania tecnológica e ampliar a proteção de suas
+infraestruturas críticas.
+
+Apresentação: 03/10/2025 14:21:15.103 - Mesa
+
+CÂMARA DOS DEPUTADOS
+Deputado Federal MARANGONI
+
+Sala das Sessões, em
+
+de
+
+PLP n.213/2025
+
+brasileiro e com os princípios da reforma tributária. Ao promover esse
+ajuste, o Brasil se coloca em posição mais sólida para enfrentar os
+desafios da era digital, atrair investimentos, fomentar inovação e
+proteger a sua infraestrutura crítica diante da escalada de riscos
+cibernéticos que hoje ameaçam a economia e a segurança nacionais.
+Por essas razões, contamos com o apoio dos nobres pares à
+aprovação desta proposição, que fortalece a coerência normativa,
+assegura segurança jurídica, estimula o desenvolvimento econômico
+e tecnológico e projeta o Brasil como protagonista na agenda global
+de cibersegurança..
+
+Apresentação: 03/10/2025 14:21:15.103 - Mesa
+
+CÂMARA DOS DEPUTADOS
+Deputado Federal MARANGONI
+
+de 2025.
+
+*CD250951401400*
+
+Deputado MARANGONI
+UNIÃO/SP
+
+Praça dos Três Poderes - Câmara dos Deputados
+Gabinete: 609 - Anexo IV - CEP: 70160-900 - Brasília - DF
+Telefones: (61) 3215-5609 - Email: dep.marangoni@camara.gov.br
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD250951401400
+Assinado eletronicamente pelo(a) Dep. Marangoni
+
+

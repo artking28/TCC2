@@ -1,0 +1,290 @@
+PROJETO DE LEI Nº
+, DE 2025
+(Do Sr. DR. ZACHARIAS CALIL)
+
+PL n.3842/2025
+
+Gabinete do Deputado Dr. Zacharias Calil
+
+Apresentação: 11/08/2025 08:41:07.710 - Mesa
+
+CÂMARA DOS DEPUTADOS
+
+Altera a Lei nº 12.965, de 23 de abril de 2014,
+para estabelecer obrigações de transparência e
+de avaliação de impacto algorítmico relativas a
+conteúdos
+que
+envolvam
+crianças
+e
+adolescentes.
+O CONGRESSO NACIONAL decreta:
+Art. 1º A Lei nº 12.965, de 23 de abril de 2014, passa a vigorar acrescida do
+Capítulo VI – Da Transparência e da Avaliação de Impacto Algorítmico para
+Proteção de Crianças e Adolescentes, composto pelos arts. 31-A a 31-D, com
+a seguinte redação:
+CAPÍTULO IV – DA TRANSPARÊNCIA E DA AVALIAÇÃO DE IMPACTO
+ALGORÍTMICO PARA PROTEÇÃO DE CRIANÇAS E ADOLESCENTES
+Art. 31-A. O provedor de aplicação de internet de grande porte que utilize
+sistemas automatizados de recomendação, ranqueamento, priorização ou
+direcionamento de conteúdo deverá publicar, semestralmente, relatório de
+transparência algorítmica em proteção de crianças e adolescentes, contendo,
+no mínimo:
+I – quantitativo estimado de conteúdos destinados a crianças e adolescentes
+ou que os envolvam, por meio de imagem, voz ou persona, exibidos por
+recomendação automatizada no Brasil, apresentados de forma agregada;
+II – medidas técnicas e organizacionais adotadas para prevenir a exposição a
+conteúdos inadequados ou prejudiciais, inclusive controles parentais e
+classificação indicativa;
+
+IV – critérios gerais e sinais utilizados nos sistemas de recomendação para
+classificar ou direcionar conteúdos relacionados a menores, resguardados o
+segredo
+de
+negócio
+e
+a
+segurança
+dos
+sistemas;
+V – estatísticas de moderação relativas a tais conteúdos, incluídas as
+sinalizações recebidas, as remoções, o tempo médio de resposta e os
+recursos.
+
+Câmara dos Deputados, Anexo IV Gabinete 616, CEP 70160-900 – Brasília/DF
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD253757369800
+Telefone:(61) 3215-5616 – Fax: (61) 3215-2616
+Assinado eletronicamente pelo(a) Dep. Dr. Zacharias Calil
+
+*CD253757369800*
+
+III – indicadores agregados de exposição por faixas etárias declaradas ou
+estimadas por métodos que não impliquem coleta adicional de dados pessoais;
+
+§ 1º O relatório deverá ser de fácil acesso ao público, em linguagem clara e
+compreensível, e conter a metodologia utilizada para as estimativas.
+§ 2º As informações deverão ser apresentadas em formato aberto e com dados
+agregados, vedada a identificação de usuários e a coleta ou tratamento
+adicional de dados pessoais de crianças e adolescentes exclusivamente para
+atendimento deste artigo, observado o disposto no art. 14 da Lei nº 13.709, de
+14 de agosto de 2018.
+
+PL n.3842/2025
+
+Gabinete do Deputado Dr. Zacharias Calil
+
+Apresentação: 11/08/2025 08:41:07.710 - Mesa
+
+CÂMARA DOS DEPUTADOS
+
+§
+3º
+Para
+os
+fins
+deste
+artigo,
+considera-se:
+I – provedor de aplicação de internet de grande porte: aquele que registre
+10.000.000 (dez milhões) ou mais de usuários ativos mensais no Brasil, em
+média, no semestre anterior;
+II – sistemas automatizados: processos algorítmicos ou de aprendizado de
+máquina utilizados para recomendar, priorizar, ranquear, personalizar ou
+direcionar conteúdos a usuários;
+III – conteúdos que envolvam crianças e adolescentes: aqueles destinados a
+esse público ou que utilizem sua imagem, voz ou persona, conforme definições
+do art. 2º da Lei nº 8.069, de 13 de julho de 1990.
+§ 4º Ficam dispensadas das obrigações deste artigo as microempresas e as
+empresas de pequeno porte.
+§ 5º O relatório será publicado anualmente até 31 de janeiro, referente ao
+segundo semestre do ano anterior, e até 31 de julho, referente ao primeiro
+semestre do ano em curso.
+§ 6º O disposto neste artigo não afasta o cumprimento da Lei nº 13.709, de 14
+de agosto de 2018, da Lei nº 8.069, de 13 de julho de 1990, e das demais
+obrigações previstas em lei.
+
+I – descrição dos riscos de exposição a conteúdos inadequados ou prejudiciais
+decorrentes de seus sistemas automatizados de recomendação;
+II – medidas de mitigação adotadas e testes de segurança e eficácia
+realizados;
+III – governança interna aplicável, com indicação de responsáveis, rotinas de
+revisão, incidentes relevantes e lições aprendidas.
+
+Câmara dos Deputados, Anexo IV Gabinete 616, CEP 70160-900 – Brasília/DF
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD253757369800
+Telefone:(61) 3215-5616 – Fax: (61) 3215-2616
+Assinado eletronicamente pelo(a) Dep. Dr. Zacharias Calil
+
+*CD253757369800*
+
+Art. 31-B. O provedor de aplicação de internet de grande porte deverá
+elaborar, anualmente, avaliação de impacto algorítmico em proteção de
+crianças e adolescentes, contendo, no mínimo:
+
+§ 1º A avaliação terá caráter técnico e poderá conter informações confidenciais,
+devendo permanecer à disposição da Secretaria Nacional do Consumidor do
+Ministério da Justiça e Segurança Pública e, quando envolver tratamento de
+dados pessoais, da Autoridade Nacional de Proteção de Dados, mediante
+requisição e garantia de sigilo.
+§ 2º A avaliação não poderá exigir coleta adicional de dados pessoais de
+crianças e adolescentes além do estritamente necessário ao funcionamento do
+serviço, devendo privilegiar métricas agregadas e a proteção da privacidade
+desde a concepção.
+
+PL n.3842/2025
+
+Gabinete do Deputado Dr. Zacharias Calil
+
+Apresentação: 11/08/2025 08:41:07.710 - Mesa
+
+CÂMARA DOS DEPUTADOS
+
+Art. 31-C. Compete à Secretaria Nacional do Consumidor do Ministério da
+Justiça e Segurança Pública, sem prejuízo das atribuições da Autoridade
+Nacional de Proteção de Dados e do Sistema Nacional de Defesa do
+Consumidor:
+I – requisitar os relatórios e as avaliações previstos nos arts. 31-A e 31-B;
+II – determinar ajustes para sanar irregularidades ou emitir recomendações de
+boas práticas;
+III – instaurar processo administrativo para apurar infrações ao disposto nos
+arts. 31-A e 31-B.
+Art. 31-D. O descumprimento do disposto nos arts. 31-A e 31-B sujeita o
+infrator, após processo administrativo instaurado pela Secretaria Nacional do
+Consumidor do Ministério da Justiça e Segurança Pública, assegurados o
+contraditório e a ampla defesa, às seguintes sanções:
+I – advertência, com indicação de prazo para adoção de medidas corretivas;
+
+III – publicização da infração, após o trânsito em julgado na esfera
+administrativa;
+IV – suspensão, em caráter excepcional e proporcional, das funcionalidades de
+recomendação automatizada diretamente relacionadas à infração.
+§ 1º As sanções previstas neste artigo não afastam as competências
+sancionatórias da Autoridade Nacional de Proteção de Dados, quando houver
+violação à Lei nº 13.709, de 14 de agosto de 2018, nem outras medidas cíveis
+e penais cabíveis.
+§ 2º Os critérios de dosimetria considerarão, entre outros, a gravidade e a
+duração da infração, a vantagem auferida ou pretendida, a condição econômica
+do infrator, a boa-fé, a cooperação e a adoção de programas de compliance.
+Câmara dos Deputados, Anexo IV Gabinete 616, CEP 70160-900 – Brasília/DF
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD253757369800
+Telefone:(61) 3215-5616 – Fax: (61) 3215-2616
+Assinado eletronicamente pelo(a) Dep. Dr. Zacharias Calil
+
+*CD253757369800*
+
+II – multa simples ou diária, observado o porte econômico do infrator, a
+gravidade e a reincidência, de até 10% (dez por cento) do faturamento no
+Brasil no exercício anterior, limitada a R$ 50.000.000,00 (cinquenta milhões de
+reais) por infração;
+
+Art. 2º Esta Lei entra em vigor na data de sua publicação.
+
+PL n.3842/2025
+
+Gabinete do Deputado Dr. Zacharias Calil
+
+Apresentação: 11/08/2025 08:41:07.710 - Mesa
+
+CÂMARA DOS DEPUTADOS
+
+A presente proposição tem por objetivo alterar a Lei nº 12.965, de
+23 de abril de 2014, para instituir obrigações específicas de transparência e de
+avaliação de impacto algorítmico voltadas à proteção de crianças e
+adolescentes no ambiente digital.
+A crescente utilização de sistemas automatizados de
+recomendação, ranqueamento e direcionamento de conteúdos — operados por
+grandes plataformas digitais — vem gerando preocupações quanto à exposição
+de menores a conteúdos inadequados ou prejudiciais. Esses sistemas, muitas
+vezes opacos e de funcionamento complexo, têm potencial de influenciar
+hábitos, valores e comportamentos de crianças e adolescentes, configurando
+um cenário de risco que exige atuação regulatória.
+Nos últimos meses, diversos veículos de comunicação nacional e
+internacional noticiaram casos em que algoritmos de recomendação
+expuseram menores a conteúdos violentos, sexualizados ou relacionados à
+automutilação e a desafios perigosos. Houve registros de famílias que
+relataram o agravamento de quadros de ansiedade, depressão e transtornos
+alimentares em crianças e adolescentes após consumo contínuo de conteúdos
+indicados automaticamente. Em 2024, levantamento da organização britânica
+5Rights Foundation, citado pela BBC, apontou que 80% das crianças entre 11
+e 17 anos relataram ter recebido, em redes sociais, conteúdos impróprios ou
+que incentivavam comportamentos nocivos, sem que houvesse bloqueio efetivo
+das plataformas.
+No Brasil, reportagens recentes do jornal O Globo e do portal UOL
+revelaram investigações policiais sobre redes de exploração sexual infantil e
+disseminação de material impróprio por meio de aplicativos de vídeo,
+potencializadas por sistemas automáticos de recomendação. Um inquérito da
+Polícia Federal, divulgado em abril de 2025, constatou que algoritmos de
+ranqueamento aumentavam a visibilidade de vídeos com aparência lúdica, mas
+que continham elementos sexualizados, direcionando-os de forma recorrente a
+perfis de usuários identificados como crianças.
+Estudos acadêmicos corroboram essas evidências. Pesquisa da
+Universidade de Stanford publicada em 2023 revelou que o tempo médio para
+que um perfil de adolescente recém-criado em determinada rede social
+recebesse sua primeira recomendação de conteúdo sensível sobre distúrbios
+alimentares era de apenas 8 minutos de uso contínuo. No mesmo sentido,
+levantamento do Instituto Alana, divulgado em novembro de 2024, apontou que
+68% dos adolescentes brasileiros entrevistados tiveram contato, nos últimos 12
+meses, com vídeos que incentivavam práticas perigosas, sendo que em 42%
+dos casos o acesso ocorreu por recomendação algorítmica.
+Câmara dos Deputados, Anexo IV Gabinete 616, CEP 70160-900 – Brasília/DF
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD253757369800
+Telefone:(61) 3215-5616 – Fax: (61) 3215-2616
+Assinado eletronicamente pelo(a) Dep. Dr. Zacharias Calil
+
+*CD253757369800*
+
+JUSTIFICAÇÃO
+
+Internacionalmente, tais problemas têm levado à adoção de
+medidas regulatórias mais rigorosas. A União Europeia implementou o Digital
+Services Act, que impõe obrigações de avaliação de risco e transparência de
+algoritmos voltados à proteção de menores. No Reino Unido, o Online Safety
+Act estabelece padrões semelhantes, incluindo multas e restrições
+operacionais a empresas que descumprirem os requisitos. A proposta ora
+apresentada dialoga com esse movimento global, mas é adaptada à realidade
+brasileira, observando as competências da Secretaria Nacional do Consumidor,
+da Autoridade Nacional de Proteção de Dados e do Sistema Nacional de
+Defesa do Consumidor.
+O texto limita o alcance das obrigações a provedores de grande
+porte, definidos como aqueles com 10 milhões ou mais de usuários ativos
+mensais no Brasil, evitando onerar indevidamente pequenas empresas e
+startups. Também harmoniza as novas exigências com a Lei nº 8.069, de 13 de
+julho de 1990, e com a Lei nº 13.709, de 14 de agosto de 2018, proibindo a
+coleta adicional de dados pessoais de menores exclusivamente para o
+cumprimento das obrigações previstas.
+Ao estabelecer relatórios semestrais de transparência e
+avaliações anuais de impacto, a proposta oferece ao poder público e à
+sociedade instrumentos concretos para compreender e mitigar os riscos
+algorítmicos, fortalecendo a confiança no ambiente digital e prevenindo danos
+irreparáveis à formação e ao bem-estar de crianças e adolescentes.
+Diante do exposto, e considerando a urgência de resposta aos
+fatos recentemente divulgados pela imprensa e comprovados por estudos
+científicos, que evidenciam falhas graves na proteção de menores nas
+plataformas digitais, conclama-se o apoio dos nobres Pares para a aprovação
+desta proposição.
+Sala das Sessões, em
+
+de
+
+PL n.3842/2025
+
+Gabinete do Deputado Dr. Zacharias Calil
+
+Apresentação: 11/08/2025 08:41:07.710 - Mesa
+
+CÂMARA DOS DEPUTADOS
+
+de 2025.
+
+*CD253757369800*
+
+Deputado DR. ZACHARIAS CALIL
+UNIÃO BRASIL/GO
+
+Câmara dos Deputados, Anexo IV Gabinete 616, CEP 70160-900 – Brasília/DF
+Para verificar a assinatura, acesse https://infoleg-autenticidade-assinatura.camara.leg.br/CD253757369800
+Telefone:(61) 3215-5616 – Fax: (61) 3215-2616
+Assinado eletronicamente pelo(a) Dep. Dr. Zacharias Calil
+
+
