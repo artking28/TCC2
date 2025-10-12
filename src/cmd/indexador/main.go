@@ -18,28 +18,10 @@ const dir = "./misc/corpus/clean"
 
 // Variáveis globais
 var (
-	cache map[string]models.Word // Cache em memória de palavras para evitar consultas repetidas
-	db    *gorm.DB               // Conexão com o banco de dados
+	cache  map[string]models.Word         // Cache em memória de palavras para evitar consultas repetidas
+	cacheN map[string]models.InverseNGram // Cache em memória de n-gramas
+	db     *gorm.DB                       // Conexão com o banco de dados
 )
-
-// Inicializa o banco de dados e faz a migração automática dos modelos
-func initDB() {
-	var err error
-	db, err = gorm.Open(sqlite.Open("./data.db"), &gorm.Config{})
-	if err != nil {
-		panic("failed to connect database")
-	}
-
-	// AutoMigrate cria as tabelas para os modelos, se não existirem
-	err = db.AutoMigrate(
-		&models.Document{},
-		&models.Word{},
-		&models.InverseNGram{},
-	)
-	if err != nil {
-		panic("failed to migrate models")
-	}
-}
 
 func main() {
 	initDB() // Inicializa o banco
@@ -75,6 +57,25 @@ func main() {
 	}
 
 	fmt.Println("Finished...")
+}
+
+// Inicializa o banco de dados e faz a migração automática dos modelos
+func initDB() {
+	var err error
+	db, err = gorm.Open(sqlite.Open("./data.db"), &gorm.Config{})
+	if err != nil {
+		panic("failed to connect database")
+	}
+
+	// AutoMigrate cria as tabelas para os modelos, se não existirem
+	err = db.AutoMigrate(
+		&models.Document{},
+		&models.Word{},
+		&models.InverseNGram{},
+	)
+	if err != nil {
+		panic("failed to migrate models")
+	}
 }
 
 // InsertAll Lê todos os arquivos de texto do diretório, cria documentos e palavras, e insere no banco
