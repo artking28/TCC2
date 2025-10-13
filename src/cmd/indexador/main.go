@@ -4,10 +4,8 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"os/signal"
 	"path/filepath"
 	"strings"
-	"syscall"
 	"time"
 
 	mgu "github.com/artking28/myGoUtils" // Biblioteca customizada para utilitários, como Set
@@ -239,34 +237,4 @@ func InsertAll() error {
 		// Insere as palavras no banco
 		return tx.Create(words).Error
 	})
-}
-
-func SetOnDestroy(callback func()) {
-	// Captura panics normais
-	defer func() {
-		if r := recover(); r != nil {
-			callback()
-			panic(r)
-		}
-	}()
-
-	// Canal para sinais do sistema
-	sigChan := make(chan os.Signal, 1)
-	signal.Notify(sigChan,
-		syscall.SIGINT,  // CTRL+C
-		syscall.SIGTERM, // kill
-		syscall.SIGHUP,  // logout/terminal close
-		syscall.SIGQUIT, // quit
-	)
-
-	// Goroutine que aguarda qualquer sinal
-	go func() {
-		sig := <-sigChan
-		fmt.Printf("Recebido sinal: %v\n", sig)
-		callback()
-		os.Exit(0)
-	}()
-
-	// Captura saída normal
-	defer callback()
 }
