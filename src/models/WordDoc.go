@@ -33,7 +33,7 @@ func NewInverseNGram() *InverseNGram {
 	}
 }
 
-func (this *InverseNGram) GetCacheKey() string {
+func (this *InverseNGram) GetCacheKey(jumps, doc bool) string {
 	j0 := fmt.Sprintf("%d", this.Jump0)
 	if this.Jump0 == -1 {
 		j0 = "n"
@@ -42,7 +42,14 @@ func (this *InverseNGram) GetCacheKey() string {
 	if this.Jump1 == -1 {
 		j1 = "n"
 	}
-	return fmt.Sprintf("%05d-%05d-%05d-%s%s-%04d", this.Wd0Id, this.Wd1Id, this.Wd2Id, j0, j1, this.DocId)
+	ret := fmt.Sprintf("%05d-%05d-%05d", this.Wd0Id, this.Wd1Id, this.Wd2Id)
+	if jumps {
+		ret = fmt.Sprintf("%s-%s%s", ret, j0, j1)
+	}
+	if doc {
+		ret = fmt.Sprintf("%s-%04d", ret, this.DocId)
+	}
+	return ret
 }
 
 func (this *InverseNGram) ToString() string {

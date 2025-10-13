@@ -163,6 +163,11 @@ func initDB() {
 	if err != nil {
 		panic("failed to migrate models")
 	}
+
+	err = Db.Exec(`CREATE INDEX IF NOT EXISTS idx_worddoc_wdids ON inverse_n_grams (wd0_id, wd1_id, wd2_id);`).Error
+	if err != nil {
+		panic("failed to create index")
+	}
 }
 
 // InsertAll Lê todos os arquivos de texto do diretório, cria documentos e palavras, e insere no banco
