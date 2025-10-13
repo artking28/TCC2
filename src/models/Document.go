@@ -30,9 +30,9 @@ type (
 	DocKind string
 
 	Document struct {
-		ID      uint64  `json:"id"      gorm:"column:id;primary_key;auto_increment;notnull"`
+		ID      uint16  `json:"id"      gorm:"column:id;primary_key;auto_increment;notnull"`
 		Name    string  `json:"name"    gorm:"column:name;type:varchar(20);notnull"`
-		Size    int64   `json:"size"    gorm:"column:size;notnull"`
+		Size    uint16  `json:"size"    gorm:"column:size;notnull"`
 		Kind    DocKind `json:"kind"    gorm:"column:kind;type:varchar(5);notnull"`
 		Content []byte  `json:"content" gorm:"-"`
 	}
@@ -43,7 +43,7 @@ func NewDoc(name string, kind DocKind, content []byte) *Document {
 	name = docNameRgx.FindString(name)
 	return &Document{
 		Name:    name,
-		Size:    int64(len(content)),
+		Size:    uint16(len(content)),
 		Kind:    kind,
 		Content: content,
 	}
@@ -57,7 +57,7 @@ func (this *Document) TableName() string {
 	return "DOCUMENT"
 }
 
-func (this *Document) GetId() uint64 {
+func (this *Document) GetId() uint16 {
 	return this.ID
 }
 

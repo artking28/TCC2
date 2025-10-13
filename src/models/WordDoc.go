@@ -7,13 +7,14 @@ import (
 )
 
 type InverseNGram struct {
-	Wd0Id uint64 `gorm:"column:wd0Id;uniqueIndex:compositeindex;notnull"`
-	Wd1Id uint64 `gorm:"column:wd1Id;uniqueIndex:compositeindex;"`
-	Wd2Id uint64 `gorm:"column:wd2Id;uniqueIndex:compositeindex;"`
-	DocId uint64 `gorm:"column:docId;uniqueIndex:compositeindex;notnull"`
-	Count uint64 `gorm:"column:count;notnull"`
-	Jump0 int8   `gorm:"column:jump0;"`
-	Jump1 int8   `gorm:"column:jump1;"`
+	Wd0Id uint16 `gorm:"column:wd0Id;uniqueIndex:compositeindex;notnull"`
+	Wd1Id uint16 `gorm:"column:wd1Id;uniqueIndex:compositeindex;"`
+	Wd2Id uint16 `gorm:"column:wd2Id;uniqueIndex:compositeindex;"`
+	DocId uint16 `gorm:"column:docId;uniqueIndex:compositeindex;notnull"`
+	Jump0 int8   `gorm:"column:jump0;uniqueIndex:compositeindex;"`
+	Jump1 int8   `gorm:"column:jump1;uniqueIndex:compositeindex;"`
+
+	Count uint16 `gorm:"column:count;notnull"`
 
 	Document *Document `gorm:"foreignKey:DocId;references:ID"`
 	Wd0      *Word     `gorm:"foreignKey:Wd0Id;references:ID"`

@@ -2,6 +2,8 @@ package utils
 
 import (
 	"encoding/json"
+	"errors"
+	"io"
 	"os"
 	"regexp"
 	"strings"
@@ -56,13 +58,15 @@ func CleanText(input string) (string, error) {
 	rx2 := regexp.MustCompile(`\b((\d{1,3}(,\d{3})*)|\d+)(\.\d+)?\b`)
 	rx3 := regexp.MustCompile(`<número>(( |\.)?<número>)*`)
 	rx4 := regexp.MustCompile(`\b(\d{1,2}[-/]\d{1,2}[-/]\d{2,4}|\d{4}[-/]\d{1,2}[-/]\d{1,2})\b`)
+	rx5 := regexp.MustCompile(`https?://[^\s]+`)
 
 	// Substitui numerais por <n>
-	input = rx0.ReplaceAllString(input, "número")
-	input = rx1.ReplaceAllString(input, "número")
-	input = rx2.ReplaceAllString(input, "número")
-	input = rx3.ReplaceAllString(input, "código")
-	input = rx4.ReplaceAllString(input, "data")
+	input = rx0.ReplaceAllString(input, "")
+	input = rx1.ReplaceAllString(input, "")
+	input = rx2.ReplaceAllString(input, "")
+	input = rx3.ReplaceAllString(input, "")
+	input = rx4.ReplaceAllString(input, "")
+	input = rx5.ReplaceAllString(input, "")
 
 	// Pega o array de caracteres especiais.
 	replaceVec, err := LoadAccents()
@@ -76,4 +80,31 @@ func CleanText(input string) (string, error) {
 
 	input = stopwords.CleanString(input, "pt", false)
 	return input, nil
+}
+
+// DuplicateFile copia um arquivo de src para dst.
+// Retorna erro se algo falhar.
+func DuplicateFile(src, dst string) (err error) {
+	source, err := os.Open(src)
+	if err != nil {
+		return err
+	}
+	defer func() { err = errors.Join(err, source.Close()) }()
+
+	dest, err := os.Create(dst)
+	if err != nil {
+		return err
+	}
+	defer func() { err = errors.Join(err, dest.Close()) }()
+
+	if _, err = io.Copy(dest, source); err != nil {
+		return err
+	}
+
+	info, err := os.Stat(src)
+	if err != nil {
+		return err
+	}
+
+	return os.Chmod(dst, info.Mode())
 }

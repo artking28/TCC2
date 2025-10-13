@@ -7,7 +7,7 @@ import (
 )
 
 type Word struct {
-	ID    uint64 `json:"id"    gorm:"column:id;primary_key;auto_increment;notnull"`
+	ID    uint16 `json:"id"    gorm:"column:id;primary_key;auto_increment;notnull"`
 	Value string `json:"value" gorm:"value:kind;type:varchar(30);notnull"`
 }
 
@@ -25,7 +25,7 @@ func (this *Word) TableName() string {
 	return "WORD"
 }
 
-func (this *Word) GetId() uint64 {
+func (this *Word) GetId() uint16 {
 	return this.ID
 }
 

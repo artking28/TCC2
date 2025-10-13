@@ -1,60 +1,147 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
+	"os/signal"
 	"path/filepath"
 	"strings"
+	"syscall"
+	"time"
 
 	mgu "github.com/artking28/myGoUtils" // Biblioteca customizada para utilitários, como Set
 	"github.com/tcc2-davi-arthur/models" // Models do projeto: Document, Word, InverseNGram
-	"gorm.io/driver/sqlite"              // Driver SQLite do GORM
-	"gorm.io/gorm"                       // ORM GORM
+	"github.com/tcc2-davi-arthur/utils"
+	"gorm.io/driver/sqlite" // Driver SQLite do GORM
+	"gorm.io/gorm"          // ORM GORM
 )
 
 // Diretório onde os arquivos de texto serão lidos
-const dir = "./misc/corpus/clean"
+const (
+	DbFileBackup = "./data_backup.db"
+	DbFile       = "./data.db"
+	LogsDir      = "./misc/logs"
+	Dir          = "./misc/corpus/clean"
+)
 
 // Variáveis globais
 var (
-	cache  map[string]models.Word         // Cache em memória de palavras para evitar consultas repetidas
-	cacheN map[string]models.InverseNGram // Cache em memória de n-gramas
-	db     *gorm.DB                       // Conexão com o banco de dados
+	Stats  []models.StatEntry
+	Cache  map[string]models.Word          // Cache em memória de palavras para evitar consultas repetidas
+	CacheN map[string]*models.InverseNGram // CacheN em memória de n-gramas
+	CacheD map[string]*models.Document     // CacheD em memória de n-gramas
+	Db     *gorm.DB                        // Conexão com o banco de dados
 )
 
 func main() {
+
+	Stats = []models.StatEntry{}
+
+	SetOnDestroy(func() {
+		filename := fmt.Sprintf("%s/stats_%s.json", LogsDir, time.Now().Format("02_01_2006_15_04_05"))
+
+		result, err := json.Marshal(Stats)
+		if err != nil {
+			fmt.Println("Falha durante persistência dos dados:", err)
+			return
+		}
+
+		err = os.WriteFile(filename, result, 0644)
+		if err != nil {
+			println("Falha durante o procedimento de persistência dos dados: " + err.Error())
+		}
+
+		fmt.Println("Programa terminou ou recebeu sinal!")
+	})
+
 	initDB() // Inicializa o banco
 
 	// Verifica se existem documentos no banco
 	var n int64
-	if err := db.Model(&models.Document{}).Count(&n).Error; err != nil {
+	err := Db.Model(&models.Document{}).Count(&n).Error
+	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Se não houver documentos, insere todos os arquivos do diretório
+	// Se não houver documentos, insere todos os arquivos do diretório e suas palavras
 	if n <= 0 {
 		if err := InsertAll(); err != nil {
 			log.Fatal(err)
 		}
 	}
 
-	// Inicializa cache em memória com todas as palavras
-	if len(cache) == 0 {
-		if cache == nil {
-			cache = make(map[string]models.Word)
+	// Sempre q roda cria um backup
+	if err = utils.DuplicateFile(DbFileBackup, DbFile); err != nil {
+		log.Fatal(err)
+	}
+	Db, err = gorm.Open(sqlite.Open(DbFile), &gorm.Config{})
+	if err != nil {
+		panic("failed to connect database")
+	}
+
+	// Inicializa Cache em memória com todas as palavras
+	if len(Cache) == 0 {
+		if Cache == nil {
+			Cache = make(map[string]models.Word)
 		}
 
 		var vec []*models.Word
-		if err := db.Model(&models.Word{}).Find(&vec).Error; err != nil {
+		if err = Db.Model(&models.Word{}).Find(&vec).Error; err != nil {
 			log.Fatal(err)
 		}
 
 		// Preenche o cache
 		for _, word := range vec {
-			cache[word.Value] = *word
+			Cache[word.Value] = *word
 		}
 	}
+
+	// Inicializa cacheD em memória com todos os documentos
+	if len(CacheD) == 0 {
+		if CacheD == nil {
+			CacheD = make(map[string]*models.Document)
+		}
+
+		var vec []*models.Document
+		if err = Db.Model(&models.Document{}).Find(&vec).Error; err != nil {
+			log.Fatal(err)
+		}
+
+		// Preenche o cache
+		for _, doc := range vec {
+			CacheD[doc.Name] = doc
+		}
+	}
+
+	//Stats = append(Stats, TestPreIndex(models.TF_IDF, 0, 1))
+	//
+	//Stats = append(Stats, TestPreIndex(models.TF_IDF, 4, 2))
+	//
+	//Stats = append(Stats, TestPreIndex(models.TF_IDF, 2, 3))
+	//
+	//Stats = append(Stats, TestPreIndex(models.BM_25, 0, 1))
+	//
+	//Stats = append(Stats, TestPreIndex(models.BM_25, 4, 2))
+	//
+	//Stats = append(Stats, TestPreIndex(models.BM_25, 2, 3))
+
+	if err = IndexDocs(); err != nil {
+		log.Fatal(err)
+	}
+
+	//Stats = append(Stats, TestPosIndex(models.TF_IDF, 0, 1))
+	//
+	//Stats = append(Stats, TestPosIndex(models.TF_IDF, 4, 2))
+	//
+	//Stats = append(Stats, TestPosIndex(models.TF_IDF, 2, 3))
+	//
+	//Stats = append(Stats, TestPosIndex(models.BM_25, 0, 1))
+	//
+	//Stats = append(Stats, TestPosIndex(models.BM_25, 4, 2))
+	//
+	//Stats = append(Stats, TestPosIndex(models.BM_25, 2, 3))
 
 	fmt.Println("Finished...")
 }
@@ -62,13 +149,13 @@ func main() {
 // Inicializa o banco de dados e faz a migração automática dos modelos
 func initDB() {
 	var err error
-	db, err = gorm.Open(sqlite.Open("./data.db"), &gorm.Config{})
+	Db, err = gorm.Open(sqlite.Open(DbFileBackup), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
 	}
 
 	// AutoMigrate cria as tabelas para os modelos, se não existirem
-	err = db.AutoMigrate(
+	err = Db.AutoMigrate(
 		&models.Document{},
 		&models.Word{},
 		&models.InverseNGram{},
@@ -81,13 +168,13 @@ func initDB() {
 // InsertAll Lê todos os arquivos de texto do diretório, cria documentos e palavras, e insere no banco
 func InsertAll() error {
 
-	files, err := os.ReadDir(dir) // Lista os arquivos no diretório
+	files, err := os.ReadDir(Dir) // Lista os arquivos no diretório
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// Transaction garante que tudo seja inserido de forma atômica
-	return db.Transaction(func(tx *gorm.DB) error {
+	return Db.Transaction(func(tx *gorm.DB) error {
 
 		var vec []*models.Document
 		wordSet := mgu.NewSet[string]() // Conjunto para armazenar palavras únicas
@@ -106,13 +193,13 @@ func InsertAll() error {
 			// Cria um documento com nome, tamanho e tipo
 			doc := models.Document{
 				Name: info.Name(),
-				Size: info.Size(),
+				Size: uint16(info.Size()),
 				Kind: models.ParseDocKind(ext),
 			}
 			vec = append(vec, &doc)
 
 			// Lê o conteúdo do arquivo e adiciona palavras ao conjunto
-			content, e := os.ReadFile(fmt.Sprintf("%s/%s", dir, f.Name()))
+			content, e := os.ReadFile(fmt.Sprintf("%s/%s", Dir, f.Name()))
 			if e != nil {
 				return e
 			}
@@ -140,4 +227,34 @@ func InsertAll() error {
 		// Insere as palavras no banco
 		return tx.Create(words).Error
 	})
+}
+
+func SetOnDestroy(callback func()) {
+	// Captura panics normais
+	defer func() {
+		if r := recover(); r != nil {
+			callback()
+			panic(r)
+		}
+	}()
+
+	// Canal para sinais do sistema
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan,
+		syscall.SIGINT,  // CTRL+C
+		syscall.SIGTERM, // kill
+		syscall.SIGHUP,  // logout/terminal close
+		syscall.SIGQUIT, // quit
+	)
+
+	// Goroutine que aguarda qualquer sinal
+	go func() {
+		sig := <-sigChan
+		fmt.Printf("Recebido sinal: %v\n", sig)
+		callback()
+		os.Exit(0)
+	}()
+
+	// Captura saída normal
+	defer callback()
 }

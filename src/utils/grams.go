@@ -4,9 +4,25 @@ import (
 	"log"
 )
 
+//func main() {
+//  size, jump := 3, 2
+//  vec := "abcdefghijklmnopqrstuvwxyz"
+//  fmt.Println(vec)
+//
+//  res := getGrams([]byte(vec), size, jump)
+//  for _, g := range res {
+//     fmt.Println(string(g))
+//  }
+//
+//  res = getGrams([]byte(vec), size, jump)
+//  for _, g := range res {
+//     fmt.Println(string(g))
+//  }
+//}
+
 // GetGramsLim Generates n-grams explicitly/limitedly (max 3-grams, max 2 jumps).
 // [T any] defines the function as generic, accepting slices of any type T.
-func GetGramsLim[T any](vec []T, size, jump int) [][]T {
+func GetGramsLim[T any](vec []T, size, jump int) ([][]T, [][]int8) {
 	n := len(vec)
 	if size <= 0 || size > 3 || jump > 2 {
 		log.Fatalln("Error: getGramsLim supports a maximum of 3-grams and 2 jumps.")
@@ -16,6 +32,7 @@ func GetGramsLim[T any](vec []T, size, jump int) [][]T {
 	}
 
 	var ret [][]T
+	var retJumps [][]int8
 
 	// Base Case: size=1 (Unigrams)
 	if size == 1 {
@@ -24,7 +41,7 @@ func GetGramsLim[T any](vec []T, size, jump int) [][]T {
 			// vec[i:i+1] creates a slice of a single element.
 			ret = append(ret, vec[i:i+1])
 		}
-		return ret
+		return ret, nil
 	}
 
 	// Case size=2 (Bigrams with Jumps)
@@ -34,9 +51,10 @@ func GetGramsLim[T any](vec []T, size, jump int) [][]T {
 				// Creates the gram: [element at 'i', element at 'i+j']
 				gram := []T{vec[i], vec[i+j]}
 				ret = append(ret, gram)
+				retJumps = append(retJumps, []int8{int8(j)})
 			}
 		}
-		return ret
+		return ret, retJumps
 	}
 
 	// Case size=3 (Trigrams with Jumps)
@@ -47,11 +65,12 @@ func GetGramsLim[T any](vec []T, size, jump int) [][]T {
 				// Creates the 3-element gram.
 				gram := []T{vec[i], vec[i+j], vec[i+j+k]}
 				ret = append(ret, gram)
+				retJumps = append(retJumps, []int8{int8(j), int8(k)})
 			}
 		}
 	}
 
-	return ret
+	return ret, retJumps
 }
 
 // GetGrams Generates all possible n-grams with jumps up to "jump".
