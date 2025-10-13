@@ -70,6 +70,6 @@ func IndexDocs() error {
 	return Db.CreateInBatches(all, 1000).Error
 }
 
-func TestPreIndex(algo models.Algo, size, jumps int) {
-
-}
+//func TestPreIndex(algo models.Algo, size, jumps int) {
+//
+//}

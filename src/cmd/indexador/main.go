@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -28,7 +27,6 @@ const (
 
 // Variáveis globais
 var (
-	Stats  []models.StatEntry
 	Cache  map[string]models.Word          // Cache em memória de palavras para evitar consultas repetidas
 	CacheN map[string]*models.InverseNGram // CacheN em memória de n-gramas
 	CacheD map[string]*models.Document     // CacheD em memória de n-gramas
@@ -36,25 +34,6 @@ var (
 )
 
 func main() {
-
-	Stats = []models.StatEntry{}
-
-	SetOnDestroy(func() {
-		filename := fmt.Sprintf("%s/stats_%s.json", LogsDir, time.Now().Format("02_01_2006_15_04_05"))
-
-		result, err := json.Marshal(Stats)
-		if err != nil {
-			fmt.Println("Falha durante persistência dos dados:", err)
-			return
-		}
-
-		err = os.WriteFile(filename, result, 0644)
-		if err != nil {
-			println("Falha durante o procedimento de persistência dos dados: " + err.Error())
-		}
-
-		fmt.Println("Programa terminou ou recebeu sinal!")
-	})
 
 	initDB() // Inicializa o banco
 
@@ -148,7 +127,7 @@ func main() {
 	}
 
 	start := time.Now()
-	vec, err := utils.ComputePosIndexedTFIDF(1, len(CacheD), Db, false, false)
+	vec, err := utils.ComputePosIndexedTFIDF(1, len(CacheD), Db, true, false)
 	if err != nil {
 		log.Fatal(err)
 	}
