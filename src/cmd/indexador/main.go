@@ -17,10 +17,8 @@ import (
 
 // Diretório onde os arquivos de texto serão lidos
 const (
-	DbFileBackup = "./data_backup.db"
-	DbFile       = "./data.db"
-	LogsDir      = "./misc/logs"
-	Dir          = "./misc/corpus/clean"
+	DbFile = "./data.db"
+	Dir    = "./misc/corpus/clean"
 )
 
 // Variáveis globais
@@ -31,6 +29,21 @@ var (
 	CacheD         map[string]*models.Document       // CacheD em memória de n-gramas
 	Db             *gorm.DB                          // Conexão com o banco de dados
 )
+
+// Test executa um ciclo completo de benchmark e validação
+// algo: modelo de ponderação (ex: BM25 ou TF-IDF)
+// preIndexed: se true, usa cache em memória; se false, consulta o banco
+// normalizeJumps: unifica n-grams com mesmos termos e jumps diferentes
+// size: tamanho do n-gram (ex: 3 para trigram)
+// jumps: número máximo de saltos entre palavras
+func Test(algo models.Algo, preIndexed, normalizeJumps bool, size, jumps int) {
+	start := time.Now()
+	fmt.Printf("\n[TEST] Iniciando teste com %s | preIndexed=%v | normalizeJumps=%v | size=%d | jumps=%d\n",
+		algo, preIndexed, normalizeJumps, size, jumps)
+
+	elapsed := time.Since(start)
+	fmt.Printf("[OK] Test finalizado em %.3fs (%d n-grams processados)\n", elapsed.Seconds())
+}
 
 func main() {
 
@@ -45,7 +58,7 @@ func main() {
 
 	// Se não houver documentos, insere todos os arquivos do diretório e suas palavras
 	if n <= 0 {
-		if err := InsertAll(); err != nil {
+		if err = InsertAll(); err != nil {
 			log.Fatal(err)
 		}
 	}
@@ -93,35 +106,17 @@ func main() {
 		}
 	}
 
-	//Stats = append(Stats, TestPreIndex(models.TF_IDF, 0, 1))
-	//
-	//Stats = append(Stats, TestPreIndex(models.TF_IDF, 4, 2))
-	//
-	//Stats = append(Stats, TestPreIndex(models.TF_IDF, 2, 3))
-	//
-	//Stats = append(Stats, TestPreIndex(models.BM_25, 0, 1))
-	//
-	//Stats = append(Stats, TestPreIndex(models.BM_25, 4, 2))
-	//
-	//Stats = append(Stats, TestPreIndex(models.BM_25, 2, 3))
-
 	if err = IndexDocs(); err != nil {
 		log.Fatal(err)
 	}
-	//
-	//var vec []*models.InverseTrigram
-	//err = Db.Model(&models.InverseTrigram{}).Where("docId = ?", 1).Find(&vec).Error
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
 
 	err = Db.Model(&models.InverseTrigram{}).Count(&n).Error
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Se não houver documentos, insere todos os arquivos do diretório e suas palavras
 	if n <= 0 {
+		fmt.Println("Finished... [empty database]")
 		os.Exit(0)
 	}
 
@@ -132,18 +127,6 @@ func main() {
 	}
 	println(vec)
 	fmt.Println("PreIndexed elapsed:", time.Since(start))
-
-	//Stats = append(Stats, TestPosIndex(models.TF_IDF, 0, 1))
-	//
-	//Stats = append(Stats, TestPosIndex(models.TF_IDF, 4, 2))
-	//
-	//Stats = append(Stats, TestPosIndex(models.TF_IDF, 2, 3))
-	//
-	//Stats = append(Stats, TestPosIndex(models.BM_25, 0, 1))
-	//
-	//Stats = append(Stats, TestPosIndex(models.BM_25, 4, 2))
-	//
-	//Stats = append(Stats, TestPosIndex(models.BM_25, 2, 3))
 
 	fmt.Println("Finished...")
 }
