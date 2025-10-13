@@ -46,11 +46,11 @@ func IndexDocs() error {
 				Jump1: jumps[i][1],
 				Count: 0,
 			}
-			if CacheN[ngram.GetCacheKey()] != nil {
-				CacheN[ngram.GetCacheKey()].Count++
+			if CacheN[ngram.GetCacheKey(true, true)] != nil {
+				CacheN[ngram.GetCacheKey(true, true)].Count++
 				continue
 			}
-			CacheN[ngram.GetCacheKey()] = &ngram
+			CacheN[ngram.GetCacheKey(true, true)] = &ngram
 		}
 	}
 

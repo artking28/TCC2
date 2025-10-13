@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"sort"
+	"sync"
 
 	"github.com/tcc2-davi-arthur/models"
 	"gorm.io/gorm"
@@ -14,7 +15,7 @@ type TFIDFEntry struct {
 	Value float64
 }
 
-func ComputePreIndexedTFIDF(trigramList []*models.InverseNGram, totalDocs int, cacheN map[string]*models.InverseNGram, smooth bool) ([]TFIDFEntry, error) {
+func ComputePreIndexedTFIDF(trigramList []*models.InverseNGram, totalDocs int, cacheN map[string]*models.InverseNGram, smoothJumps, parallel bool) ([]TFIDFEntry, error) {
 	if len(trigramList) == 0 {
 		return nil, fmt.Errorf("trigram list is empty")
 	}
@@ -32,23 +33,61 @@ func ComputePreIndexedTFIDF(trigramList []*models.InverseNGram, totalDocs int, c
 		if ngram.DocId != expectedDocID {
 			return nil, fmt.Errorf("mismatched DocId: expected %d, got %d", expectedDocID, ngram.DocId)
 		}
-		key := ngram.GetCacheKey(smooth, true)
+		key := ngram.GetCacheKey(smoothJumps, true)
 		tf[key]++
 	}
 
-	// Calcula TF-IDF usando CacheN para DF
-	for key, count := range tf {
-		docSet := make(map[uint16]bool)
-		for k, ngram := range cacheN {
-			if k == key {
-				docSet[ngram.DocId] = true
-			}
-		}
-		df := len(docSet)
+	// Calcula DF
+	type dfResult struct {
+		key string
+		df  int
+	}
+	dfChan := make(chan dfResult, len(tf))
 
-		tfVal := float64(count) / float64(totalTrigrams)
-		idfVal := math.Log(float64(totalDocs) / (1 + float64(df)))
-		tfidf[key] = tfVal * idfVal
+	if parallel {
+		// Concorrência com até 25 goroutines
+		sem := make(chan struct{}, 25) // Semaforo para limitar goroutines
+		var wg sync.WaitGroup
+
+		for key := range tf {
+			wg.Add(1)
+			sem <- struct{}{} // Adquire semaforo
+			go func(key string) {
+				defer wg.Done()
+				defer func() { <-sem }() // Libera semaforo
+				docSet := make(map[uint16]bool)
+				for k, ngram := range cacheN {
+					if k == key {
+						docSet[ngram.DocId] = true
+					}
+				}
+				dfChan <- dfResult{key: key, df: len(docSet)}
+			}(key)
+		}
+
+		go func() {
+			wg.Wait()
+			close(dfChan)
+		}()
+	} else {
+		// Sequencial
+		for key := range tf {
+			docSet := make(map[uint16]bool)
+			for k, ngram := range cacheN {
+				if k == key {
+					docSet[ngram.DocId] = true
+				}
+			}
+			dfChan <- dfResult{key: key, df: len(docSet)}
+		}
+		close(dfChan)
+	}
+
+	// Coleta resultados do DF
+	for res := range dfChan {
+		tfVal := float64(tf[res.key]) / float64(totalTrigrams)
+		idfVal := math.Log(float64(totalDocs) / (1 + float64(res.df)))
+		tfidf[res.key] = tfVal * idfVal
 	}
 
 	// Converte mapa para slice e ordena por chave
@@ -63,28 +102,26 @@ func ComputePreIndexedTFIDF(trigramList []*models.InverseNGram, totalDocs int, c
 	return result, nil
 }
 
-func ComputePosIndexedTFIDF(docID uint16, totalDocs int, db *gorm.DB, smooth bool) ([]TFIDFEntry, error) {
+func ComputePosIndexedTFIDF(docID uint16, totalDocs int, db *gorm.DB, smoothJumps, parallel bool) ([]TFIDFEntry, error) {
 	if totalDocs <= 0 {
 		return nil, fmt.Errorf("totalDocs must be positive")
 	}
 
 	tfidf := make(map[string]float64)
 	tf := make(map[string]int)
-	df := make(map[string]int)
+	totalTrigrams := 0
 
 	// TF: contagem de trigramas do documento
-	var tfResults []struct {
-		Wd0Id, Wd1Id, Wd2Id uint16
-		Jump0, Jump1        int8
-		CountInDoc          int64
+	var tfResults []*models.InverseNGram
+	err := db.Model(&models.InverseNGram{}).
+		Select("wd0Id, wd1Id, wd2Id, jump0, jump1, COUNT(docId) AS count").
+		Where("docId = ?", docID).
+		Group("wd0Id, wd1Id, wd2Id, jump0, jump1").
+		Find(&tfResults).Error
+	if err != nil {
+		return nil, err
 	}
-	db.Model(&models.InverseNGram{}).
-		Select("wd0_id, wd1_id, wd2_id, jump0, jump1, COUNT(doc_id) AS count_in_doc").
-		Where("doc_id = ?", docID).
-		Group("wd0_id, wd1_id, wd2_id, jump0, jump1").
-		Find(&tfResults)
 
-	totalTrigrams := 0
 	for _, r := range tfResults {
 		ngram := &models.InverseNGram{
 			Wd0Id: r.Wd0Id,
@@ -94,47 +131,81 @@ func ComputePosIndexedTFIDF(docID uint16, totalDocs int, db *gorm.DB, smooth boo
 			Jump1: r.Jump1,
 			DocId: docID,
 		}
-		key := ngram.GetCacheKey(smooth, true)
-		tf[key] = int(r.CountInDoc)
-		totalTrigrams += int(r.CountInDoc)
-	}
-
-	var trigramKeys []struct {
-		Wd0Id, Wd1Id, Wd2Id uint16
-		Jump0, Jump1        int8
-	}
-	for _, r := range tfResults {
-		trigramKeys = append(trigramKeys, struct {
-			Wd0Id, Wd1Id, Wd2Id uint16
-			Jump0, Jump1        int8
-		}{r.Wd0Id, r.Wd1Id, r.Wd2Id, r.Jump0, r.Jump1})
+		key := ngram.GetCacheKey(smoothJumps, true)
+		tf[key] = int(r.Count)
+		totalTrigrams += int(r.Count)
 	}
 
 	// Calcula DF
-	for _, t := range trigramKeys {
-		var docCount int64
-		ngram := &models.InverseNGram{
-			Wd0Id: t.Wd0Id,
-			Wd1Id: t.Wd1Id,
-			Wd2Id: t.Wd2Id,
-			Jump0: t.Jump0,
-			Jump1: t.Jump1,
+	type dfResult struct {
+		key string
+		df  int
+	}
+	dfChan := make(chan dfResult, len(tfResults))
+
+	if parallel {
+		// Concorrência com até 25 goroutines
+		sem := make(chan struct{}, 25) // Semaforo para limitar goroutines
+		var wg sync.WaitGroup
+
+		for _, r := range tfResults {
+			wg.Add(1)
+			sem <- struct{}{} // Adquire semaforo
+			go func(r *models.InverseNGram) {
+				defer wg.Done()
+				defer func() { <-sem }() // Libera semaforo
+				ngram := &models.InverseNGram{
+					Wd0Id: r.Wd0Id,
+					Wd1Id: r.Wd1Id,
+					Wd2Id: r.Wd2Id,
+					Jump0: r.Jump0,
+					Jump1: r.Jump1,
+				}
+				key := ngram.GetCacheKey(smoothJumps, true)
+				var docCount int64
+				query := db.Model(&models.InverseNGram{}).
+					Where("wd0Id = ? AND wd1Id = ? AND wd2Id = ?", r.Wd0Id, r.Wd1Id, r.Wd2Id)
+				if !smoothJumps {
+					query = query.Where("jump0 = ? AND jump1 = ?", r.Jump0, r.Jump1)
+				}
+				query.Distinct("docId").Count(&docCount)
+				dfChan <- dfResult{key: key, df: int(docCount)}
+			}(r)
 		}
-		key := ngram.GetCacheKey(smooth, true)
-		query := db.Model(&models.InverseNGram{}).
-			Where("wd0_id = ? AND wd1_id = ? AND wd2_id = ?", t.Wd0Id, t.Wd1Id, t.Wd2Id)
-		if !smooth {
-			query = query.Where("jump0 = ? AND jump1 = ?", t.Jump0, t.Jump1)
+
+		go func() {
+			wg.Wait()
+			close(dfChan)
+		}()
+	} else {
+		// Sequencial
+		for _, r := range tfResults {
+			ngram := &models.InverseNGram{
+				Wd0Id: r.Wd0Id,
+				Wd1Id: r.Wd1Id,
+				Wd2Id: r.Wd2Id,
+				Jump0: r.Jump0,
+				Jump1: r.Jump1,
+				DocId: docID,
+			}
+			key := ngram.GetCacheKey(smoothJumps, true)
+			var docCount int64
+			query := db.Model(&models.InverseNGram{}).
+				Where("wd0Id = ? AND wd1Id = ? AND wd2Id = ?", r.Wd0Id, r.Wd1Id, r.Wd2Id)
+			if !smoothJumps {
+				query = query.Where("jump0 = ? AND jump1 = ?", r.Jump0, r.Jump1)
+			}
+			query.Distinct("docId").Count(&docCount)
+			dfChan <- dfResult{key: key, df: int(docCount)}
 		}
-		query.Distinct("doc_id").Count(&docCount)
-		df[key] = int(docCount)
+		close(dfChan)
 	}
 
-	// Calcula TF-IDF
-	for key, count := range tf {
-		tfVal := float64(count) / float64(totalTrigrams)
-		idfVal := math.Log(float64(totalDocs) / (1 + float64(df[key])))
-		tfidf[key] = tfVal * idfVal
+	// Coleta resultados do DF
+	for res := range dfChan {
+		tfVal := float64(tf[res.key]) / float64(totalTrigrams)
+		idfVal := math.Log(float64(totalDocs) / (1 + float64(res.df)))
+		tfidf[res.key] = tfVal * idfVal
 	}
 
 	// Converte mapa para slice e ordena por chave

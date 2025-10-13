@@ -73,13 +73,13 @@ func main() {
 	}
 
 	// Sempre q roda cria um backup
-	if err = utils.DuplicateFile(DbFileBackup, DbFile); err != nil {
-		log.Fatal(err)
-	}
-	Db, err = gorm.Open(sqlite.Open(DbFile), &gorm.Config{})
-	if err != nil {
-		panic("failed to connect database")
-	}
+	//if err = utils.DuplicateFile(DbFileBackup, DbFile); err != nil {
+	//	log.Fatal(err)
+	//}
+	//Db, err = gorm.Open(sqlite.Open(DbFile), &gorm.Config{})
+	//if err != nil {
+	//	panic("failed to connect database")
+	//}
 
 	// Inicializa Cache em memória com todas as palavras
 	if len(Cache) == 0 {
@@ -127,9 +127,33 @@ func main() {
 	//
 	//Stats = append(Stats, TestPreIndex(models.BM_25, 2, 3))
 
-	if err = IndexDocs(); err != nil {
+	//if err = IndexDocs(); err != nil {
+	//	log.Fatal(err)
+	//}
+	//
+	//var vec []*models.InverseNGram
+	//err = Db.Model(&models.InverseNGram{}).Where("docId = ?", 1).Find(&vec).Error
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+
+	err = Db.Model(&models.InverseNGram{}).Count(&n).Error
+	if err != nil {
 		log.Fatal(err)
 	}
+
+	// Se não houver documentos, insere todos os arquivos do diretório e suas palavras
+	if n <= 0 {
+		os.Exit(0)
+	}
+
+	start := time.Now()
+	vec, err := utils.ComputePosIndexedTFIDF(1, len(CacheD), Db, false, false)
+	if err != nil {
+		log.Fatal(err)
+	}
+	println(vec)
+	fmt.Println("PreIndexed elapsed:", time.Since(start))
 
 	//Stats = append(Stats, TestPosIndex(models.TF_IDF, 0, 1))
 	//
@@ -149,9 +173,10 @@ func main() {
 // Inicializa o banco de dados e faz a migração automática dos modelos
 func initDB() {
 	var err error
-	Db, err = gorm.Open(sqlite.Open(DbFileBackup), &gorm.Config{})
+	Db, err = gorm.Open(sqlite.Open(DbFile), &gorm.Config{})
 	if err != nil {
-		panic("failed to connect database")
+		println("failed to connect database")
+		log.Fatal(err)
 	}
 
 	// AutoMigrate cria as tabelas para os modelos, se não existirem
@@ -161,12 +186,14 @@ func initDB() {
 		&models.InverseNGram{},
 	)
 	if err != nil {
-		panic("failed to migrate models")
+		println("failed to migrate models")
+		log.Fatal(err)
 	}
 
-	err = Db.Exec(`CREATE INDEX IF NOT EXISTS idx_worddoc_wdids ON inverse_n_grams (wd0_id, wd1_id, wd2_id);`).Error
+	err = Db.Exec(`CREATE INDEX IF NOT EXISTS idx_worddoc_wdids ON WORD_DOC (wd0_id, wd1_id, wd2_id);`).Error
 	if err != nil {
-		panic("failed to create index")
+		println("failed to create index")
+		log.Fatal(err)
 	}
 }
 
