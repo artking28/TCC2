@@ -27,10 +27,11 @@ const (
 
 // Variáveis globais
 var (
-	Cache  map[string]models.Word          // Cache em memória de palavras para evitar consultas repetidas
-	CacheN map[string]*models.InverseNGram // CacheN em memória de n-gramas
-	CacheD map[string]*models.Document     // CacheD em memória de n-gramas
-	Db     *gorm.DB                        // Conexão com o banco de dados
+	CountAllNGrams uint32
+	Cache          map[string]models.Word          // Cache em memória de palavras para evitar consultas repetidas
+	CacheN         map[string]*models.InverseNGram // CacheN em memória de n-gramas
+	CacheD         map[string]*models.Document     // CacheD em memória de n-gramas
+	Db             *gorm.DB                        // Conexão com o banco de dados
 )
 
 func main() {
@@ -106,9 +107,9 @@ func main() {
 	//
 	//Stats = append(Stats, TestPreIndex(models.BM_25, 2, 3))
 
-	//if err = IndexDocs(); err != nil {
-	//	log.Fatal(err)
-	//}
+	if err = IndexDocs(); err != nil {
+		log.Fatal(err)
+	}
 	//
 	//var vec []*models.InverseNGram
 	//err = Db.Model(&models.InverseNGram{}).Where("docId = ?", 1).Find(&vec).Error

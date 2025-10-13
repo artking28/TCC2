@@ -44,13 +44,15 @@ func IndexDocs() error {
 				Wd2Id: Cache[word[2]].ID,
 				Jump0: jumps[i][0],
 				Jump1: jumps[i][1],
-				Count: 0,
+				Count: 1,
 			}
 			if CacheN[ngram.GetCacheKey(true, true)] != nil {
 				CacheN[ngram.GetCacheKey(true, true)].Count++
+				CountAllNGrams++
 				continue
 			}
 			CacheN[ngram.GetCacheKey(true, true)] = &ngram
+			CountAllNGrams++
 		}
 	}
 
@@ -69,7 +71,3 @@ func IndexDocs() error {
 	all := mgu.MapValues(CacheN)
 	return Db.CreateInBatches(all, 1000).Error
 }
-
-//func TestPreIndex(algo models.Algo, size, jumps int) {
-//
-//}

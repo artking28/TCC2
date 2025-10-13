@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"log"
 	"math"
 	"sync"
 
@@ -10,7 +11,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func ComputePreIndexedTFIDF(trigramList []*models.InverseNGram, totalDocs int, cacheN map[string]*models.InverseNGram, smoothJumps, parallel bool) (map[string]*float64, error) {
+func ComputePreIndexedBM25(trigramList []*models.InverseNGram, totalDocs, totalGrams int, cacheN map[string]*models.InverseNGram, smoothJumps, parallel bool) (map[string]*float64, error) {
 	if len(trigramList) == 0 {
 		return nil, fmt.Errorf("trigram list is empty")
 	}
@@ -19,7 +20,7 @@ func ComputePreIndexedTFIDF(trigramList []*models.InverseNGram, totalDocs int, c
 	}
 
 	expectedDocID := trigramList[0].DocId
-	tfidf := make(map[string]*float64)
+	bm25 := make(map[string]*float64)
 	tf := make(map[string]int)
 	totalTrigrams := len(trigramList)
 
@@ -78,22 +79,27 @@ func ComputePreIndexedTFIDF(trigramList []*models.InverseNGram, totalDocs int, c
 		close(dfChan)
 	}
 
-	// Coleta resultados do DF
+	k := 1.5
+	b := 0.75
+	docLen := float64(totalTrigrams) // ou o tamanho do documento
+	avgDL := float64(totalGrams) / float64(totalDocs)
+
 	for res := range dfChan {
-		tfVal := float64(tf[res.key]) / float64(totalTrigrams)
-		idfVal := math.Log(float64(totalDocs) / (1 + float64(res.df)))
-		tfidf[res.key] = mgu.Ptr(tfVal * idfVal)
+		tfTerm := float64(tf[res.key])
+		idf := math.Log((float64(totalDocs)-float64(res.df)+0.5)/(float64(res.df)+0.5) + 1)
+		bm25Score := idf * (tfTerm * (k + 1)) / (tfTerm + k*(1-b+b*(docLen/avgDL)))
+		bm25[res.key] = mgu.Ptr(bm25Score)
 	}
 
-	return tfidf, nil
+	return bm25, nil
 }
 
-func ComputePosIndexedTFIDF(docID uint16, totalDocs int, db *gorm.DB, smoothJumps, parallel bool) (map[string]*float64, error) {
+func ComputePosIndexedBM25(docID uint16, totalDocs int, db *gorm.DB, smoothJumps, parallel bool) (map[string]*float64, error) {
 	if totalDocs <= 0 {
 		return nil, fmt.Errorf("totalDocs must be positive")
 	}
 
-	tfidf := make(map[string]*float64)
+	bm25 := make(map[string]*float64)
 	tf := make(map[string]int)
 	totalTrigrams := 0
 
@@ -187,12 +193,23 @@ func ComputePosIndexedTFIDF(docID uint16, totalDocs int, db *gorm.DB, smoothJump
 		close(dfChan)
 	}
 
-	// Coleta resultados do DF
-	for res := range dfChan {
-		tfVal := float64(tf[res.key]) / float64(totalTrigrams)
-		idfVal := math.Log(float64(totalDocs) / (1 + float64(res.df)))
-		tfidf[res.key] = mgu.Ptr(tfVal * idfVal)
+	var totalTrigramsAllDocs int64
+	err = db.Model(&models.InverseNGram{}).Count(&totalTrigramsAllDocs).Error
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	return tfidf, nil
+	k := 1.5
+	b := 0.75
+	docLen := float64(totalTrigrams) // ou o tamanho do documento
+	avgDL := float64(totalTrigramsAllDocs) / float64(totalDocs)
+
+	for res := range dfChan {
+		tfTerm := float64(tf[res.key])
+		idf := math.Log((float64(totalDocs)-float64(res.df)+0.5)/(float64(res.df)+0.5) + 1)
+		bm25Score := idf * (tfTerm * (k + 1)) / (tfTerm + k*(1-b+b*(docLen/avgDL)))
+		bm25[res.key] = mgu.Ptr(bm25Score)
+	}
+
+	return bm25, nil
 }
