@@ -194,7 +194,7 @@ func ComputePosIndexedBM25(docID uint16, totalDocs int, db *gorm.DB, smoothJumps
 	}
 
 	var totalTrigramsAllDocs int64
-	err = db.Model(&models.InverseNGram{}).Count(&totalTrigramsAllDocs).Error
+	err = db.Model(&models.InverseNGram{}).Select("SUM(count)").Scan(&totalTrigramsAllDocs).Error
 	if err != nil {
 		log.Fatal(err)
 	}
