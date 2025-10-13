@@ -11,7 +11,7 @@ import (
 	"time"
 
 	mgu "github.com/artking28/myGoUtils" // Biblioteca customizada para utilitários, como Set
-	"github.com/tcc2-davi-arthur/models" // Models do projeto: Document, Word, InverseNGram
+	"github.com/tcc2-davi-arthur/models" // Models do projeto: Document, Word, InverseTrigram
 	"github.com/tcc2-davi-arthur/utils"
 	"gorm.io/driver/sqlite" // Driver SQLite do GORM
 	"gorm.io/gorm"          // ORM GORM
@@ -28,10 +28,10 @@ const (
 // Variáveis globais
 var (
 	CountAllNGrams uint32
-	Cache          map[string]models.Word          // Cache em memória de palavras para evitar consultas repetidas
-	CacheN         map[string]*models.InverseNGram // CacheN em memória de n-gramas
-	CacheD         map[string]*models.Document     // CacheD em memória de n-gramas
-	Db             *gorm.DB                        // Conexão com o banco de dados
+	Cache          map[string]models.Word            // Cache em memória de palavras para evitar consultas repetidas
+	CacheN         map[string]*models.InverseTrigram // CacheN em memória de n-gramas
+	CacheD         map[string]*models.Document       // CacheD em memória de n-gramas
+	Db             *gorm.DB                          // Conexão com o banco de dados
 )
 
 func main() {
@@ -111,13 +111,13 @@ func main() {
 		log.Fatal(err)
 	}
 	//
-	//var vec []*models.InverseNGram
-	//err = Db.Model(&models.InverseNGram{}).Where("docId = ?", 1).Find(&vec).Error
+	//var vec []*models.InverseTrigram
+	//err = Db.Model(&models.InverseTrigram{}).Where("docId = ?", 1).Find(&vec).Error
 	//if err != nil {
 	//	log.Fatal(err)
 	//}
 
-	err = Db.Model(&models.InverseNGram{}).Count(&n).Error
+	err = Db.Model(&models.InverseTrigram{}).Count(&n).Error
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -163,7 +163,7 @@ func initDB() {
 	err = Db.AutoMigrate(
 		&models.Document{},
 		&models.Word{},
-		&models.InverseNGram{},
+		&models.InverseTrigram{},
 	)
 	if err != nil {
 		println("failed to migrate models")

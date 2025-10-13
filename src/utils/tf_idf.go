@@ -10,7 +10,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func ComputePreIndexedTFIDF(trigramList []*models.InverseNGram, totalDocs int, cacheN map[string]*models.InverseNGram, smoothJumps, parallel bool) (map[string]*float64, error) {
+func ComputePreIndexedTFIDF(trigramList []*models.InverseTrigram, totalDocs int, cacheN map[string]*models.InverseTrigram, smoothJumps, parallel bool) (map[string]*float64, error) {
 	if len(trigramList) == 0 {
 		return nil, fmt.Errorf("trigram list is empty")
 	}
@@ -98,8 +98,8 @@ func ComputePosIndexedTFIDF(docID uint16, totalDocs int, db *gorm.DB, smoothJump
 	totalTrigrams := 0
 
 	// TF: contagem de trigramas do documento
-	var tfResults []*models.InverseNGram
-	err := db.Model(&models.InverseNGram{}).
+	var tfResults []*models.InverseTrigram
+	err := db.Model(&models.InverseTrigram{}).
 		Select("wd0Id, wd1Id, wd2Id, jump0, jump1, COUNT(docId) AS count").
 		Where("docId = ?", docID).
 		Group("wd0Id, wd1Id, wd2Id, jump0, jump1").
@@ -109,7 +109,7 @@ func ComputePosIndexedTFIDF(docID uint16, totalDocs int, db *gorm.DB, smoothJump
 	}
 
 	for _, r := range tfResults {
-		ngram := &models.InverseNGram{
+		ngram := &models.InverseTrigram{
 			Wd0Id: r.Wd0Id,
 			Wd1Id: r.Wd1Id,
 			Wd2Id: r.Wd2Id,
@@ -137,10 +137,10 @@ func ComputePosIndexedTFIDF(docID uint16, totalDocs int, db *gorm.DB, smoothJump
 		for _, r := range tfResults {
 			wg.Add(1)
 			sem <- struct{}{} // Adquire semaforo
-			go func(r *models.InverseNGram) {
+			go func(r *models.InverseTrigram) {
 				defer wg.Done()
 				defer func() { <-sem }() // Libera semaforo
-				ngram := &models.InverseNGram{
+				ngram := &models.InverseTrigram{
 					Wd0Id: r.Wd0Id,
 					Wd1Id: r.Wd1Id,
 					Wd2Id: r.Wd2Id,
@@ -149,7 +149,7 @@ func ComputePosIndexedTFIDF(docID uint16, totalDocs int, db *gorm.DB, smoothJump
 				}
 				key := ngram.GetCacheKey(smoothJumps, true)
 				var docCount int64
-				query := db.Model(&models.InverseNGram{}).
+				query := db.Model(&models.InverseTrigram{}).
 					Where("wd0Id = ? AND wd1Id = ? AND wd2Id = ?", r.Wd0Id, r.Wd1Id, r.Wd2Id)
 				if !smoothJumps {
 					query = query.Where("jump0 = ? AND jump1 = ?", r.Jump0, r.Jump1)
@@ -166,7 +166,7 @@ func ComputePosIndexedTFIDF(docID uint16, totalDocs int, db *gorm.DB, smoothJump
 	} else {
 		// Sequencial
 		for _, r := range tfResults {
-			ngram := &models.InverseNGram{
+			ngram := &models.InverseTrigram{
 				Wd0Id: r.Wd0Id,
 				Wd1Id: r.Wd1Id,
 				Wd2Id: r.Wd2Id,
@@ -176,7 +176,7 @@ func ComputePosIndexedTFIDF(docID uint16, totalDocs int, db *gorm.DB, smoothJump
 			}
 			key := ngram.GetCacheKey(smoothJumps, true)
 			var docCount int64
-			query := db.Model(&models.InverseNGram{}).
+			query := db.Model(&models.InverseTrigram{}).
 				Where("wd0Id = ? AND wd1Id = ? AND wd2Id = ?", r.Wd0Id, r.Wd1Id, r.Wd2Id)
 			if !smoothJumps {
 				query = query.Where("jump0 = ? AND jump1 = ?", r.Jump0, r.Jump1)

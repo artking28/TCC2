@@ -15,7 +15,7 @@ import (
 func IndexDocs() error {
 
 	if CacheN == nil {
-		CacheN = make(map[string]*models.InverseNGram)
+		CacheN = make(map[string]*models.InverseTrigram)
 	}
 
 	files, err := os.ReadDir(Dir)
@@ -37,7 +37,7 @@ func IndexDocs() error {
 
 		result, jumps := utils.GetGramsLim(text, 3, 2)
 		for i, word := range result {
-			ngram := models.InverseNGram{
+			ngram := models.InverseTrigram{
 				DocId: CacheD[f.Name()].ID,
 				Wd0Id: Cache[word[0]].ID,
 				Wd1Id: Cache[word[1]].ID,
@@ -58,7 +58,7 @@ func IndexDocs() error {
 
 	// Verifica se existem documentos no banco
 	var n int64
-	err = Db.Model(&models.InverseNGram{}).Count(&n).Error
+	err = Db.Model(&models.InverseTrigram{}).Count(&n).Error
 	if err != nil {
 		log.Fatal(err)
 	}
