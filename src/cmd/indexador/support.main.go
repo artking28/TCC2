@@ -15,7 +15,7 @@ import (
 func IndexDocs() error {
 
 	if CacheN == nil {
-		CacheN = make(map[string]*models.InverseTrigram)
+		CacheN = make(map[string]map[uint16]*models.InverseTrigram)
 	}
 
 	files, err := os.ReadDir(Dir)
@@ -46,12 +46,14 @@ func IndexDocs() error {
 				Jump1: jumps[i][1],
 				Count: 1,
 			}
-			if CacheN[ngram.GetCacheKey(true, true)] != nil {
-				CacheN[ngram.GetCacheKey(true, true)].Count++
+			key := ngram.GetCacheKey(true, false)
+			if CacheN[key] != nil {
+				CacheN[key][ngram.DocId].Count++
 				CountAllNGrams++
 				continue
 			}
-			CacheN[ngram.GetCacheKey(true, true)] = &ngram
+			CacheN[key] = make(map[uint16]*models.InverseTrigram)
+			CacheN[key][ngram.DocId] = &ngram
 			CountAllNGrams++
 		}
 	}

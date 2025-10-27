@@ -24,10 +24,10 @@ const (
 // Variáveis globais
 var (
 	CountAllNGrams uint32
-	Cache          map[string]models.Word            // Cache em memória de palavras para evitar consultas repetidas
-	CacheN         map[string]*models.InverseTrigram // CacheN em memória de n-gramas
-	CacheD         map[string]*models.Document       // CacheD em memória de n-gramas
-	Db             *gorm.DB                          // Conexão com o banco de dados
+	Cache          map[string]models.Word                       // Cache em memória de palavras para evitar consultas repetidas
+	CacheN         map[string]map[uint16]*models.InverseTrigram // CacheN em memória de n-gramas
+	CacheD         map[string]*models.Document                  // CacheD em memória de n-gramas
+	Db             *gorm.DB                                     // Conexão com o banco de dados
 )
 
 // Test executa um ciclo completo de benchmark e validação

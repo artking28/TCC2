@@ -39,6 +39,20 @@ func CleanText(input string) (string, error) {
 	// Tira todas as minúsculas.
 	input = strings.ToLower(input)
 
+	// Regex para detectar números romanos e regex para detectar números decimais.
+	rx0 := regexp.MustCompile(`^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$`)
+	rx1 := regexp.MustCompile(`((\d{1,3}(\.\d{3})*)|\d+)(,\d+)?\b`)
+	rx2 := regexp.MustCompile(`((\d{1,3}(,\d{3})*)|\d+)(\.\d+)?\b`)
+	rx4 := regexp.MustCompile(`(\d{1,2}[-/]\d{1,2}[-/]\d{2,4}|\d{4}[-/]\d{1,2}[-/]\d{1,2})\b`)
+	rx5 := regexp.MustCompile(`https?://([^\s]|\n)+`)
+
+	// Substitui numerais por <n>
+	input = rx5.ReplaceAllString(input, "")
+	input = rx0.ReplaceAllString(input, "")
+	input = rx1.ReplaceAllString(input, "")
+	input = rx2.ReplaceAllString(input, "")
+	input = rx4.ReplaceAllString(input, "")
+
 	// Normalizações
 	input = strings.ReplaceAll(input, "–", " ")
 	input = strings.ReplaceAll(input, "-", " ")
@@ -51,22 +65,6 @@ func CleanText(input string) (string, error) {
 		}
 		return r
 	}, input)
-
-	// Regex para detectar números romanos e regex para detectar números decimais.
-	rx0 := regexp.MustCompile(`^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$`)
-	rx1 := regexp.MustCompile(`\b((\d{1,3}(\.\d{3})*)|\d+)(,\d+)?\b`)
-	rx2 := regexp.MustCompile(`\b((\d{1,3}(,\d{3})*)|\d+)(\.\d+)?\b`)
-	rx3 := regexp.MustCompile(`<número>(( |\.)?<número>)*`)
-	rx4 := regexp.MustCompile(`\b(\d{1,2}[-/]\d{1,2}[-/]\d{2,4}|\d{4}[-/]\d{1,2}[-/]\d{1,2})\b`)
-	rx5 := regexp.MustCompile(`https?://[^\s]+`)
-
-	// Substitui numerais por <n>
-	input = rx0.ReplaceAllString(input, "")
-	input = rx1.ReplaceAllString(input, "")
-	input = rx2.ReplaceAllString(input, "")
-	input = rx3.ReplaceAllString(input, "")
-	input = rx4.ReplaceAllString(input, "")
-	input = rx5.ReplaceAllString(input, "")
 
 	// Pega o array de caracteres especiais.
 	replaceVec, err := LoadAccents()
