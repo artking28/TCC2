@@ -47,7 +47,7 @@ func IndexDocs() error {
 				Count: 1,
 			}
 			key := ngram.GetCacheKey(true, false)
-			if CacheN[key] != nil {
+			if CacheN[key] != nil && CacheN[key][ngram.DocId] != nil {
 				CacheN[key][ngram.DocId].Count++
 				CountAllNGrams++
 				continue

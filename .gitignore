@@ -133,3 +133,4 @@ chrome-profiler-events*.json
 *.flv
 *.mov
 *.wmv
+/src/cmd_pyhon/venv/
