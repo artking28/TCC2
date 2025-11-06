@@ -43,13 +43,21 @@ func (this *InverseBigram) GetCacheKey(jumps, doc bool) string {
 	return ret
 }
 
+func (this *InverseBigram) GetDocId() uint16 {
+	return this.DocId
+}
+
+func (this *InverseBigram) Increment() {
+	this.Count++
+}
+
 func (this *InverseBigram) ToString() string {
 	id := fmt.Sprintf("%s-%s", this.Wd0.Value, this.Wd1.Value)
 	return fmt.Sprintf("{ id: %s; count: %d; docId: %d }", id, this.Count, this.DocId)
 }
 
 func (this *InverseBigram) TableName() string {
-	return "INVERSE_BIGRAM"
+	return "WORD_DOC"
 }
 
 func (this *InverseBigram) GetId() uint64 {

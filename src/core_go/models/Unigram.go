@@ -23,7 +23,7 @@ func NewInverseUnigram() *InverseUnigram {
 	}
 }
 
-func (this *InverseUnigram) GetCacheKey(doc bool) string {
+func (this *InverseUnigram) GetCacheKey(_, doc bool) string {
 	ret := fmt.Sprintf("%05d", this.Wd0Id)
 	if doc {
 		ret = fmt.Sprintf("%s-%04d", ret, this.DocId)
@@ -31,12 +31,20 @@ func (this *InverseUnigram) GetCacheKey(doc bool) string {
 	return ret
 }
 
+func (this *InverseUnigram) GetDocId() uint16 {
+	return this.DocId
+}
+
+func (this *InverseUnigram) Increment() {
+	this.Count++
+}
+
 func (this *InverseUnigram) ToString() string {
 	return fmt.Sprintf("{ id: %s; count: %d; docId: %d }", this.Wd0.Value, this.Count, this.DocId)
 }
 
 func (this *InverseUnigram) TableName() string {
-	return "INVERSE_BIGRAM"
+	return "WORD_DOC"
 }
 
 func (this *InverseUnigram) GetId() uint64 {

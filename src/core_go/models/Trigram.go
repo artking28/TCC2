@@ -52,6 +52,14 @@ func (this *InverseTrigram) GetCacheKey(jumps, doc bool) string {
 	return ret
 }
 
+func (this *InverseTrigram) GetDocId() uint16 {
+	return this.DocId
+}
+
+func (this *InverseTrigram) Increment() {
+	this.Count++
+}
+
 func (this *InverseTrigram) ToString() string {
 	id := fmt.Sprintf("%s-%s-%s", this.Wd0.Value, this.Wd1.Value, this.Wd2.Value)
 	return fmt.Sprintf("{ id: %s; count: %d; docId: %d }", id, this.Count, this.DocId)
