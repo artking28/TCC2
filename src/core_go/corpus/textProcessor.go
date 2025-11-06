@@ -1,4 +1,4 @@
-package main
+package corpus
 
 import (
 	"errors"
@@ -12,10 +12,14 @@ import (
 	"github.com/tcc2-davi-arthur/utils"
 )
 
-func main() {
-	dir := "./misc/corpus/pdf"
-	dirTxt := "./misc/corpus/txt"
-	dirClen := "./misc/corpus/clean"
+const (
+	dirClen = "./misc/corpus/clean"
+	dirTxt  = "./misc/corpus/txt"
+	dir     = "./misc/corpus/pdf"
+)
+
+func TextProcessor(maxWorkers int) {
+
 	err := errors.Join(
 		os.MkdirAll(dir, 0755),
 		os.MkdirAll(dirTxt, 0755),
@@ -30,26 +34,26 @@ func main() {
 		log.Fatal(err)
 	}
 
-	var wg sync.WaitGroup
-	workerLimit := make(chan struct{}, 25)
+	var wgCleaner sync.WaitGroup
+	workerLimit := make(chan struct{}, maxWorkers)
 
 	for _, f := range files {
 		if f.IsDir() || filepath.Ext(f.Name()) != ".pdf" {
 			continue
 		}
 
-		wg.Add(1)
+		wgCleaner.Add(1)
 		workerLimit <- struct{}{}
 
 		go func(name string) {
 			defer func() {
 				<-workerLimit
 			}()
-			processPDF(filepath.Join(dir, name), &wg)
+			processPDF(filepath.Join(dir, name), &wgCleaner)
 		}(f.Name())
 	}
 
-	wg.Wait()
+	wgCleaner.Wait()
 }
 
 func processPDF(path string, wg *sync.WaitGroup) {

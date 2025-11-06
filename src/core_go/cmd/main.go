@@ -8,6 +8,7 @@ import (
 	"time"
 
 	mgu "github.com/artking28/myGoUtils"
+	"github.com/tcc2-davi-arthur/corpus"
 	"github.com/tcc2-davi-arthur/models/support"
 )
 
@@ -29,6 +30,10 @@ const (
 
 // main iterates over all parameter combinations and saves results to a JSON file.
 func main() {
+
+	corpus.StartScrapping(5000, 25, 500*time.Millisecond)
+
+	corpus.TextProcessor(25)
 
 	var id int64 = 1 // Unique counter to identify each test.
 	results := map[string]int64{}

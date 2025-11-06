@@ -16,19 +16,16 @@ import (
 )
 
 const (
-	apiURL      = "https://www.camara.leg.br/busca-api/api/v1/busca/proposicoes/_search"
-	tempDir     = "./misc/corpus/temp"
-	corpusDir   = "./misc/corpus/pdf"
-	maxPages    = 5000 // limite total de páginas somadas
-	maxWorkers  = 15
-	delayPerReq = 500 * time.Millisecond
+	apiURL    = "https://www.camara.leg.br/busca-api/api/v1/busca/proposicoes/_search"
+	tempDir   = "./misc/corpus/temp"
+	corpusDir = "./misc/corpus/pdf"
 )
 
 var (
 	totalPages int
 	totalDocs  int
 	mu         sync.Mutex
-	wg         sync.WaitGroup
+	wgScrap    sync.WaitGroup
 )
 
 type apiResponse struct {
@@ -46,7 +43,8 @@ type searchBody struct {
 	TiposDeProposicao string `json:"tiposDeProposicao"`
 }
 
-func StartScrapping() {
+func StartScrapping(maxPages, maxWorkers int, delayPerReq time.Duration) {
+
 	err := os.MkdirAll(tempDir, 0755)
 	if err != nil {
 		log.Fatal(err)
@@ -59,8 +57,8 @@ func StartScrapping() {
 
 	tasks := make(chan string, 200)
 	for i := 0; i < maxWorkers; i++ {
-		wg.Add(1)
-		go worker(tasks)
+		wgScrap.Add(1)
+		go worker(maxPages, delayPerReq, tasks)
 	}
 
 pageLoop:
@@ -112,13 +110,13 @@ pageLoop:
 	}
 
 	close(tasks)
-	wg.Wait()
+	wgScrap.Wait()
 
 	fmt.Printf("Finalizado: %d PDFs válidos, %d páginas totais\n", getTotalDocs(), getTotalPages())
 }
 
-func worker(tasks <-chan string) {
-	defer wg.Done()
+func worker(maxPages int, delayPerReq time.Duration, tasks <-chan string) {
+	defer wgScrap.Done()
 	for url := range tasks {
 		if getTotalPages() >= maxPages {
 			return

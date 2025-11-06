@@ -10,7 +10,6 @@ import (
 
 	mgu "github.com/artking28/myGoUtils" // Biblioteca customizada para utilitários, como Set
 	"github.com/tcc2-davi-arthur/models" // Models do projeto: Document, Word, InverseTrigram
-	"github.com/tcc2-davi-arthur/models/support"
 	"github.com/tcc2-davi-arthur/utils"
 	"gorm.io/driver/sqlite" // Driver SQLite do GORM
 	"gorm.io/gorm"          // ORM GORM
@@ -30,21 +29,6 @@ var (
 	CacheD         map[string]*models.Document                  // CacheD em memória de n-gramas
 	Db             *gorm.DB                                     // Conexão com o banco de dados
 )
-
-// Test executa um ciclo completo de benchmark e validação
-// algo: modelo de ponderação (ex: BM25 ou TF-IDF)
-// preIndexed: se true, usa cache em memória; se false, consulta o banco
-// normalizeJumps: unifica n-grams com mesmos termos e jumps diferentes
-// size: tamanho do n-gram (ex: 3 para trigram)
-// jumps: número máximo de saltos entre palavras
-func Test(algo support.Algo, preIndexed, normalizeJumps bool, size, jumps int) {
-	start := time.Now()
-	fmt.Printf("\n[TEST] Iniciando teste com %s | preIndexed=%v | normalizeJumps=%v | size=%d | jumps=%d\n",
-		algo, preIndexed, normalizeJumps, size, jumps)
-
-	elapsed := time.Since(start)
-	fmt.Printf("[OK] Test finalizado em %.3fs (%d n-grams processados)\n", elapsed.Seconds())
-}
 
 func main() {
 
