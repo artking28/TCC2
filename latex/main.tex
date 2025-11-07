@@ -324,7 +324,7 @@
 
     Portanto, a literatura estabelece que o estado da arte para a busca semântica de alta precisão no domínio jurídico envolve o uso de modelos de linguagem contextuais, pesados e de domínio específico. É justamente essa abordagem, que representa o polo de maior complexidade e custo computacional, que este trabalho utilizará como referência para a comparação com os métodos estatísticos tradicionais.
 
-    
+
     \section{Técnicas de Pré-processamento Textual}
 
     Em um cenário de grande volume textual, como o jurídico, a extração de informação relevante demanda um tratamento prévio sobre os documentos. Essa etapa é conhecida como pré-processamento, e tem como objetivo transformar textos brutos em representações mais estruturadas e significativas, facilitando tanto a análise semântica quanto a indexação e recuperação posterior. Trata-se, portanto, de uma fase indispensável para qualquer sistema de recuperação de informação textual, sobretudo em domínios especializados, já que a escolha adequada das técnicas de pré-processamento pode influenciar significativamente a relevância das informações extraídas \cite{citacao16}.
@@ -595,26 +595,6 @@
     No pior caso, entretanto, o Boyer-Moore pode chegar a uma complexidade de $O(n \cdot m)$, especialmente em textos com padrões altamente repetitivos ou quando o padrão tem caracteres repetidos que causam pequenos deslocamentos a cada falha. Apesar disso, esses casos são raros, e na prática, o algoritmo é considerado um dos mais rápidos e robustos para busca de padrões em textos \cite{citacao47, citacao50, citacao48}.
 
     Em contrapartida, o algoritmo de KMP evita retrocessos no texto usando a tabela de falhas (prefix-função), garantindo sempre tempo linear ${O(n + m)}$, onde ${n}$ é o tamanho do texto e ${m}$ o do padrão. Já Boyer-Moore, embora não tenha garantia de pior caso linear sem extensões, costuma superar KMP em textos reais graças aos grandes saltos proporcionados pelas heurísticas de caractere-ruim e sufixo-bom \cite{citacao51, citacao47}.
-
-    \subsection{Algoritmos de Ordenação - Quicksort}
-
-    O algoritmo \textit{Quicksort} é um método de ordenação de listas criado em 1960 pelo britânico Charles Antony Richard Hoare, enquanto ainda era estudante em Moscou. A publicação oficial do algoritmo ocorreu em 1962. O \textit{Quicksort} se baseia na técnica de divisão e conquista, utilizando recursão para quebrar o problema em partes menores, com complexidade média de $O(n \log n)$ e pior caso de $O(n^2)$, dependendo da escolha do pivô.
-
-    A técnica de divisão e conquista envolve três etapas fundamentais: dividir, resolver e combinar. Primeiro, o problema original é fragmentado em partes menores — de preferência equilibradas — reduzindo sua complexidade. Em seguida, cada subproblema é resolvido independentemente, geralmente por meio de chamadas recursivas. Por fim, os resultados são reunidos para formar a solução completa, permitindo que problemas grandes sejam solucionados por meio da repetição controlada de operações simples \cite{citacao26}.
-
-    Essa abordagem parte da ideia de que resolver vários subproblemas simples costuma ser mais eficiente do que atacar o problema original diretamente. No \textit{Quicksort}, isso se traduz em dividir uma lista de tamanho $n$ em duas sublistas menores e aplicar o mesmo procedimento recursivo a cada uma. A recursão prossegue até que cada sublista tenha menos de dois elementos, sendo então considerada ordenada.
-
-    Hoare propôs que essa divisão fosse feita a partir da escolha arbitrária de um elemento da lista, chamado de pivô. Em seguida, percorre-se a lista comparando os elementos com o pivô: os menores são agrupados em uma nova lista, chamada vetor inferior ($V_{\text{inf}}$), e os maiores ou iguais, em outra, chamada vetor superior ($V_{\text{sup}}$).
-
-    Após o particionamento, obtemos três partes distintas: o vetor inferior ($V_{\text{inf}}$), o pivô central e o vetor superior ($V_{\text{sup}}$). O algoritmo então se auto-invoca recursivamente sobre $V_{\text{inf}}$ e $V_{\text{sup}}$, até que as sublistas estejam suficientemente pequenas. Quando isso acontece, o \textit{Quicksort} realiza a etapa final: a junção das três partes — $V_{\text{inf}}$, pivô e $V_{\text{sup}}$ — reconstruindo a lista original, agora ordenada \cite{citacao15}.
-
-
-    \begin{figure}[H]
-        \centering
-        \caption{\label{fig:Quicksort}Quicksort}
-        \includegraphics[width=\textwidth]{assets/Quicksort.png}
-        \legend {Fonte: Elaboração própria.}
-    \end{figure}.
 
 
     \section{Programação Paralela e Escalabilidade}
