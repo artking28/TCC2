@@ -69,7 +69,7 @@
 \autor{Arthur Andrade e Davi Henrique}
 \local{São Paulo - Brasil}
 \data{2025}
-\orientador{Nome do Orientador}
+\orientador{Afonso Lelis}
 %\coorientador{Nome do Coorientador}
 \instituicao{
     Centro Universitário Senac - Santo Amaro
@@ -314,13 +314,17 @@
 
     No contexto jurídico, essa complexidade é intensificada pelo uso recorrente de locuções e expressões idiomáticas específicas da tradição normativa. Frases como \textit{sem prejuízo do disposto}, \textit{salvo disposição em contrário} ou \textit{nos termos da legislação aplicável} não podem ser analisadas isoladamente por palavra. Tais construções funcionam como unidades semânticas coesas, exigindo abordagens capazes de identificar e preservar o significado completo durante o pré-processamento textual \cite{citacao44,citacao17}.
 
-    \subsection{Iniciativas e ferramentas existentes}
+    \subsection{Modelos de Linguagem para o Domínio Jurídico}
 
-    Uma das iniciativas voltadas ao português jurídico é o projeto \textit{LegalNLP} \cite{citacao17}, que disponibiliza um conjunto de modelos pré-treinados — como Word2Vec, Doc2Vec, FastText e BERT — ajustados ao domínio legal brasileiro. O projeto inclui ainda um pacote em Python com funcionalidades específicas para tarefas como vetorização, extração de entidades e classificação de textos legais. Os modelos foram treinados com dados provenientes de diversos tribunais nacionais, o que visa proporcionar maior aderência linguística e semântica ao contexto jurídico do país, em comparação com abordagens mais genéricas.
+    Embora bibliotecas de NLP de propósito geral, como \textit{spaCy} ou \textit{NLTK}, ofereçam suporte para a língua portuguesa, seus modelos genéricos, treinados em textos da web ou literatura, falham em capturar as nuances terminológicas e o contexto semântico específico do universo jurídico. A palavra "competência", por exemplo, tem um significado técnico e distinto no Direito (atribuição de um órgão para julgar) que um modelo genérico não consegue priorizar.
 
-    Outras iniciativas relevantes incluem o \textit{OpenLegalData}, o \textit{JusBrasil Labs} e os repositórios públicos mantidos pelo \textit{Conselho Nacional de Justiça} (CNJ) e pelos tribunais superiores, que fornecem bases de dados utilizadas em aplicações experimentais de NLP jurídico. No campo das ferramentas gerais de NLP, bibliotecas como \textit{spaCy}, \textit{NLTK}, \textit{Stanza} e modelos da \textit{Hugging Face} oferecem suporte para o português, embora possam demandar adaptações específicas ao domínio jurídico devido à complexidade e à terminologia especializada dos textos legais — um aspecto abordado por iniciativas como o \textit{LegalNLP} \cite{citacao17}.
+    Para suprir essa lacuna, a comunidade acadêmica tem se concentrado no desenvolvimento de modelos de linguagem especializados. Um trabalho central nesse contexto para o português brasileiro é o \citeonline{citacao17} (LegalNLP). Os autores demonstram que modelos como Word2Vec e BERT, quando pré-treinados ou ajustados (\textit{fine-tuning}) em um vasto e específico corpus de documentos jurídicos nacionais, superam significativamente o desempenho de modelos genéricos em tarefas-chave de NLP.
 
+    Essa abordagem de especialização é uma tendência global. O trabalho de \citeonline{citacao39}, por exemplo, introduziu o LEGAL-BERT, um modelo da família BERT treinado inteiramente em textos legais. A pesquisa comprovou que essa especialização de domínio permite uma captação muito mais precisa do vocabulário técnico e das estruturas discursivas do Direito do que o modelo BERT original.
 
+    Portanto, a literatura estabelece que o estado da arte para a busca semântica de alta precisão no domínio jurídico envolve o uso de modelos de linguagem contextuais, pesados e de domínio específico. É justamente essa abordagem, que representa o polo de maior complexidade e custo computacional, que este trabalho utilizará como referência para a comparação com os métodos estatísticos tradicionais.
+
+    
     \section{Técnicas de Pré-processamento Textual}
 
     Em um cenário de grande volume textual, como o jurídico, a extração de informação relevante demanda um tratamento prévio sobre os documentos. Essa etapa é conhecida como pré-processamento, e tem como objetivo transformar textos brutos em representações mais estruturadas e significativas, facilitando tanto a análise semântica quanto a indexação e recuperação posterior. Trata-se, portanto, de uma fase indispensável para qualquer sistema de recuperação de informação textual, sobretudo em domínios especializados, já que a escolha adequada das técnicas de pré-processamento pode influenciar significativamente a relevância das informações extraídas \cite{citacao16}.
