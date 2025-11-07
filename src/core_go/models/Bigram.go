@@ -51,6 +51,18 @@ func (this *InverseBigram) Increment() {
 	this.Count++
 }
 
+func (this *InverseBigram) GetCount() int {
+	return int(this.Count)
+}
+
+func (this *InverseBigram) ApplyWordWheres(db *gorm.DB) *gorm.DB {
+	return db.Where("wd0Id = ? AND wd1Id = ?", this.Wd0Id, this.Wd1Id)
+}
+
+func (this *InverseBigram) ApplyJumpWheres(db *gorm.DB) *gorm.DB {
+	return db.Where("jump0 = ?", this.Jump0)
+}
+
 func (this *InverseBigram) ToString() string {
 	id := fmt.Sprintf("%s-%s", this.Wd0.Value, this.Wd1.Value)
 	return fmt.Sprintf("{ id: %s; count: %d; docId: %d }", id, this.Count, this.DocId)

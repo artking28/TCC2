@@ -33,7 +33,7 @@ func NewInverseNGram() *InverseTrigram {
 	}
 }
 
-func (this *InverseTrigram) GetCacheKey(jumps, doc bool) string {
+func (this *InverseTrigram) GetCacheKey(normalizeJumps, doc bool) string {
 	j0 := fmt.Sprintf("%d", this.Jump0)
 	if this.Jump0 == -1 {
 		j0 = "n"
@@ -43,7 +43,7 @@ func (this *InverseTrigram) GetCacheKey(jumps, doc bool) string {
 		j1 = "n"
 	}
 	ret := fmt.Sprintf("%05d-%05d-%05d", this.Wd0Id, this.Wd1Id, this.Wd2Id)
-	if jumps {
+	if !normalizeJumps {
 		ret = fmt.Sprintf("%s-%s%s", ret, j0, j1)
 	}
 	if doc {
@@ -58,6 +58,18 @@ func (this *InverseTrigram) GetDocId() uint16 {
 
 func (this *InverseTrigram) Increment() {
 	this.Count++
+}
+
+func (this *InverseTrigram) GetCount() int {
+	return int(this.Count)
+}
+
+func (this *InverseTrigram) ApplyWordWheres(db *gorm.DB) *gorm.DB {
+	return db.Where("wd0Id = ? AND wd1Id = ? AND wd2Id = ?", this.Wd0Id, this.Wd1Id, this.Wd2Id)
+}
+
+func (this *InverseTrigram) ApplyJumpWheres(db *gorm.DB) *gorm.DB {
+	return db.Where("jump0 = ? AND jump1 = ?", this.Jump0, this.Jump1)
 }
 
 func (this *InverseTrigram) ToString() string {

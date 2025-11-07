@@ -12,7 +12,7 @@ import (
 )
 
 // InitDB inicializa o banco de dados e faz a migração automática dos modelos
-func InitDB(id uint64, gramSize int, dbFile string, fromScratch bool) (string, *gorm.DB) {
+func InitDB(id int64, gramSize int, dbFile string, fromScratch bool) (string, *gorm.DB) {
 	var targetFile string
 
 	if fromScratch {

@@ -39,6 +39,18 @@ func (this *InverseUnigram) Increment() {
 	this.Count++
 }
 
+func (this *InverseUnigram) GetCount() int {
+	return int(this.Count)
+}
+
+func (this *InverseUnigram) ApplyWordWheres(db *gorm.DB) *gorm.DB {
+	return db.Where("wd0Id = ?", this.Wd0Id)
+}
+
+func (this *InverseUnigram) ApplyJumpWheres(db *gorm.DB) *gorm.DB {
+	return db
+}
+
 func (this *InverseUnigram) ToString() string {
 	return fmt.Sprintf("{ id: %s; count: %d; docId: %d }", this.Wd0.Value, this.Count, this.DocId)
 }

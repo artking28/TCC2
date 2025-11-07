@@ -8,10 +8,11 @@ import (
 
 	mgu "github.com/artking28/myGoUtils"
 	"github.com/tcc2-davi-arthur/models"
+	"github.com/tcc2-davi-arthur/models/interfaces"
 	"gorm.io/gorm"
 )
 
-func ComputePreIndexedBM25(trigramList []*models.InverseTrigram, totalDocs, totalGrams int, cacheN map[string]*models.InverseTrigram, smoothJumps, parallel bool) (map[string]*float64, error) {
+func ComputePreIndexedBM25(trigramList []interfaces.IGram, totalDocs, totalGrams int, cacheN map[string]interfaces.IGram, smoothJumps, parallel bool) (map[string]*float64, error) {
 	if len(trigramList) == 0 {
 		return nil, fmt.Errorf("trigram list is empty")
 	}
@@ -19,15 +20,15 @@ func ComputePreIndexedBM25(trigramList []*models.InverseTrigram, totalDocs, tota
 		return nil, fmt.Errorf("totalDocs must be positive")
 	}
 
-	expectedDocID := trigramList[0].DocId
+	expectedDocID := trigramList[0].GetDocId()
 	bm25 := make(map[string]*float64)
 	tf := make(map[string]int)
 	totalTrigrams := len(trigramList)
 
 	// Calcula TF
 	for _, ngram := range trigramList {
-		if ngram.DocId != expectedDocID {
-			return nil, fmt.Errorf("mismatched DocId: expected %d, got %d", expectedDocID, ngram.DocId)
+		if ngram.GetDocId() != expectedDocID {
+			return nil, fmt.Errorf("mismatched DocId: expected %d, got %d", expectedDocID, ngram.GetDocId())
 		}
 		key := ngram.GetCacheKey(smoothJumps, true)
 		tf[key]++
@@ -54,7 +55,7 @@ func ComputePreIndexedBM25(trigramList []*models.InverseTrigram, totalDocs, tota
 				docSet := make(map[uint16]bool)
 				for k, ngram := range cacheN {
 					if k == key {
-						docSet[ngram.DocId] = true
+						docSet[ngram.GetDocId()] = true
 					}
 				}
 				dfChan <- dfResult{key: key, df: len(docSet)}
@@ -71,7 +72,7 @@ func ComputePreIndexedBM25(trigramList []*models.InverseTrigram, totalDocs, tota
 			docSet := make(map[uint16]bool)
 			for k, ngram := range cacheN {
 				if k == key {
-					docSet[ngram.DocId] = true
+					docSet[ngram.GetDocId()] = true
 				}
 			}
 			dfChan <- dfResult{key: key, df: len(docSet)}
@@ -94,7 +95,7 @@ func ComputePreIndexedBM25(trigramList []*models.InverseTrigram, totalDocs, tota
 	return bm25, nil
 }
 
-func ComputePosIndexedBM25(docID uint16, totalDocs int, db *gorm.DB, smoothJumps, parallel bool) (map[string]*float64, error) {
+func ComputePosIndexedBM25(docID uint16, gramSize, totalDocs int, db *gorm.DB, normalizeJumps, parallel bool) (map[string]*float64, error) {
 	if totalDocs <= 0 {
 		return nil, fmt.Errorf("totalDocs must be positive")
 	}
@@ -103,29 +104,36 @@ func ComputePosIndexedBM25(docID uint16, totalDocs int, db *gorm.DB, smoothJumps
 	tf := make(map[string]int)
 	totalTrigrams := 0
 
+	var label string
+	switch gramSize {
+	case 1:
+		label = "wd0Id"
+		break
+	case 2:
+		label = "wd0Id, wd1Id, jump0"
+		break
+	case 3:
+		label = "wd0Id, wd1Id, wd2Id, jump0, jump1"
+		break
+	default:
+		log.Fatalf("invalid gramSize: %d", gramSize)
+	}
+
 	// TF: contagem de trigramas do documento
-	var tfResults []*models.InverseTrigram
-	err := db.Model(&models.InverseTrigram{}).
-		Select("wd0Id, wd1Id, wd2Id, jump0, jump1, COUNT(docId) AS count").
+	var tfResults []interfaces.IGram
+	err := db.Model("WORD_DOC").
+		Select(fmt.Sprintf("%s, COUNT(docId) AS count", label)).
 		Where("docId = ?", docID).
-		Group("wd0Id, wd1Id, wd2Id, jump0, jump1").
+		Group(label).
 		Find(&tfResults).Error
 	if err != nil {
 		return nil, err
 	}
 
 	for _, r := range tfResults {
-		ngram := &models.InverseTrigram{
-			Wd0Id: r.Wd0Id,
-			Wd1Id: r.Wd1Id,
-			Wd2Id: r.Wd2Id,
-			Jump0: r.Jump0,
-			Jump1: r.Jump1,
-			DocId: docID,
-		}
-		key := ngram.GetCacheKey(smoothJumps, true)
-		tf[key] = int(r.Count)
-		totalTrigrams += int(r.Count)
+		key := r.GetCacheKey(normalizeJumps, true)
+		tf[key] = r.GetCount()
+		totalTrigrams += int(r.GetCount())
 	}
 
 	// Calcula DF
@@ -143,22 +151,14 @@ func ComputePosIndexedBM25(docID uint16, totalDocs int, db *gorm.DB, smoothJumps
 		for _, r := range tfResults {
 			wg.Add(1)
 			sem <- struct{}{} // Adquire semaforo
-			go func(r *models.InverseTrigram) {
+			go func(r interfaces.IGram) {
 				defer wg.Done()
 				defer func() { <-sem }() // Libera semaforo
-				ngram := &models.InverseTrigram{
-					Wd0Id: r.Wd0Id,
-					Wd1Id: r.Wd1Id,
-					Wd2Id: r.Wd2Id,
-					Jump0: r.Jump0,
-					Jump1: r.Jump1,
-				}
-				key := ngram.GetCacheKey(smoothJumps, true)
+				key := r.GetCacheKey(normalizeJumps, true)
 				var docCount int64
-				query := db.Model(&models.InverseTrigram{}).
-					Where("wd0Id = ? AND wd1Id = ? AND wd2Id = ?", r.Wd0Id, r.Wd1Id, r.Wd2Id)
-				if !smoothJumps {
-					query = query.Where("jump0 = ? AND jump1 = ?", r.Jump0, r.Jump1)
+				query := r.ApplyWordWheres(db)
+				if !normalizeJumps {
+					query = r.ApplyJumpWheres(query)
 				}
 				query.Distinct("docId").Count(&docCount)
 				dfChan <- dfResult{key: key, df: int(docCount)}
@@ -172,20 +172,11 @@ func ComputePosIndexedBM25(docID uint16, totalDocs int, db *gorm.DB, smoothJumps
 	} else {
 		// Sequencial
 		for _, r := range tfResults {
-			ngram := &models.InverseTrigram{
-				Wd0Id: r.Wd0Id,
-				Wd1Id: r.Wd1Id,
-				Wd2Id: r.Wd2Id,
-				Jump0: r.Jump0,
-				Jump1: r.Jump1,
-				DocId: docID,
-			}
-			key := ngram.GetCacheKey(smoothJumps, true)
+			key := r.GetCacheKey(normalizeJumps, true)
 			var docCount int64
-			query := db.Model(&models.InverseTrigram{}).
-				Where("wd0Id = ? AND wd1Id = ? AND wd2Id = ?", r.Wd0Id, r.Wd1Id, r.Wd2Id)
-			if !smoothJumps {
-				query = query.Where("jump0 = ? AND jump1 = ?", r.Jump0, r.Jump1)
+			query := r.ApplyWordWheres(db)
+			if !normalizeJumps {
+				query = r.ApplyJumpWheres(query)
 			}
 			query.Distinct("docId").Count(&docCount)
 			dfChan <- dfResult{key: key, df: int(docCount)}

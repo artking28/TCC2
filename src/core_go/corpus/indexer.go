@@ -6,7 +6,6 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	"time"
 
 	mgu "github.com/artking28/myGoUtils" // Biblioteca customizada para utilitários, como Set
 	"github.com/tcc2-davi-arthur/models" // Models do projeto: Document, Word, InverseTrigram
@@ -23,14 +22,13 @@ const (
 
 // Variáveis globais
 var (
-	gramEntity     interfaces.IGram
 	CountAllNGrams uint32
 	CacheWords     map[string]models.Word                 // Cache em memória de palavras para evitar consultas repetidas
 	CacheDocs      map[string]*models.Document            // CacheD em memória de n-gramas
 	CacheGrams     map[string]map[uint16]interfaces.IGram // CacheN em memória de n-gramas
 )
 
-func CreateDataBase(id uint64, fromScratch bool, gramsSize int) string {
+func CreateDatabaseCaches(id int64, fromScratch bool, gramsSize int, jumpSize int) string {
 
 	targetFile, db := utils.InitDB(id, max(1, gramsSize%4), DbFile, fromScratch) // Inicializa o banco
 
@@ -47,6 +45,35 @@ func CreateDataBase(id uint64, fromScratch bool, gramsSize int) string {
 			log.Fatal(err)
 		}
 	}
+
+	DefineCaches(db)
+
+	inserted, err := IndexDocsGrams(db, gramsSize, jumpSize)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if inserted <= 0 {
+		fmt.Println("Finished... [empty database]")
+		os.Exit(0)
+	}
+
+	//if algo == support.TdIdf {
+	//	if preIndexed {
+	//		_, err = utils.ComputePreIndexedTFIDF(1, len(CacheDocs), db, normalizeJumps, pa)
+	//	} else {
+	//		_, err = utils.ComputePosIndexedTFIDF(1, len(CacheDocs), db, normalizeJumps, false)
+	//	}
+	//} else {
+	//	if preIndexed {
+	//		_, err = utils.ComputePreIndexedBM25(1, len(CacheDocs), db, normalizeJumps, false)
+	//	} else {
+	//		_, err = utils.ComputePosIndexedBM25(1, len(CacheDocs), db, normalizeJumps, false)
+	//	}
+	//}
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
 
 	return targetFile
 }
@@ -113,44 +140,6 @@ func RegisterDocs(db *gorm.DB) error {
 		// Insere as palavras no banco
 		return tx.Create(words).Error
 	})
-}
-
-func IndexDatabase(db *gorm.DB, gramsSize, jumpSize int) {
-
-	// Verifica se existem documentos no banco
-	var n int64
-	err := db.Model(&models.Document{}).Count(&n).Error
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// Se não houver documentos, insere todos os arquivos do diretório e suas palavras
-	if n <= 0 {
-		if err = RegisterDocs(db); err != nil {
-			log.Fatal(err)
-		}
-	}
-
-	DefineCaches(db)
-
-	inserted, err := IndexDocsGrams(db, gramsSize, jumpSize)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	if inserted <= 0 {
-		fmt.Println("Finished... [empty database]")
-		os.Exit(0)
-	}
-
-	start := time.Now()
-	vec, err := utils.ComputePosIndexedTFIDF(1, len(CacheDocs), db, true, false)
-	if err != nil {
-		log.Fatal(err)
-	}
-	println(vec)
-	fmt.Println("PreIndexed elapsed:", time.Since(start))
-	fmt.Println("Finished...")
 }
 
 func DefineCaches(db *gorm.DB) {

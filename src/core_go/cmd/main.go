@@ -97,22 +97,16 @@ func main() {
 func BaseTest(testId int64, algo support.Algo, preIndexed bool, normalizeJumps bool, size int, jumps int) (string, int64) {
 
 	// Marks the start of the test execution.
-	start := time.Now()
 	label := fmt.Sprintf("[TEST %02d] → algo=%s | preIndexed=%v | normalizeJumps=%v | size=%d | jumps=%d",
 		testId, algo, preIndexed, normalizeJumps, size, jumps)
 
 	// Prints the current test configuration to the console.
 	fmt.Printf("\n%s\n", label)
 
-	//corpus := ReadCorpus(true)
-	//
-	//corpus.Index()
-	//
-	//corpus.Calculate()
+	name := corpus.CreateDatabaseCaches(testId, false, size, jumps)
+	if err := os.Remove(name); err != nil {
+		log.Fatalf("error removing corpus file: %v", err)
+	}
 
-	// Prints test completion and elapsed time.
-	// The value '1' for "n-grams processed" is a placeholder and should be replaced with the actual n-grams count.
-	elapsed := time.Since(start).Milliseconds() // Calculates elapsed time since 'start'.
-	fmt.Printf("[OK %02d] Completed in %s (%d n-grams processed)\n", testId, elapsed, 1)
 	return label, elapsed
 }
