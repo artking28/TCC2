@@ -9,34 +9,33 @@
 
 
 \documentclass[
-	% -- opções da classe memoir --
-	12pt,				% tamanho da fonte
-	openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
-	oneside,			% para impressão em verso e anverso. Oposto a oneside
-	a4paper,			% tamanho do papel. 
-	% -- opções da classe abntex2 --
-	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
-	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
-	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
-	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
-	% -- opções do pacote babel --
-	english,			% idioma adicional para hifenização
-	brazil				% o último idioma é o principal do documento
-	]{abntex2}
+% -- opções da classe memoir --
+    12pt,                % tamanho da fonte
+    openright,            % capítulos começam em pág ímpar (insere página vazia caso preciso)
+    oneside,            % para impressão em verso e anverso. Oposto a oneside
+    a4paper,            % tamanho do papel.
+% -- opções da classe abntex2 --
+%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+% -- opções do pacote babel --
+    english,            % idioma adicional para hifenização
+    brazil                % o último idioma é o principal do documento
+]{abntex2}
 
 % ---
-% Pacotes básicos 
+% Pacotes básicos
 % ---
-\usepackage{lmodern}			% Usa a fonte Latin Modern			
-\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
-\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
-\usepackage{lastpage}			% Usado pela Ficha catalográfica
-\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
-\usepackage{color}				% Controle das cores
-\usepackage{graphicx}			% Inclusão de gráficos
-\usepackage{microtype} 			% para melhorias de justificação
+\usepackage{lmodern}            % Usa a fonte Latin Modern
+\usepackage[T1]{fontenc}        % Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}        % Codificacao do documento (conversão automática dos acentos)
+\usepackage{lastpage}            % Usado pela Ficha catalográfica
+\usepackage{indentfirst}        % Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}                % Controle das cores
+\usepackage{graphicx}            % Inclusão de gráficos
+\usepackage{microtype}            % para melhorias de justificação
 \usepackage{listings}
-\usepackage{indentfirst}
 \usepackage[top=3cm, bottom=2cm, left=3cm, right=2cm]{geometry}
 \usepackage{amsmath}
 \usepackage{float}
@@ -44,8 +43,8 @@
 % ---
 % Pacotes de citações
 % ---
-\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
-\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+\usepackage[brazilian,hyperpageref]{backref}     % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}    % Citações padrão ABNT
 
 % CONFIGURAÇÕES DE PACOTES
 
@@ -56,13 +55,14 @@
 \renewcommand{\backref}{}
 % Define os textos da citação
 \renewcommand*{\backrefalt}[4]{
-	\ifcase #1 %
-		Nenhuma citação no texto.%
-	\or
-		Citado na página #2.%
-	\else
-		Citado #1 vezes nas páginas #2.%
-	\fi}%
+    \ifcase
+        #1 %
+        Nenhuma citação no texto.%
+        \or
+        Citado na página #2.%
+    \else
+        Citado #1 vezes nas páginas #2.%
+    \fi}%
 
 % Informações de dados para CAPA e FOLHA DE ROSTO
 \titulo{Avaliação de métodos estatísticos na busca de correspondência textual jurídica frente a \textit{embeddings}}
@@ -72,13 +72,13 @@
 \orientador{Nome do Orientador}
 %\coorientador{Nome do Coorientador}
 \instituicao{
-  Centro Universitário Senac - Santo Amaro
-  \par
-  Bacharelado em Ciência da Computação
+    Centro Universitário Senac - Santo Amaro
+    \par
+    Bacharelado em Ciência da Computação
 }
 \tipotrabalho{Trabalho de Conclusão de Curso}
-% O preambulo deve conter o tipo do trabalho, o objetivo, 
-% o nome da instituição e a área de concentração 
+% O preambulo deve conter o tipo do trabalho, o objetivo,
+% o nome da instituição e a área de concentração
 \preambulo{Monografia apresentada na disciplina Trabalho de Conclusão de Curso, como parte dos requisitos para obtenção do título de Bacharel em Ciência da Computação.}
 
 % Configurações de aparência do PDF final
@@ -89,22 +89,22 @@
 % informações do PDF
 \makeatletter
 \hypersetup{
-     	%pagebackref=true,
-		pdftitle={\@title}, 
-		pdfauthor={\@author},
-    	pdfsubject={\imprimirpreambulo},
-	    pdfcreator={LaTeX with abnTeX2},
-		pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico}, 
-		colorlinks=true,       		% false: boxed links; true: colored links
-    	linkcolor=black,          	% color of internal links
-    	citecolor=black,        		% color of links to bibliography
-    	filecolor=magenta,      		% color of file links
-		urlcolor=black,
-		bookmarksdepth=4
+%pagebackref=true,
+    pdftitle={\@title},
+    pdfauthor={\@author},
+    pdfsubject={\imprimirpreambulo},
+    pdfcreator={LaTeX with abnTeX2},
+    pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico},
+    colorlinks=true,            % false: boxed links; true: colored links
+    linkcolor=black,            % color of internal links
+    citecolor=black,                % color of links to bibliography
+    filecolor=magenta,            % color of file links
+    urlcolor=black,
+    bookmarksdepth=4
 }
 \makeatother
 
-% Espaçamentos entre linhas e parágrafos 
+% Espaçamentos entre linhas e parágrafos
 
 % O tamanho do parágrafo é dado por:
 \setlength{\parindent}{1.25cm}
@@ -123,75 +123,75 @@
 \begin{document}
 
 % Retira espaço extra obsoleto entre as frases.
-\frenchspacing
+    \frenchspacing
 
 % ========================================================================
 % CAPA
 % ========================================================================
-\imprimircapa
+    \imprimircapa
 
 % ========================================================================
 % FOLHA DE ROSTO
 % ========================================================================
-\imprimirfolhaderosto
+    \imprimirfolhaderosto
 
 % ========================================================================
 % DEDICATÓRIA
 % ========================================================================
- % \begin{dedicatoria}
- %   \vspace*{\fill}
- %   \centering
- %   \noindent
- %   \textit{ Texto da dedicatória.} \vspace*{\fill}
- % \end{dedicatoria}
+    \begin{dedicatoria}
+        \vspace*{\fill}
+        \centering
+        \noindent
+        \textit{ Texto da dedicatória.} \vspace*{\fill}
+    \end{dedicatoria}
 
 % ========================================================================
 % AGRADECIMENTOS
 % ========================================================================
- % \begin{agradecimentos}
- % Texto de agradecimento.
+    \begin{agradecimentos}
+        Texto de agradecimento.
 
- % \end{agradecimentos}
+    \end{agradecimentos}
 
 % ========================================================================
 % EPÍGRAFE
 % ========================================================================
- \begin{epigrafe}
-     \vspace*{\fill}
- 	\begin{flushright}
- 		\textit{``A beleza é realmente um bom dom de Deus; mas que os bons não pensem que ela é um grande bem, pois Deus a distribui mesmo para os maus. \\
- 		(Santo Agostinho)}
- 	\end{flushright}
- \end{epigrafe}
+    \begin{epigrafe}
+        \vspace*{\fill}
+        \begin{flushright}
+            \textit{``A beleza é realmente um bom dom de Deus; mas que os bons não pensem que ela é um grande bem, pois Deus a distribui mesmo para os maus. \\
+            (Santo Agostinho)}
+        \end{flushright}
+    \end{epigrafe}
 
 % ========================================================================
 % RESUMO
 % ========================================================================
-\setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
-% \begin{resumo}
+    \setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
+    \begin{resumo}
 
-% Texto do resumo
+        Texto do resumo
 
-% \textbf{Palavras-chaves}: palavra-chave 1, palavra-chave 2, palavra-chave 3.
-% \end{resumo}
+        \textbf{Palavras-chaves}: palavra-chave 1, palavra-chave 2, palavra-chave 3.
+    \end{resumo}
 
 % ========================================================================
 % ABSTRACT
 % ========================================================================
-% \begin{resumo}[Abstract]
-%  \begin{otherlanguage*}{english}
-%     Abstract text in english
-   
-%    \textbf{Key-words}: keyword 1, keyword 2, keyword 3
-%  \end{otherlanguage*}
-% \end{resumo}
+    \begin{resumo}[Abstract]
+        \begin{otherlanguage*}{english}
+            Abstract text in english
+
+            \textbf{Key-words}: keyword 1, keyword 2, keyword 3
+        \end{otherlanguage*}
+    \end{resumo}
 
 % ========================================================================
 % LISTA DE ILISTRAÇÕES
 % ========================================================================
-\pdfbookmark[0]{\listfigurename}{lof}
-\listoffigures*
-\cleardoublepage
+    \pdfbookmark[0]{\listfigurename}{lof}
+    \listoffigures*
+    \cleardoublepage
 
 % ========================================================================
 % LISTA DE TABELAS
@@ -203,465 +203,476 @@
 % ========================================================================
 % LISTA DE ABREVIATURAS E SIGLAS
 % ========================================================================
-\begin{siglas}
-  \item[API] Application Programming Interface
-  \item[BERT] Bidirectional Encoder Representations from Transformers
-  \item[BMSS] Boyer-Moore String Search
-  \item[KMP] Knuth Morris Pratt
-  \item[CBOW] Continuous Bag-of-Words
-  \item[CNJ] Conselho Nacional de Justiça
-  \item[CPU] Computing Processing Unit
-  \item[GPU] Graphics Processing Unit
-  \item[CRF] Conditional Random Field
-  \item[ELMo] Embeddings from Language Model
-  \item[GO] Golang Programming Language
-  \item[GloVe] Global Vectors for Word Representation
-  \item[HTTP] Hypertext Transfer Protocol
-  \item[IDF] Inverse Document Frequency
-  \item[JSON] JavaScript Object Notation
-  \item[NLP] Natural Language Processing
-  \item[NER] Reconhecimento de Entidade Nomeada
-  \item[POS] Part-of-Speech
-  \item[PJe] Processo Judicial Eletrônico
-  \item[SVM] Support Vector Machine
-  \item[RAG] Retrieval-Augmented Generation
-  \item[REST] Representational State Transfer
-  \item[TF-IDF] Term Frequency-Inverse Document Frequency
-\end{siglas}
+    \begin{siglas}
+        \item[API] Application Programming Interface
+        \item[BERT] Bidirectional Encoder Representations from Transformers
+        \item[BMSS] Boyer-Moore String Search
+        \item[KMP] Knuth Morris Pratt
+        \item[CBOW] Continuous Bag-of-Words
+        \item[CNJ] Conselho Nacional de Justiça
+        \item[CPU] Computing Processing Unit
+        \item[GPU] Graphics Processing Unit
+        \item[CRF] Conditional Random Field
+        \item[ELMo] Embeddings from Language Model
+        \item[GO] Golang Programming Language
+        \item[GloVe] Global Vectors for Word Representation
+        \item[HTTP] Hypertext Transfer Protocol
+        \item[IDF] Inverse Document Frequency
+        \item[JSON] JavaScript Object Notation
+        \item[NLP] Natural Language Processing
+        \item[NER] Reconhecimento de Entidade Nomeada
+        \item[POS] Part-of-Speech
+        \item[PJe] Processo Judicial Eletrônico
+        \item[SVM] Support Vector Machine
+        \item[RAG] Retrieval-Augmented Generation
+        \item[REST] Representational State Transfer
+        \item[TF-IDF] Term Frequency-Inverse Document Frequency
+    \end{siglas}
 
 % ========================================================================
 % SUMÁRIO
 % ========================================================================
-\pdfbookmark[0]{\contentsname}{toc}
-\tableofcontents*
-\cleardoublepage
+    \pdfbookmark[0]{\contentsname}{toc}
+    \tableofcontents*
+    \cleardoublepage
 
-\textual
+    \textual
 % ========================================================================
 % INTRODUÇÃO
 % ========================================================================
-\chapter{Introdução}
 
-\section{Contexto}
 
-A era digital transformou radicalmente o acesso à informação, gerando um volume de dados sem precedentes em praticamente todos os setores da sociedade. No campo do Direito, essa realidade se manifesta na digitalização massiva de processos, leis, jurisprudências e pareceres. O Judiciário brasileiro, por exemplo, recebeu mais de 250 milhões de processos em formato eletrônico nos últimos 15 anos \cite{citacao59}. Se por um lado essa digitalização representa um avanço em termos de transparência, por outro, impõe um desafio monumental: como navegar e extrair informações relevantes de um oceano de textos complexos e interconectados? A simples capacidade de armazenamento tornou-se insuficiente; a necessidade agora é de processamento inteligente.
+    \chapter{Introdução}
 
-Nesse cenário, as técnicas de Processamento de Linguagem Natural (NLP), especialmente aquelas baseadas em Inteligência Artificial e aprendizado de máquina, surgiram como a solução mais promissora. Modelos de linguagem avançados, capazes de compreender nuances semânticas e contextuais, prometem revolucionar a busca jurídica. Ferramentas que utilizam \textit{embeddings} e arquiteturas de \textit{transformers} representam o estado da arte, buscando emular uma compreensão quase humana dos textos legais para tarefas como a identificação de divergências jurisprudenciais \cite{citacao60}.
 
-Contudo, a adoção dessas tecnologias levanta uma questão fundamental e muitas vezes negligenciada: qual o custo-benefício real dessa complexidade? O esforço computacional, financeiro e técnico para treinar, implementar e manter sistemas de IA é significativo, exigindo a aplicação de métodos para otimizar e reduzir os custos de inferência dos modelos \cite{citacao61}. Isso nos leva ao cerne deste trabalho: investigar até que ponto a sofisticação dos modelos de \textit{machine learning} é indispensável para a tarefa de busca em documentos jurídicos. Será que métodos estatísticos e algoritmos de busca mais clássicos, quando bem aplicados, não poderiam alcançar resultados comparáveis, com uma fração do custo?
+    \section{Contexto}
 
-Este estudo se propõe a explorar essa fronteira. Conforme aponta \citeonline{citacao62}, modelos distribucionais como BERT não apresentam, necessariamente, um desempenho superior em todas as tarefas de classificação de textos jurídicos quando comparados a abordagens mais simples. O objetivo deste trabalho, portanto, não é desenvolver uma nova ferramenta, mas sim realizar uma análise crítica e comparativa, buscando compreender o verdadeiro \textit{trade-off} entre a precisão semântica e a eficiência computacional no domínio específico do Direito.
+    A era digital transformou radicalmente o acesso à informação, gerando um volume de dados sem precedentes em praticamente todos os setores da sociedade. No campo do Direito, essa realidade se manifesta na digitalização massiva de processos, leis, jurisprudências e pareceres. O Judiciário brasileiro, por exemplo, recebeu mais de 250 milhões de processos em formato eletrônico nos últimos 15 anos \cite{citacao59}. Se por um lado essa digitalização representa um avanço em termos de transparência, por outro, impõe um desafio monumental: como navegar e extrair informações relevantes de um oceano de textos complexos e interconectados? A simples capacidade de armazenamento tornou-se insuficiente; a necessidade agora é de processamento inteligente.
 
-\section{Justificativa}
+    Nesse cenário, as técnicas de Processamento de Linguagem Natural (NLP), especialmente aquelas baseadas em Inteligência Artificial e aprendizado de máquina, surgiram como a solução mais promissora. Modelos de linguagem avançados, capazes de compreender nuances semânticas e contextuais, prometem revolucionar a busca jurídica. Ferramentas que utilizam \textit{embeddings} e arquiteturas de \textit{transformers} representam o estado da arte, buscando emular uma compreensão quase humana dos textos legais para tarefas como a identificação de divergências jurisprudenciais \cite{citacao60}.
 
-A busca incessante por precisão levou o campo da tecnologia jurídica a uma crescente dependência de modelos de Inteligência Artificial, cujo uso no Judiciário brasileiro cresceu 26\% apenas entre 2022 e 2023 \cite{citacao63}. A premissa é clara: quanto mais "inteligente" o modelo, melhores os resultados. No entanto, essa corrida pela sofisticação muitas vezes ignora os custos práticos associados. O treinamento de grandes modelos de linguagem exige poder de processamento massivo, geralmente dependente de hardware especializado como GPUs, o que se traduz em altos custos de infraestrutura, energia e manutenção. Para muitas instituições, essa barreira pode ser intransponível.
+    Contudo, a adoção dessas tecnologias levanta uma questão fundamental e muitas vezes negligenciada: qual o custo-benefício real dessa complexidade? O esforço computacional, financeiro e técnico para treinar, implementar e manter sistemas de IA é significativo, exigindo a aplicação de métodos para otimizar e reduzir os custos de inferência dos modelos \cite{citacao61}. Isso nos leva ao cerne deste trabalho: investigar até que ponto a sofisticação dos modelos de \textit{machine learning} é indispensável para a tarefa de busca em documentos jurídicos. Será que métodos estatísticos e algoritmos de busca mais clássicos, quando bem aplicados, não poderiam alcançar resultados comparáveis, com uma fração do custo?
 
-Paralelamente, a evolução do hardware, com o advento das arquiteturas \textit{multicore}, não beneficiou apenas os modelos de IA. Algoritmos clássicos, antes limitados por execuções sequenciais, podem hoje ter seu desempenho drasticamente otimizado por meio de paralelismo, explorando múltiplos núcleos de processamento para aumentar a performance das aplicações \cite{citacao64}. Técnicas estatísticas como o TF-IDF e algoritmos de busca de padrões, como o Boyer-Moore, são computacionalmente mais leves e mais simples de implementar, mas seu potencial em hardware moderno é frequentemente subestimado.
+    Este estudo se propõe a explorar essa fronteira. Conforme aponta \citeonline{citacao62}, modelos distribucionais como BERT não apresentam, necessariamente, um desempenho superior em todas as tarefas de classificação de textos jurídicos quando comparados a abordagens mais simples. O objetivo deste trabalho, portanto, não é desenvolver uma nova ferramenta, mas sim realizar uma análise crítica e comparativa, buscando compreender o verdadeiro \textit{trade-off} entre a precisão semântica e a eficiência computacional no domínio específico do Direito.
 
-A justificativa deste trabalho reside, portanto, em uma necessidade de pragmatismo. É preciso questionar se o ganho marginal de relevância oferecido por um modelo semântico complexo justifica sua implementação em todos os cenários. Em domínios com linguagem controlada e previsível, como é o caso dos documentos jurídicos, abordagens mais simples, baseadas em regras, podem se mostrar altamente eficazes \cite{citacao65}. Em muitas tarefas cotidianas, a velocidade de resposta e o baixo custo operacional podem ser mais valiosos do que a capacidade de interpretar uma ambiguidade sutil em um texto.
 
-Esta pesquisa oferece uma análise quantitativa desse \textit{trade-off}. Ao comparar diretamente o desempenho, o tempo de resposta e o uso de recursos de diferentes abordagens — uma prática já adotada em trabalhos que avaliam modelos como BERT e ChatGPT por meio de métricas de acurácia, precisão e F1-score \cite{citacao66} — pretendemos fornecer dados concretos que auxiliem na tomada de decisão sobre qual tecnologia é mais adequada para diferentes necessidades do ecossistema jurídico, movendo o debate do campo teórico para uma avaliação de aplicabilidade prática.
+    \section{Justificativa}
 
-\section{Objetivos}
+    A busca incessante por precisão levou o campo da tecnologia jurídica a uma crescente dependência de modelos de Inteligência Artificial, cujo uso no Judiciário brasileiro cresceu 26\% apenas entre 2022 e 2023 \cite{citacao63}. A premissa é clara: quanto mais "inteligente" o modelo, melhores os resultados. No entanto, essa corrida pela sofisticação muitas vezes ignora os custos práticos associados. O treinamento de grandes modelos de linguagem exige poder de processamento massivo, geralmente dependente de hardware especializado como GPUs, o que se traduz em altos custos de infraestrutura, energia e manutenção. Para muitas instituições, essa barreira pode ser intransponível.
 
-\subsection{Objetivo Geral}
+    Paralelamente, a evolução do hardware, com o advento das arquiteturas \textit{multicore}, não beneficiou apenas os modelos de IA. Algoritmos clássicos, antes limitados por execuções sequenciais, podem hoje ter seu desempenho drasticamente otimizado por meio de paralelismo, explorando múltiplos núcleos de processamento para aumentar a performance das aplicações \cite{citacao64}. Técnicas estatísticas como o TF-IDF e algoritmos de busca de padrões, como o Boyer-Moore, são computacionalmente mais leves e mais simples de implementar, mas seu potencial em hardware moderno é frequentemente subestimado.
 
-Avaliar e comparar o desempenho de métodos estatísticos e semânticos para a indexação e busca de informações em documentos jurídicos, analisando o \textit{trade-off} entre a complexidade computacional dos modelos e a relevância dos resultados obtidos.
+    A justificativa deste trabalho reside, portanto, em uma necessidade de pragmatismo. É preciso questionar se o ganho marginal de relevância oferecido por um modelo semântico complexo justifica sua implementação em todos os cenários. Em domínios com linguagem controlada e previsível, como é o caso dos documentos jurídicos, abordagens mais simples, baseadas em regras, podem se mostrar altamente eficazes \cite{citacao65}. Em muitas tarefas cotidianas, a velocidade de resposta e o baixo custo operacional podem ser mais valiosos do que a capacidade de interpretar uma ambiguidade sutil em um texto.
 
-\subsection{Objetivos Específicos}
+    Esta pesquisa oferece uma análise quantitativa desse \textit{trade-off}. Ao comparar diretamente o desempenho, o tempo de resposta e o uso de recursos de diferentes abordagens — uma prática já adotada em trabalhos que avaliam modelos como BERT e ChatGPT por meio de métricas de acurácia, precisão e F1-score \cite{citacao66} — pretendemos fornecer dados concretos que auxiliem na tomada de decisão sobre qual tecnologia é mais adequada para diferentes necessidades do ecossistema jurídico, movendo o debate do campo teórico para uma avaliação de aplicabilidade prática.
 
-\begin{enumerate}
-    \item Pré-processar um corpus de documentos jurídicos, incluindo limpeza textual e outras técnicas pertinentes, para criar uma base de testes consistente para ambas as abordagens.
-    \item Implementar um pipeline de busca baseado em \textit{embeddings} de sentenças, utilizando a similaridade de cosseno para ranquear os resultados de acordo com a proximidade semântica.
-    \item Implementar um pipeline de busca baseado no modelo estatístico TF-IDF para criar uma representação vetorial baseada na frequência de termos.
-    \item Utilizar o algoritmo de busca de padrões Boyer-Moore para realizar buscas por correspondência exata de termos, servindo como uma linha de base de desempenho.
-    \item Definir e aplicar um conjunto de métricas para avaliar e comparar o desempenho das diferentes abordagens, considerando precisão, tempo de resposta e uso de recursos computacionais.
-    \item Analisar criticamente os resultados obtidos para identificar as vantagens, desvantagens e os cenários de aplicação mais adequados para cada método no contexto específico dos textos jurídicos.
-\end{enumerate}
 
-\chapter{Revisão bibliográfica}
+    \section{Objetivos}
 
-\section{Processamento de Linguagem Natural no Domínio Jurídico}
+    \subsection{Objetivo Geral}
 
-A crescente produção textual na sociedade contemporânea transformou a informação em um recurso abundante, porém desafiador de ser processado. No universo jurídico, esse fenômeno é ainda mais acentuado: contratos, decisões, pareceres, petições e legislações são produtos essencialmente linguísticos. O Direito, enquanto sistema normativo, é construído, operado e interpretado por meio da linguagem \cite{citacao42, citacao43}.
+    Avaliar e comparar o desempenho de métodos estatísticos e semânticos para a indexação e busca de informações em documentos jurídicos, analisando o \textit{trade-off} entre a complexidade computacional dos modelos e a relevância dos resultados obtidos.
 
-Diante do volume exponencial de documentos jurídicos, o uso de ferramentas computacionais tornou-se uma necessidade. As limitações cognitivas humanas frente à grande quantidade de dados disponíveis exigem soluções capazes de automatizar parte do processamento textual. Técnicas de NLP surgem como abordagem consolidada para enfrentar esse desafio \cite{citacao17, citacao44}.
+    \subsection{Objetivos Específicos}
 
-O NLP, subárea da inteligência artificial, permite que máquinas compreendam, processem e operem sobre dados em linguagem natural. No contexto jurídico, essas técnicas viabilizam a identificação de padrões, a extração de informações relevantes, a sumarização de documentos e o suporte à tomada de decisão. Trata-se de uma evolução que não apenas automatiza tarefas, mas incorpora mecanismos capazes de operar diretamente sobre a base textual do Direito \cite{citacao45, citacao43}.
+    \begin{enumerate}
+        \item Pré-processar um corpus de documentos jurídicos, incluindo limpeza textual e outras técnicas pertinentes, para criar uma base de testes consistente para ambas as abordagens.
+        \item Implementar um pipeline de busca baseado em \textit{embeddings} de sentenças, utilizando a similaridade de cosseno para ranquear os resultados de acordo com a proximidade semântica.
+        \item Implementar um pipeline de busca baseado no modelo estatístico TF-IDF para criar uma representação vetorial baseada na frequência de termos.
+        \item Utilizar o algoritmo de busca de padrões Boyer-Moore para realizar buscas por correspondência exata de termos, servindo como uma linha de base de desempenho.
+        \item Definir e aplicar um conjunto de métricas para avaliar e comparar o desempenho das diferentes abordagens, considerando precisão, tempo de resposta e uso de recursos computacionais.
+        \item Analisar criticamente os resultados obtidos para identificar as vantagens, desvantagens e os cenários de aplicação mais adequados para cada método no contexto específico dos textos jurídicos.
+    \end{enumerate}
 
-Atualmente, modelos computacionais já demonstram aplicações práticas no ambiente jurídico, como análise de jurisprudência, redação assistida e busca semântica em bases normativas. No contexto brasileiro, estudos como os de \citeonline{citacao17} evidenciam a consolidação dessas tecnologias no setor jurídico.
 
-\subsection{Características dos textos jurídicos}
+    \chapter{Revisão bibliográfica}
 
-A aplicação de técnicas de NLP no domínio jurídico envolve desafios particulares, uma vez que os textos jurídicos apresentam propriedades distintas em relação a outros gêneros textuais. Em primeiro lugar, são documentos altamente especializados, redigidos com vocabulário técnico e linguagem formal, frequentemente estruturados de modo padronizado. Termos como \textit{vossa excelência}, \textit{ex positis} ou \textit{ad nutum} não apenas indicam jargão, mas também desempenham papel semântico e pragmático central na construção do sentido legal de um texto \cite{citacao42,citacao44}.
 
-Além disso, esses textos apresentam um alto grau de ambiguidade controlada --- ou seja, ambiguidade tolerada e, muitas vezes, intencional. Palavras como \textit{poderá}, \textit{deverá} ou \textit{caberá} têm significados normativos específicos que impactam diretamente a interpretação e aplicação das normas. Essa polissemia exige que modelos de NLP sejam sensíveis ao contexto jurídico para evitar erros semânticos que possam comprometer a análise automatizada \cite{citacao17,citacao45}.
+    \section{Processamento de Linguagem Natural no Domínio Jurídico}
 
-Outro aspecto relevante é a intertextualidade jurídica. Leis, contratos, petições e sentenças costumam referenciar outros documentos legais, criando dependências explícitas entre normas, jurisprudências e atos administrativos. Essa característica impõe a necessidade de modelos capazes de capturar relações entre documentos --- como citações, remissões e precedentes --- o que exige abordagens sofisticadas para modelagem de contexto e representação semântica \cite{citacao17}.
+    A crescente produção textual na sociedade contemporânea transformou a informação em um recurso abundante, porém desafiador de ser processado. No universo jurídico, esse fenômeno é ainda mais acentuado: contratos, decisões, pareceres, petições e legislações são produtos essencialmente linguísticos. O Direito, enquanto sistema normativo, é construído, operado e interpretado por meio da linguagem \cite{citacao42, citacao43}.
 
-Também é importante considerar a estrutura argumentativa dos textos jurídicos. Documentos como sentenças e pareceres possuem uma lógica discursiva específica, geralmente organizada em premissas, fundamentações e conclusões. Essa organização influencia tanto a segmentação quanto a priorização de informações nos sistemas de NLP aplicados ao Direito \cite{citacao43}.
+    Diante do volume exponencial de documentos jurídicos, o uso de ferramentas computacionais tornou-se uma necessidade. As limitações cognitivas humanas frente à grande quantidade de dados disponíveis exigem soluções capazes de automatizar parte do processamento textual. Técnicas de NLP surgem como abordagem consolidada para enfrentar esse desafio \cite{citacao17, citacao44}.
 
-\subsection{Desafios específicos em português}
+    O NLP, subárea da inteligência artificial, permite que máquinas compreendam, processem e operem sobre dados em linguagem natural. No contexto jurídico, essas técnicas viabilizam a identificação de padrões, a extração de informações relevantes, a sumarização de documentos e o suporte à tomada de decisão. Trata-se de uma evolução que não apenas automatiza tarefas, mas incorpora mecanismos capazes de operar diretamente sobre a base textual do Direito \cite{citacao45, citacao43}.
 
-Ao aplicar técnicas de NLP à língua portuguesa, especialmente no domínio jurídico, surgem obstáculos adicionais que não estão presentes em línguas com estruturas morfossintáticas mais simples, como o inglês. O português brasileiro apresenta uma morfologia altamente flexiva, com ampla variação de formas verbais, nominais e pronominais, o que torna tarefas como tokenização e lematização consideravelmente mais complexas \cite{citacao17}.
+    Atualmente, modelos computacionais já demonstram aplicações práticas no ambiente jurídico, como análise de jurisprudência, redação assistida e busca semântica em bases normativas. No contexto brasileiro, estudos como os de \citeonline{citacao17} evidenciam a consolidação dessas tecnologias no setor jurídico.
 
-No contexto jurídico, essa complexidade é intensificada pelo uso recorrente de locuções e expressões idiomáticas específicas da tradição normativa. Frases como \textit{sem prejuízo do disposto}, \textit{salvo disposição em contrário} ou \textit{nos termos da legislação aplicável} não podem ser analisadas isoladamente por palavra. Tais construções funcionam como unidades semânticas coesas, exigindo abordagens capazes de identificar e preservar o significado completo durante o pré-processamento textual \cite{citacao44,citacao17}.
+    \subsection{Características dos textos jurídicos}
 
-\subsection{Iniciativas e ferramentas existentes}
+    A aplicação de técnicas de NLP no domínio jurídico envolve desafios particulares, uma vez que os textos jurídicos apresentam propriedades distintas em relação a outros gêneros textuais. Em primeiro lugar, são documentos altamente especializados, redigidos com vocabulário técnico e linguagem formal, frequentemente estruturados de modo padronizado. Termos como \textit{vossa excelência}, \textit{ex positis} ou \textit{ad nutum} não apenas indicam jargão, mas também desempenham papel semântico e pragmático central na construção do sentido legal de um texto \cite{citacao42,citacao44}.
 
-Uma das iniciativas voltadas ao português jurídico é o projeto \textit{LegalNLP} \cite{citacao17}, que disponibiliza um conjunto de modelos pré-treinados — como Word2Vec, Doc2Vec, FastText e BERT — ajustados ao domínio legal brasileiro. O projeto inclui ainda um pacote em Python com funcionalidades específicas para tarefas como vetorização, extração de entidades e classificação de textos legais. Os modelos foram treinados com dados provenientes de diversos tribunais nacionais, o que visa proporcionar maior aderência linguística e semântica ao contexto jurídico do país, em comparação com abordagens mais genéricas.
+    Além disso, esses textos apresentam um alto grau de ambiguidade controlada --- ou seja, ambiguidade tolerada e, muitas vezes, intencional. Palavras como \textit{poderá}, \textit{deverá} ou \textit{caberá} têm significados normativos específicos que impactam diretamente a interpretação e aplicação das normas. Essa polissemia exige que modelos de NLP sejam sensíveis ao contexto jurídico para evitar erros semânticos que possam comprometer a análise automatizada \cite{citacao17,citacao45}.
 
-Outras iniciativas relevantes incluem o \textit{OpenLegalData}, o \textit{JusBrasil Labs} e os repositórios públicos mantidos pelo \textit{Conselho Nacional de Justiça} (CNJ) e pelos tribunais superiores, que fornecem bases de dados utilizadas em aplicações experimentais de NLP jurídico. No campo das ferramentas gerais de NLP, bibliotecas como \textit{spaCy}, \textit{NLTK}, \textit{Stanza} e modelos da \textit{Hugging Face} oferecem suporte para o português, embora possam demandar adaptações específicas ao domínio jurídico devido à complexidade e à terminologia especializada dos textos legais — um aspecto abordado por iniciativas como o \textit{LegalNLP} \cite{citacao17}.
+    Outro aspecto relevante é a intertextualidade jurídica. Leis, contratos, petições e sentenças costumam referenciar outros documentos legais, criando dependências explícitas entre normas, jurisprudências e atos administrativos. Essa característica impõe a necessidade de modelos capazes de capturar relações entre documentos --- como citações, remissões e precedentes --- o que exige abordagens sofisticadas para modelagem de contexto e representação semântica \cite{citacao17}.
 
-\section{Técnicas de Pré-processamento Textual}
+    Também é importante considerar a estrutura argumentativa dos textos jurídicos. Documentos como sentenças e pareceres possuem uma lógica discursiva específica, geralmente organizada em premissas, fundamentações e conclusões. Essa organização influencia tanto a segmentação quanto a priorização de informações nos sistemas de NLP aplicados ao Direito \cite{citacao43}.
 
-Em um cenário de grande volume textual, como o jurídico, a extração de informação relevante demanda um tratamento prévio sobre os documentos. Essa etapa é conhecida como pré-processamento, e tem como objetivo transformar textos brutos em representações mais estruturadas e significativas, facilitando tanto a análise semântica quanto a indexação e recuperação posterior. Trata-se, portanto, de uma fase indispensável para qualquer sistema de recuperação de informação textual, sobretudo em domínios especializados, já que a escolha adequada das técnicas de pré-processamento pode influenciar significativamente a relevância das informações extraídas \cite{citacao16}.
+    \subsection{Desafios específicos em português}
 
-Além de normalizar o conteúdo textual, o pré-processamento também é responsável pela definição do vocabulário de termos que será utilizado na indexação e na construção de representações computacionais. Um bom pré-processamento reduz o tamanho do vocabulário, melhora o desempenho e aumenta a precisão das buscas \cite{citacao67}. Essa etapa funciona, portanto, como uma ponte entre a linguagem natural e os algoritmos, permitindo que informações relevantes sejam extraídas de forma estruturada, eficiente e precisa. No contexto deste trabalho, ela se mostra essencial para a identificação de elementos fundamentais nos documentos jurídicos, como nomes das partes, dispositivos legais e decisões.
+    Ao aplicar técnicas de NLP à língua portuguesa, especialmente no domínio jurídico, surgem obstáculos adicionais que não estão presentes em línguas com estruturas morfossintáticas mais simples, como o inglês. O português brasileiro apresenta uma morfologia altamente flexiva, com ampla variação de formas verbais, nominais e pronominais, o que torna tarefas como tokenização e lematização consideravelmente mais complexas \cite{citacao17}.
 
-\subsection{Tokenização}
+    No contexto jurídico, essa complexidade é intensificada pelo uso recorrente de locuções e expressões idiomáticas específicas da tradição normativa. Frases como \textit{sem prejuízo do disposto}, \textit{salvo disposição em contrário} ou \textit{nos termos da legislação aplicável} não podem ser analisadas isoladamente por palavra. Tais construções funcionam como unidades semânticas coesas, exigindo abordagens capazes de identificar e preservar o significado completo durante o pré-processamento textual \cite{citacao44,citacao17}.
 
-No contexto do processamento de linguagem natural, um \textit{token} é definido como uma unidade básica de texto, normalmente correspondente a uma palavra, número, pontuação ou símbolo significativo. A forma como os \textit{tokens} são extraídos influencia diretamente a eficácia dos modelos computacionais, especialmente em contextos especializados como o jurídico, onde há presença de construções formais e terminologias específicas.
+    \subsection{Iniciativas e ferramentas existentes}
 
-O processo de tokenização refere-se, portanto, à separação do texto contínuo em unidades menores, os \textit{tokens}, que geralmente representam palavras. Essa tarefa vai além de simplesmente dividir o texto por espaços; por exemplo, expressões como “São Paulo” ou “Art. 5º” exigem regras específicas para não serem segmentadas incorretamente, especialmente em textos técnicos como os jurídicos \cite{citacao67}.
+    Uma das iniciativas voltadas ao português jurídico é o projeto \textit{LegalNLP} \cite{citacao17}, que disponibiliza um conjunto de modelos pré-treinados — como Word2Vec, Doc2Vec, FastText e BERT — ajustados ao domínio legal brasileiro. O projeto inclui ainda um pacote em Python com funcionalidades específicas para tarefas como vetorização, extração de entidades e classificação de textos legais. Os modelos foram treinados com dados provenientes de diversos tribunais nacionais, o que visa proporcionar maior aderência linguística e semântica ao contexto jurídico do país, em comparação com abordagens mais genéricas.
 
-\begin{figure}[H]
-    \centering
-    \caption{\label{fig:tokenizacao}Exemplo de \textit{tokenização}.}
-    \includegraphics[width=0.8\textwidth]{assets/tokenizacao.png}
-    \legend {Fonte: \cite{citacao10}}
-\end{figure}
+    Outras iniciativas relevantes incluem o \textit{OpenLegalData}, o \textit{JusBrasil Labs} e os repositórios públicos mantidos pelo \textit{Conselho Nacional de Justiça} (CNJ) e pelos tribunais superiores, que fornecem bases de dados utilizadas em aplicações experimentais de NLP jurídico. No campo das ferramentas gerais de NLP, bibliotecas como \textit{spaCy}, \textit{NLTK}, \textit{Stanza} e modelos da \textit{Hugging Face} oferecem suporte para o português, embora possam demandar adaptações específicas ao domínio jurídico devido à complexidade e à terminologia especializada dos textos legais — um aspecto abordado por iniciativas como o \textit{LegalNLP} \cite{citacao17}.
 
-\subsubsection{Desafios específicos no contexto jurídico em português}
 
-A tokenização de textos jurídicos em língua portuguesa apresenta desafios particulares que precisam ser considerados para evitar a perda de informação ou a distorção semântica. Um dos principais aspectos envolve o tratamento da pontuação. Embora seja comum a remoção de sinais de pontuação na maioria dos sistemas de pré-processamento textual, certos elementos, como os números de processo — por exemplo, 1234567-89.2023.8.26.0100 — devem ser preservados como um único \textit{token}, dada sua importância semântica e recorrência em documentos legais \cite{citacao17}.
+    \section{Técnicas de Pré-processamento Textual}
 
-Outro desafio é o manejo de contrações e apóstrofos. Expressões como \textit{d’água} exigem normalização ou adaptação conforme a estratégia do sistema de NLP adotado, a fim de evitar a fragmentação de termos relevantes ou a exclusão de significados culturalmente marcados. Esse tipo de problema é particularmente sensível em português, dada a frequência de contrações e formas elípticas presentes na linguagem formal e jurídica \cite{citacao17}.
+    Em um cenário de grande volume textual, como o jurídico, a extração de informação relevante demanda um tratamento prévio sobre os documentos. Essa etapa é conhecida como pré-processamento, e tem como objetivo transformar textos brutos em representações mais estruturadas e significativas, facilitando tanto a análise semântica quanto a indexação e recuperação posterior. Trata-se, portanto, de uma fase indispensável para qualquer sistema de recuperação de informação textual, sobretudo em domínios especializados, já que a escolha adequada das técnicas de pré-processamento pode influenciar significativamente a relevância das informações extraídas \cite{citacao16}.
 
-A presença de hífen também demanda atenção, especialmente em palavras compostas. Termos como \textit{auto-aplicável} podem ser mantidos como uma única unidade ou separados, dependendo do contexto e do domínio de aplicação. Em geral, recomenda-se a separação de prefixos curtos em termos técnicos, mas a preservação do hífen em nomes próprios, como em \textit{Hewlett-Packard}. Esse problema é bem documentado tanto na literatura geral de processamento de linguagem quanto nos trabalhos específicos aplicados ao domínio jurídico brasileiro, que destacam como a segmentação incorreta impacta diretamente na qualidade da indexação e da recuperação de informação \cite{citacao17}.
+    Além de normalizar o conteúdo textual, o pré-processamento também é responsável pela definição do vocabulário de termos que será utilizado na indexação e na construção de representações computacionais. Um bom pré-processamento reduz o tamanho do vocabulário, melhora o desempenho e aumenta a precisão das buscas \cite{citacao67}. Essa etapa funciona, portanto, como uma ponte entre a linguagem natural e os algoritmos, permitindo que informações relevantes sejam extraídas de forma estruturada, eficiente e precisa. No contexto deste trabalho, ela se mostra essencial para a identificação de elementos fundamentais nos documentos jurídicos, como nomes das partes, dispositivos legais e decisões.
 
-Além disso, há a necessidade de identificar e manter unidas expressões fixas e nomes compostos, tais como \textit{Ministério Público}, \textit{Poder Judiciário} ou \textit{São Paulo}. Essas unidades semânticas são especialmente relevantes quando se lida com consultas baseadas em frases, nas quais a separação pode comprometer a precisão dos resultados. Modelos jurídicos treinados para o português, como os apresentados no projeto NLP Legal Brasil, reforçam a necessidade desse tipo de pré-processamento especializado, visto que expressões compostas carregam um valor semântico muito superior ao de seus termos isolados \cite{citacao17}.
+    \subsection{Tokenização}
 
-Por fim, entidades estruturadas como endereços de e-mail, URLs, datas e identificadores numéricos — incluindo CPF e CNPJ — devem ser reconhecidas e tratadas como \textit{tokens} indivisíveis. Esses elementos são frequentemente objeto direto de busca em sistemas jurídicos informatizados, e sua fragmentação pode prejudicar seriamente a eficácia dos mecanismos de recuperação de informação. A literatura destaca que a preservação de entidades estruturadas é uma das práticas essenciais para garantir a robustez de sistemas de busca no domínio jurídico, especialmente em bases documentais complexas como acervos de jurisprudência ou diários oficiais \cite{citacao17}.
+    No contexto do processamento de linguagem natural, um \textit{token} é definido como uma unidade básica de texto, normalmente correspondente a uma palavra, número, pontuação ou símbolo significativo. A forma como os \textit{tokens} são extraídos influencia diretamente a eficácia dos modelos computacionais, especialmente em contextos especializados como o jurídico, onde há presença de construções formais e terminologias específicas.
 
+    O processo de tokenização refere-se, portanto, à separação do texto contínuo em unidades menores, os \textit{tokens}, que geralmente representam palavras. Essa tarefa vai além de simplesmente dividir o texto por espaços; por exemplo, expressões como “São Paulo” ou “Art. 5º” exigem regras específicas para não serem segmentadas incorretamente, especialmente em textos técnicos como os jurídicos \cite{citacao67}.
 
-\subsection{Remoção de Stopwords}
+    \begin{figure}[H]
+        \centering
+        \caption{\label{fig:tokenizacao}Exemplo de \textit{tokenização}.}
+        \includegraphics[width=0.8\textwidth]{assets/tokenizacao.png}
+        \legend {Fonte: \cite{citacao10}}
+    \end{figure}
 
-A remoção de \textit{stopwords} é uma das etapas principais do pré-processamento textual e consiste na exclusão de palavras que ocorrem com alta frequência, mas que carregam pouco ou nenhum valor semântico individual — como \textit{de}, \textit{que}, \textit{em}, \textit{o} e \textit{a}. Esse tipo de filtragem é comumente utilizado para reduzir o vocabulário e acelerar os algoritmos, sem perda significativa de informação relevante para a maioria das tarefas de recuperação e classificação textual. \cite{citacao67} 
+    \subsubsection{Desafios específicos no contexto jurídico em português}
 
-Apesar de a remoção de \textit{stopwords} ser uma prática comum em tarefas de processamento de linguagem natural, no contexto jurídico é necessário cautela. Isso porque palavras funcionais — geralmente ignoradas em outros domínios — podem conter informações fundamentais para a interpretação de dispositivos legais, como apontado por \citeauthor{citacao17} (\citeyear{citacao17}), que optaram por não removê-las durante o treinamento de seus modelos linguísticos, justamente para preservar a integridade semântica dos textos judiciais.
+    A tokenização de textos jurídicos em língua portuguesa apresenta desafios particulares que precisam ser considerados para evitar a perda de informação ou a distorção semântica. Um dos principais aspectos envolve o tratamento da pontuação. Embora seja comum a remoção de sinais de pontuação na maioria dos sistemas de pré-processamento textual, certos elementos, como os números de processo — por exemplo, 1234567-89.2023.8.26.0100 — devem ser preservados como um único \textit{token}, dada sua importância semântica e recorrência em documentos legais \cite{citacao17}.
 
-\begin{figure}[H]
-    \centering
-    \caption{Exemplo de remoção de \textit{stopwords}}
-    \includegraphics[width=0.8\textwidth]{assets/Stopwords.png}
-    \legend{Fonte: \cite{citacao25}}
-\end{figure}
+    Outro desafio é o manejo de contrações e apóstrofos. Expressões como \textit{d’água} exigem normalização ou adaptação conforme a estratégia do sistema de NLP adotado, a fim de evitar a fragmentação de termos relevantes ou a exclusão de significados culturalmente marcados. Esse tipo de problema é particularmente sensível em português, dada a frequência de contrações e formas elípticas presentes na linguagem formal e jurídica \cite{citacao17}.
 
-\subsection{Lematização e Stemização}
+    A presença de hífen também demanda atenção, especialmente em palavras compostas. Termos como \textit{auto-aplicável} podem ser mantidos como uma única unidade ou separados, dependendo do contexto e do domínio de aplicação. Em geral, recomenda-se a separação de prefixos curtos em termos técnicos, mas a preservação do hífen em nomes próprios, como em \textit{Hewlett-Packard}. Esse problema é bem documentado tanto na literatura geral de processamento de linguagem quanto nos trabalhos específicos aplicados ao domínio jurídico brasileiro, que destacam como a segmentação incorreta impacta diretamente na qualidade da indexação e da recuperação de informação \cite{citacao17}.
 
-A lematização reduz palavras à sua forma canônica, conhecida como \textit{lema}. Por exemplo, termos como \textit{decidir}, \textit{decisão} e \textit{decidido} são todos associados ao verbo \textit{decidir}. Esse processo considera a análise morfológica e o contexto gramatical, sendo essencial para manter o sentido das palavras nos textos jurídicos, onde pequenas variações morfológicas podem alterar significativamente o significado \cite{citacao10}.
+    Além disso, há a necessidade de identificar e manter unidas expressões fixas e nomes compostos, tais como \textit{Ministério Público}, \textit{Poder Judiciário} ou \textit{São Paulo}. Essas unidades semânticas são especialmente relevantes quando se lida com consultas baseadas em frases, nas quais a separação pode comprometer a precisão dos resultados. Modelos jurídicos treinados para o português, como os apresentados no projeto NLP Legal Brasil, reforçam a necessidade desse tipo de pré-processamento especializado, visto que expressões compostas carregam um valor semântico muito superior ao de seus termos isolados \cite{citacao17}.
 
-Por outro lado, a stemização é uma técnica mais simples que remove afixos (prefixos e sufixos) para obter uma raiz. No entanto, essa raiz nem sempre corresponde a uma palavra válida no idioma. Por exemplo, as palavras \textit{decidir}, \textit{decidindo} e \textit{decidido} podem ser reduzidas a \textit{decid}.
+    Por fim, entidades estruturadas como endereços de e-mail, URLs, datas e identificadores numéricos — incluindo CPF e CNPJ — devem ser reconhecidas e tratadas como \textit{tokens} indivisíveis. Esses elementos são frequentemente objeto direto de busca em sistemas jurídicos informatizados, e sua fragmentação pode prejudicar seriamente a eficácia dos mecanismos de recuperação de informação. A literatura destaca que a preservação de entidades estruturadas é uma das práticas essenciais para garantir a robustez de sistemas de busca no domínio jurídico, especialmente em bases documentais complexas como acervos de jurisprudência ou diários oficiais \cite{citacao17}.
 
-\begin{figure}[H]
-    \centering
-    \caption{Exemplo de diferenças entre Stemização e Lematização.}
-    \includegraphics[width=0.7\textwidth]{assets/lem_stem.png}
-    \legend{Fonte: \cite{citacao18}}
-\end{figure}
+    \subsection{Remoção de Stopwords}
 
-A lematização proporciona maior fidelidade semântica, sendo mais indicada para tarefas que exigem compreensão precisa dos textos, como análise e busca em documentos jurídicos. Essa abordagem, por depender de análise linguística completa e regras morfológicas, costuma ter maior custo computacional e necessidade de recursos linguísticos bem estruturados, especialmente em idiomas como o português, que possui alta complexidade morfológica \cite{citacao17}.
+    A remoção de \textit{stopwords} é uma das etapas principais do pré-processamento textual e consiste na exclusão de palavras que ocorrem com alta frequência, mas que carregam pouco ou nenhum valor semântico individual — como \textit{de}, \textit{que}, \textit{em}, \textit{o} e \textit{a}. Esse tipo de filtragem é comumente utilizado para reduzir o vocabulário e acelerar os algoritmos, sem perda significativa de informação relevante para a maioria das tarefas de recuperação e classificação textual. \cite{citacao67}
 
-Por outro lado, a stemização é uma solução mais simples e eficiente em termos computacionais, baseada em regras heurísticas para remoção de afixos. Embora menos precisa, pode ser útil em tarefas onde a sensibilidade semântica não é tão crítica \cite{citacao18}.
+    Apesar de a remoção de \textit{stopwords} ser uma prática comum em tarefas de processamento de linguagem natural, no contexto jurídico é necessário cautela. Isso porque palavras funcionais — geralmente ignoradas em outros domínios — podem conter informações fundamentais para a interpretação de dispositivos legais, como apontado por \citeauthor{citacao17} (\citeyear{citacao17}), que optaram por não removê-las durante o treinamento de seus modelos linguísticos, justamente para preservar a integridade semântica dos textos judiciais.
 
-No contexto jurídico brasileiro, a adoção de lematização se mostra mais vantajosa, uma vez que ferramentas linguísticas genéricas não são suficientes para capturar as nuances da linguagem jurídica em português \cite{citacao17}.
+    \begin{figure}[H]
+        \centering
+        \caption{Exemplo de remoção de \textit{stopwords}}
+        \includegraphics[width=0.8\textwidth]{assets/Stopwords.png}
+        \legend{Fonte: \cite{citacao25}}
+    \end{figure}
 
-\subsection{Segmentação de Sentenças}
+    \subsection{Lematização e Stemização}
 
-A segmentação de sentenças consiste em dividir um texto contínuo em unidades menores, geralmente delimitadas por frases. Esse processo é essencial para permitir que modelos de processamento de linguagem operem com unidades textuais semanticamente completas, sobretudo em tarefas que requerem maior nível de precisão, como extração de fundamentos jurídicos, sumarização automática, análise de jurisprudências ou geração de relatórios.
+    A lematização reduz palavras à sua forma canônica, conhecida como \textit{lema}. Por exemplo, termos como \textit{decidir}, \textit{decisão} e \textit{decidido} são todos associados ao verbo \textit{decidir}. Esse processo considera a análise morfológica e o contexto gramatical, sendo essencial para manter o sentido das palavras nos textos jurídicos, onde pequenas variações morfológicas podem alterar significativamente o significado \cite{citacao10}.
 
-Embora seja considerado um processo relativamente simples no processamento de linguagem natural, a segmentação de sentenças apresenta desafios em textos jurídicos. A alta frequência de abreviações, siglas e expressões formais, como “Art.”, “Inc.”, “V. Exa.” ou “D.J.E.”, gera ambiguidades na definição dos pontos que efetivamente representam o final de uma sentença. Pontuações como ponto final, dois-pontos e até ponto e vírgula podem assumir funções distintas dependendo do contexto \cite{citacao17}.
+    Por outro lado, a stemização é uma técnica mais simples que remove afixos (prefixos e sufixos) para obter uma raiz. No entanto, essa raiz nem sempre corresponde a uma palavra válida no idioma. Por exemplo, as palavras \textit{decidir}, \textit{decidindo} e \textit{decidido} podem ser reduzidas a \textit{decid}.
 
-\section{Representação de Documentos}
+    \begin{figure}[H]
+        \centering
+        \caption{Exemplo de diferenças entre Stemização e Lematização.}
+        \includegraphics[width=0.7\textwidth]{assets/lem_stem.png}
+        \legend{Fonte: \cite{citacao18}}
+    \end{figure}
 
-\subsection{TF-IDF}
+    A lematização proporciona maior fidelidade semântica, sendo mais indicada para tarefas que exigem compreensão precisa dos textos, como análise e busca em documentos jurídicos. Essa abordagem, por depender de análise linguística completa e regras morfológicas, costuma ter maior custo computacional e necessidade de recursos linguísticos bem estruturados, especialmente em idiomas como o português, que possui alta complexidade morfológica \cite{citacao17}.
 
-Após o pré-processamento, uma das técnicas mais consolidadas para representar documentos como vetores numéricos é o TF-IDF (\textit{Term Frequency--Inverse Document Frequency}). Esse método associa a cada termo um peso que reflete tanto sua importância local — baseada na frequência com que aparece no documento — quanto sua importância global — determinada pela raridade do termo na coleção como um todo \cite{citacao10, citacao67}.
+    Por outro lado, a stemização é uma solução mais simples e eficiente em termos computacionais, baseada em regras heurísticas para remoção de afixos. Embora menos precisa, pode ser útil em tarefas onde a sensibilidade semântica não é tão crítica \cite{citacao18}.
 
-O cálculo do TF--IDF é composto por duas etapas fundamentais. A primeira consiste na determinação da frequência de termo \textit{Term Frequency} (TF), que quantifica o número de vezes que um termo \(t\) aparece em um documento \(d\), representado por \(\mathit{tf}_{t,d}\). Para evitar que termos muito frequentes dominem a representação, especialmente em documentos longos, é comum aplicar uma normalização logarítmica, definida como:
-\[
-\mathit{tf}_{t,d} =
-\begin{cases}
-1 + \log(\mathit{tf}_{t,d}), & \text{se } \mathit{tf}_{t,d} > 0, \\
-0, & \text{caso contrário}.
-\end{cases}
-\]
-Essa transformação suaviza o impacto de termos com alta contagem, tornando a representação mais robusta e comparável entre documentos de diferentes tamanhos \cite{citacao67}.
+    No contexto jurídico brasileiro, a adoção de lematização se mostra mais vantajosa, uma vez que ferramentas linguísticas genéricas não são suficientes para capturar as nuances da linguagem jurídica em português \cite{citacao17}.
 
-A segunda etapa envolve o cálculo da \textit{Inverse Document Frequency} (IDF), que mede a capacidade de um termo discriminar documentos. Dado \(N\) como o número total de documentos na coleção e \(df_t\) como o número de documentos em que o termo \(t\) aparece, a IDF é calculada como:
-\[
-\mathit{idf}_t = \log \left( \frac{N}{df_t} \right)
-\]
-Esse fator tem como objetivo reduzir o peso de termos comuns na coleção, como artigos, pronomes ou palavras genéricas, e aumentar o peso de termos mais raros, que são mais úteis para diferenciar documentos \cite{citacao67}.
+    \subsection{Segmentação de Sentenças}
 
-Assim, o peso final de um termo em um documento, chamado de TF--IDF, é dado pela multiplicação dos dois componentes:
-\[
-\mathrm{tf\text{-}idf}(t,d) = \mathit{tf}_{t,d} \times \mathit{idf}_t
-\]
-Esse valor será mais alto para termos que ocorrem frequentemente em um documento específico, mas que são raros na coleção como um todo, refletindo sua importância tanto local quanto global \cite{citacao67}.
+    A segmentação de sentenças consiste em dividir um texto contínuo em unidades menores, geralmente delimitadas por frases. Esse processo é essencial para permitir que modelos de processamento de linguagem operem com unidades textuais semanticamente completas, sobretudo em tarefas que requerem maior nível de precisão, como extração de fundamentos jurídicos, sumarização automática, análise de jurisprudências ou geração de relatórios.
 
-A representação de documentos no modelo vetorial é então construída a partir dos pesos TF--IDF de cada termo. Formalmente, um documento é representado como um vetor \(\mathbf{v}(d) = [\mathrm{tf\text{-}idf}(t_1,d), \dots, \mathrm{tf\text{-}idf}(t_M,d)]\), onde \(M\) é o número total de termos únicos na coleção. Consultas podem ser representadas de maneira análoga, permitindo o uso de métricas como a similaridade do cosseno para calcular a proximidade entre consultas e documentos no espaço vetorial \cite{citacao67}.
+    Embora seja considerado um processo relativamente simples no processamento de linguagem natural, a segmentação de sentenças apresenta desafios em textos jurídicos. A alta frequência de abreviações, siglas e expressões formais, como “Art.”, “Inc.”, “V. Exa.” ou “D.J.E.”, gera ambiguidades na definição dos pontos que efetivamente representam o final de uma sentença. Pontuações como ponto final, dois-pontos e até ponto e vírgula podem assumir funções distintas dependendo do contexto \cite{citacao17}.
 
-\begin{figure}[H]
-    \centering
-    \caption{Exemplo da aplicação do TF-IDF em frases.}
-    \includegraphics[width=\textwidth]{assets/TF_IDF.png}
-    \legend{Fonte: \cite{citacao41}}
-\end{figure}
 
-O modelo TF--IDF é amplamente utilizado em tarefas de recuperação de informação, classificação e agrupamento de textos, justamente por sua simplicidade e eficácia. Seu principal mérito reside na combinação da frequência local com a raridade global dos termos, permitindo destacar palavras que são relevantes para o conteúdo específico de um documento, enquanto penaliza termos genéricos e pouco informativos \cite{citacao10}.
+    \section{Representação de Documentos}
 
-\subsection{BM25}
+    \subsection{TF-IDF}
 
-Enquanto o TF-IDF estabeleceu um modelo fundamental para a recuperação de informação, ele possui limitações intrínsecas, como a tendência de favorecer desproporcionalmente termos de alta frequência e a falta de uma normalização robusta para o tamanho dos documentos. Para superar essas questões, foi desenvolvido o algoritmo Okapi BM25 (doravante chamado apenas de BM25), um modelo de ranqueamento probabilístico que se tornou um padrão de fato em sistemas de busca modernos devido à sua eficácia e robustez \cite{citacao67}.
+    Após o pré-processamento, uma das técnicas mais consolidadas para representar documentos como vetores numéricos é o TF-IDF (\textit{Term Frequency--Inverse Document Frequency}). Esse método associa a cada termo um peso que reflete tanto sua importância local — baseada na frequência com que aparece no documento — quanto sua importância global — determinada pela raridade do termo na coleção como um todo \cite{citacao10, citacao67}.
 
-O BM25 não trata a frequência de um termo (\textit{term frequency}) de forma linear. Em vez disso, ele introduz um componente de saturação, partindo da premissa de que a relevância de um termo para um documento não cresce infinitamente com sua frequência. A primeira vez que uma palavra aparece é muito significativa; a décima, um pouco menos; e a centésima vez adiciona uma relevância marginal muito pequena. O algoritmo modela esse comportamento para evitar que documentos longos e repetitivos dominem os resultados da busca.
+    O cálculo do TF--IDF é composto por duas etapas fundamentais. A primeira consiste na determinação da frequência de termo \textit{Term Frequency} (TF), que quantifica o número de vezes que um termo \(t\) aparece em um documento \(d\), representado por \(\mathit{tf}_{t,d}\). Para evitar que termos muito frequentes dominem a representação, especialmente em documentos longos, é comum aplicar uma normalização logarítmica, definida como:
+    \[
+        \mathit{tf}_{t,d} =
+        \begin{cases}
+            1 + \log(\mathit{tf}_{t,d}), & \text{se } \mathit{tf}_{t,d} > 0, \\
+            0, & \text{caso contrário}.
+        \end{cases}
+    \]
+    Essa transformação suaviza o impacto de termos com alta contagem, tornando a representação mais robusta e comparável entre documentos de diferentes tamanhos \cite{citacao67}.
 
-A pontuação de relevância de um documento \textit{D} para uma consulta \textit{Q}, que contém os termos \(q_1, q_2, \dots, q_n\), é calculada pela seguinte fórmula:
+    A segunda etapa envolve o cálculo da \textit{Inverse Document Frequency} (IDF), que mede a capacidade de um termo discriminar documentos. Dado \(N\) como o número total de documentos na coleção e \(df_t\) como o número de documentos em que o termo \(t\) aparece, a IDF é calculada como:
+    \[
+        \mathit{idf}_t = \log \left( \frac{N}{df_t} \right)
+    \]
+    Esse fator tem como objetivo reduzir o peso de termos comuns na coleção, como artigos, pronomes ou palavras genéricas, e aumentar o peso de termos mais raros, que são mais úteis para diferenciar documentos \cite{citacao67}.
 
-\[
-\text{score}(D, Q) = \sum_{i=1}^{n} \text{IDF}(q_i) \cdot \frac{f(q_i, D) \cdot (k_1 + 1)}{f(q_i, D) + k_1 \cdot \left(1 - b + b \cdot \frac{|D|}{\text{avgdl}}\right)}
-\]
+    Assim, o peso final de um termo em um documento, chamado de TF--IDF, é dado pela multiplicação dos dois componentes:
+    \[
+        \mathrm{tf\text{-}idf}(t,d) = \mathit{tf}_{t,d} \times \mathit{idf}_t
+    \]
+    Esse valor será mais alto para termos que ocorrem frequentemente em um documento específico, mas que são raros na coleção como um todo, refletindo sua importância tanto local quanto global \cite{citacao67}.
 
-Para entender seu funcionamento, podemos decompor a fórmula em suas três partes principais. O primeiro componente é o \textit{Inverse Document Frequency} (IDF), que, assim como no TF-IDF, mede a raridade de um termo na coleção de documentos. O BM25 utiliza uma variante da fórmula padrão de IDF, geralmente com um ajuste para evitar valores nulos ou negativos para termos que aparecem em mais da metade dos documentos \cite{citacao67}. A lógica central, no entanto, permanece a mesma: termos que são raros em toda a coleção recebem um peso maior, pois são considerados mais discriminativos.
+    A representação de documentos no modelo vetorial é então construída a partir dos pesos TF--IDF de cada termo. Formalmente, um documento é representado como um vetor \(\mathbf{v}(d) = [\mathrm{tf\text{-}idf}(t_1,d), \dots, \mathrm{tf\text{-}idf}(t_M,d)]\), onde \(M\) é o número total de termos únicos na coleção. Consultas podem ser representadas de maneira análoga, permitindo o uso de métricas como a similaridade do cosseno para calcular a proximidade entre consultas e documentos no espaço vetorial \cite{citacao67}.
 
-O segundo e mais inovador componente da fórmula lida com a \textit{saturação da frequência do termo}. Diferente do TF-IDF, o BM25 parte do princípio de que a relevância de um termo não cresce infinitamente com sua frequência. A primeira ocorrência é muito significativa, mas cada aparição subsequente contribui progressivamente menos para a pontuação final. Esse efeito de saturação é controlado pelo parâmetro de calibração \textit{k1} (geralmente entre 1.2 e 2.0), que define quão rapidamente a pontuação de um termo se estabiliza. Um valor de \textit{k1} baixo faz com que a relevância sature rapidamente, enquanto um valor mais alto permite que a frequência do termo continue a ter um impacto maior na pontuação \cite{citacao67}.
+    \begin{figure}[H]
+        \centering
+        \caption{Exemplo da aplicação do TF-IDF em frases.}
+        \includegraphics[width=\textwidth]{assets/TF_IDF.png}
+        \legend{Fonte: \cite{citacao41}}
+    \end{figure}
 
-Por fim, o BM25 introduz uma \textit{normalização pelo comprimento do documento} muito mais sofisticada. O algoritmo compara o tamanho do documento atual, \(|D|\), com o tamanho médio de todos os documentos na coleção, \textit{avgdl}. O parâmetro \textit{b} (geralmente em torno de 0.75) controla o grau de influência que o tamanho do documento tem na pontuação final. Quando \textit{b} é 1, o efeito da normalização é máximo; quando é 0, o tamanho do documento é completamente ignorado. Essa abordagem permite penalizar documentos que são muito mais longos que a média, pois eles têm uma probabilidade estatisticamente maior de conter os termos da busca por acaso, sem serem necessariamente mais relevantes \cite{citacao67}.
+    O modelo TF--IDF é amplamente utilizado em tarefas de recuperação de informação, classificação e agrupamento de textos, justamente por sua simplicidade e eficácia. Seu principal mérito reside na combinação da frequência local com a raridade global dos termos, permitindo destacar palavras que são relevantes para o conteúdo específico de um documento, enquanto penaliza termos genéricos e pouco informativos \cite{citacao10}.
 
-Em síntese, o BM25 aprimora os conceitos do modelo vetorial ao incorporar uma visão probabilística e heurísticas mais refinadas sobre como a frequência de termos e o tamanho dos documentos influenciam a relevância. Sua capacidade de ser calibrado pelos parâmetros \textit{k1} e \textit{b} o torna altamente adaptável a diferentes tipos de coleções de texto. Essa relevância é comprovada por sua aplicação prática em diversos domínios, incluindo estudos recentes no contexto jurídico brasileiro para a identificação de similaridade em documentos oficiais \cite{citacao68}.
+    \subsection{BM25}
 
-\subsection{Índice inverso}
+    Enquanto o TF-IDF estabeleceu um modelo fundamental para a recuperação de informação, ele possui limitações intrínsecas, como a tendência de favorecer desproporcionalmente termos de alta frequência e a falta de uma normalização robusta para o tamanho dos documentos. Para superar essas questões, foi desenvolvido o algoritmo Okapi BM25 (doravante chamado apenas de BM25), um modelo de ranqueamento probabilístico que se tornou um padrão de fato em sistemas de busca modernos devido à sua eficácia e robustez \cite{citacao67}.
 
-O cálculo eficiente de medidas como o TF-IDF e o BM25, bem como a execução de buscas rápidas em grandes volumes de texto, dependem de uma estrutura de dados mais sofisticada do que a simples lista de documentos. A cada nova consulta ou para a construção dos próprios modelos estatísticos, seria computacionalmente inviável reanalisar todo o corpus para encontrar termos, suas frequências (\textit{term frequency}) e em quantos documentos eles aparecem (\textit{document frequency}). Para resolver esse problema, utiliza-se o \textbf{índice inverso} (ou \textit{inverted index}), que funciona como a principal estrutura de indexação para sistemas de recuperação de informação \cite{citacao67}.
+    O BM25 não trata a frequência de um termo (\textit{term frequency}) de forma linear. Em vez disso, ele introduz um componente de saturação, partindo da premissa de que a relevância de um termo para um documento não cresce infinitamente com sua frequência. A primeira vez que uma palavra aparece é muito significativa; a décima, um pouco menos; e a centésima vez adiciona uma relevância marginal muito pequena. O algoritmo modela esse comportamento para evitar que documentos longos e repetitivos dominem os resultados da busca.
 
-O índice inverso é uma estrutura de dados amplamente utilizada em sistemas de recuperação de informação, projetada para otimizar a busca de termos em grandes coleções de documentos \cite{citacao67, citacao69}. Diferentemente de uma abordagem direta, que examinaria cada documento sequencialmente (uma operação de complexidade \(O(N)\), onde N é o tamanho do corpus), o índice invertido organiza os termos do corpus de forma a mapear cada palavra ou unidade lexical às suas respectivas ocorrências. Esse mapeamento inclui informações como a identificação dos documentos e, comumente, a posição ou frequência de cada termo. Essa organização permite consultas eficientes e rápidas, fundamentais para o funcionamento de sistemas como motores de busca \cite{citacao67}. Segue uma imagem que exemplifica o índice inverso.
+    A pontuação de relevância de um documento \textit{D} para uma consulta \textit{Q}, que contém os termos \(q_1, q_2, \dots, q_n\), é calculada pela seguinte fórmula:
 
-\begin{figure}[H]
-    \centering
-    \caption{\label{fig:Indice} No índice inverso quem mapeia são os termos e n.}
-    \includegraphics[width=\textwidth]{assets/Indice.png}
-    \legend {Fonte: Elaboração própria}
-\end{figure}
+    \[
+        \text{score}(D, Q) = \sum_{i=1}^{n} \text{IDF}(q_i) \cdot \frac{f(q_i, D) \cdot (k_1 + 1)}{f(q_i, D) + k_1 \cdot \left(1 - b + b \cdot \frac{|D|}{\text{avgdl}}\right)}
+    \]
 
-Uma forma de otimizar o uso de memória do índice inverso é por meio da compressão das listas de ocorrências (\textit{postings lists}). Técnicas comuns incluem a codificação de diferenças (\textit{gap encoding} ou \textit{delta encoding}), onde apenas a diferença entre IDs de documentos consecutivos é armazenada, e codificações de inteiros como \textit{varint} (\textit{Variable Byte coding}) ou \textit{Golomb coding}, que reduzem o espaço ocupado por números pequenos. Além de economizar memória, a compressão pode acelerar consultas, já que menos dados precisam ser carregados da memória ou disco, sendo uma prática padrão em motores de busca de larga escala \cite{citacao67}.
+    Para entender seu funcionamento, podemos decompor a fórmula em suas três partes principais. O primeiro componente é o \textit{Inverse Document Frequency} (IDF), que, assim como no TF-IDF, mede a raridade de um termo na coleção de documentos. O BM25 utiliza uma variante da fórmula padrão de IDF, geralmente com um ajuste para evitar valores nulos ou negativos para termos que aparecem em mais da metade dos documentos \cite{citacao67}. A lógica central, no entanto, permanece a mesma: termos que são raros em toda a coleção recebem um peso maior, pois são considerados mais discriminativos.
 
-O índice inverso oferece consultas com complexidade \(O(\log n)\) para a busca de termos no dicionário da estrutura, onde \(n\) é o número de termos únicos, caso o dicionário seja implementado com árvores balanceadas; ou \(O(1)\) em média, se forem usadas tabelas hash \cite{citacao67}. Isso se difere drasticamente da complexidade \(O(N)\) de uma varredura sequencial. Atualizações, como a inserção de novos documentos, têm um custo associado ao processamento de seus termos. No projeto, usamos uma tabelas hash para mapear termos a listas de ocorrências, armazenando para cada termo: ID do documento, frequência e posições. Isso reduz o tempo de vetorização, já que os dados são pré-computados, garantindo eficiência em consultas e escalabilidade para corpora grandes.
+    O segundo e mais inovador componente da fórmula lida com a \textit{saturação da frequência do termo}. Diferente do TF-IDF, o BM25 parte do princípio de que a relevância de um termo não cresce infinitamente com sua frequência. A primeira ocorrência é muito significativa, mas cada aparição subsequente contribui progressivamente menos para a pontuação final. Esse efeito de saturação é controlado pelo parâmetro de calibração \textit{k1} (geralmente entre 1.2 e 2.0), que define quão rapidamente a pontuação de um termo se estabiliza. Um valor de \textit{k1} baixo faz com que a relevância sature rapidamente, enquanto um valor mais alto permite que a frequência do termo continue a ter um impacto maior na pontuação \cite{citacao67}.
 
-O índice inverso, contudo, apresenta \textit{trade-offs}. Ele consome mais memória do que uma varredura direta, devido ao armazenamento do dicionário de termos e das listas de ocorrências. A construção inicial do índice também é um processo custoso, com complexidade tipicamente linear em relação ao tamanho total do corpus \cite{citacao67}. Em corpora dinâmicos, onde documentos são adicionados ou alterados frequentemente, as atualizações podem exigir estratégias complexas de gerenciamento, como o uso de índices auxiliares ou a fusão periódica de índices incrementais, para manter o desempenho sem reconstruir toda a estrutura \cite{citacao67}.
+    Por fim, o BM25 introduz uma \textit{normalização pelo comprimento do documento} muito mais sofisticada. O algoritmo compara o tamanho do documento atual, \(|D|\), com o tamanho médio de todos os documentos na coleção, \textit{avgdl}. O parâmetro \textit{b} (geralmente em torno de 0.75) controla o grau de influência que o tamanho do documento tem na pontuação final. Quando \textit{b} é 1, o efeito da normalização é máximo; quando é 0, o tamanho do documento é completamente ignorado. Essa abordagem permite penalizar documentos que são muito mais longos que a média, pois eles têm uma probabilidade estatisticamente maior de conter os termos da busca por acaso, sem serem necessariamente mais relevantes \cite{citacao67}.
 
-\subsection{\textit{Embeddings} baseados em Inteligência Artificial}
+    Em síntese, o BM25 aprimora os conceitos do modelo vetorial ao incorporar uma visão probabilística e heurísticas mais refinadas sobre como a frequência de termos e o tamanho dos documentos influenciam a relevância. Sua capacidade de ser calibrado pelos parâmetros \textit{k1} e \textit{b} o torna altamente adaptável a diferentes tipos de coleções de texto. Essa relevância é comprovada por sua aplicação prática em diversos domínios, incluindo estudos recentes no contexto jurídico brasileiro para a identificação de similaridade em documentos oficiais \cite{citacao68}.
 
-Modelos estatísticos clássicos de recuperação de informação, como o TF-IDF e o BM25, operam em um nível lexical. Eles são extremamente eficientes para determinar a relevância de um documento com base na frequência e raridade de \textit{palavras-chave} exatas, mas falham em capturar o \textit{significado} ou a \textit{intenção} por trás da busca. Por exemplo, uma consulta por "responsabilidade civil em acidentes de trânsito" pode não retornar um documento altamente relevante que use a frase "indenização por colisão de veículos", pois os termos não coincidem. Essa limitação, conhecida como \textit{impedância semântica} (\textit{semantic mismatch}), é o principal desafio que as representações de texto baseadas em Inteligência Artificial buscam resolver.
+    \subsection{Índice inverso}
 
-Para superar essa barreira, o Processamento de Linguagem Natural (NLP) evoluiu de modelos baseados em contagem para modelos baseados em \textit{predição}, que aprendem a representar palavras em um espaço vetorial contínuo. Essas representações, conhecidas como \textit{word embeddings} (ou apenas \textit{embeddings}), são vetores densos de números que capturam relações semânticas e sintáticas complexas a partir do contexto em que as palavras aparecem em grandes volumes de texto \cite{citacao53}. Em vez de apenas contar palavras, esses modelos aprendem seu significado, impulsionando uma nova geração de sistemas de busca semântica.
+    O cálculo eficiente de medidas como o TF-IDF e o BM25, bem como a execução de buscas rápidas em grandes volumes de texto, dependem de uma estrutura de dados mais sofisticada do que a simples lista de documentos. A cada nova consulta ou para a construção dos próprios modelos estatísticos, seria computacionalmente inviável reanalisar todo o corpus para encontrar termos, suas frequências (\textit{term frequency}) e em quantos documentos eles aparecem (\textit{document frequency}). Para resolver esse problema, utiliza-se o \textbf{índice inverso} (ou \textit{inverted index}), que funciona como a principal estrutura de indexação para sistemas de recuperação de informação \cite{citacao67}.
 
-\subsubsection{Processamento de Linguagem Natural (NLP)}
+    O índice inverso é uma estrutura de dados amplamente utilizada em sistemas de recuperação de informação, projetada para otimizar a busca de termos em grandes coleções de documentos \cite{citacao67, citacao69}. Diferentemente de uma abordagem direta, que examinaria cada documento sequencialmente (uma operação de complexidade \(O(N)\), onde N é o tamanho do corpus), o índice invertido organiza os termos do corpus de forma a mapear cada palavra ou unidade lexical às suas respectivas ocorrências. Esse mapeamento inclui informações como a identificação dos documentos e, comumente, a posição ou frequência de cada termo. Essa organização permite consultas eficientes e rápidas, fundamentais para o funcionamento de sistemas como motores de busca \cite{citacao67}. Segue uma imagem que exemplifica o índice inverso.
 
-O Processamento de Linguagem Natural (NLP) é uma área da inteligência artificial que tem como objetivo permitir que computadores compreendam, interpretem e gerem a linguagem humana de forma automática e eficiente. A linguagem natural, usada por pessoas no dia a dia, é cheia de ambiguidades, variações e contextos, o que torna o trabalho do NLP bastante desafiador. Para superar essas dificuldades, o NLP aplica técnicas que vão desde regras gramaticais, análise sintática, tokenização e stemming até modelos probabilísticos, aprendizado supervisionado, redes neurais e arquiteturas avançadas como \textit{transformers} \cite{citacao52}.
+    \begin{figure}[H]
+        \centering
+        \caption{\label{fig:Indice} No índice inverso quem mapeia são os termos e n.}
+        \includegraphics[width=\textwidth]{assets/Indice.png}
+        \legend {Fonte: Elaboração própria}
+    \end{figure}
 
-Historicamente, os sistemas de NLP eram baseados em regras linguísticas definidas manualmente, o que exigia muito esforço e apresentava limitações para lidar com a complexidade da linguagem. Com o avanço do aprendizado de máquina, especialmente dos modelos de aprendizado profundo, o campo evoluiu significativamente. Modelos modernos, como os baseados em arquiteturas \textit{transformers}, têm a capacidade de capturar relações contextuais complexas em textos, o que melhorou muito o desempenho em tarefas essenciais do NLP, como tradução automática, análise de sentimentos, reconhecimento de fala, extração de informações, sumarização automática e respostas a perguntas \cite{citacao35}. Essas técnicas permitem que sistemas interpretem o significado de frases, reconheçam intenções e até gerem textos coerentes, facilitando a interação entre humanos e máquinas.
+    Uma forma de otimizar o uso de memória do índice inverso é por meio da compressão das listas de ocorrências (\textit{postings lists}). Técnicas comuns incluem a codificação de diferenças (\textit{gap encoding} ou \textit{delta encoding}), onde apenas a diferença entre IDs de documentos consecutivos é armazenada, e codificações de inteiros como \textit{varint} (\textit{Variable Byte coding}) ou \textit{Golomb coding}, que reduzem o espaço ocupado por números pequenos. Além de economizar memória, a compressão pode acelerar consultas, já que menos dados precisam ser carregados da memória ou disco, sendo uma prática padrão em motores de busca de larga escala \cite{citacao67}.
 
-O NLP precisa lidar com desafios como a ambiguidade das palavras — onde uma mesma palavra pode ter vários significados dependendo do contexto —, a variação linguística entre diferentes regiões e falantes, e a necessidade de entender o contexto mais amplo para interpretar corretamente expressões e intenções. Além disso, o desenvolvimento de sistemas eficientes depende da disponibilidade de grandes volumes de dados anotados para treinar esses modelos, o que nem sempre é fácil para línguas menos representadas \cite{citacao52}.
+    O índice inverso oferece consultas com complexidade \(O(\log n)\) para a busca de termos no dicionário da estrutura, onde \(n\) é o número de termos únicos, caso o dicionário seja implementado com árvores balanceadas; ou \(O(1)\) em média, se forem usadas tabelas hash \cite{citacao67}. Isso se difere drasticamente da complexidade \(O(N)\) de uma varredura sequencial. Atualizações, como a inserção de novos documentos, têm um custo associado ao processamento de seus termos. No projeto, usamos uma tabelas hash para mapear termos a listas de ocorrências, armazenando para cada termo: ID do documento, frequência e posições. Isso reduz o tempo de vetorização, já que os dados são pré-computados, garantindo eficiência em consultas e escalabilidade para corpora grandes.
 
-Na prática, o NLP está presente em muitas aplicações que usamos diariamente, desde assistentes virtuais como Siri e Alexa, passando por sistemas de tradução automática, \textit{chatbots} para atendimento ao cliente, até ferramentas que ajudam a analisar opiniões em redes sociais. Essa popularização faz do NLP uma área essencial para a interação entre humanos e máquinas, impulsionando a transformação digital em diversos setores \cite{citacao35}.
+    O índice inverso, contudo, apresenta \textit{trade-offs}. Ele consome mais memória do que uma varredura direta, devido ao armazenamento do dicionário de termos e das listas de ocorrências. A construção inicial do índice também é um processo custoso, com complexidade tipicamente linear em relação ao tamanho total do corpus \cite{citacao67}. Em corpora dinâmicos, onde documentos são adicionados ou alterados frequentemente, as atualizações podem exigir estratégias complexas de gerenciamento, como o uso de índices auxiliares ou a fusão periódica de índices incrementais, para manter o desempenho sem reconstruir toda a estrutura \cite{citacao67}.
 
-Nesse contexto de evolução das técnicas de NLP, um dos avanços mais importantes para a representação da linguagem foi o desenvolvimento dos \textit{embeddings}. Eles surgiram como uma solução eficaz para transformar palavras, frases ou documentos em vetores numéricos que preservam relações semânticas e contextuais \cite{citacao52,citacao53}. Essa representação vetorial tornou-se fundamental para alimentar modelos de aprendizado de máquina, especialmente os modelos mais modernos. A seguir, serão explorados o conceito de \textit{embeddings} e os principais modelos utilizados para gerá-los.
+    \subsection{\textit{Embeddings} baseados em Inteligência Artificial}
 
-\subsubsection{O que são \textit{embeddings}}
+    Modelos estatísticos clássicos de recuperação de informação, como o TF-IDF e o BM25, operam em um nível lexical. Eles são extremamente eficientes para determinar a relevância de um documento com base na frequência e raridade de \textit{palavras-chave} exatas, mas falham em capturar o \textit{significado} ou a \textit{intenção} por trás da busca. Por exemplo, uma consulta por "responsabilidade civil em acidentes de trânsito" pode não retornar um documento altamente relevante que use a frase "indenização por colisão de veículos", pois os termos não coincidem. Essa limitação, conhecida como \textit{impedância semântica} (\textit{semantic mismatch}), é o principal desafio que as representações de texto baseadas em Inteligência Artificial buscam resolver.
 
-No contexto do Processamento de Linguagem Natural, \textit{embeddings} são representações vetoriais densas de palavras, sentenças ou documentos, projetadas para capturar aspectos semânticos da linguagem em um espaço numérico contínuo. Diferente de representações tradicionais esparsas, como \textit{one-hot encoding} ou a própria matriz TF-IDF, que apenas indicam a presença ou a frequência de palavras, os \textit{embeddings} posicionam elementos linguisticamente semelhantes mais próximos entre si em um espaço vetorial de centenas ou milhares de dimensões \cite{citacao53}. Isso permite que modelos matemáticos e algoritmos de aprendizado de máquina consigam processar e "entender" a linguagem de forma mais contextualizada e eficiente.
+    Para superar essa barreira, o Processamento de Linguagem Natural (NLP) evoluiu de modelos baseados em contagem para modelos baseados em \textit{predição}, que aprendem a representar palavras em um espaço vetorial contínuo. Essas representações, conhecidas como \textit{word embeddings} (ou apenas \textit{embeddings}), são vetores densos de números que capturam relações semânticas e sintáticas complexas a partir do contexto em que as palavras aparecem em grandes volumes de texto \cite{citacao53}. Em vez de apenas contar palavras, esses modelos aprendem seu significado, impulsionando uma nova geração de sistemas de busca semântica.
 
-Essas representações são aprendidas automaticamente a partir de grandes volumes de dados textuais e permitem que relações semânticas e sintáticas emergentes sejam capturadas de maneira distribuída. Por exemplo, vetores de palavras como “rei” e “rainha” costumam estar próximos no espaço de \textit{embeddings}, e relações analógicas como “rei – homem + mulher = rainha” podem ser observadas em modelos bem treinados \cite{citacao53}. Essa capacidade de capturar padrões complexos tornou os \textit{embeddings} um componente essencial em praticamente todas as aplicações modernas de NLP \cite{citacao54}.
+    \subsubsection{Processamento de Linguagem Natural (NLP)}
 
-\subsubsection{A Evolução dos Modelos de \textit{Embeddings}}
+    O Processamento de Linguagem Natural (NLP) é uma área da inteligência artificial que tem como objetivo permitir que computadores compreendam, interpretem e gerem a linguagem humana de forma automática e eficiente. A linguagem natural, usada por pessoas no dia a dia, é cheia de ambiguidades, variações e contextos, o que torna o trabalho do NLP bastante desafiador. Para superar essas dificuldades, o NLP aplica técnicas que vão desde regras gramaticais, análise sintática, tokenização e stemming até modelos probabilísticos, aprendizado supervisionado, redes neurais e arquiteturas avançadas como \textit{transformers} \cite{citacao52}.
 
-Os modelos para geração de \textit{embeddings} evoluíram significativamente, passando de representações estáticas para representações dinâmicas e contextuais.
+    Historicamente, os sistemas de NLP eram baseados em regras linguísticas definidas manualmente, o que exigia muito esforço e apresentava limitações para lidar com a complexidade da linguagem. Com o avanço do aprendizado de máquina, especialmente dos modelos de aprendizado profundo, o campo evoluiu significativamente. Modelos modernos, como os baseados em arquiteturas \textit{transformers}, têm a capacidade de capturar relações contextuais complexas em textos, o que melhorou muito o desempenho em tarefas essenciais do NLP, como tradução automática, análise de sentimentos, reconhecimento de fala, extração de informações, sumarização automática e respostas a perguntas \cite{citacao35}. Essas técnicas permitem que sistemas interpretem o significado de frases, reconheçam intenções e até gerem textos coerentes, facilitando a interação entre humanos e máquinas.
 
-\subsubsubsection{Embeddings Estáticos: Word2Vec e GloVe}
+    O NLP precisa lidar com desafios como a ambiguidade das palavras — onde uma mesma palavra pode ter vários significados dependendo do contexto —, a variação linguística entre diferentes regiões e falantes, e a necessidade de entender o contexto mais amplo para interpretar corretamente expressões e intenções. Além disso, o desenvolvimento de sistemas eficientes depende da disponibilidade de grandes volumes de dados anotados para treinar esses modelos, o que nem sempre é fácil para línguas menos representadas \cite{citacao52}.
 
-Os primeiros modelos que popularizaram os \textit{embeddings} foram o \textit{Word2Vec} \cite{citacao53} e o \textit{GloVe} \cite{citacao54}. O \textit{Word2Vec} é baseado em aprendizado preditivo local, utilizando duas arquiteturas principais: \textit{Skip-Gram} e \textit{Continuous Bag-of-Words} (CBOW). O modelo \textit{Skip-Gram} tenta prever as palavras de contexto (vizinhas) a partir de uma palavra central. Inversamente, o CBOW tenta prever a palavra central com base em seu contexto. Por outro lado, o \textit{GloVe} adota uma abordagem baseada em contagem, construindo vetores a partir de estatísticas globais de coocorrência de palavras em todo o corpus.
+    Na prática, o NLP está presente em muitas aplicações que usamos diariamente, desde assistentes virtuais como Siri e Alexa, passando por sistemas de tradução automática, \textit{chatbots} para atendimento ao cliente, até ferramentas que ajudam a analisar opiniões em redes sociais. Essa popularização faz do NLP uma área essencial para a interação entre humanos e máquinas, impulsionando a transformação digital em diversos setores \cite{citacao35}.
 
-A principal característica — e limitação — desses modelos é que eles geram \textit{embeddings estáticos}. Cada palavra no vocabulário é mapeada para um único vetor, independentemente do contexto em que ela é usada. Isso significa que a palavra "banco" teria a mesma representação vetorial em "sentei no banco da praça" e em "fui ao banco depositar dinheiro". Essa incapacidade de lidar com a polissemia (múltiplos significados) foi a principal motivação para o desenvolvimento da próxima geração de modelos.
+    Nesse contexto de evolução das técnicas de NLP, um dos avanços mais importantes para a representação da linguagem foi o desenvolvimento dos \textit{embeddings}. Eles surgiram como uma solução eficaz para transformar palavras, frases ou documentos em vetores numéricos que preservam relações semânticas e contextuais \cite{citacao52,citacao53}. Essa representação vetorial tornou-se fundamental para alimentar modelos de aprendizado de máquina, especialmente os modelos mais modernos. A seguir, serão explorados o conceito de \textit{embeddings} e os principais modelos utilizados para gerá-los.
 
-\subsubsubsection{Embeddings Contextuais: BERT e a Revolução \textit{Transformer}}
+    \subsubsection{O que são \textit{embeddings}}
 
-A grande revolução nos \textit{embeddings} veio com os modelos de linguagem contextualizados, como o ELMo \cite{citacao55} e, principalmente, o BERT \cite{citacao56}. Esses modelos não atribuem um vetor fixo a uma palavra, mas geram um \textit{embedding} dinâmico para cada palavra com base na sentença completa em que ela aparece. A palavra "banco" passa a ter vetores diferentes e apropriados para cada um dos seus significados.
+    No contexto do Processamento de Linguagem Natural, \textit{embeddings} são representações vetoriais densas de palavras, sentenças ou documentos, projetadas para capturar aspectos semânticos da linguagem em um espaço numérico contínuo. Diferente de representações tradicionais esparsas, como \textit{one-hot encoding} ou a própria matriz TF-IDF, que apenas indicam a presença ou a frequência de palavras, os \textit{embeddings} posicionam elementos linguisticamente semelhantes mais próximos entre si em um espaço vetorial de centenas ou milhares de dimensões \cite{citacao53}. Isso permite que modelos matemáticos e algoritmos de aprendizado de máquina consigam processar e "entender" a linguagem de forma mais contextualizada e eficiente.
 
-Essa capacidade foi possibilitada pela arquitetura \textit{Transformer}, que introduziu um mecanismo chamado \textbf{autoatenção} (\textit{self-attention}). Diferente de modelos anteriores que liam o texto sequencialmente (da esquerda para a direita), o mecanismo de autoatenção permite que o modelo "olhe" para todas as outras palavras da sentença simultaneamente, ponderando a importância de cada uma para definir o significado da palavra atual.
+    Essas representações são aprendidas automaticamente a partir de grandes volumes de dados textuais e permitem que relações semânticas e sintáticas emergentes sejam capturadas de maneira distribuída. Por exemplo, vetores de palavras como “rei” e “rainha” costumam estar próximos no espaço de \textit{embeddings}, e relações analógicas como “rei – homem + mulher = rainha” podem ser observadas em modelos bem treinados \cite{citacao53}. Essa capacidade de capturar padrões complexos tornou os \textit{embeddings} um componente essencial em praticamente todas as aplicações modernas de NLP \cite{citacao54}.
 
-O BERT (\textit{Bidirectional Encoder Representations from Transformers}) utiliza essa arquitetura de forma "bidirecional", lendo todo o contexto de uma vez. Para alcançar essa compreensão profunda, o BERT é pré-treinado em duas tarefas principais:
-\begin{enumerate}
-    \item \textbf{Masked Language Model (MLM):} O modelo recebe uma sentença onde algumas palavras foram substituídas por um \textit{token} especial `[MASK]`. A tarefa do modelo é adivinhar qual era a palavra original, forçando-o a entender o contexto gramatical e semântico de ambos os lados (esquerdo e direito) da palavra mascarada.
-    \item \textbf{Next Sentence Prediction (NSP):} O modelo recebe dois segmentos de texto, A e B, e deve prever se B é a sentença que realmente se segue a A no texto original ou se é uma sentença aleatória do corpus. Isso ensina o modelo a entender a relação lógica e coesiva entre sentenças.
-\end{enumerate}
+    \subsubsection{A Evolução dos Modelos de \textit{Embeddings}}
 
-O resultado desse pré-treinamento intensivo é um modelo capaz de gerar \textit{embeddings} contextuais de alta fidelidade, que capturam nuances da linguagem. Modelos subsequentes, como o Sentence-BERT \cite{citacao35}, foram desenvolvidos especificamente para otimizar o BERT para tarefas de comparação de sentenças, gerando representações vetoriais de frases inteiras, ideais para busca semântica.
+    Os modelos para geração de \textit{embeddings} evoluíram significativamente, passando de representações estáticas para representações dinâmicas e contextuais.
 
-\subsubsection{Recuperação e Medidas de Similaridade}
+    \subsubsubsection{Embeddings Estáticos: Word2Vec e GloVe}
+
+    Os primeiros modelos que popularizaram os \textit{embeddings} foram o \textit{Word2Vec} \cite{citacao53} e o \textit{GloVe} \cite{citacao54}. O \textit{Word2Vec} é baseado em aprendizado preditivo local, utilizando duas arquiteturas principais: \textit{Skip-Gram} e \textit{Continuous Bag-of-Words} (CBOW). O modelo \textit{Skip-Gram} tenta prever as palavras de contexto (vizinhas) a partir de uma palavra central. Inversamente, o CBOW tenta prever a palavra central com base em seu contexto. Por outro lado, o \textit{GloVe} adota uma abordagem baseada em contagem, construindo vetores a partir de estatísticas globais de coocorrência de palavras em todo o corpus.
+
+    A principal característica — e limitação — desses modelos é que eles geram \textit{embeddings estáticos}. Cada palavra no vocabulário é mapeada para um único vetor, independentemente do contexto em que ela é usada. Isso significa que a palavra "banco" teria a mesma representação vetorial em "sentei no banco da praça" e em "fui ao banco depositar dinheiro". Essa incapacidade de lidar com a polissemia (múltiplos significados) foi a principal motivação para o desenvolvimento da próxima geração de modelos.
+
+    \subsubsubsection{Embeddings Contextuais: BERT e a Revolução \textit{Transformer}}
+
+    A grande revolução nos \textit{embeddings} veio com os modelos de linguagem contextualizados, como o ELMo \cite{citacao55} e, principalmente, o BERT \cite{citacao56}. Esses modelos não atribuem um vetor fixo a uma palavra, mas geram um \textit{embedding} dinâmico para cada palavra com base na sentença completa em que ela aparece. A palavra "banco" passa a ter vetores diferentes e apropriados para cada um dos seus significados.
+
+    Essa capacidade foi possibilitada pela arquitetura \textit{Transformer}, que introduziu um mecanismo chamado \textbf{autoatenção} (\textit{self-attention}). Diferente de modelos anteriores que liam o texto sequencialmente (da esquerda para a direita), o mecanismo de autoatenção permite que o modelo "olhe" para todas as outras palavras da sentença simultaneamente, ponderando a importância de cada uma para definir o significado da palavra atual.
+
+    O BERT (\textit{Bidirectional Encoder Representations from Transformers}) utiliza essa arquitetura de forma "bidirecional", lendo todo o contexto de uma vez. Para alcançar essa compreensão profunda, o BERT é pré-treinado em duas tarefas principais:
+    \begin{enumerate}
+        \item \textbf{Masked Language Model (MLM):} O modelo recebe uma sentença onde algumas palavras foram substituídas por um \textit{token} especial `[MASK]`. A tarefa do modelo é adivinhar qual era a palavra original, forçando-o a entender o contexto gramatical e semântico de ambos os lados (esquerdo e direito) da palavra mascarada.
+        \item \textbf{Next Sentence Prediction (NSP):} O modelo recebe dois segmentos de texto, A e B, e deve prever se B é a sentença que realmente se segue a A no texto original ou se é uma sentença aleatória do corpus. Isso ensina o modelo a entender a relação lógica e coesiva entre sentenças.
+    \end{enumerate}
+
+    O resultado desse pré-treinamento intensivo é um modelo capaz de gerar \textit{embeddings} contextuais de alta fidelidade, que capturam nuances da linguagem. Modelos subsequentes, como o Sentence-BERT \cite{citacao35}, foram desenvolvidos especificamente para otimizar o BERT para tarefas de comparação de sentenças, gerando representações vetoriais de frases inteiras, ideais para busca semântica.
+
+    \subsubsection{Recuperação e Medidas de Similaridade}
 % (Esta seção foi mantida como estava, pois já era muito boa)
 
-A recuperação de informações em contextos de linguagem natural depende da capacidade que temos de medir similaridade entre todas estas representações textuais. Com o uso de \textit{embeddings}, textos são convertidos em vetores numéricos em espaços de alta dimensão, nos permitindo aplicar técnicas matemáticas e equações para comparar conteúdos. Entre as diversas medidas de similaridade existentes — como a distância euclidiana, de \textit{Jaccard} ou de \textit{Manhattan} — a similaridade de cosseno destaca-se por sua robustez e simplicidade, sendo amplamente adotada em tarefas de busca semântica e ranqueamento de documentos. Na subseção a seguir, detalha-se seu funcionamento e aplicação no contexto de NLP e jurídico.
+    A recuperação de informações em contextos de linguagem natural depende da capacidade que temos de medir similaridade entre todas estas representações textuais. Com o uso de \textit{embeddings}, textos são convertidos em vetores numéricos em espaços de alta dimensão, nos permitindo aplicar técnicas matemáticas e equações para comparar conteúdos. Entre as diversas medidas de similaridade existentes — como a distância euclidiana, de \textit{Jaccard} ou de \textit{Manhattan} — a similaridade de cosseno destaca-se por sua robustez e simplicidade, sendo amplamente adotada em tarefas de busca semântica e ranqueamento de documentos. Na subseção a seguir, detalha-se seu funcionamento e aplicação no contexto de NLP e jurídico.
 
-\subsubsubsection{Similaridade de cosseno}
+    \subsubsubsection{Similaridade de cosseno}
 
-A similaridade de cosseno é uma métrica amplamente utilizada em Processamento de Linguagem Natural (NLP) para medir o grau de similaridade entre dois vetores em um espaço vetorial multidimensional. Quando aplicada a \textit{embeddings} de palavras, frases ou documentos, essa métrica permite quantificar o quão semanticamente próximos dois textos são entre si. A ideia central é comparar a orientação dos vetores e não sua magnitude, o que torna essa medida especialmente útil para dados textuais \cite{citacao67}.
+    A similaridade de cosseno é uma métrica amplamente utilizada em Processamento de Linguagem Natural (NLP) para medir o grau de similaridade entre dois vetores em um espaço vetorial multidimensional. Quando aplicada a \textit{embeddings} de palavras, frases ou documentos, essa métrica permite quantificar o quão semanticamente próximos dois textos são entre si. A ideia central é comparar a orientação dos vetores e não sua magnitude, o que torna essa medida especialmente útil para dados textuais \cite{citacao67}.
 
-A fórmula da similaridade de cosseno entre dois vetores ${\vec{A}}$ e ${\vec{B}}$ é dada por:
+    A fórmula da similaridade de cosseno entre dois vetores ${\vec{A}}$ e ${\vec{B}}$ é dada por:
 
-\[
-\text{similaridade}_{\cos}(\vec{A}, \vec{B}) = \frac{\vec{A} \cdot \vec{B}}{||\vec{A}|| \cdot ||\vec{B}||}
-\]
+    \[
+        \text{similaridade}_{\cos}(\vec{A}, \vec{B}) = \frac{\vec{A} \cdot \vec{B}}{||\vec{A}|| \cdot ||\vec{B}||}
+    \]
 
-onde ${\vec{A} \cdot \vec{B}}$ é o produto escalar entre os vetores, e ${||\vec{A}||}$ e ${||\vec{B}|| }$ são as normas (módulos) dos respectivos vetores. O resultado varia entre -1 e 1, mas no contexto de NLP, os valores geralmente estão entre 0 (sem similaridade) e 1 (similaridade máxima), já que os vetores de \textit{embeddings} costumam estar em um espaço de dimensão positiva.
+    onde ${\vec{A} \cdot \vec{B}}$ é o produto escalar entre os vetores, e ${||\vec{A}||}$ e ${||\vec{B}|| }$ são as normas (módulos) dos respectivos vetores. O resultado varia entre -1 e 1, mas no contexto de NLP, os valores geralmente estão entre 0 (sem similaridade) e 1 (similaridade máxima), já que os vetores de \textit{embeddings} costumam estar em um espaço de dimensão positiva.
 
-O resultado da similaridade de cosseno varia entre -1 e 1, pois esse é o intervalo natural da função cosseno. Valores próximos de 1 indicam que os vetores estão quase na mesma direção, sugerindo alta similaridade. Se o valor estiver perto de 0, significa que os vetores são ortogonais, ou seja, não têm relação direta. Já valores próximos de -1 indicam direções opostas, o que representa dissimilaridade, como mostra a imagem abaixo em uma simplificação 2D:
+    O resultado da similaridade de cosseno varia entre -1 e 1, pois esse é o intervalo natural da função cosseno. Valores próximos de 1 indicam que os vetores estão quase na mesma direção, sugerindo alta similaridade. Se o valor estiver perto de 0, significa que os vetores são ortogonais, ou seja, não têm relação direta. Já valores próximos de -1 indicam direções opostas, o que representa dissimilaridade, como mostra a imagem abaixo em uma simplificação 2D:
 
-\begin{figure}[H]
-    \centering
-    \caption{\label{fig:vetores} O ângulo entre os vetores é diretamente proporcional à sua similaridade.}
-    \includegraphics[width=\textwidth]{assets/vetores.png}
-    \legend {Fonte: \cite{citacao38}}
-\end{figure}
+    \begin{figure}[H]
+        \centering
+        \caption{\label{fig:vetores} O ângulo entre os vetores é diretamente proporcional à sua similaridade.}
+        \includegraphics[width=\textwidth]{assets/vetores.png}
+        \legend {Fonte: \cite{citacao38}}
+    \end{figure}
 
-A vantagem da similaridade cosseno sobre outras métricas, como a distância euclidiana, está no fato de que ela é invariável à magnitude dos vetores. Isso significa que dois vetores com direções similares, mas comprimentos diferentes (por exemplo, textos curtos vs. longos com mesmo conteúdo), ainda podem ser considerados semanticamente similares. Isso é particularmente útil em tarefas de busca semântica e recuperação de informações, onde a intenção é encontrar conteúdos com sentido próximo, independentemente da sua extensão textual \cite{citacao67}.
+    A vantagem da similaridade cosseno sobre outras métricas, como a distância euclidiana, está no fato de que ela é invariável à magnitude dos vetores. Isso significa que dois vetores com direções similares, mas comprimentos diferentes (por exemplo, textos curtos vs. longos com mesmo conteúdo), ainda podem ser considerados semanticamente similares. Isso é particularmente útil em tarefas de busca semântica e recuperação de informações, onde a intenção é encontrar conteúdos com sentido próximo, independentemente da sua extensão textual \cite{citacao67}.
 
-Na prática, ao aplicar essa métrica, os textos são primeiro convertidos em vetores numéricos usando técnicas de \textit{embeddings} (como Word2Vec, BERT ou Sentence-BERT), e depois esses vetores são comparados utilizando a similaridade cosseno para ranquear ou agrupar documentos. Essa abordagem é a base de diversos sistemas modernos de busca jurídica, recomendação de jurisprudência e agrupamento de decisões semelhantes \cite{citacao35}.
+    Na prática, ao aplicar essa métrica, os textos são primeiro convertidos em vetores numéricos usando técnicas de \textit{embeddings} (como Word2Vec, BERT ou Sentence-BERT), e depois esses vetores são comparados utilizando a similaridade cosseno para ranquear ou agrupar documentos. Essa abordagem é a base de diversos sistemas modernos de busca jurídica, recomendação de jurisprudência e agrupamento de decisões semelhantes \cite{citacao35}.
 
-É importante ressaltar que o cosseno não capta relações mais complexas como ironia, polissemia ou implicaturas contextuais — para esses casos, a escolha do modelo de \textit{embedding} (estático ou contextualizado) é determinante para que os vetores usados na comparação contenham essas nuances semânticas. Ainda assim, a similaridade cosseno continua sendo uma escolha padrão e eficaz em aplicações de NLP por sua simplicidade, desempenho e capacidade de generalização \cite{citacao10}.
+    É importante ressaltar que o cosseno não capta relações mais complexas como ironia, polissemia ou implicaturas contextuais — para esses casos, a escolha do modelo de \textit{embedding} (estático ou contextualizado) é determinante para que os vetores usados na comparação contenham essas nuances semânticas. Ainda assim, a similaridade cosseno continua sendo uma escolha padrão e eficaz em aplicações de NLP por sua simplicidade, desempenho e capacidade de generalização \cite{citacao10}.
 
-\subsubsection{\textit{Embeddings} aplicados ao Direito}
+    \subsubsection{\textit{Embeddings} aplicados ao Direito}
 
-No contexto jurídico, \textit{embeddings} vêm sendo utilizados para representar textos legais em formato vetorial, permitindo a aplicação de algoritmos de NLP em tarefas como busca jurisprudencial, classificação de documentos, extração de entidades e verificação de similaridade entre decisões. Ao converter petições, sentenças, leis e pareceres em vetores numéricos, torna-se possível aplicar modelos de aprendizado para identificar padrões, sugerir documentos similares ou agrupar textos por temas jurídicos \cite{citacao39}.
+    No contexto jurídico, \textit{embeddings} vêm sendo utilizados para representar textos legais em formato vetorial, permitindo a aplicação de algoritmos de NLP em tarefas como busca jurisprudencial, classificação de documentos, extração de entidades e verificação de similaridade entre decisões. Ao converter petições, sentenças, leis e pareceres em vetores numéricos, torna-se possível aplicar modelos de aprendizado para identificar padrões, sugerir documentos similares ou agrupar textos por temas jurídicos \cite{citacao39}.
 
-Uma das principais vantagens dos \textit{embeddings} nesse domínio é a capacidade de lidar com a linguagem técnica e formal do Direito. Modelos genéricos, treinados com textos da web, podem não capturar as nuances de termos jurídicos. Por isso, modelos da família LEGAL-BERT \cite{citacao39}, que são pré-treinados ou ajustados (\textit{fine-tuned}) especificamente em corpora jurídicos, tornam-se mais eficazes na captação de vocabulário especializado e estruturas discursivas recorrentes. Contudo, o treinamento e a inferência desses modelos demandam alto custo computacional, o que levanta questões sobre o \textit{trade-off} entre precisão semântica e eficiência, cerne da investigação deste trabalho \cite{citacao35, citacao40}.
-
-\section{Algoritmos}
-
-Algoritmos são conjuntos finitos de instruções bem definidas, ordenadas e executáveis que visam resolver um problema ou realizar uma tarefa específica. Conforme definido por Cormen e outros. \cite{citacao26}, “um algoritmo é qualquer procedimento computacional bem definido que toma algum valor ou conjunto de valores como entrada e produz algum valor ou conjunto de valores como saída”. Segundo o dicionário Michaelis \cite{citacao27}, algoritmo é “Conjunto de regras e operações e procedimentos, definidos e ordenados usados na solução de um problema”. Dessa forma, os algoritmos constituem a base do raciocínio computacional e do desenvolvimento de software, estruturando a lógica para a execução de tarefas de maneira clara e eficiente.
-
-\subsection{Avaliação de algoritmos: Coeficiente de \textit{Spearman}}
-
-Neste trabalho, após ordenarmos os documentos do mais ao menos importante com base nos algoritmos analisados, é fundamental dispor de uma métrica que nos permita comparar essas listas. Essa comparação é essencial para medir a consistência dos algoritmos e avaliar quão semelhantes são os rankings que eles produzem \cite{citacao71}. Para isso, utilizaremos o coeficiente de correlação de \textit{Spearman}, uma técnica estatística não paramétrica que quantifica a força e a direção da relação entre duas variáveis ordenadas \cite{citacao70}.
-
-Para entender o coeficiente de \textit{Spearman}, é útil primeiro diferenciá-lo do coeficiente de correlação de \textit{Pearson}. O \textit{Pearson} é uma medida estatística que indica a força e a direção da relação \textit{linear} entre duas variáveis contínuas. Ele avalia se os pontos de dados se aproximam de uma linha reta, mas é sensível a \textit{outliers} e assume que os dados seguem uma distribuição normal \cite{citacao70}.
-
-O \textit{Pearson} avalia diretamente os valores dos \textit{scores} de relevância, o que não é ideal para o nosso problema. Não nos importa se o \textit{score} do BM25 foi 0.8 e o do \textit{embedding} foi 0.9; o que nos importa é se ambos concordam que aquele documento é o "primeiro mais relevante". É justamente nesse cenário que o coeficiente de \textit{Spearman} se torna mais apropriado. Ele não olha para os \textit{scores} brutos, mas sim para os \textit{postos} (ou \textit{ranks}) dos elementos, medindo a correlação monotônica entre eles \cite{citacao70, citacao71}.
-
-Na prática, o coeficiente de \textit{Spearman} é simplesmente definido como o \textbf{coeficiente de correlação de \textit{Pearson} calculado sobre os postos das variáveis}. O processo de cálculo envolve transformar os \textit{scores} de cada lista em uma sequência de postos (1º, 2º, 3º, ...). Caso ocorram empates (por exemplo, dois documentos com o mesmo \textit{score}), atribui-se a eles a média de suas posições. Por exemplo, se dois documentos empatam nas posições 2 e 3, ambos recebem o posto 2,5. Após a transformação, o coeficiente de \textit{Pearson} é aplicado sobre essas duas novas listas de postos \cite{citacao70}.
-
-O resultado, assim como o \textit{Pearson}, varia de -1 a +1. Valores próximos de +1 indicam uma forte concordância (os algoritmos produziram rankings muito semelhantes). Valores próximos de -1 indicam uma forte discordância (um algoritmo ranqueou na ordem inversa do outro). Valores próximos de 0 apontam para uma ausência de correlação, sugerindo que os rankings são aleatórios um em relação ao outro \cite{citacao70}.
-
-No contexto deste trabalho, o coeficiente de \textit{Spearman} fornecerá uma medida objetiva do grau de concordância entre as listas produzidas pelas abordagens estatísticas (TF-IDF, BM25) e semânticas (\textit{embeddings}). Conforme demonstrado em \citeonline{citacao71}, que utilizou essa métrica para comparar algoritmos de ranqueamento textual, o \textit{Spearman} é uma ferramenta eficaz para avaliar a correlação entre os resultados de diferentes sistemas de busca.
-
-\subsection{Algoritmo de busca de padrão: Boyer-Moore}
-
-O algoritmo Boyer-Moore é uma técnica avançada de busca de padrões em textos, criada em 1977 por Robert S. Boyer e J Strother Moore, dois cientistas da computação americanos. Eles desenvolveram esse método enquanto trabalhavam na IBM, buscando uma solução eficiente para o problema clássico de encontrar a ocorrência de uma sequência de caracteres (padrão) dentro de um texto maior, que é uma tarefa fundamental em várias áreas, como processamento de texto, bioinformática e sistemas de busca \cite{citacao47, citacao48}.
-
-O Boyer-Moore destaca-se por sua eficiência prática e seu funcionamento baseado em heurísticas inteligentes, que permitem ao algoritmo pular grandes trechos do texto durante a busca, ao invés de verificar cada caractere sequencialmente como em métodos mais simples. Isso o torna especialmente rápido para textos grandes e padrões não triviais \cite{citacao47, citacao49}.
-
-A ideia central do algoritmo é comparar o padrão com o texto da direita para a esquerda, começando pelo último caractere do padrão. Caso ocorra uma incompatibilidade, duas heurísticas são usadas para calcular possíveis deslocamentos do padrão: a heurística do caractere ruim (\textit{Bad Character Rule}) e a heurística do sufixo bom (\textit{Good Suffix Rule}) \cite{citacao48, citacao47}.
-
-A heurística do caractere ruim atua quando há uma falha na comparação entre o padrão e o texto, ou seja, quando um caractere do texto não coincide com o caractere correspondente do padrão. Nesse caso, o algoritmo verifica se esse caractere “ruim” aparece em alguma posição anterior dentro do próprio padrão. Se ele existir, o padrão é deslocado para a direita até que essa ocorrência do caractere ruim no padrão alinhe-se com a posição atual no texto. Caso o caractere não esteja presente no padrão, o deslocamento pode ser ainda maior, movendo o padrão além desse caractere, o que permite pular várias posições de uma vez \cite{citacao48, citacao47}.
-
-Já a heurística do sufixo bom é aplicada quando um sufixo do padrão já casou com uma parte do texto, mas a comparação subsequente falha. Nesse cenário, o algoritmo tenta alinhar esse sufixo com outra ocorrência dele dentro do próprio padrão, deslocando-o para a direita. Se não houver outra ocorrência desse sufixo, busca-se alinhar parte desse sufixo com um prefixo correspondente do padrão. Dessa forma, essa heurística permite que o algoritmo aproveite ao máximo as comparações já realizadas, promovendo deslocamentos que aumentam a eficiência da busca sem risco de perder possíveis correspondências \cite{citacao48, citacao47}.
-
-Essas duas heurísticas trabalham juntas para maximizar o deslocamento do padrão e minimizar o número de comparações. Na prática, isso significa que o algoritmo consegue pular grandes partes do texto onde a busca não terá sucesso, evitando comparações desnecessárias. Por isso, seu desempenho médio é muito eficiente, com complexidade sublinear --- ou seja, ele não precisa examinar todos os caracteres do texto. Essa eficiência se traduz em um tempo médio aproximado de $O\left(\frac{n}{m}\right)$, onde $n$ é o tamanho do texto e $m$ o tamanho do padrão, o que é muito melhor do que a abordagem ingênua que sempre leva $O(n \cdot m)$ \cite{citacao47, citacao48, citacao49}.
-
-No pior caso, entretanto, o Boyer-Moore pode chegar a uma complexidade de $O(n \cdot m)$, especialmente em textos com padrões altamente repetitivos ou quando o padrão tem caracteres repetidos que causam pequenos deslocamentos a cada falha. Apesar disso, esses casos são raros, e na prática, o algoritmo é considerado um dos mais rápidos e robustos para busca de padrões em textos \cite{citacao47, citacao50, citacao48}.
-
-Em contrapartida, o algoritmo de KMP evita retrocessos no texto usando a tabela de falhas (prefix-função), garantindo sempre tempo linear ${O(n + m)}$, onde ${n}$ é o tamanho do texto e ${m}$ o do padrão. Já Boyer-Moore, embora não tenha garantia de pior caso linear sem extensões, costuma superar KMP em textos reais graças aos grandes saltos proporcionados pelas heurísticas de caractere-ruim e sufixo-bom \cite{citacao51, citacao47}.
-
-\subsection{Algoritmos de Ordenação - Quicksort}
-
-O algoritmo \textit{Quicksort} é um método de ordenação de listas criado em 1960 pelo britânico Charles Antony Richard Hoare, enquanto ainda era estudante em Moscou. A publicação oficial do algoritmo ocorreu em 1962. O \textit{Quicksort} se baseia na técnica de divisão e conquista, utilizando recursão para quebrar o problema em partes menores, com complexidade média de $O(n \log n)$ e pior caso de $O(n^2)$, dependendo da escolha do pivô.
-
-A técnica de divisão e conquista envolve três etapas fundamentais: dividir, resolver e combinar. Primeiro, o problema original é fragmentado em partes menores — de preferência equilibradas — reduzindo sua complexidade. Em seguida, cada subproblema é resolvido independentemente, geralmente por meio de chamadas recursivas. Por fim, os resultados são reunidos para formar a solução completa, permitindo que problemas grandes sejam solucionados por meio da repetição controlada de operações simples \cite{citacao26}.
-
-Essa abordagem parte da ideia de que resolver vários subproblemas simples costuma ser mais eficiente do que atacar o problema original diretamente. No \textit{Quicksort}, isso se traduz em dividir uma lista de tamanho $n$ em duas sublistas menores e aplicar o mesmo procedimento recursivo a cada uma. A recursão prossegue até que cada sublista tenha menos de dois elementos, sendo então considerada ordenada.
-
-Hoare propôs que essa divisão fosse feita a partir da escolha arbitrária de um elemento da lista, chamado de pivô. Em seguida, percorre-se a lista comparando os elementos com o pivô: os menores são agrupados em uma nova lista, chamada vetor inferior ($V_{\text{inf}}$), e os maiores ou iguais, em outra, chamada vetor superior ($V_{\text{sup}}$).
-
-Após o particionamento, obtemos três partes distintas: o vetor inferior ($V_{\text{inf}}$), o pivô central e o vetor superior ($V_{\text{sup}}$). O algoritmo então se auto-invoca recursivamente sobre $V_{\text{inf}}$ e $V_{\text{sup}}$, até que as sublistas estejam suficientemente pequenas. Quando isso acontece, o \textit{Quicksort} realiza a etapa final: a junção das três partes — $V_{\text{inf}}$, pivô e $V_{\text{sup}}$ — reconstruindo a lista original, agora ordenada \cite{citacao15}.
+    Uma das principais vantagens dos \textit{embeddings} nesse domínio é a capacidade de lidar com a linguagem técnica e formal do Direito. Modelos genéricos, treinados com textos da web, podem não capturar as nuances de termos jurídicos. Por isso, modelos da família LEGAL-BERT \cite{citacao39}, que são pré-treinados ou ajustados (\textit{fine-tuned}) especificamente em corpora jurídicos, tornam-se mais eficazes na captação de vocabulário especializado e estruturas discursivas recorrentes. Contudo, o treinamento e a inferência desses modelos demandam alto custo computacional, o que levanta questões sobre o \textit{trade-off} entre precisão semântica e eficiência, cerne da investigação deste trabalho \cite{citacao35, citacao40}.
 
 
-\begin{figure}[H]
-    \centering
-    \caption{\label{fig:Quicksort}Quicksort}
-    \includegraphics[width=\textwidth]{assets/Quicksort.png}
-    \legend {Fonte: Elaboração própria.}
-\end{figure}.
+    \section{Algoritmos}
 
-\section{Programação Paralela e Escalabilidade}
+    Algoritmos são conjuntos finitos de instruções bem definidas, ordenadas e executáveis que visam resolver um problema ou realizar uma tarefa específica. Conforme definido por Cormen e outros. \cite{citacao26}, “um algoritmo é qualquer procedimento computacional bem definido que toma algum valor ou conjunto de valores como entrada e produz algum valor ou conjunto de valores como saída”. Segundo o dicionário Michaelis \cite{citacao27}, algoritmo é “Conjunto de regras e operações e procedimentos, definidos e ordenados usados na solução de um problema”. Dessa forma, os algoritmos constituem a base do raciocínio computacional e do desenvolvimento de software, estruturando a lógica para a execução de tarefas de maneira clara e eficiente.
 
-A programação paralela vem como uma das soluções propostas para os desafios modernos da computação. A ideia por trás dela foi impulsionada pela necessidade de otimizar o tempo de processamento através algoritmos eficientes para criar aplicações que sejam capazes de lidar com um grande volume de dados e cálculos intensivos \cite{citacao12}, coisa que os algoritmos sequenciais não são tão adequados.
+    \subsection{Avaliação de algoritmos: Coeficiente de \textit{Spearman}}
 
-\subsection{Algoritmos Sequenciais e Limitações}
+    Neste trabalho, após ordenarmos os documentos do mais ao menos importante com base nos algoritmos analisados, é fundamental dispor de uma métrica que nos permita comparar essas listas. Essa comparação é essencial para medir a consistência dos algoritmos e avaliar quão semelhantes são os rankings que eles produzem \cite{citacao71}. Para isso, utilizaremos o coeficiente de correlação de \textit{Spearman}, uma técnica estatística não paramétrica que quantifica a força e a direção da relação entre duas variáveis ordenadas \cite{citacao70}.
 
-Algoritmos sequenciais representam o início da computação, onde processadores e algoritmos tinham a premissa da restrição a ordem das instruções, ou seja, uma operação de cada vez, o fim de uma representa o início da próxima. Seguindo assim uma sequência lógica e clara \cite{citacao13} como é representado na imagem abaixo.
+    Para entender o coeficiente de \textit{Spearman}, é útil primeiro diferenciá-lo do coeficiente de correlação de \textit{Pearson}. O \textit{Pearson} é uma medida estatística que indica a força e a direção da relação \textit{linear} entre duas variáveis contínuas. Ele avalia se os pontos de dados se aproximam de uma linha reta, mas é sensível a \textit{outliers} e assume que os dados seguem uma distribuição normal \cite{citacao70}.
 
-\begin{figure}[H]
-    \centering
-    \caption{\label{fig:AlgSequenciais}Algoritmos sequenciais}
-    \includegraphics[width=0.8\textwidth]{assets/Algoritmos sequenciais.png}
-    \legend {Fonte: Elaboração própria.}
- \end{figure} 
+    O \textit{Pearson} avalia diretamente os valores dos \textit{scores} de relevância, o que não é ideal para o nosso problema. Não nos importa se o \textit{score} do BM25 foi 0.8 e o do \textit{embedding} foi 0.9; o que nos importa é se ambos concordam que aquele documento é o "primeiro mais relevante". É justamente nesse cenário que o coeficiente de \textit{Spearman} se torna mais apropriado. Ele não olha para os \textit{scores} brutos, mas sim para os \textit{postos} (ou \textit{ranks}) dos elementos, medindo a correlação monotônica entre eles \cite{citacao70, citacao71}.
 
-\subsection{Algoritmos Paralelos: Modelos e Bibliotecas}
+    Na prática, o coeficiente de \textit{Spearman} é simplesmente definido como o \textbf{coeficiente de correlação de \textit{Pearson} calculado sobre os postos das variáveis}. O processo de cálculo envolve transformar os \textit{scores} de cada lista em uma sequência de postos (1º, 2º, 3º, ...). Caso ocorram empates (por exemplo, dois documentos com o mesmo \textit{score}), atribui-se a eles a média de suas posições. Por exemplo, se dois documentos empatam nas posições 2 e 3, ambos recebem o posto 2,5. Após a transformação, o coeficiente de \textit{Pearson} é aplicado sobre essas duas novas listas de postos \cite{citacao70}.
 
-Algoritmos paralelos são a forma de programação que se utiliza de arquiteturas paralelas e suas características para que várias operações e instruções possam ser executadas simultaneamente dentro da estrutura, podendo esta ser, \textit{multicore}, multiprocessador ou uma rede de computadores (cluster) \cite{citacao14}.
+    O resultado, assim como o \textit{Pearson}, varia de -1 a +1. Valores próximos de +1 indicam uma forte concordância (os algoritmos produziram rankings muito semelhantes). Valores próximos de -1 indicam uma forte discordância (um algoritmo ranqueou na ordem inversa do outro). Valores próximos de 0 apontam para uma ausência de correlação, sugerindo que os rankings são aleatórios um em relação ao outro \cite{citacao70}.
 
-\begin{figure}[H]
-    \centering
-    \caption{\label{fig:AlgParalelos}Algoritmos paralelos}
-    \includegraphics[width=0.8\textwidth]{assets/Algoritmos paralelos.png}
-    \legend {Fonte: Elaboração própria.}
-\end{figure}
+    No contexto deste trabalho, o coeficiente de \textit{Spearman} fornecerá uma medida objetiva do grau de concordância entre as listas produzidas pelas abordagens estatísticas (TF-IDF, BM25) e semânticas (\textit{embeddings}). Conforme demonstrado em \citeonline{citacao71}, que utilizou essa métrica para comparar algoritmos de ranqueamento textual, o \textit{Spearman} é uma ferramenta eficaz para avaliar a correlação entre os resultados de diferentes sistemas de busca.
 
-Com o avanço da computação, da engenharia de software, o surgimento de várias arquiteturas \textit{multicore} e sistemas distribuídos, a paralelização dentro dessas estruturas nos permite dividir tarefas complexas em subtarefas executadas simultaneamente, maximizando a eficiência e o desempenho. Contudo, o desenvolvimento de algoritmos paralelos exige lidar com questões como sincronização, concorrência e balanceamento de carga, tornando essa prática essencial para atender às demandas de rapidez e escalabilidade atualmente \cite{citacao13}.
+    \subsection{Algoritmo de busca de padrão: Boyer-Moore}
 
-\section{Trabalhos Relacionados}
+    O algoritmo Boyer-Moore é uma técnica avançada de busca de padrões em textos, criada em 1977 por Robert S. Boyer e J Strother Moore, dois cientistas da computação americanos. Eles desenvolveram esse método enquanto trabalhavam na IBM, buscando uma solução eficiente para o problema clássico de encontrar a ocorrência de uma sequência de caracteres (padrão) dentro de um texto maior, que é uma tarefa fundamental em várias áreas, como processamento de texto, bioinformática e sistemas de busca \cite{citacao47, citacao48}.
+
+    O Boyer-Moore destaca-se por sua eficiência prática e seu funcionamento baseado em heurísticas inteligentes, que permitem ao algoritmo pular grandes trechos do texto durante a busca, ao invés de verificar cada caractere sequencialmente como em métodos mais simples. Isso o torna especialmente rápido para textos grandes e padrões não triviais \cite{citacao47, citacao49}.
+
+    A ideia central do algoritmo é comparar o padrão com o texto da direita para a esquerda, começando pelo último caractere do padrão. Caso ocorra uma incompatibilidade, duas heurísticas são usadas para calcular possíveis deslocamentos do padrão: a heurística do caractere ruim (\textit{Bad Character Rule}) e a heurística do sufixo bom (\textit{Good Suffix Rule}) \cite{citacao48, citacao47}.
+
+    A heurística do caractere ruim atua quando há uma falha na comparação entre o padrão e o texto, ou seja, quando um caractere do texto não coincide com o caractere correspondente do padrão. Nesse caso, o algoritmo verifica se esse caractere “ruim” aparece em alguma posição anterior dentro do próprio padrão. Se ele existir, o padrão é deslocado para a direita até que essa ocorrência do caractere ruim no padrão alinhe-se com a posição atual no texto. Caso o caractere não esteja presente no padrão, o deslocamento pode ser ainda maior, movendo o padrão além desse caractere, o que permite pular várias posições de uma vez \cite{citacao48, citacao47}.
+
+    Já a heurística do sufixo bom é aplicada quando um sufixo do padrão já casou com uma parte do texto, mas a comparação subsequente falha. Nesse cenário, o algoritmo tenta alinhar esse sufixo com outra ocorrência dele dentro do próprio padrão, deslocando-o para a direita. Se não houver outra ocorrência desse sufixo, busca-se alinhar parte desse sufixo com um prefixo correspondente do padrão. Dessa forma, essa heurística permite que o algoritmo aproveite ao máximo as comparações já realizadas, promovendo deslocamentos que aumentam a eficiência da busca sem risco de perder possíveis correspondências \cite{citacao48, citacao47}.
+
+    Essas duas heurísticas trabalham juntas para maximizar o deslocamento do padrão e minimizar o número de comparações. Na prática, isso significa que o algoritmo consegue pular grandes partes do texto onde a busca não terá sucesso, evitando comparações desnecessárias. Por isso, seu desempenho médio é muito eficiente, com complexidade sublinear --- ou seja, ele não precisa examinar todos os caracteres do texto. Essa eficiência se traduz em um tempo médio aproximado de $O\left(\frac{n}{m}\right)$, onde $n$ é o tamanho do texto e $m$ o tamanho do padrão, o que é muito melhor do que a abordagem ingênua que sempre leva $O(n \cdot m)$ \cite{citacao47, citacao48, citacao49}.
+
+    No pior caso, entretanto, o Boyer-Moore pode chegar a uma complexidade de $O(n \cdot m)$, especialmente em textos com padrões altamente repetitivos ou quando o padrão tem caracteres repetidos que causam pequenos deslocamentos a cada falha. Apesar disso, esses casos são raros, e na prática, o algoritmo é considerado um dos mais rápidos e robustos para busca de padrões em textos \cite{citacao47, citacao50, citacao48}.
+
+    Em contrapartida, o algoritmo de KMP evita retrocessos no texto usando a tabela de falhas (prefix-função), garantindo sempre tempo linear ${O(n + m)}$, onde ${n}$ é o tamanho do texto e ${m}$ o do padrão. Já Boyer-Moore, embora não tenha garantia de pior caso linear sem extensões, costuma superar KMP em textos reais graças aos grandes saltos proporcionados pelas heurísticas de caractere-ruim e sufixo-bom \cite{citacao51, citacao47}.
+
+    \subsection{Algoritmos de Ordenação - Quicksort}
+
+    O algoritmo \textit{Quicksort} é um método de ordenação de listas criado em 1960 pelo britânico Charles Antony Richard Hoare, enquanto ainda era estudante em Moscou. A publicação oficial do algoritmo ocorreu em 1962. O \textit{Quicksort} se baseia na técnica de divisão e conquista, utilizando recursão para quebrar o problema em partes menores, com complexidade média de $O(n \log n)$ e pior caso de $O(n^2)$, dependendo da escolha do pivô.
+
+    A técnica de divisão e conquista envolve três etapas fundamentais: dividir, resolver e combinar. Primeiro, o problema original é fragmentado em partes menores — de preferência equilibradas — reduzindo sua complexidade. Em seguida, cada subproblema é resolvido independentemente, geralmente por meio de chamadas recursivas. Por fim, os resultados são reunidos para formar a solução completa, permitindo que problemas grandes sejam solucionados por meio da repetição controlada de operações simples \cite{citacao26}.
+
+    Essa abordagem parte da ideia de que resolver vários subproblemas simples costuma ser mais eficiente do que atacar o problema original diretamente. No \textit{Quicksort}, isso se traduz em dividir uma lista de tamanho $n$ em duas sublistas menores e aplicar o mesmo procedimento recursivo a cada uma. A recursão prossegue até que cada sublista tenha menos de dois elementos, sendo então considerada ordenada.
+
+    Hoare propôs que essa divisão fosse feita a partir da escolha arbitrária de um elemento da lista, chamado de pivô. Em seguida, percorre-se a lista comparando os elementos com o pivô: os menores são agrupados em uma nova lista, chamada vetor inferior ($V_{\text{inf}}$), e os maiores ou iguais, em outra, chamada vetor superior ($V_{\text{sup}}$).
+
+    Após o particionamento, obtemos três partes distintas: o vetor inferior ($V_{\text{inf}}$), o pivô central e o vetor superior ($V_{\text{sup}}$). O algoritmo então se auto-invoca recursivamente sobre $V_{\text{inf}}$ e $V_{\text{sup}}$, até que as sublistas estejam suficientemente pequenas. Quando isso acontece, o \textit{Quicksort} realiza a etapa final: a junção das três partes — $V_{\text{inf}}$, pivô e $V_{\text{sup}}$ — reconstruindo a lista original, agora ordenada \cite{citacao15}.
 
 
-\chapter{Desenvolvimento}
+    \begin{figure}[H]
+        \centering
+        \caption{\label{fig:Quicksort}Quicksort}
+        \includegraphics[width=\textwidth]{assets/Quicksort.png}
+        \legend {Fonte: Elaboração própria.}
+    \end{figure}.
 
-O desenvolvimento deste trabalho seguirá uma abordagem incremental e iterativa, com entregas organizadas semanalmente ao longo de doze semanas. Cada etapa será planejada de forma a permitir a validação contínua dos componentes implementados, favorecendo a integração progressiva entre os módulos do sistema. Essa estratégia contribui para a identificação precoce de falhas e a mitigação de riscos relacionados a incompatibilidades entre partes distintas da aplicação.
 
-A arquitetura adotada será orientada a microserviços, promovendo uma separação clara de responsabilidades entre os componentes do sistema. Essa escolha visa facilitar o desenvolvimento paralelo, a escalabilidade e a manutenção futura. O sistema terá como principal objetivo a extração e recuperação de informações contidas em documentos jurídicos, com foco em consultas tanto textuais quanto semânticas. A base de dados será composta por documentos oriundos de fontes públicas, como a Câmara dos Deputados, o Senado Federal e tribunais superiores. Esses documentos serão extraídos, normalizados e armazenados em um formato unificado, acompanhados de metadados que possibilitem buscas mais eficientes.
+    \section{Programação Paralela e Escalabilidade}
 
-As buscas ocorrerão em duas camadas complementares. A camada textual utilizará o algoritmo de Boyer–Moore, reconhecido por seu bom desempenho na localização de padrões em grandes volumes de texto. Já a camada semântica aplicará modelos pré-treinados baseados em \textit{transformers}, responsáveis por converter os textos em vetores numéricos. A partir desses vetores, será possível calcular a similaridade entre documentos com base na métrica de cosseno, promovendo uma recuperação mais contextualizada das informações.
+    A programação paralela vem como uma das soluções propostas para os desafios modernos da computação. A ideia por trás dela foi impulsionada pela necessidade de otimizar o tempo de processamento através algoritmos eficientes para criar aplicações que sejam capazes de lidar com um grande volume de dados e cálculos intensivos \cite{citacao12}, coisa que os algoritmos sequenciais não são tão adequados.
 
-A infraestrutura do sistema será composta por três componentes principais, interconectados por meio de APIs REST. A camada de apresentação será construída com um \textit{framework} moderno de \textit{frontend} utilizando \textit{TypeScript}, oferecendo ao usuário funcionalidades como envio de documentos, execução de buscas e visualização dos resultados. O \textit{backend} principal será desenvolvido em GO (versão 1.22 ou superior), e será responsável pelas tarefas de ingestão dos documentos, normalização textual, armazenamento em banco de dados relacional e execução da lógica de busca.
+    \subsection{Algoritmos Sequenciais e Limitações}
 
-O processamento semântico será realizado por um microserviço desenvolvido em Python 3.11, que utilizará a biblioteca \textit{sentence-transformers} e modelos da família BERT, selecionados por apresentarem um bom equilíbrio entre desempenho e custo computacional. Esse microserviço será exposto por meio do \textit{framework} FastAPI, que fornece uma interface leve, eficiente e compatível com os requisitos de comunicação REST. Durante o processo de ingestão, o \textit{backend} em GO enviará os textos ao microserviço Python e armazenará os vetores retornados juntamente aos metadados dos documentos. Isso permitirá que as buscas textuais e semânticas sejam realizadas de forma paralela e posteriormente combinadas por meio de um mecanismo de rankeamento.
+    Algoritmos sequenciais representam o início da computação, onde processadores e algoritmos tinham a premissa da restrição a ordem das instruções, ou seja, uma operação de cada vez, o fim de uma representa o início da próxima. Seguindo assim uma sequência lógica e clara \cite{citacao13} como é representado na imagem abaixo.
 
-Por fim, o armazenamento será feito em um banco de dados PostgreSQL, escolhido por sua confiabilidade, suporte a tipos de dados complexos e compatibilidade com diversas linguagens de programação. Essa combinação de tecnologias visa garantir um sistema robusto, eficiente e adaptável a diferentes contextos de uso.
+    \begin{figure}[H]
+        \centering
+        \caption{\label{fig:AlgSequenciais}Algoritmos sequenciais}
+        \includegraphics[width=0.8\textwidth]{assets/Algoritmos sequenciais.png}
+        \legend {Fonte: Elaboração própria.}
+    \end{figure}
 
-\section{Cronograma de Atividades}
+    \subsection{Algoritmos Paralelos: Modelos e Bibliotecas}
 
-\begin{figure}[H]
-    \centering
-    \caption{\label{fig:cronoframa}Cronograma de atividades.}
-    \includegraphics[width=\textwidth]{assets/cronograma.png}
-    \legend {Fonte: Elaboração própria}
-\end{figure}
+    Algoritmos paralelos são a forma de programação que se utiliza de arquiteturas paralelas e suas características para que várias operações e instruções possam ser executadas simultaneamente dentro da estrutura, podendo esta ser, \textit{multicore}, multiprocessador ou uma rede de computadores (cluster) \cite{citacao14}.
+
+    \begin{figure}[H]
+        \centering
+        \caption{\label{fig:AlgParalelos}Algoritmos paralelos}
+        \includegraphics[width=0.8\textwidth]{assets/Algoritmos paralelos.png}
+        \legend {Fonte: Elaboração própria.}
+    \end{figure}
+
+    Com o avanço da computação, da engenharia de software, o surgimento de várias arquiteturas \textit{multicore} e sistemas distribuídos, a paralelização dentro dessas estruturas nos permite dividir tarefas complexas em subtarefas executadas simultaneamente, maximizando a eficiência e o desempenho. Contudo, o desenvolvimento de algoritmos paralelos exige lidar com questões como sincronização, concorrência e balanceamento de carga, tornando essa prática essencial para atender às demandas de rapidez e escalabilidade atualmente \cite{citacao13}.
+
+
+    \section{Trabalhos Relacionados}
+
+
+    \chapter{Desenvolvimento}
+
+    O desenvolvimento deste trabalho seguirá uma abordagem incremental e iterativa, com entregas organizadas semanalmente ao longo de doze semanas. Cada etapa será planejada de forma a permitir a validação contínua dos componentes implementados, favorecendo a integração progressiva entre os módulos do sistema. Essa estratégia contribui para a identificação precoce de falhas e a mitigação de riscos relacionados a incompatibilidades entre partes distintas da aplicação.
+
+    A arquitetura adotada será orientada a microserviços, promovendo uma separação clara de responsabilidades entre os componentes do sistema. Essa escolha visa facilitar o desenvolvimento paralelo, a escalabilidade e a manutenção futura. O sistema terá como principal objetivo a extração e recuperação de informações contidas em documentos jurídicos, com foco em consultas tanto textuais quanto semânticas. A base de dados será composta por documentos oriundos de fontes públicas, como a Câmara dos Deputados, o Senado Federal e tribunais superiores. Esses documentos serão extraídos, normalizados e armazenados em um formato unificado, acompanhados de metadados que possibilitem buscas mais eficientes.
+
+    As buscas ocorrerão em duas camadas complementares. A camada textual utilizará o algoritmo de Boyer–Moore, reconhecido por seu bom desempenho na localização de padrões em grandes volumes de texto. Já a camada semântica aplicará modelos pré-treinados baseados em \textit{transformers}, responsáveis por converter os textos em vetores numéricos. A partir desses vetores, será possível calcular a similaridade entre documentos com base na métrica de cosseno, promovendo uma recuperação mais contextualizada das informações.
+
+    A infraestrutura do sistema será composta por três componentes principais, interconectados por meio de APIs REST. A camada de apresentação será construída com um \textit{framework} moderno de \textit{frontend} utilizando \textit{TypeScript}, oferecendo ao usuário funcionalidades como envio de documentos, execução de buscas e visualização dos resultados. O \textit{backend} principal será desenvolvido em GO (versão 1.22 ou superior), e será responsável pelas tarefas de ingestão dos documentos, normalização textual, armazenamento em banco de dados relacional e execução da lógica de busca.
+
+    O processamento semântico será realizado por um microserviço desenvolvido em Python 3.11, que utilizará a biblioteca \textit{sentence-transformers} e modelos da família BERT, selecionados por apresentarem um bom equilíbrio entre desempenho e custo computacional. Esse microserviço será exposto por meio do \textit{framework} FastAPI, que fornece uma interface leve, eficiente e compatível com os requisitos de comunicação REST. Durante o processo de ingestão, o \textit{backend} em GO enviará os textos ao microserviço Python e armazenará os vetores retornados juntamente aos metadados dos documentos. Isso permitirá que as buscas textuais e semânticas sejam realizadas de forma paralela e posteriormente combinadas por meio de um mecanismo de rankeamento.
+
+    Por fim, o armazenamento será feito em um banco de dados PostgreSQL, escolhido por sua confiabilidade, suporte a tipos de dados complexos e compatibilidade com diversas linguagens de programação. Essa combinação de tecnologias visa garantir um sistema robusto, eficiente e adaptável a diferentes contextos de uso.
+
+
+    \section{Cronograma de Atividades}
+
+    \begin{figure}[H]
+        \centering
+        \caption{\label{fig:cronoframa}Cronograma de atividades.}
+        \includegraphics[width=\textwidth]{assets/cronograma}
+        \legend {Fonte: Elaboração própria}
+    \end{figure}
 
 % ========================================================================
 % BIBLIOGRAFIA
 % ========================================================================
-\bibliography{bibliografia.bib}
-
+    \bibliography{bibliografia}
 
 
 % % ========================================================================
