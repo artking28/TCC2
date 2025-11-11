@@ -7,6 +7,7 @@ import (
 	"os"
 	"regexp"
 	"strings"
+	"time"
 	"unicode"
 
 	"github.com/bbalet/stopwords"
@@ -32,6 +33,12 @@ func LoadAccents() ([]string, error) {
 	}
 
 	return ret, nil
+}
+
+func Stopwatch(fn func()) time.Duration {
+	start := time.Now()
+	fn()
+	return time.Since(start)
 }
 
 func CleanText(input string) (string, error) {

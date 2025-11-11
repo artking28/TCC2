@@ -66,7 +66,7 @@ func processPDF(path string, wg *sync.WaitGroup) {
 		return
 	}
 
-	// Salva texto extraído
+	// Salva texto convertido
 	filename := filepath.Base(path)[:len(filepath.Base(path))-len(filepath.Ext(path))]
 	txtPath := fmt.Sprintf("./misc/corpus/txt/%s.txt", filename)
 	if err := os.WriteFile(txtPath, out, 0744); err != nil {

@@ -14,7 +14,7 @@ type InverseTrigram struct {
 	Jump0 int8   `gorm:"column:jump0;uniqueIndex:compositeindex;"`
 	Jump1 int8   `gorm:"column:jump1;uniqueIndex:compositeindex;"`
 
-	Count uint16 `gorm:"column:count;notnull"`
+	Count int `gorm:"column:count;notnull"`
 
 	Document *Document `gorm:"foreignKey:DocId;references:ID"`
 	Wd0      *Word     `gorm:"foreignKey:Wd0Id;references:ID"`
@@ -22,14 +22,15 @@ type InverseTrigram struct {
 	Wd2      *Word     `gorm:"foreignKey:Wd2Id;references:ID"`
 }
 
-func NewInverseNGram() *InverseTrigram {
+func NewInverseTrigram(size int, docID, wdId0, wdId1, wdId2 uint16, jump0, jump1 int8) *InverseTrigram {
 	return &InverseTrigram{
-		Wd0Id: 0,
-		Wd1Id: 0,
-		Wd2Id: 0,
-		DocId: 0,
-		Jump0: -1,
-		Jump1: -1,
+		Count: size,
+		DocId: docID,
+		Wd0Id: wdId0,
+		Wd1Id: wdId1,
+		Wd2Id: wdId2,
+		Jump0: jump0,
+		Jump1: jump1,
 	}
 }
 
@@ -61,7 +62,7 @@ func (this *InverseTrigram) Increment() {
 }
 
 func (this *InverseTrigram) GetCount() int {
-	return int(this.Count)
+	return this.Count
 }
 
 func (this *InverseTrigram) ApplyWordWheres(db *gorm.DB) *gorm.DB {

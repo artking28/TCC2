@@ -1,10 +1,10 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"os"
+	"strings"
 	"time"
 
 	mgu "github.com/artking28/myGoUtils"
@@ -13,7 +13,7 @@ import (
 )
 
 // ResultsOutput represents path to the file where benchmark results will be saved.
-const ResultsOutput = "./misc/results.json"
+const ResultsOutput = "./misc/results.txt"
 
 // N-gram Size Constants
 const (
@@ -36,7 +36,6 @@ func main() {
 	corpus.TextProcessor(25)
 
 	var id int64 = 1 // Unique counter to identify each test.
-	results := map[string]int64{}
 
 	// Defines n-gram sizes to be tested and their respective maximum jump limits.
 	sizes := []mgu.Pair[int, int]{
@@ -44,6 +43,8 @@ func main() {
 		mgu.NewPair(Bigram, MaxBigramJumps),   // Bigram: up to 4 jumps.
 		mgu.NewPair(Trigram, MaxTrigramJumps), // Trigram: up to 2 jumps.
 	}
+
+	strB := strings.Builder{}
 
 	// Main loop: iterates through each configured n-gram type (Unigram, Bigram, Trigram).
 	for _, s := range sizes {
@@ -58,15 +59,17 @@ func main() {
 				// For each pre-index mode, test jump normalization on and off.
 				for _, normalize := range []bool{false, true} {
 
-					// Execute the test with this parameter combination
-					resultL, resultT := BaseTest(id, support.TdIdf, preIndexed, normalize, size, jump)
-					results[resultL] = resultT
-					id++ // Increment test ID
+					// For each parallel mode, test multithreading.
+					for _, parallel := range []bool{false, true} {
 
-					// Execute the test with this parameter combination
-					resultL, resultT = BaseTest(id, support.Bm25, preIndexed, normalize, size, jump)
-					results[resultL] = resultT
-					id++ // Increment test ID
+						// Execute the test with this parameter combination
+						strB.WriteString(BaseTest(id, support.TdIdf, parallel, preIndexed, normalize, size, jump))
+						id++ // Increment test ID
+
+						// Execute the test with this parameter combination
+						strB.WriteString(BaseTest(id, support.Bm25, parallel, preIndexed, normalize, size, jump))
+						id++ // Increment test ID
+					}
 				}
 			}
 		}
@@ -76,16 +79,9 @@ func main() {
 
 	// Print an empty line for better console formatting.
 	fmt.Println()
+	fmt.Println(strB.String())
 
-	// Serialize the 'results' slice to indented JSON (human-readable).
-	content, err := json.MarshalIndent(results, "", "   ")
-	if err != nil {
-		// If serialization fails, fail the test.
-		log.Fatalf("error serializing results: %v", err)
-	}
-
-	// Save the JSON content to the ResultsOutput file.
-	err = os.WriteFile(ResultsOutput, content, 0644) // 0644 are file permissions (read/write for owner, read for others).
+	err := os.WriteFile(ResultsOutput, []byte(strB.String()), 0644) // 0644 are file permissions (read/write for owner, read for others).
 	if err != nil {
 		// If saving fails, fail the test.
 		log.Fatalf("error saving results.json: %v", err)
@@ -94,19 +90,27 @@ func main() {
 
 // BaseTest executes a full benchmark and validation cycle.
 // Records execution time and adds parameters and duration to the results slice.
-func BaseTest(testId int64, algo support.Algo, preIndexed bool, normalizeJumps bool, size int, jumps int) (string, int64) {
+func BaseTest(testId int64, algo support.Algo, parallel, preIndexed, normalizeJumps bool, size, jumps int) string {
 
 	// Marks the start of the test execution.
-	label := fmt.Sprintf("[TEST %02d] → algo=%s | preIndexed=%v | normalizeJumps=%v | size=%d | jumps=%d",
+	label := fmt.Sprintf("[TEST %02d] algo=%s | preIndexed=%v | normalizedJumps=%v | size=%d | jumps=%d {\n",
 		testId, algo, preIndexed, normalizeJumps, size, jumps)
 
 	// Prints the current test configuration to the console.
 	fmt.Printf("\n%s\n", label)
 
-	name := corpus.CreateDatabaseCaches(testId, false, size, jumps)
+	name, db := corpus.CreateDatabaseCaches(testId, false, size, jumps)
 	if err := os.Remove(name); err != nil {
 		log.Fatalf("error removing corpus file: %v", err)
 	}
 
-	return label, elapsed
+	res, err := corpus.ApplyLegalInputsDir(db, "legalInputs", algo, preIndexed, normalizeJumps, parallel, size, jumps)
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
+
+	label += res.String()
+	label += "}\n\n"
+
+	return label
 }

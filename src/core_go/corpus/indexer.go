@@ -22,13 +22,13 @@ const (
 
 // Variáveis globais
 var (
-	CountAllNGrams uint32
+	CountAllNGrams int
 	CacheWords     map[string]models.Word                 // Cache em memória de palavras para evitar consultas repetidas
 	CacheDocs      map[string]*models.Document            // CacheD em memória de n-gramas
 	CacheGrams     map[string]map[uint16]interfaces.IGram // CacheN em memória de n-gramas
 )
 
-func CreateDatabaseCaches(id int64, fromScratch bool, gramsSize int, jumpSize int) string {
+func CreateDatabaseCaches(id int64, fromScratch bool, gramsSize int, jumpSize int) (string, *gorm.DB) {
 
 	targetFile, db := utils.InitDB(id, max(1, gramsSize%4), DbFile, fromScratch) // Inicializa o banco
 
@@ -58,24 +58,7 @@ func CreateDatabaseCaches(id int64, fromScratch bool, gramsSize int, jumpSize in
 		os.Exit(0)
 	}
 
-	//if algo == support.TdIdf {
-	//	if preIndexed {
-	//		_, err = utils.ComputePreIndexedTFIDF(1, len(CacheDocs), db, normalizeJumps, pa)
-	//	} else {
-	//		_, err = utils.ComputePosIndexedTFIDF(1, len(CacheDocs), db, normalizeJumps, false)
-	//	}
-	//} else {
-	//	if preIndexed {
-	//		_, err = utils.ComputePreIndexedBM25(1, len(CacheDocs), db, normalizeJumps, false)
-	//	} else {
-	//		_, err = utils.ComputePosIndexedBM25(1, len(CacheDocs), db, normalizeJumps, false)
-	//	}
-	//}
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-
-	return targetFile
+	return targetFile, db
 }
 
 // RegisterDocs Lê todos os arquivos de texto do diretório, cria documentos e palavras, e insere no banco
@@ -209,26 +192,13 @@ func IndexDocsGrams(db *gorm.DB, gramsSize, jumpSize int) (int, error) {
 
 			switch gramsSize {
 			case 1:
-				ngram = &models.InverseUnigram{
-					DocId: CacheDocs[f.Name()].ID,
-					Wd0Id: CacheWords[word[0]].ID,
-				}
+				ngram = models.NewInverseUnigram(0, CacheDocs[f.Name()].ID, CacheWords[word[0]].ID)
 			case 2:
-				ngram = &models.InverseBigram{
-					DocId: CacheDocs[f.Name()].ID,
-					Wd0Id: CacheWords[word[0]].ID,
-					Wd1Id: CacheWords[word[1]].ID,
-					Jump0: jumps[i][0],
-				}
+				ngram = models.NewInverseBigram(0, CacheDocs[f.Name()].ID, CacheWords[word[0]].ID,
+					CacheWords[word[1]].ID, jumps[i][0])
 			case 3:
-				ngram = &models.InverseTrigram{
-					DocId: CacheDocs[f.Name()].ID,
-					Wd0Id: CacheWords[word[0]].ID,
-					Wd1Id: CacheWords[word[1]].ID,
-					Wd2Id: CacheWords[word[2]].ID,
-					Jump0: jumps[i][0],
-					Jump1: jumps[i][1],
-				}
+				ngram = models.NewInverseTrigram(0, CacheDocs[f.Name()].ID, CacheWords[word[0]].ID,
+					CacheWords[word[1]].ID, CacheWords[word[2]].ID, jumps[i][0], jumps[i][1])
 			}
 			ngram.Increment()
 

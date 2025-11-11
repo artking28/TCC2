@@ -10,16 +10,17 @@ type InverseUnigram struct {
 	Wd0Id uint16 `gorm:"column:wd0Id;uniqueIndex:compositeindex;notnull"`
 	DocId uint16 `gorm:"column:docId;uniqueIndex:compositeindex;notnull"`
 
-	Count uint16 `gorm:"column:count;notnull"`
+	Count int `gorm:"column:count;notnull"`
 
 	Document *Document `gorm:"foreignKey:DocId;references:ID"`
 	Wd0      *Word     `gorm:"foreignKey:Wd0Id;references:ID"`
 }
 
-func NewInverseUnigram() *InverseUnigram {
+func NewInverseUnigram(size int, docID, wdId0 uint16) *InverseUnigram {
 	return &InverseUnigram{
-		Wd0Id: 0,
-		DocId: 0,
+		Wd0Id: wdId0,
+		DocId: docID,
+		Count: size,
 	}
 }
 
@@ -40,7 +41,7 @@ func (this *InverseUnigram) Increment() {
 }
 
 func (this *InverseUnigram) GetCount() int {
-	return int(this.Count)
+	return this.Count
 }
 
 func (this *InverseUnigram) ApplyWordWheres(db *gorm.DB) *gorm.DB {

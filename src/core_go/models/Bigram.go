@@ -12,19 +12,20 @@ type InverseBigram struct {
 	DocId uint16 `gorm:"column:docId;uniqueIndex:compositeindex;notnull"`
 	Jump0 int8   `gorm:"column:jump0;uniqueIndex:compositeindex;"`
 
-	Count uint16 `gorm:"column:count;notnull"`
+	Count int `gorm:"column:count;notnull"`
 
 	Document *Document `gorm:"foreignKey:DocId;references:ID"`
 	Wd0      *Word     `gorm:"foreignKey:Wd0Id;references:ID"`
 	Wd1      *Word     `gorm:"foreignKey:Wd1Id;references:ID"`
 }
 
-func NewInverseBigram() *InverseBigram {
+func NewInverseBigram(size int, docID, wdId0, wdId1 uint16, jump0 int8) *InverseBigram {
 	return &InverseBigram{
-		Wd0Id: 0,
-		Wd1Id: 0,
-		DocId: 0,
-		Jump0: -1,
+		DocId: docID,
+		Wd0Id: wdId0,
+		Wd1Id: wdId1,
+		Jump0: jump0,
+		Count: size,
 	}
 }
 
@@ -52,7 +53,7 @@ func (this *InverseBigram) Increment() {
 }
 
 func (this *InverseBigram) GetCount() int {
-	return int(this.Count)
+	return this.Count
 }
 
 func (this *InverseBigram) ApplyWordWheres(db *gorm.DB) *gorm.DB {
