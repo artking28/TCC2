@@ -3,7 +3,7 @@
 ## Project
 ##############################
 /.github/*
-/src/core_pyhon/.venv/
+**/.venv/
 /misc/corpus/pdf/
 /misc/corpus/txt/
 
@@ -136,7 +136,6 @@ chrome-profiler-events*.json
 *.flv
 *.mov
 *.wmv
-/src/cmd_pyhon/venv/
 
 ##############################
 ## LaTeX (tcc)
@@ -181,3 +180,4 @@ latex/build/
 latex/out/
 latex/_tex/
 latex/_cache/
+/output.json

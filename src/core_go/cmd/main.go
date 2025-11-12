@@ -73,8 +73,8 @@ func main() {
 	//	}
 	//}
 
-	strB.WriteString(BaseTest(id, support.TdIdf, true, false, false, 1, 2))
-	strB.WriteString(BaseTest(id, support.Bm25, true, false, false, 3, 2))
+	strB.WriteString(BaseTest(id, support.TdIdf, true, false, false, 3, 0))
+	//strB.WriteString(BaseTest(id, support.Bm25, true, false, false, 1, 2))
 
 	// --- Saving Results ---
 

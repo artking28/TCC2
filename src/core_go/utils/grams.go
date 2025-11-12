@@ -27,9 +27,9 @@ func GetGramsLim[T any](vec []T, size, jump int) ([][]T, [][]int8) {
 	if size <= 0 || size > 3 || jump > 2 {
 		log.Fatalln("Error: getGramsLim supports a maximum of 3-grams and 2 jumps.")
 	}
-	if n < size {
-		log.Fatalf("Error: vector size (%d) must be >= gram size (%d).\n", n, size)
-	}
+	//if n < size {
+	//	log.Fatalf("Error: vector size (%d) must be >= gram size (%d).\n", n, size)
+	//}
 
 	var ret [][]T
 	var retJumps [][]int8

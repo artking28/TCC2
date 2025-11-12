@@ -17,13 +17,13 @@ func Spearman[C comparable](a, b []C) (float64, error) {
 		return 1, nil
 	}
 
-	// rankA maps item -> rank (1..n)
+	// rankA maps item -> rank (0..n-1)
 	rankA := make(map[C]int, n)
 	for i, v := range a {
 		if _, dup := rankA[v]; dup {
 			return 0, fmt.Errorf("ties not supported (duplicate in a)")
 		}
-		rankA[v] = i + 1
+		rankA[v] = i
 	}
 
 	// compute sum of squared rank differences using positions in b
@@ -39,7 +39,7 @@ func Spearman[C comparable](a, b []C) (float64, error) {
 		if !ok {
 			return 0, fmt.Errorf("item %v in b not found in a", v)
 		}
-		rb := j + 1
+		rb := j
 		d := float64(ra - rb)
 		sumD2 += d * d
 	}

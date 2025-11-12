@@ -4,8 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"runtime"
 	"sort"
-	"strings"
+	"sync"
 
 	mgu "github.com/artking28/myGoUtils"
 	"github.com/tcc2-davi-arthur/models"
@@ -30,14 +31,14 @@ func ApplyLegalInputsDir(db *gorm.DB, legalInputs string, algo support.Algo, pre
 		return nil, fmt.Errorf("error reading documents: %v", err)
 	}
 
-	ret := models.NewTestConfigResult()
-	docCache := make(map[uint16]map[string]*float64) // cache dos documentos
+	ret := models.NewTestConfigResult(len(all))
+	docCache := make(map[uint16]map[string]*float64)
 	phraseCache := make(map[string]map[string]*float64)
 
 	processPhrase := func(phrase support.Interaction, pushFunc func(float64, int64)) error {
-		// vetor TF-IDF da frase
 		var phraseVec map[string]*float64
 		var err error
+
 		elapsedPhrase := utils.Stopwatch(func() {
 			phraseVec, err = utils.ComputeStringTFIDF(phrase.Input, size, jumps, len(all), CacheGrams, CacheWords, normalizeJumps, parallel)
 			phraseCache[phrase.Input] = phraseVec
@@ -46,37 +47,68 @@ func ApplyLegalInputsDir(db *gorm.DB, legalInputs string, algo support.Algo, pre
 			return err
 		}
 
-		// acumula similaridade por documento para a frase
 		docSimAccum := make(map[uint16]float64)
+		var mu sync.Mutex
+		wg := sync.WaitGroup{}
+		sem := make(chan struct{}, runtime.NumCPU())
+		progress := make(chan int, len(all))
 
-		for _, doc := range all {
-			docVec, ok := docCache[doc.ID]
-			if !ok {
-				elapsed := utils.Stopwatch(func() {
-					if algo == support.TdIdf {
-						if preIndexed {
-							docVec, err = utils.ComputeDocPreIndexedTFIDF(nil, len(CacheDocs), CacheGrams, normalizeJumps, parallel)
-						} else {
-							docVec, err = utils.ComputeDocPosIndexedTFIDF(doc.ID, size, len(all), db, normalizeJumps, parallel)
-						}
-					} else {
-						if preIndexed {
-							docVec, err = utils.ComputeDocPreIndexedBM25(nil, len(CacheDocs), CountAllNGrams, CacheGrams, normalizeJumps, parallel)
-						} else {
-							docVec, err = utils.ComputeDocPosIndexedBM25(doc.ID, size, len(all), db, normalizeJumps, parallel)
-						}
-					}
-				})
-				if err != nil {
-					return err
-				}
-				docCache[doc.ID] = docVec
-				ret.DocCalcBytesPerSecondAvgTime += float64(doc.Size) / (float64(elapsed.Microseconds()) / 1000.0)
+		// goroutine única pra exibir progresso
+		go func() {
+			doneDocs := 0
+			for range progress {
+				doneDocs++
+				fmt.Printf("\rProcessed docs: %d/%d", doneDocs, len(all))
 			}
+			fmt.Println()
+		}()
 
-			sim := utils.CosineSimMaps(phraseVec, docVec)
-			docSimAccum[doc.ID] = sim
-		}
+		ret.TotalTime += utils.Stopwatch(func() {
+			for _, doc := range all {
+				wg.Add(1)
+				sem <- struct{}{}
+				go func(doc *models.Document) {
+					defer wg.Done()
+					defer func() { <-sem }()
+					var err error
+
+					mu.Lock()
+					docVec, ok := docCache[doc.ID]
+					mu.Unlock()
+					if !ok {
+						if algo == support.TdIdf {
+							if preIndexed {
+								docVec, err = utils.ComputeDocPreIndexedTFIDF(nil, len(CacheDocs), CacheGrams, normalizeJumps, parallel)
+							} else {
+								docVec, err = utils.ComputeDocPosIndexedTFIDF(doc.ID, size, len(all), db, normalizeJumps, parallel)
+							}
+						} else {
+							if preIndexed {
+								docVec, err = utils.ComputeDocPreIndexedBM25(nil, len(CacheDocs), CountAllNGrams, CacheGrams, normalizeJumps, parallel)
+							} else {
+								docVec, err = utils.ComputeDocPosIndexedBM25(doc.ID, size, len(all), db, normalizeJumps, parallel)
+							}
+						}
+						if err != nil {
+							fmt.Printf("error computing doc %d: %v\n", doc.ID, err)
+							return
+						}
+						mu.Lock()
+						docCache[doc.ID] = docVec
+						mu.Unlock()
+					}
+
+					sim := utils.CosineSimMaps(phraseVec, docVec)
+					mu.Lock()
+					docSimAccum[doc.ID] = sim
+					mu.Unlock()
+
+					progress <- 1
+				}(doc)
+			}
+			wg.Wait()
+			close(progress)
+		}).Milliseconds()
 
 		// ordena top documentos
 		pairs := make([]mgu.Pair[uint16, float64], 0, len(docSimAccum))
@@ -92,43 +124,28 @@ func ApplyLegalInputsDir(db *gorm.DB, legalInputs string, algo support.Algo, pre
 			return err
 		}
 
-		// atualiza stats usando Push
 		pushFunc(spearmanSim, elapsedPhrase)
 		return nil
 	}
 
-	total := len(data.Words10) + len(data.Words20) + len(data.Words40)
 	done := 0
-	printProgress := func() {
-		progress := float64(done) / float64(total)
-		barLen := 50
-		filled := int(progress * float64(barLen))
-		fmt.Printf("\r[%-50s] %3.0f%%", strings.Repeat("#", filled), progress*100)
-		if done == total {
-			fmt.Println()
-		}
-	}
-
 	for _, phrase := range data.Words10 {
 		if e := processPhrase(phrase, ret.Push10); e != nil {
 			return nil, e
 		}
 		done++
-		printProgress()
 	}
 	for _, phrase := range data.Words20 {
 		if e := processPhrase(phrase, ret.Push20); e != nil {
 			return nil, e
 		}
 		done++
-		printProgress()
 	}
 	for _, phrase := range data.Words40 {
 		if e := processPhrase(phrase, ret.Push40); e != nil {
 			return nil, e
 		}
 		done++
-		printProgress()
 	}
 
 	return &ret, nil

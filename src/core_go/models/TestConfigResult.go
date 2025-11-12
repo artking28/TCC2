@@ -6,6 +6,8 @@ import (
 )
 
 type TestConfigResult struct {
+	TotalDocs int
+	TotalTime int64
 	// Velocidade de cálculo dos vetores vase dos documentos em bytes por segundo
 	DocCalcBytesPerSecondAvgTime float64
 
@@ -37,8 +39,10 @@ type TestConfigResult struct {
 	MaxTime40        int64
 }
 
-func NewTestConfigResult() TestConfigResult {
+func NewTestConfigResult(totalDocs int) TestConfigResult {
 	return TestConfigResult{
+		TotalDocs:                    totalDocs,
+		TotalTime:                    0,
 		DocCalcBytesPerSecondAvgTime: 0,
 
 		AvgSpearmanSim10: 0,
@@ -64,7 +68,7 @@ func NewTestConfigResult() TestConfigResult {
 	}
 }
 
-func (this *TestConfigResult) Push10(spearman float64, elapsedMillis int64) {
+func (this *TestConfigResult) Push10(spearman float64, elapsedMicro int64) {
 	this.AvgSpearmanSim10 += spearman
 	if spearman < this.MinSpearmanSim10 {
 		this.MinSpearmanSim10 = spearman
@@ -73,16 +77,16 @@ func (this *TestConfigResult) Push10(spearman float64, elapsedMillis int64) {
 		this.MaxSpearmanSim10 = spearman
 	}
 
-	this.AvgTime10 += elapsedMillis
-	if elapsedMillis < this.MinTime10 {
-		this.MinTime10 = elapsedMillis
+	this.AvgTime10 += elapsedMicro
+	if elapsedMicro < this.MinTime10 {
+		this.MinTime10 = elapsedMicro
 	}
-	if elapsedMillis > this.MaxTime10 {
-		this.MaxTime10 = elapsedMillis
+	if elapsedMicro > this.MaxTime10 {
+		this.MaxTime10 = elapsedMicro
 	}
 }
 
-func (this *TestConfigResult) Push20(spearman float64, elapsedMillis int64) {
+func (this *TestConfigResult) Push20(spearman float64, elapsedMicro int64) {
 	this.AvgSpearmanSim20 += spearman
 	if spearman < this.MinSpearmanSim20 {
 		this.MinSpearmanSim20 = spearman
@@ -91,16 +95,16 @@ func (this *TestConfigResult) Push20(spearman float64, elapsedMillis int64) {
 		this.MaxSpearmanSim20 = spearman
 	}
 
-	this.AvgTime20 += elapsedMillis
-	if elapsedMillis < this.MinTime20 {
-		this.MinTime20 = elapsedMillis
+	this.AvgTime20 += elapsedMicro
+	if elapsedMicro < this.MinTime20 {
+		this.MinTime20 = elapsedMicro
 	}
-	if elapsedMillis > this.MaxTime20 {
-		this.MaxTime20 = elapsedMillis
+	if elapsedMicro > this.MaxTime20 {
+		this.MaxTime20 = elapsedMicro
 	}
 }
 
-func (this *TestConfigResult) Push40(spearman float64, elapsedMillis int64) {
+func (this *TestConfigResult) Push40(spearman float64, elapsedMicro int64) {
 	this.AvgSpearmanSim40 += spearman
 	if spearman < this.MinSpearmanSim40 {
 		this.MinSpearmanSim40 = spearman
@@ -109,28 +113,30 @@ func (this *TestConfigResult) Push40(spearman float64, elapsedMillis int64) {
 		this.MaxSpearmanSim40 = spearman
 	}
 
-	this.AvgTime40 += elapsedMillis
-	if elapsedMillis < this.MinTime40 {
-		this.MinTime40 = elapsedMillis
+	this.AvgTime40 += elapsedMicro
+	if elapsedMicro < this.MinTime40 {
+		this.MinTime40 = elapsedMicro
 	}
-	if elapsedMillis > this.MaxTime40 {
-		this.MaxTime40 = elapsedMillis
+	if elapsedMicro > this.MaxTime40 {
+		this.MaxTime40 = elapsedMicro
 	}
 }
 
 func (this *TestConfigResult) String() (ret string) {
 
+	ret += fmt.Sprintf("\tTotalDocs: %d, TotalTime: %d\n", this.TotalDocs, this.TotalTime)
+
 	ret += fmt.Sprintf("\tSpearmanSim10: avg=%.4f, min=%.4f, max=%.4f, time.avg=%d, time.min=%d, time.max=%d\n",
-		this.AvgSpearmanSim10, this.MinSpearmanSim10, this.MaxSpearmanSim10,
-		this.AvgTime10, this.MinTime10, this.MaxTime10)
+		this.AvgSpearmanSim10/50, this.MinSpearmanSim10, this.MaxSpearmanSim10,
+		this.AvgTime10/50, this.MinTime10, this.MaxTime10)
 
 	ret += fmt.Sprintf("\tSpearmanSim20: avg=%.4f, min=%.4f, max=%.4f, time.avg=%d, time.min=%d, time.max=%d\n",
-		this.AvgSpearmanSim20, this.MinSpearmanSim20, this.MaxSpearmanSim20,
-		this.AvgTime20, this.MinTime20, this.MaxTime20)
+		this.AvgSpearmanSim20/50, this.MinSpearmanSim20, this.MaxSpearmanSim20,
+		this.AvgTime20/50, this.MinTime20, this.MaxTime20)
 
 	ret += fmt.Sprintf("\tSpearmanSim40: avg=%.4f, min=%.4f, max=%.4f, time.avg=%d, time.min=%d, time.max=%d\n",
-		this.AvgSpearmanSim40, this.MinSpearmanSim40, this.MaxSpearmanSim40,
-		this.AvgTime40, this.MinTime40, this.MaxTime40)
+		this.AvgSpearmanSim40/50, this.MinSpearmanSim40, this.MaxSpearmanSim40,
+		this.AvgTime40/50, this.MinTime40, this.MaxTime40)
 
 	return ret
 }

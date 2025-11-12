@@ -54,12 +54,12 @@ func (r *GramRepository) FindByDocAndSize(docID uint16, gramSize int) ([]interfa
 		}
 		break
 	case 2:
-		for _, one := range data.([]models.InverseUnigram) {
+		for _, one := range data.([]models.InverseBigram) {
 			ret = append(ret, &one)
 		}
 		break
 	case 3:
-		for _, one := range data.([]models.InverseUnigram) {
+		for _, one := range data.([]models.InverseTrigram) {
 			ret = append(ret, &one)
 		}
 		break

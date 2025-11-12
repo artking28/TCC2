@@ -224,7 +224,7 @@ func ComputeStringTFIDF(
 
 	result, jumps := GetGramsLim(text, gramsSize, jumpSize)
 	if len(result) == 0 {
-		return nil, fmt.Errorf("no n-grams generated")
+		return nil, nil
 	}
 
 	var grams []interfaces.IGram
