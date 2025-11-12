@@ -26,6 +26,7 @@ var (
 	CacheWords     map[string]models.Word                 // Cache em memória de palavras para evitar consultas repetidas
 	CacheDocs      map[string]*models.Document            // CacheD em memória de n-gramas
 	CacheGrams     map[string]map[uint16]interfaces.IGram // CacheN em memória de n-gramas
+	Docs           map[uint16][]interfaces.IGram
 )
 
 func CreateDatabaseCaches(id int64, fromScratch bool, gramsSize int, jumpSize int) (string, *gorm.DB) {
@@ -172,6 +173,9 @@ func IndexDocsGrams(db *gorm.DB, gramsSize, jumpSize int) (int, error) {
 	if CacheGrams == nil {
 		CacheGrams = make(map[string]map[uint16]interfaces.IGram)
 	}
+	if Docs == nil {
+		Docs = make(map[uint16][]interfaces.IGram)
+	}
 
 	files, err := os.ReadDir(Dir)
 	if err != nil {
@@ -212,6 +216,7 @@ func IndexDocsGrams(db *gorm.DB, gramsSize, jumpSize int) (int, error) {
 			}
 			if CacheGrams[key][ngram.GetDocId()] == nil {
 				CacheGrams[key][ngram.GetDocId()] = ngram
+				Docs[ngram.GetDocId()] = append(Docs[ngram.GetDocId()], ngram)
 			}
 			CacheGrams[key][ngram.GetDocId()].Increment()
 			CountAllNGrams++

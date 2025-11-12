@@ -12,4 +12,6 @@ type Interaction struct {
 	BertT     int64    `json:"bertT"`
 	Word2vec  []uint16 `json:"word2vec"`
 	Word2vecT int64    `json:"word2vecT"`
+	Glove     []uint16 `json:"glove"`
+	GloveT    int64    `json:"gloveT"`
 }

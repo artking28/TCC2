@@ -53,16 +53,6 @@ func ApplyLegalInputsDir(db *gorm.DB, legalInputs string, algo support.Algo, pre
 		sem := make(chan struct{}, runtime.NumCPU())
 		progress := make(chan int, len(all))
 
-		// goroutine única pra exibir progresso
-		go func() {
-			doneDocs := 0
-			for range progress {
-				doneDocs++
-				fmt.Printf("\rProcessed docs: %d/%d", doneDocs, len(all))
-			}
-			fmt.Println()
-		}()
-
 		ret.TotalTime += utils.Stopwatch(func() {
 			for _, doc := range all {
 				wg.Add(1)
@@ -77,17 +67,9 @@ func ApplyLegalInputsDir(db *gorm.DB, legalInputs string, algo support.Algo, pre
 					mu.Unlock()
 					if !ok {
 						if algo == support.TdIdf {
-							if preIndexed {
-								docVec, err = utils.ComputeDocPreIndexedTFIDF(nil, len(CacheDocs), CacheGrams, normalizeJumps, parallel)
-							} else {
-								docVec, err = utils.ComputeDocPosIndexedTFIDF(doc.ID, size, len(all), db, normalizeJumps, parallel)
-							}
+							docVec, err = utils.ComputeDocPreIndexedTFIDF(Docs[doc.ID], len(CacheDocs), CacheGrams, normalizeJumps, parallel)
 						} else {
-							if preIndexed {
-								docVec, err = utils.ComputeDocPreIndexedBM25(nil, len(CacheDocs), CountAllNGrams, CacheGrams, normalizeJumps, parallel)
-							} else {
-								docVec, err = utils.ComputeDocPosIndexedBM25(doc.ID, size, len(all), db, normalizeJumps, parallel)
-							}
+							docVec, err = utils.ComputeDocPreIndexedBM25(Docs[doc.ID], len(CacheDocs), CountAllNGrams, CacheGrams, normalizeJumps, parallel)
 						}
 						if err != nil {
 							fmt.Printf("error computing doc %d: %v\n", doc.ID, err)
@@ -119,7 +101,7 @@ func ApplyLegalInputsDir(db *gorm.DB, legalInputs string, algo support.Algo, pre
 
 		// calcula Spearman médio
 		list := mgu.VecMap(pairs, func(t mgu.Pair[uint16, float64]) uint16 { return t.Left })
-		spearmanSim, err := utils.Spearman(phrase.Bert, list)
+		spearmanSim, err := utils.Spearman(phrase.Glove, list)
 		if err != nil {
 			return err
 		}

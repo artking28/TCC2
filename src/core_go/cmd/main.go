@@ -6,12 +6,13 @@ import (
 	"os"
 	"strings"
 
+	mgu "github.com/artking28/myGoUtils"
 	"github.com/tcc2-davi-arthur/corpus"
 	"github.com/tcc2-davi-arthur/models/support"
 )
 
 // ResultsOutput represents path to the file where benchmark results will be saved.
-const ResultsOutput = "./misc/results.txt"
+const ResultsOutput = "./../../misc/results.txt"
 
 // N-gram Size Constants
 const (
@@ -35,46 +36,39 @@ func main() {
 
 	var id int64 = 1 // Unique counter to identify each test.
 
-	//// Defines n-gram sizes to be tested and their respective maximum jump limits.
-	//sizes := []mgu.Pair[int, int]{
-	//	mgu.NewPair(Unigram, 0),               // Unigram: 0 jumps (always).
-	//	mgu.NewPair(Bigram, MaxBigramJumps),   // Bigram: up to 4 jumps.
-	//	mgu.NewPair(Trigram, MaxTrigramJumps), // Trigram: up to 2 jumps.
-	//}
+	// Defines n-gram sizes to be tested and their respective maximum jump limits.
+	sizes := []mgu.Pair[int, int]{
+		mgu.NewPair(Unigram, 0),               // Unigram: 0 jumps (always).
+		mgu.NewPair(Bigram, MaxBigramJumps),   // Bigram: up to 4 jumps.
+		mgu.NewPair(Trigram, MaxTrigramJumps), // Trigram: up to 2 jumps.
+	}
 
 	strB := strings.Builder{}
 
-	//// Main loop: iterates through each configured n-gram type (Unigram, Bigram, Trigram).
-	//for _, s := range sizes {
-	//	size, maxJumps := s.Left, s.Right // Unpacks n-gram size and jump limit.
-	//
-	//	// For each n-gram size, test all possible jump levels (from 0 to maxJumps).
-	//	for jump := 0; jump <= maxJumps; jump++ {
-	//
-	//		// Test both variations: with and without pre-indexing (in-memory cache vs database query).
-	//		for _, preIndexed := range []bool{false, true} {
-	//
-	//			// For each pre-index mode, test jump normalization on and off.
-	//			for _, normalize := range []bool{false, true} {
-	//
-	//				// For each parallel mode, test multithreading.
-	//				for _, parallel := range []bool{false, true} {
-	//
-	//					// Execute the test with this parameter combination
-	//					strB.WriteString(BaseTest(id, support.TdIdf, parallel, preIndexed, normalize, size, jump))
-	//					id++ // Increment test ID
-	//
-	//					// Execute the test with this parameter combination
-	//					strB.WriteString(BaseTest(id, support.Bm25, parallel, preIndexed, normalize, size, jump))
-	//					id++ // Increment test ID
-	//				}
-	//			}
-	//		}
-	//	}
-	//}
+	// Main loop: iterates through each configured n-gram type (Unigram, Bigram, Trigram).
+	for _, s := range sizes {
+		size, maxJumps := s.Left, s.Right // Unpacks n-gram size and jump limit.
 
-	strB.WriteString(BaseTest(id, support.TdIdf, true, false, false, 3, 0))
-	//strB.WriteString(BaseTest(id, support.Bm25, true, false, false, 1, 2))
+		// For each n-gram size, test all possible jump levels (from 0 to maxJumps).
+		for jump := 0; jump <= maxJumps; jump++ {
+
+			// For each pre-index mode, test jump normalization on and off.
+			for _, normalize := range []bool{false, true} {
+
+				// For each parallel mode, test multithreading.
+				for _, parallel := range []bool{false, true} {
+
+					// Execute the test with this parameter combination
+					strB.WriteString(BaseTest(id, support.TdIdf, parallel, false, normalize, size, jump))
+					id++ // Increment test ID
+
+					// Execute the test with this parameter combination
+					strB.WriteString(BaseTest(id, support.Bm25, parallel, false, normalize, size, jump))
+					id++ // Increment test ID
+				}
+			}
+		}
+	}
 
 	// --- Saving Results ---
 

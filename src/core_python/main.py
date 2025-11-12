@@ -25,6 +25,22 @@ def embed_bert(texts, model):
     faiss.normalize_L2(embs)
     return embs.astype(np.float32)
 
+# --- EMBEDDING: GLOVE ---
+class GloveEmbedder:
+    def __init__(self, model_name="glove-wiki-gigaword-300"):
+        self.model = api.load(model_name)
+        self.dim = self.model.vector_size
+
+    def embed(self, texts):
+        embs = []
+        for t in texts:
+            words = [w for w in t.split() if w in self.model]
+            if words:
+                vec = np.mean([self.model[w] for w in words], axis=0)
+            else:
+                vec = np.zeros(self.dim, dtype=np.float32)
+            embs.append(vec)
+        return np.array(embs, dtype=np.float32)
 
 # --- EMBEDDING: WORD2VEC ---
 class Word2VecEmbedder:
@@ -87,16 +103,26 @@ w2v_model = Word2VecEmbedder()
 embeddings_w2v = w2v_model.embed(texts)
 index_w2v = build_index(embeddings_w2v)
 
+# GloVe
+glove_model = GloveEmbedder()
+embeddings_glove = glove_model.embed(texts)
+index_glove = build_index(embeddings_glove)
+
 # Inputs
 inputs = load_inputs(inputs_path)
 final_output = {"words10": [], "words20": [], "words40": []}
-
 
 # --- GERA SAMPLE ---
 def generate_sample(sample):
     text = sample["input"]
     query_w2v = w2v_model.embed([text])
     query_bert = bert_model.encode([text], convert_to_tensor=False)
+    query_glove = glove_model.embed([text])
+
+
+    ordered, t = search(index_glove, query_glove, n_docs)
+    sample["glove"] = (ordered[:TOP_K] + 1).tolist() if TOP_K is not None else (ordered + 1).tolist()
+    sample["gloveT"] = t
 
     ordered, t = search(index_bert, query_bert, n_docs)
     sample["bert"] = (ordered[:TOP_K] + 1).tolist() if TOP_K is not None else (ordered + 1).tolist()
