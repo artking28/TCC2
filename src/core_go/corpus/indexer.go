@@ -16,8 +16,8 @@ import (
 
 // Diretório onde os arquivos de texto serão lidos
 const (
-	DbFile = "./data.db"
-	Dir    = "./misc/corpus/clean"
+	DbFile = "./../data/data.db"
+	Dir    = "./../../misc/corpus/clean"
 )
 
 // Variáveis globais
@@ -30,34 +30,38 @@ var (
 
 func CreateDatabaseCaches(id int64, fromScratch bool, gramsSize int, jumpSize int) (string, *gorm.DB) {
 
-	targetFile, db := utils.InitDB(id, max(1, gramsSize%4), DbFile, fromScratch) // Inicializa o banco
+	targetFile, db := utils.InitDB(id, max(1, gramsSize%4), DbFile, fromScratch)
+	log.Printf("[INFO] Banco inicializado: %s", targetFile)
 
-	// Verifica se existem documentos no banco
 	var n int64
 	err := db.Model(&models.Document{}).Count(&n).Error
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("[ERRO] Falha ao contar documentos: %v", err)
 	}
+	log.Printf("[INFO] Documentos existentes no banco: %d", n)
 
-	// Se não houver documentos, insere todos os arquivos do diretório e suas palavras
 	if n <= 0 {
 		if err = RegisterDocs(db); err != nil {
-			log.Fatal(err)
+			log.Fatalf("[ERRO] Falha ao registrar documentos: %v", err)
 		}
+		log.Println("[INFO] Documentos registrados com sucesso.")
 	}
 
 	DefineCaches(db)
+	log.Println("[INFO] Caches definidos.")
 
 	inserted, err := IndexDocsGrams(db, gramsSize, jumpSize)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("[ERRO] Falha ao indexar documentos: %v", err)
 	}
+	log.Printf("[INFO] Indexação concluída. Inseridos %d registros.", inserted)
 
 	if inserted <= 0 {
-		fmt.Println("Finished... [empty database]")
+		log.Println("[INFO] Finalizado. Banco vazio.")
 		os.Exit(0)
 	}
 
+	log.Println("[INFO] Tarefas de banco finalizadas.")
 	return targetFile, db
 }
 
@@ -203,13 +207,13 @@ func IndexDocsGrams(db *gorm.DB, gramsSize, jumpSize int) (int, error) {
 			ngram.Increment()
 
 			key := ngram.GetCacheKey(true, false)
-			if CacheGrams[key] != nil && CacheGrams[key][ngram.GetDocId()] != nil {
-				CacheGrams[key][ngram.GetDocId()].Increment()
-				CountAllNGrams++
-				continue
+			if CacheGrams[key] == nil {
+				CacheGrams[key] = make(map[uint16]interfaces.IGram)
 			}
-			CacheGrams[key] = make(map[uint16]interfaces.IGram)
-			CacheGrams[key][ngram.GetDocId()] = ngram
+			if CacheGrams[key][ngram.GetDocId()] == nil {
+				CacheGrams[key][ngram.GetDocId()] = ngram
+			}
+			CacheGrams[key][ngram.GetDocId()].Increment()
 			CountAllNGrams++
 		}
 	}
@@ -226,6 +230,32 @@ func IndexDocsGrams(db *gorm.DB, gramsSize, jumpSize int) (int, error) {
 		return 0, nil
 	}
 
-	all := mgu.MapValues(CacheGrams)
-	return len(all), db.CreateInBatches(all, 1000).Error
+	vec0 := mgu.VecMap(mgu.MapValues(CacheGrams), func(t map[uint16]interfaces.IGram) []interfaces.IGram {
+		return mgu.MapValues(t)
+	})
+	vec1, _ := mgu.VecReduce(vec0, func(grams []interfaces.IGram, grams2 []interfaces.IGram) []interfaces.IGram {
+		return append(grams, grams2...)
+	})
+
+	switch gramsSize {
+	case 1:
+		all := mgu.VecMap(vec1, func(t interfaces.IGram) *models.InverseUnigram {
+			return t.(*models.InverseUnigram)
+		})
+		return len(all), db.CreateInBatches(all, 1000).Error
+
+	case 2:
+		all := mgu.VecMap(vec1, func(t interfaces.IGram) *models.InverseBigram {
+			return t.(*models.InverseBigram)
+		})
+		return len(all), db.CreateInBatches(all, 1000).Error
+
+	case 3:
+		all := mgu.VecMap(vec1, func(t interfaces.IGram) *models.InverseTrigram {
+			return t.(*models.InverseTrigram)
+		})
+		return len(all), db.CreateInBatches(all, 1000).Error
+	}
+
+	return 0, nil
 }

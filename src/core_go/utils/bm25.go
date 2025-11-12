@@ -10,6 +10,7 @@ import (
 	mgu "github.com/artking28/myGoUtils"
 	"github.com/tcc2-davi-arthur/models"
 	"github.com/tcc2-davi-arthur/models/interfaces"
+	"github.com/tcc2-davi-arthur/repository"
 	"gorm.io/gorm"
 )
 
@@ -128,28 +129,8 @@ func ComputeDocPosIndexedBM25(docID uint16, gramSize, totalDocs int, db *gorm.DB
 	tf := make(map[string]int)
 	totalTrigrams := 0
 
-	var label string
-	switch gramSize {
-	case 1:
-		label = "wd0Id"
-		break
-	case 2:
-		label = "wd0Id, wd1Id, jump0"
-		break
-	case 3:
-		label = "wd0Id, wd1Id, wd2Id, jump0, jump1"
-		break
-	default:
-		log.Fatalf("invalid gramSize: %d", gramSize)
-	}
-
 	// TF: contagem de trigramas do documento
-	var tfResults []interfaces.IGram
-	err := db.Model("WORD_DOC").
-		Select(fmt.Sprintf("%s, COUNT(docId) AS count", label)).
-		Where("docId = ?", docID).
-		Group(label).
-		Find(&tfResults).Error
+	tfResults, err := repository.NewGramRepository(db).FindByDocAndSize(docID, gramSize)
 	if err != nil {
 		return nil, err
 	}

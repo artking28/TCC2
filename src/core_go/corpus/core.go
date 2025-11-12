@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"sort"
+	"strings"
 
 	mgu "github.com/artking28/myGoUtils"
 	"github.com/tcc2-davi-arthur/models"
@@ -24,8 +25,8 @@ func ApplyLegalInputsDir(db *gorm.DB, legalInputs string, algo support.Algo, pre
 		return nil, fmt.Errorf("error unmarshalling legal entries: %v", err)
 	}
 
-	var all []models.Document
-	if err = db.Model(&models.Document{}).Select(&all).Error; err != nil {
+	var all []*models.Document
+	if err = db.Model(&models.Document{}).Find(&all).Error; err != nil {
 		return nil, fmt.Errorf("error reading documents: %v", err)
 	}
 
@@ -40,7 +41,7 @@ func ApplyLegalInputsDir(db *gorm.DB, legalInputs string, algo support.Algo, pre
 		elapsedPhrase := utils.Stopwatch(func() {
 			phraseVec, err = utils.ComputeStringTFIDF(phrase.Input, size, jumps, len(all), CacheGrams, CacheWords, normalizeJumps, parallel)
 			phraseCache[phrase.Input] = phraseVec
-		}).Milliseconds()
+		}).Microseconds()
 		if err != nil {
 			return err
 		}
@@ -70,7 +71,7 @@ func ApplyLegalInputsDir(db *gorm.DB, legalInputs string, algo support.Algo, pre
 					return err
 				}
 				docCache[doc.ID] = docVec
-				ret.DocCalcBytesPerSecondAvgTime += float64(doc.Size) / elapsed.Seconds()
+				ret.DocCalcBytesPerSecondAvgTime += float64(doc.Size) / (float64(elapsed.Microseconds()) / 1000.0)
 			}
 
 			sim := utils.CosineSimMaps(phraseVec, docVec)
@@ -96,20 +97,38 @@ func ApplyLegalInputsDir(db *gorm.DB, legalInputs string, algo support.Algo, pre
 		return nil
 	}
 
+	total := len(data.Words10) + len(data.Words20) + len(data.Words40)
+	done := 0
+	printProgress := func() {
+		progress := float64(done) / float64(total)
+		barLen := 50
+		filled := int(progress * float64(barLen))
+		fmt.Printf("\r[%-50s] %3.0f%%", strings.Repeat("#", filled), progress*100)
+		if done == total {
+			fmt.Println()
+		}
+	}
+
 	for _, phrase := range data.Words10 {
 		if e := processPhrase(phrase, ret.Push10); e != nil {
 			return nil, e
 		}
+		done++
+		printProgress()
 	}
 	for _, phrase := range data.Words20 {
 		if e := processPhrase(phrase, ret.Push20); e != nil {
 			return nil, e
 		}
+		done++
+		printProgress()
 	}
 	for _, phrase := range data.Words40 {
 		if e := processPhrase(phrase, ret.Push40); e != nil {
 			return nil, e
 		}
+		done++
+		printProgress()
 	}
 
 	return &ret, nil

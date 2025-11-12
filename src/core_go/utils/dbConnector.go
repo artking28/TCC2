@@ -43,13 +43,13 @@ func InitDB(id int64, gramSize int, dbFile string, fromScratch bool) (string, *g
 	switch gramSize {
 	case 1:
 		gramModel = &models.InverseUnigram{}
-		index = "(wd0_id)"
+		index = "(wd0Id)"
 	case 2:
 		gramModel = &models.InverseBigram{}
-		index = "(wd0_id, wd1_id)"
+		index = "(wd0Id, wd1Id)"
 	case 3:
 		gramModel = &models.InverseTrigram{}
-		index = "(wd0_id, wd1_id, wd2_id)"
+		index = "(wd0Id, wd1Id, wd2Id)"
 	}
 
 	// AutoMigrate cria as tabelas para os modelos, se não existirem
