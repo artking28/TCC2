@@ -629,20 +629,296 @@
     \section{Trabalhos Relacionados}
 
 
+% --- CAPÍTULO 3: DESENVOLVIMENTO ---
     \chapter{Desenvolvimento}
 
-    O desenvolvimento deste trabalho seguirá uma abordagem incremental e iterativa, com entregas organizadas semanalmente ao longo de doze semanas. Cada etapa será planejada de forma a permitir a validação contínua dos componentes implementados, favorecendo a integração progressiva entre os módulos do sistema. Essa estratégia contribui para a identificação precoce de falhas e a mitigação de riscos relacionados a incompatibilidades entre partes distintas da aplicação.
+    O desenvolvimento da solução foi guiado principalmente por requisitos de desempenho e escalabilidade, já que o sistema precisava lidar com um grande volume de documentos jurídicos de forma eficiente. Em vez de seguir uma arquitetura baseada em microsserviços, a aplicação foi estruturada em módulos bem definidos, onde cada um possui sua própria responsabilidade dentro do fluxo geral do sistema. Esses módulos não se comunicam por meio de APIs ou chamadas diretas, sendo conectados apenas por manipulação humana entre as etapas, o que simplifica a integração e o controle do processo.
 
-    A arquitetura adotada será orientada a microserviços, promovendo uma separação clara de responsabilidades entre os componentes do sistema. Essa escolha visa facilitar o desenvolvimento paralelo, a escalabilidade e a manutenção futura. O sistema terá como principal objetivo a extração e recuperação de informações contidas em documentos jurídicos, com foco em consultas tanto textuais quanto semânticas. A base de dados será composta por documentos oriundos de fontes públicas, como a Câmara dos Deputados, o Senado Federal e tribunais superiores. Esses documentos serão extraídos, normalizados e armazenados em um formato unificado, acompanhados de metadados que possibilitem buscas mais eficientes.
+    Embora duas linguagens tenham sido utilizadas, o núcleo da aplicação foi desenvolvido em Go. Toda a parte de coleta de dados, assim como a lógica de orquestração e indexação dos documentos, foi implementada nessa linguagem. A escolha pelo Go se deu tanto pela preferência dos desenvolvedores quanto por suas características técnicas, já que é uma linguagem com um nível ergonômico muito alto e, ao mesmo tempo, excelente desempenho computacional. Essa combinação de praticidade e velocidade foi decisiva para o projeto.
 
-    As buscas ocorrerão em duas camadas complementares. A camada textual utilizará o algoritmo de Boyer–Moore, reconhecido por seu bom desempenho na localização de padrões em grandes volumes de texto. Já a camada semântica aplicará modelos pré-treinados baseados em \textit{transformers}, responsáveis por converter os textos em vetores numéricos. A partir desses vetores, será possível calcular a similaridade entre documentos com base na métrica de cosseno, promovendo uma recuperação mais contextualizada das informações.
+    O Python foi empregado apenas em um ponto específico do processo, na geração das \textit{embeddings} e na ordenação dos documentos de acordo com o nível de similaridade semântica. Essa etapa fazia uso de bibliotecas consolidadas de Inteligência Artificial e Processamento de Linguagem Natural, que se encaixavam melhor no ecossistema Python.
 
-    A infraestrutura do sistema será composta por três componentes principais, interconectados por meio de APIs REST. A camada de apresentação será construída com um \textit{framework} moderno de \textit{frontend} utilizando \textit{TypeScript}, oferecendo ao usuário funcionalidades como envio de documentos, execução de buscas e visualização dos resultados. O \textit{backend} principal será desenvolvido em GO (versão 1.22 ou superior), e será responsável pelas tarefas de ingestão dos documentos, normalização textual, armazenamento em banco de dados relacional e execução da lógica de busca.
+    A seguir são apresentadas as principais tecnologias utilizadas, as estratégias adotadas na coleta de dados, o fluxo de limpeza e padronização textual e a forma como os algoritmos de busca foram implementados e integrados ao restante do sistema.
 
-    O processamento semântico será realizado por um microserviço desenvolvido em Python 3.11, que utilizará a biblioteca \textit{sentence-transformers} e modelos da família BERT, selecionados por apresentarem um bom equilíbrio entre desempenho e custo computacional. Esse microserviço será exposto por meio do \textit{framework} FastAPI, que fornece uma interface leve, eficiente e compatível com os requisitos de comunicação REST. Durante o processo de ingestão, o \textit{backend} em GO enviará os textos ao microserviço Python e armazenará os vetores retornados juntamente aos metadados dos documentos. Isso permitirá que as buscas textuais e semânticas sejam realizadas de forma paralela e posteriormente combinadas por meio de um mecanismo de rankeamento.
+    \section{Aquisição de Dados}
 
-    Por fim, o armazenamento será feito em um banco de dados PostgreSQL, escolhido por sua confiabilidade, suporte a tipos de dados complexos e compatibilidade com diversas linguagens de programação. Essa combinação de tecnologias visa garantir um sistema robusto, eficiente e adaptável a diferentes contextos de uso.
+    A construção do \textit{corpus} documental baseou-se na coleta massiva de textos legislativos diretamente do Portal da Câmara dos Deputados. O objetivo foi compilar uma base de dados robusta e representativa, totalizando aproximadamente 5.000 documentos, abrangendo principalmente Projetos de Lei (PL) e Propostas de Emenda à Constituição (PEC).
 
+    Dada a magnitude do volume de dados, uma abordagem sequencial seria inviável devido à latência de rede. Portanto, a solução foi implementada em Go, localizada no pacote \texttt{corpus}, explorando o modelo de concorrência da linguagem (\textit{goroutines}) para realizar o \textit{download} dos documentos de forma paralela e assíncrona.
+
+    Para a extração das informações, utilizou-se a biblioteca \texttt{goquery}. Esta ferramenta permite realizar o \textit{parsing} das páginas HTML retornadas pelo portal e navegar pela árvore DOM utilizando seletores CSS, facilitando a identificação precisa dos \textit{links} para os arquivos PDF em meio à estrutura complexa do site da Câmara.
+
+    O fluxo de coleta foi estruturado da seguinte forma:
+
+    \begin{enumerate}
+        \item \textbf{Definição do Escopo:} O algoritmo inicia o processo varrendo as páginas de resultados do portal com base nas categorias legislativas de interesse, identificando os documentos disponíveis para coleta.
+        \item \textbf{Execução Paralela e \textit{Rate Limiting}:} O sistema dispara múltiplas requisições simultâneas para maximizar o uso da banda. Contudo, para evitar que o servidor de origem interprete o tráfego intenso como um ataque de Negação de Serviço (DoS) ou bloqueie o endereço IP da aplicação por excesso de requisições (\textit{throttling}), foi implementado um intervalo de segurança (\textit{delay}) fixo de 500 milissegundos entre as chamadas de rede. Essa estratégia garante a estabilidade do processo de coleta e respeita as políticas de uso do portal governamental.
+        \item \textbf{Extração de Links:} O conteúdo HTML de cada página processada é analisado pelo \texttt{goquery}, que filtra e extrai apenas as URLs que apontam para o inteiro teor dos documentos (arquivos com extensão \texttt{.pdf}).
+        \item \textbf{Download e Persistência:} Os arquivos identificados são baixados via \textit{stream} e salvos diretamente no diretório local \texttt{./misc/corpus/pdf}, preservando a nomenclatura original para garantir a rastreabilidade dos dados.
+    \end{enumerate}
+
+    \section{Pré-processamento e Normalização Textual}
+
+    Após a etapa de aquisição, o \textit{corpus} bruto constitui-se de milhares de arquivos em formato PDF. A utilização direta desses arquivos para fins de indexação ou vetorização é inviável devido à presença de formatação binária e, principalmente, de "ruído textual" — elementos que, embora necessários para a validade jurídica do documento (como cabeçalhos, numeração de autos, datas e assinaturas), não contribuem para a identificação do conteúdo semântico da matéria legislativa.
+
+    Para mitigar esse problema, foi implementado um módulo robusto de processamento textual em Go, localizado no pacote \texttt{corpus}. Este módulo opera como um \textit{pipeline} de transformação, convertendo documentos não estruturados em sequências de \textit{tokens} normalizados.
+
+    \subsection{Arquitetura de Processamento Concorrente}
+
+    Dada a alta carga de I/O (Entrada/Saída) exigida para a leitura e conversão de milhares de arquivos PDF, a implementação não seguiu uma abordagem sequencial. Em vez disso, utilizou-se o padrão de projeto \textit{Worker Pool} nativo da linguagem Go.
+
+    A função orquestradora, \texttt{TextProcessor}, define um limite de concorrência controlado pela variável \texttt{maxWorkers}. O funcionamento baseia-se em três primitivas de sincronização:
+    \begin{itemize}
+        \item \textbf{Channels (Canais):} Um canal buferizado (\texttt{workerLimit}) atua como um semáforo, bloqueando a criação de novas \textit{goroutines} quando o limite de processos simultâneos é atingido. Isso impede a exaustão de recursos do sistema operacional, como descritores de arquivos e memória RAM.
+        \item \textbf{Goroutines:} Cada documento é processado em sua própria \textit{thread} leve, permitindo que enquanto um arquivo aguarda a operação de disco, a CPU possa processar a limpeza textual de outro.
+        \item \textbf{WaitGroup:} O mecanismo \texttt{sync.WaitGroup} assegura que o processo principal aguarde a conclusão de todas as tarefas de limpeza antes de encerrar a execução.
+    \end{itemize}
+
+    \subsection{Extração de Texto (OCR e Conversão)}
+
+    A primeira etapa do \textit{pipeline} é a extração do conteúdo textual. Devido à complexidade do \textit{layout} de documentos legislativos (frequentemente diagramados em colunas ou contendo quebras de página irregulares), bibliotecas nativas de leitura de PDF muitas vezes falham em manter a ordem lógica do texto.
+
+    Para garantir a fidelidade da extração, o sistema realiza uma chamada de sistema (\textit{syscall}) para a ferramenta externa \texttt{pdftotext} (parte do pacote \textit{poppler-utils}). A função \texttt{processPDF} executa este comando via \texttt{os/exec}, direcionando o fluxo de texto extraído (\textit{standard output}) diretamente para a memória da aplicação, evitando escritas intermediárias desnecessárias em disco nesta fase.
+
+    \subsection{Pipeline de Higienização (Cleaning)}
+
+    O texto bruto extraído é submetido à função \texttt{CleanText}, localizada no pacote \texttt{utils}. Esta função aplica uma série de transformações destrutivas e normalizadoras, projetadas especificamente para o domínio jurídico. As etapas, executadas sequencialmente, são:
+
+    \subsection{Normalização de Caixa (Case Folding)}
+    Todo o texto é convertido para letras minúsculas (\textit{lowercase}) utilizando a função \texttt{strings.ToLower}. Essa etapa reduz a dimensionalidade do vocabulário, garantindo que termos como "LEI", "Lei" e "lei" sejam tratados como a mesma entidade vetorial.
+
+    \subsection{Remoção de Entidades Específicas via Regex}
+    Utilizando Expressões Regulares (\textit{Regular Expressions}), o sistema identifica e remove padrões que não agregam valor semântico à busca temática:
+    \begin{enumerate}
+        \item \textbf{Numerais Romanos:} Expressões como "Inciso IV", "Capítulo XX" ou datas em numerais romanos são removidas. A regex \texttt{\^{}M\{0,3\}(CM|CD|D?C\{0,3\})...} foi empregada para cobrir a complexidade dessas formações. No contexto de busca semântica, saber que uma lei está no "Capítulo IV" é menos relevante do que o conteúdo do capítulo em si.
+        \item \textbf{URLs e Links:} Endereços web (\texttt{https?://...}) são removidos para evitar que o algoritmo indexe metadados de rodapé comuns em documentos digitais.
+        \item \textbf{Datas e Valores Numéricos:} Padrões de datas (ex: "12/05/2023") e valores monetários ou decimais são eliminados. A decisão de remover esses dados baseia-se no objetivo do sistema: encontrar documentos por \textit{similaridade de assunto}, não por metadados temporais ou quantitativos específicos.
+    \end{enumerate}
+
+    \subsection{Normalização de Pontuação e Caracteres}
+    A função realiza uma varredura caractere a caractere (\textit{rune-wise}), removendo qualquer elemento classificado como pontuação ou símbolo (\texttt{unicode.IsPunct}, \texttt{unicode.IsSymbol}). Hífens, travessões e \textit{underscores} são substituídos por espaços em branco para evitar a aglutinação indevida de palavras (ex: transformar "decreto-lei" em "decreto lei" e não "decretolei").
+
+    \subsection{Canonicalização de Caracteres (Acentuação)}
+    A língua portuguesa possui uma rica variedade de caracteres acentuados que podem prejudicar a correspondência exata de termos. O sistema carrega um mapa de substituições a partir do arquivo \texttt{misc/replaces.json}.
+    Este arquivo define um mapeamento exaustivo de caracteres latinos estendidos para seus equivalentes ASCII simples (ex: "á", "ã", "à", "ä" $\rightarrow$ "a"; "ç" $\rightarrow$ "c"). Essa normalização é crítica para lidar com erros de digitação e inconsistências de codificação (UTF-8 vs Latin-1) comuns em sistemas legados do governo.
+
+    \subsection{Filtragem de Stopwords}
+    Por fim, utiliza-se a biblioteca \texttt{bbalet/stopwords} para remover palavras funcionais da língua portuguesa (artigos, preposições, conectivos). A preservação destas palavras inflaria artificialmente a similaridade entre documentos distintos apenas pelo uso compartilhado da gramática básica, prejudicando a eficácia dos algoritmos TF-IDF e BM25.
+
+    O resultado final desse processo é um arquivo de texto limpo (salvo com sufixo \texttt{\_clean.txt}), contendo apenas os lexemas substantivos do documento, pronto para ser consumido pelos algoritmos de indexação e vetorização.
+
+
+
+    \section{Modelagem de Dados e Persistência}
+
+    A eficiência de um sistema de recuperação de informação depende intrinsecamente de como os dados são estruturados e persistidos. Para este projeto, optou-se por uma abordagem híbrida que combina a rigidez de um esquema relacional para manter a integridade dos documentos com a flexibilidade de estruturas de índice invertido para a busca rápida.
+
+    A camada de persistência foi construída sobre o banco de dados SQLite, utilizando o ORM (\textit{Object-Relational Mapping}) GORM para a manipulação das entidades em Go. A escolha do SQLite justifica-se pela sua arquitetura \textit{serverless} de arquivo único, eliminando a latência de rede típica de conexões cliente-servidor (como em PostgreSQL ou MySQL) e permitindo um desempenho de leitura extremamente elevado quando o arquivo do banco reside em discos SSD NVMe modernos.
+
+    \subsection{Definição das Estruturas de Dados (Structs)}
+
+    A modelagem orientada a objetos do sistema reflete-se nas \textit{structs} definidas no pacote \texttt{models}. Cada \textit{struct} mapeia diretamente para uma tabela no banco de dados, seguindo as convenções do GORM.
+
+    \subsubsection{Entidade Documento}
+    A unidade fundamental do \textit{corpus} é representada pela \textit{struct} \texttt{Document}, definida no arquivo \texttt{models/Document.go}. Esta estrutura armazena tanto os metadados quanto o conteúdo textual em seus diferentes estágios de processamento.
+
+    \begin{verbatim}
+    type Document struct {
+	ID      uint16
+	Name    string
+	Size    uint16
+	Kind    DocKind
+	Content []byte // Atributo não persistido
+}
+    \end{verbatim}
+
+    A inclusão de \texttt{gorm.Model} injeta automaticamente campos de controle como \texttt{ID} (chave primária autoincremental), \texttt{CreatedAt}, \texttt{UpdatedAt} e \texttt{DeletedAt}, facilitando a auditoria e o controle de versão dos registros. O campo \texttt{Content} armazena o texto bruto extraído do PDF, enquanto \texttt{CleanContent} preserva o resultado do pipeline de normalização descrito na seção anterior, servindo de base para a geração de N-gramas.
+
+    \subsubsection{Dicionário de Palavras (Vocabulary)}
+    Para otimizar o armazenamento e as comparações, as palavras não são repetidas nas tabelas de índice. Em vez disso, utiliza-se uma tabela de vocabulário único, representada pela \textit{struct} \texttt{Word}.
+
+    \begin{verbatim}
+type Word struct {
+    gorm.Model
+    Word string `gorm:"uniqueIndex"`
+}
+    \end{verbatim}
+
+    A \textit{tag} \texttt{uniqueIndex} na coluna \texttt{Word} é crucial: ela garante que cada termo apareça apenas uma vez no banco de dados e cria um índice B-Tree físico no SQLite, permitindo que a conversão de uma \textit{string} para seu \texttt{WordID} ocorra em tempo logarítmico $O(\log N)$.
+
+    \subsection{Estrutura do Índice Invertido e Polimorfismo}
+
+    A implementação do índice invertido foge à abordagem trivial de mapear "Palavra $\rightarrow$ Documentos". Para capturar o contexto local e permitir buscas por frases e proximidade, o sistema modela o índice através de três entidades distintas: \textbf{Unigramas}, \textbf{Bigramas} e \textbf{Trigramas}.
+
+    Para que os algoritmos de cálculo de relevância (TF-IDF e BM25) pudessem operar de forma agnóstica em relação ao tamanho do n-grama, definiu-se a interface polimórfica \texttt{IGram}, localizada no pacote \texttt{models/interfaces}.
+
+    \begin{verbatim}
+type IGram interface {
+    GetCacheKey(jumps, doc bool) string
+    GetDocId() uint16
+    Increment()
+    GetCount() int
+    ApplyWordWheres(db *gorm.DB) *gorm.DB
+    ApplyJumpWheres(db *gorm.DB) *gorm.DB
+    schema.Tabler
+}
+    \end{verbatim}
+
+    Esta interface é crucial para a arquitetura do sistema, pois permite abstrair a complexidade das consultas SQL. Métodos como \texttt{ApplyWordWheres} e \texttt{ApplyJumpWheres} encapsulam a lógica de filtragem do banco de dados, permitindo que uma função de busca receba um \texttt{IGram} genérico e construa a \textit{query} correta dinamicamente, seja ela para um termo único ou uma frase de três palavras.
+
+    A materialização dessa interface ocorre nas \textit{structs} concretas. A estrutura de um trigrama, denominada \texttt{InverseTrigram}, exemplifica a otimização de memória aplicada:
+
+    \begin{verbatim}
+type InverseTrigram struct {
+    Wd0Id uint16 `gorm:"uniqueIndex:compositeindex"`
+    Wd1Id uint16 `gorm:"uniqueIndex:compositeindex"`
+    Wd2Id uint16 `gorm:"uniqueIndex:compositeindex"`
+    DocId uint16 `gorm:"uniqueIndex:compositeindex"`
+    Jump0 int8   `gorm:"uniqueIndex:compositeindex"`
+    Jump1 int8   `gorm:"uniqueIndex:compositeindex"`
+    Count int
+}
+    \end{verbatim}
+
+    Nesta modelagem, destacam-se decisões de \textit{design} focadas em integridade e performance:
+
+    \begin{itemize}
+        \item \textbf{Índice Composto (Composite Index):} Conforme observado nas \textit{tags} do GORM (\texttt{uniqueIndex:compositeindex}), os seis primeiros atributos (as três palavras, o documento e as duas distâncias) formam, em conjunto, uma chave única composta. Isso impede a duplicação de registros para a mesma ocorrência semântica e cria um índice B-Tree otimizado no SQLite, acelerando drasticamente as operações de leitura.
+
+        \item \textbf{Chaves Estrangeiras Virtuais Leves:} Os campos \texttt{Wd...Id} referenciam a tabela de vocabulário, mas armazenam apenas inteiros sem sinal de 16 bits (\texttt{uint16}). Isso limita o vocabulário a 65.535 termos únicos (suficiente após a limpeza agressiva) e o \textit{corpus} a 65.535 documentos, mas garante que cada linha do índice ocupe uma fração mínima de espaço em disco comparado ao armazenamento de \textit{strings}.
+
+        \item \textbf{Conceito de "Jumps" (\textit{Skip-Grams}):} Diferente de implementações simples que exigem adjacência estrita, as estruturas \texttt{Bigram} e \texttt{Trigram} utilizam inteiros de 8 bits (\texttt{int8}) para armazenar a distância entre as palavras (\texttt{Jump}). Isso permite indexar padrões não contíguos (ex: "recurso \textit{de} apelação" pode ser capturado como um bigrama "recurso apelação" com \texttt{Jump=1}), aumentando a flexibilidade semântica da busca exata sem perder a precisão da ordem dos termos.
+    \end{itemize}
+
+    \subsection{Estratégia de Isolamento e Duplicação}
+
+    Para garantir a integridade dos testes comparativos e evitar que a execução de um cenário influenciasse os resultados de outro (por exemplo, cache de páginas do sistema operacional ou fragmentação de índices), implementou-se um mecanismo de duplicação de banco de dados sob demanda.
+
+    Antes de iniciar uma bateria de testes, o sistema verifica a necessidade de criar um ambiente limpo ou reutilizar dados pré-processados. Caso a \textit{flag} \texttt{fromScratch} seja falsa, a função \texttt{InitDB} invoca \texttt{DuplicateFile} para criar uma cópia física do arquivo do banco de dados mestre (contendo o \textit{corpus} limpo) para um novo arquivo identificado pelo ID da execução atual (ex: \texttt{corpus\_12345.db}).
+
+    Essa abordagem de "Sandbox por Processo" elimina a concorrência de escrita no nível do arquivo do banco de dados e permite que múltiplos testes rodem em paralelo ou em sequência sem condições de corrida e com isolamento total de transações.
+
+    \subsection{Otimização por Esquema Único (Single-Gram Schema)}
+
+    Uma decisão arquitetural crítica para a performance do sistema foi a restrição de armazenar \textbf{apenas um tipo de n-grama por instância de banco de dados}.
+
+    Embora fosse possível criar tabelas distintas para Unigramas, Bigramas e Trigramas coexistindo no mesmo banco, isso implicaria em um aumento desnecessário do tamanho do arquivo e na dispersão das páginas de dados no disco, prejudicando a localidade de referência e o desempenho do cache do SQLite.
+
+    Para mitigar isso, a função \texttt{InitDB} utiliza uma estrutura de decisão (\texttt{switch gramSize}) para definir dinamicamente qual modelo será migrado para o banco de dados daquela execução específica:
+
+    \begin{verbatim}
+switch gramSize {
+case 1:
+    gramModel = &models.InverseUnigram{}
+    index = "(wd0Id)"
+case 2:
+    gramModel = &models.InverseBigram{}
+    index = "(wd0Id, wd1Id)"
+case 3:
+    gramModel = &models.InverseTrigram{}
+    index = "(wd0Id, wd1Id, wd2Id)"
+}
+    \end{verbatim}
+
+    Dessa forma, se um teste avalia a performance de Trigramas, o banco de dados é instanciado contendo apenas a tabela \texttt{InverseTrigram}. Isso garante que a tabela de índices (\texttt{WORD\_DOC}) seja extremamente compacta e otimizada exclusivamente para as consultas daquele tamanho de grama, eliminando o \textit{overhead} de manutenção de índices não utilizados.
+
+    \subsection{Indexação Dinâmica}
+
+    Complementando a estratégia de esquema único, a criação de índices também é realizada dinamicamente via execução de SQL bruto (\textit{Raw SQL}) no momento da inicialização. O sistema executa o comando \texttt{CREATE INDEX} ajustado para as colunas específicas do n-grama selecionado (conforme a variável \texttt{index} definida no trecho de código acima).
+
+    Isso assegura que as consultas de busca (\textit{SELECT}), que realizam junções pesadas entre o vocabulário e a tabela de ocorrências, sempre utilizem um índice de cobertura (\textit{Covering Index}) ou um índice B-Tree otimizado, reduzindo a complexidade da busca de $O(N)$ para $O(\log N)$.
+
+    \section{Implementação dos Algoritmos de Busca e Recuperação}
+    \label{sec:algoritmos_busca}
+
+    A lógica de recuperação de informação representa o núcleo intelectual do sistema. Enquanto a maioria das soluções comerciais delega essa tarefa para motores de busca prontos (como Elasticsearch ou Solr), neste trabalho optou-se pela implementação manual ("\textit{from scratch}") dos algoritmos TF-IDF e BM25 em Go. Esta decisão permitiu um controle granular sobre a ponderação dos termos e a otimização do uso de memória através de concorrência.
+
+    \subsection{Pipeline Estatístico: TF-IDF}
+
+    O algoritmo TF-IDF (\textit{Term Frequency - Inverse Document Frequency}) foi implementado no pacote \texttt{utils}, especificamente no arquivo \texttt{tf\_idf.go}. A função principal, \texttt{ComputeDocPreIndexedTFIDF}, calcula o vetor de pesos para um documento dado um conjunto de N-gramas.
+
+    A implementação matemática segue a fórmula clássica com suavização:
+    \[
+        \text{TF-IDF}(t, d) = \left( \frac{f_{t,d}}{\sum_{t' \in d} f_{t',d}} \right) \times \log \left( \frac{N}{1 + df_t} \right)
+    \]
+
+    O código implementa esta lógica em duas fases distintas para maximizar a eficiência:
+
+    \begin{enumerate}
+        \item \textbf{Cálculo do TF (Local):} O algoritmo itera sobre a lista de trigramas (\texttt{trigramList}) do documento, acumulando a frequência bruta de cada termo em um mapa em memória (\texttt{tf}).
+        \item \textbf{Cálculo do DF (Global) Concorrente:} A etapa mais custosa é determinar em quantos documentos do \textit{corpus} cada termo aparece ($df_t$). Para evitar que essa operação I/O-bound bloqueie o processamento, utilizou-se o padrão de \textit{fan-out/fan-in} com \textit{goroutines}.
+    \end{enumerate}
+
+    \textbf{Otimização de Concorrência:}
+    O trecho de código abaixo ilustra como o paralelismo foi controlado para evitar sobrecarga no banco de dados:
+
+    \begin{verbatim}
+sem := make(chan struct{}, 25) // Semáforo de capacidade 25
+var wg sync.WaitGroup
+
+for key := range tf {
+    wg.Add(1)
+    sem <- struct{}{} // Adquire token
+    go func(key string) {
+        defer wg.Done()
+        defer func() { <-sem }() // Libera token
+        df := len(cacheN[key])   // Acesso thread-safe ao cache
+        dfChan <- dfResult{key: key, df: df}
+    }(key)
+}
+    \end{verbatim}
+
+    Um canal bufferizado (\texttt{sem}) atua como um semáforo limitador, garantindo que nunca haja mais de 25 \textit{goroutines} acessando o cache ou o banco de dados simultaneamente. Isso estabiliza o \textit{throughput} da CPU e previne condições de corrida em ambientes de alta carga.
+
+    \subsection{Pipeline Probabilístico: Okapi BM25}
+
+    Reconhecido como o estado da arte para buscas baseadas em palavras-chave, o algoritmo BM25 foi implementado no arquivo \texttt{bm25.go}. Diferente do TF-IDF, o BM25 normaliza a frequência do termo pelo tamanho do documento, penalizando textos excessivamente longos que poderiam ter altas contagens de palavras apenas por serem verbosos.
+
+    A função \texttt{ComputeDocPosIndexedBM25} implementa a equação:
+
+    \[
+        \text{Score}(D,Q) = \sum_{i=1}^{n} \text{IDF}(q_i) \cdot \frac{f(q_i, D) \cdot (k_1 + 1)}{f(q_i, D) + k_1 \cdot (1 - b + b \cdot \frac{|D|}{\text{avgdl}})}
+    \]
+
+    \textbf{Parametrização e Ajuste Fino:}
+    Os hiperparâmetros do algoritmo foram fixados diretamente no código fonte, seguindo valores recomendados pela literatura de Recuperação de Informação para domínios gerais, mas aplicáveis ao jurídico:
+    \begin{itemize}
+        \item \textbf{$k_1 = 1.5$:} Controla a saturação da frequência do termo. Indica o quão rapidamente a relevância aumenta com repetições da mesma palavra.
+        \item \textbf{$b = 0.75$:} Controla a intensidade da normalização pelo comprimento do documento. Um valor de 0.75 aplica uma penalização moderada a documentos longos.
+    \end{itemize}
+
+    Para calcular o comprimento médio dos documentos (\texttt{avgDL}), essencial para o denominador da equação, o sistema executa uma consulta de agregação otimizada no banco de dados SQLite (\texttt{SELECT SUM(count) FROM WORD\_DOC}), aproveitando os índices criados na etapa de modelagem.
+
+    \subsection{Pipeline Semântico: Vetorização via Transformers}
+
+    Enquanto os algoritmos anteriores (implementados em Go) operam no nível léxico exato, a busca semântica foi delegada a um microsserviço especializado em Python, localizado em \texttt{src/core\_python}. A escolha do Python deve-se à maturidade do ecossistema de Deep Learning, especificamente das bibliotecas \texttt{torch} e \texttt{sentence-transformers}.
+
+    \section{Implementação dos Algoritmos de Busca}
+
+    A lógica de recuperação de informação foi implementada do zero em Go, permitindo um controle granular sobre as estruturas de dados e o gerenciamento de memória.
+
+    \subsection{Modelo TF-IDF e BM25}
+    Para os algoritmos estatísticos, o sistema utiliza um índice invertido persistido em um banco de dados SQLite via ORM GORM. A implementação dos cálculos de TF-IDF e Okapi BM25 ocorre no pacote \texttt{utils}.
+
+    Um destaque da implementação é o suporte ao cálculo paralelo da frequência de documentos (DF). Dado que o cálculo de relevância exige saber em quantos documentos cada termo do \textit{corpus} aparece, essa operação pode se tornar um gargalo. O código utiliza \textit{goroutines} e \textit{channels} para paralelizar essas consultas ao banco de dados, limitando a concorrência através de um mecanismo de semáforo (buffer de canal) para não exaurir as conexões com o banco.
+
+    \subsection{Vetorização Semântica}
+    Para a busca semântica, o módulo Python utiliza a biblioteca \texttt{sentence-transformers}. O modelo escolhido, \texttt{paraphrase-multilingual-MiniLM-L12-v2}, converte os textos limpos em vetores densos de 384 dimensões. A similaridade entre os documentos é então calculada através da métrica de Similaridade de Cosseno, permitindo identificar correspondências baseadas no significado e não apenas na coincidência exata de palavras.
+
+%    \chapter{Desenvolvimento}
+%
+%    O desenvolvimento deste trabalho seguirá uma abordagem incremental e iterativa, com entregas organizadas semanalmente ao longo de doze semanas. Cada etapa será planejada de forma a permitir a validação contínua dos componentes implementados, favorecendo a integração progressiva entre os módulos do sistema. Essa estratégia contribui para a identificação precoce de falhas e a mitigação de riscos relacionados a incompatibilidades entre partes distintas da aplicação.
+%
+%    A arquitetura adotada será orientada a microserviços, promovendo uma separação clara de responsabilidades entre os componentes do sistema. Essa escolha visa facilitar o desenvolvimento paralelo, a escalabilidade e a manutenção futura. O sistema terá como principal objetivo a extração e recuperação de informações contidas em documentos jurídicos, com foco em consultas tanto textuais quanto semânticas. A base de dados será composta por documentos oriundos de fontes públicas, como a Câmara dos Deputados, o Senado Federal e tribunais superiores. Esses documentos serão extraídos, normalizados e armazenados em um formato unificado, acompanhados de metadados que possibilitem buscas mais eficientes.
+%
+%    As buscas ocorrerão em duas camadas complementares. A camada textual utilizará o algoritmo de Boyer–Moore, reconhecido por seu bom desempenho na localização de padrões em grandes volumes de texto. Já a camada semântica aplicará modelos pré-treinados baseados em \textit{transformers}, responsáveis por converter os textos em vetores numéricos. A partir desses vetores, será possível calcular a similaridade entre documentos com base na métrica de cosseno, promovendo uma recuperação mais contextualizada das informações.
+%
+%    A infraestrutura do sistema será composta por três componentes principais, interconectados por meio de APIs REST. A camada de apresentação será construída com um \textit{framework} moderno de \textit{frontend} utilizando \textit{TypeScript}, oferecendo ao usuário funcionalidades como envio de documentos, execução de buscas e visualização dos resultados. O \textit{backend} principal será desenvolvido em GO (versão 1.22 ou superior), e será responsável pelas tarefas de ingestão dos documentos, normalização textual, armazenamento em banco de dados relacional e execução da lógica de busca.
+%
+%    O processamento semântico será realizado por um microserviço desenvolvido em Python 3.11, que utilizará a biblioteca \textit{sentence-transformers} e modelos da família BERT, selecionados por apresentarem um bom equilíbrio entre desempenho e custo computacional. Esse microserviço será exposto por meio do \textit{framework} FastAPI, que fornece uma interface leve, eficiente e compatível com os requisitos de comunicação REST. Durante o processo de ingestão, o \textit{backend} em GO enviará os textos ao microserviço Python e armazenará os vetores retornados juntamente aos metadados dos documentos. Isso permitirá que as buscas textuais e semânticas sejam realizadas de forma paralela e posteriormente combinadas por meio de um mecanismo de rankeamento.
+%
+%    Por fim, o armazenamento será feito em um banco de dados PostgreSQL, escolhido por sua confiabilidade, suporte a tipos de dados complexos e compatibilidade com diversas linguagens de programação. Essa combinação de tecnologias visa garantir um sistema robusto, eficiente e adaptável a diferentes contextos de uso.
+%
 
     \section{Cronograma de Atividades}
 
