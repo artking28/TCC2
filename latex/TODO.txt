@@ -1,14 +1,6 @@
-DAVI
-- Escrever o capítudo BM25 ✔
-- Referenciar índice inverso ✔
-- Se aprofundar nas arquiteturas embeddings ✔
-- Referenciar o coeficiente de spearman ✔
 - Fazer Indice Faiss
-- Reescrever o resumo 
+- Reescrever o resumo
 - Escrever Metodologia
 - Refazer as imagens com nossa própria autoria
-- Refazer os trabalhos relacionados
-
-ARTHUR
+- Limpar os trabalhos relacionados
 - Refazer o desenvolvimento
-- Reescrever os objetivos especificos
