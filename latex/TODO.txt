@@ -1,4 +1,4 @@
-- Fazer Indice Faiss
+
 - Reescrever o resumo
 - Escrever Metodologia
 - Refazer as imagens com nossa própria autoria
