@@ -122,21 +122,34 @@ func (this *TestConfigResult) Push40(spearman float64, elapsedMicro int64) {
 	}
 }
 
-func (this *TestConfigResult) String() (ret string) {
+func (t *TestConfigResult) String() string {
+	return fmt.Sprintf(
+		"%d,%d,"+
+			"%.4f,%.4f,%.4f,%d,%d,%d,"+
+			"%.4f,%.4f,%.4f,%d,%d,%d,"+
+			"%.4f,%.4f,%.4f,%d,%d,%d",
+		t.TotalDocs,
+		t.TotalTime,
 
-	ret += fmt.Sprintf("\tTotalDocs: %d, TotalTime: %d\n", this.TotalDocs, this.TotalTime)
+		t.AvgSpearmanSim10/50,
+		t.MinSpearmanSim10,
+		t.MaxSpearmanSim10,
+		t.AvgTime10/50,
+		t.MinTime10,
+		t.MaxTime10,
 
-	ret += fmt.Sprintf("\tSpearmanSim10: avg=%.4f, min=%.4f, max=%.4f, time.avg=%d, time.min=%d, time.max=%d\n",
-		this.AvgSpearmanSim10/50, this.MinSpearmanSim10, this.MaxSpearmanSim10,
-		this.AvgTime10/50, this.MinTime10, this.MaxTime10)
+		t.AvgSpearmanSim20/50,
+		t.MinSpearmanSim20,
+		t.MaxSpearmanSim20,
+		t.AvgTime20/50,
+		t.MinTime20,
+		t.MaxTime20,
 
-	ret += fmt.Sprintf("\tSpearmanSim20: avg=%.4f, min=%.4f, max=%.4f, time.avg=%d, time.min=%d, time.max=%d\n",
-		this.AvgSpearmanSim20/50, this.MinSpearmanSim20, this.MaxSpearmanSim20,
-		this.AvgTime20/50, this.MinTime20, this.MaxTime20)
-
-	ret += fmt.Sprintf("\tSpearmanSim40: avg=%.4f, min=%.4f, max=%.4f, time.avg=%d, time.min=%d, time.max=%d\n",
-		this.AvgSpearmanSim40/50, this.MinSpearmanSim40, this.MaxSpearmanSim40,
-		this.AvgTime40/50, this.MinTime40, this.MaxTime40)
-
-	return ret
+		t.AvgSpearmanSim40/50,
+		t.MinSpearmanSim40,
+		t.MaxSpearmanSim40,
+		t.AvgTime40/50,
+		t.MinTime40,
+		t.MaxTime40,
+	)
 }

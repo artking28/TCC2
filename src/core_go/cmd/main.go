@@ -27,6 +27,25 @@ const (
 	MaxBigramJumps  = 4 // Maximum allowed jumps between words for a Bigram.
 )
 
+var csvHeader string
+
+func init() {
+	csvHeader = strings.Join([]string{
+		"id",
+		"algo",
+		"preIndexed",
+		"normalizedJumps",
+		"size",
+		"jumps",
+		"parallel",
+		"totalDocs",
+		"totalTime",
+		"avg10", "min10", "max10", "timeAvg10", "timeMin10", "timeMax10",
+		"avg20", "min20", "max20", "timeAvg20", "timeMin20", "timeMax20",
+		"avg40", "min40", "max40", "timeAvg40", "timeMin40", "timeMax40",
+	}, ",") + "\n"
+}
+
 // main iterates over all parameter combinations and saves results to a JSON file.
 func main() {
 
@@ -42,8 +61,10 @@ func main() {
 		mgu.NewPair(Bigram, MaxBigramJumps),   // Bigram: up to 4 jumps.
 		mgu.NewPair(Trigram, MaxTrigramJumps), // Trigram: up to 2 jumps.
 	}
+	_, _ = sizes, id
 
 	strB := strings.Builder{}
+	strB.WriteString(csvHeader)
 
 	// Main loop: iterates through each configured n-gram type (Unigram, Bigram, Trigram).
 	for _, s := range sizes {
@@ -86,14 +107,6 @@ func main() {
 // BaseTest executes a full benchmark and validation cycle.
 // Records execution time and adds parameters and duration to the results slice.
 func BaseTest(testId int64, algo support.Algo, parallel, preIndexed, normalizeJumps bool, size, jumps int) string {
-
-	// Marks the start of the test execution.
-	label := fmt.Sprintf("[TEST %02d] algo=%s | preIndexed=%v | normalizedJumps=%v | size=%d | jumps=%d {\n",
-		testId, algo, preIndexed, normalizeJumps, size, jumps)
-
-	// Prints the current test configuration to the console.
-	fmt.Printf("\n%s\n", label)
-
 	name, db := corpus.CreateDatabaseCaches(testId, false, size, jumps)
 
 	legalInputs := "./../../misc/searchLegalInputs.json"
@@ -102,11 +115,17 @@ func BaseTest(testId int64, algo support.Algo, parallel, preIndexed, normalizeJu
 		log.Fatalf(err.Error())
 	}
 
-	label += res.String()
-	label += "}\n\n"
+	// limpa o toString pra virar 1 linha
+	clean := strings.ReplaceAll(res.String(), "\n", "")
+	clean = strings.ReplaceAll(clean, "\t", "")
+
+	csv := fmt.Sprintf(
+		"%d,%s,%v,%v,%d,%d,%v,%s\n",
+		testId, algo, preIndexed, normalizeJumps, size, jumps, parallel, clean,
+	)
 
 	if err = os.Remove(name); err != nil {
 		log.Fatalf("error removing corpus file: %v", err)
 	}
-	return label
+	return csv
 }
