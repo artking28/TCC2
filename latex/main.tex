@@ -578,25 +578,6 @@
 
     No contexto deste trabalho, o coeficiente de \textit{Spearman} fornecerá uma medida objetiva do grau de concordância entre as listas produzidas pelas abordagens estatísticas (TF-IDF, BM25) e semânticas (\textit{embeddings}). Conforme demonstrado em \citeonline{citacao71}, que utilizou essa métrica para comparar algoritmos de ranqueamento textual, o \textit{Spearman} é uma ferramenta eficaz para avaliar a correlação entre os resultados de diferentes sistemas de busca.
 
-    \subsection{Algoritmo de busca de padrão: Boyer-Moore}
-
-    O algoritmo Boyer-Moore é uma técnica avançada de busca de padrões em textos, criada em 1977 por Robert S. Boyer e J Strother Moore, dois cientistas da computação americanos. Eles desenvolveram esse método enquanto trabalhavam na IBM, buscando uma solução eficiente para o problema clássico de encontrar a ocorrência de uma sequência de caracteres (padrão) dentro de um texto maior, que é uma tarefa fundamental em várias áreas, como processamento de texto, bioinformática e sistemas de busca \cite{citacao47, citacao48}.
-
-    O Boyer-Moore destaca-se por sua eficiência prática e seu funcionamento baseado em heurísticas inteligentes, que permitem ao algoritmo pular grandes trechos do texto durante a busca, ao invés de verificar cada caractere sequencialmente como em métodos mais simples. Isso o torna especialmente rápido para textos grandes e padrões não triviais \cite{citacao47, citacao49}.
-
-    A ideia central do algoritmo é comparar o padrão com o texto da direita para a esquerda, começando pelo último caractere do padrão. Caso ocorra uma incompatibilidade, duas heurísticas são usadas para calcular possíveis deslocamentos do padrão: a heurística do caractere ruim (\textit{Bad Character Rule}) e a heurística do sufixo bom (\textit{Good Suffix Rule}) \cite{citacao48, citacao47}.
-
-    A heurística do caractere ruim atua quando há uma falha na comparação entre o padrão e o texto, ou seja, quando um caractere do texto não coincide com o caractere correspondente do padrão. Nesse caso, o algoritmo verifica se esse caractere “ruim” aparece em alguma posição anterior dentro do próprio padrão. Se ele existir, o padrão é deslocado para a direita até que essa ocorrência do caractere ruim no padrão alinhe-se com a posição atual no texto. Caso o caractere não esteja presente no padrão, o deslocamento pode ser ainda maior, movendo o padrão além desse caractere, o que permite pular várias posições de uma vez \cite{citacao48, citacao47}.
-
-    Já a heurística do sufixo bom é aplicada quando um sufixo do padrão já casou com uma parte do texto, mas a comparação subsequente falha. Nesse cenário, o algoritmo tenta alinhar esse sufixo com outra ocorrência dele dentro do próprio padrão, deslocando-o para a direita. Se não houver outra ocorrência desse sufixo, busca-se alinhar parte desse sufixo com um prefixo correspondente do padrão. Dessa forma, essa heurística permite que o algoritmo aproveite ao máximo as comparações já realizadas, promovendo deslocamentos que aumentam a eficiência da busca sem risco de perder possíveis correspondências \cite{citacao48, citacao47}.
-
-    Essas duas heurísticas trabalham juntas para maximizar o deslocamento do padrão e minimizar o número de comparações. Na prática, isso significa que o algoritmo consegue pular grandes partes do texto onde a busca não terá sucesso, evitando comparações desnecessárias. Por isso, seu desempenho médio é muito eficiente, com complexidade sublinear --- ou seja, ele não precisa examinar todos os caracteres do texto. Essa eficiência se traduz em um tempo médio aproximado de $O\left(\frac{n}{m}\right)$, onde $n$ é o tamanho do texto e $m$ o tamanho do padrão, o que é muito melhor do que a abordagem ingênua que sempre leva $O(n \cdot m)$ \cite{citacao47, citacao48, citacao49}.
-
-    No pior caso, entretanto, o Boyer-Moore pode chegar a uma complexidade de $O(n \cdot m)$, especialmente em textos com padrões altamente repetitivos ou quando o padrão tem caracteres repetidos que causam pequenos deslocamentos a cada falha. Apesar disso, esses casos são raros, e na prática, o algoritmo é considerado um dos mais rápidos e robustos para busca de padrões em textos \cite{citacao47, citacao50, citacao48}.
-
-    Em contrapartida, o algoritmo de KMP evita retrocessos no texto usando a tabela de falhas (prefix-função), garantindo sempre tempo linear ${O(n + m)}$, onde ${n}$ é o tamanho do texto e ${m}$ o do padrão. Já Boyer-Moore, embora não tenha garantia de pior caso linear sem extensões, costuma superar KMP em textos reais graças aos grandes saltos proporcionados pelas heurísticas de caractere-ruim e sufixo-bom \cite{citacao51, citacao47}.
-
-
     \section{Programação Paralela e Escalabilidade}
 
     A programação paralela vem como uma das soluções propostas para os desafios modernos da computação. A ideia por trás dela foi impulsionada pela necessidade de otimizar o tempo de processamento através algoritmos eficientes para criar aplicações que sejam capazes de lidar com um grande volume de dados e cálculos intensivos \cite{citacao12}, coisa que os algoritmos sequenciais não são tão adequados.
@@ -624,7 +605,6 @@
     \end{figure}
 
     Com o avanço da computação, da engenharia de software, o surgimento de várias arquiteturas \textit{multicore} e sistemas distribuídos, a paralelização dentro dessas estruturas nos permite dividir tarefas complexas em subtarefas executadas simultaneamente, maximizando a eficiência e o desempenho. Contudo, o desenvolvimento de algoritmos paralelos exige lidar com questões como sincronização, concorrência e balanceamento de carga, tornando essa prática essencial para atender às demandas de rapidez e escalabilidade atualmente \cite{citacao13}.
-
 
     \section{Trabalhos Relacionados}
 
@@ -904,30 +884,6 @@ for key := range tf {
 
     \subsection{Vetorização Semântica}
     Para a busca semântica, o módulo Python utiliza a biblioteca \texttt{sentence-transformers}. O modelo escolhido, \texttt{paraphrase-multilingual-MiniLM-L12-v2}, converte os textos limpos em vetores densos de 384 dimensões. A similaridade entre os documentos é então calculada através da métrica de Similaridade de Cosseno, permitindo identificar correspondências baseadas no significado e não apenas na coincidência exata de palavras.
-
-%    \chapter{Desenvolvimento}
-%
-%    O desenvolvimento deste trabalho seguirá uma abordagem incremental e iterativa, com entregas organizadas semanalmente ao longo de doze semanas. Cada etapa será planejada de forma a permitir a validação contínua dos componentes implementados, favorecendo a integração progressiva entre os módulos do sistema. Essa estratégia contribui para a identificação precoce de falhas e a mitigação de riscos relacionados a incompatibilidades entre partes distintas da aplicação.
-%
-%    A arquitetura adotada será orientada a microserviços, promovendo uma separação clara de responsabilidades entre os componentes do sistema. Essa escolha visa facilitar o desenvolvimento paralelo, a escalabilidade e a manutenção futura. O sistema terá como principal objetivo a extração e recuperação de informações contidas em documentos jurídicos, com foco em consultas tanto textuais quanto semânticas. A base de dados será composta por documentos oriundos de fontes públicas, como a Câmara dos Deputados, o Senado Federal e tribunais superiores. Esses documentos serão extraídos, normalizados e armazenados em um formato unificado, acompanhados de metadados que possibilitem buscas mais eficientes.
-%
-%    As buscas ocorrerão em duas camadas complementares. A camada textual utilizará o algoritmo de Boyer–Moore, reconhecido por seu bom desempenho na localização de padrões em grandes volumes de texto. Já a camada semântica aplicará modelos pré-treinados baseados em \textit{transformers}, responsáveis por converter os textos em vetores numéricos. A partir desses vetores, será possível calcular a similaridade entre documentos com base na métrica de cosseno, promovendo uma recuperação mais contextualizada das informações.
-%
-%    A infraestrutura do sistema será composta por três componentes principais, interconectados por meio de APIs REST. A camada de apresentação será construída com um \textit{framework} moderno de \textit{frontend} utilizando \textit{TypeScript}, oferecendo ao usuário funcionalidades como envio de documentos, execução de buscas e visualização dos resultados. O \textit{backend} principal será desenvolvido em GO (versão 1.22 ou superior), e será responsável pelas tarefas de ingestão dos documentos, normalização textual, armazenamento em banco de dados relacional e execução da lógica de busca.
-%
-%    O processamento semântico será realizado por um microserviço desenvolvido em Python 3.11, que utilizará a biblioteca \textit{sentence-transformers} e modelos da família BERT, selecionados por apresentarem um bom equilíbrio entre desempenho e custo computacional. Esse microserviço será exposto por meio do \textit{framework} FastAPI, que fornece uma interface leve, eficiente e compatível com os requisitos de comunicação REST. Durante o processo de ingestão, o \textit{backend} em GO enviará os textos ao microserviço Python e armazenará os vetores retornados juntamente aos metadados dos documentos. Isso permitirá que as buscas textuais e semânticas sejam realizadas de forma paralela e posteriormente combinadas por meio de um mecanismo de rankeamento.
-%
-%    Por fim, o armazenamento será feito em um banco de dados PostgreSQL, escolhido por sua confiabilidade, suporte a tipos de dados complexos e compatibilidade com diversas linguagens de programação. Essa combinação de tecnologias visa garantir um sistema robusto, eficiente e adaptável a diferentes contextos de uso.
-%
-
-    \section{Cronograma de Atividades}
-
-    \begin{figure}[H]
-        \centering
-        \caption{\label{fig:cronoframa}Cronograma de atividades.}
-        \includegraphics[width=\textwidth]{assets/cronograma}
-        \legend {Fonte: Elaboração própria}
-    \end{figure}
 
 % ========================================================================
 % BIBLIOGRAFIA
