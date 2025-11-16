@@ -19,10 +19,10 @@ python: venv
 	clear && echo "executando python..." && python3.11 $(SCRIPT)
 
 latex:
-	cd latex; mkdir -p out && latexmk -pdf -jobname=out/tcc main.tex; cd ..
+	cd latex; mkdir -p out && latexmk -pdf -silent -jobname=out/tcc main.tex; cd ..
 
 latex-live:
-	cd latex; mkdir -p out && latexmk -pdf -pvc -jobname=out/tcc main.tex; cd ..
+	cd latex; mkdir -p out && latexmk -pdf -pvc -silent -jobname=out/tcc main.tex; cd ..
 
 clean:
 	-@rm -rf latex/out $(VENV) __pycache__ *.pyc

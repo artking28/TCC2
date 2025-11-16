@@ -1,6 +1,17 @@
 
-- Reescrever o resumo
-- Escrever Metodologia
+
+- Objetivos específicos: detalhas o pré processamento ✅
+- Inverter ordem do objetivo geral ✅
+- Tirar oq são embeddings ✅
+- Escrever o resumo ✅
+- Escrever o abstract ✅
+- Justificativa precisa ser mais fluida, mais paragrafos também 🔄
+- Introdução mais fluido é pelo menos 5 parágrafos e mais fluido
 - Refazer as imagens com nossa própria autoria
 - Limpar os trabalhos relacionados
 - Refazer o desenvolvimento
+- Fazer as consideracoes finais associando aos trabalhos associados
+- Fazer os trabalhos futuros
+- Adicionar capitalização e normalizacao de letras
+- Juntar embeddings com começo do TCC
+- Embeddings aplicado ao direito ou tirar ou mudar ordem
