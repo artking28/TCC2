@@ -12,7 +12,7 @@ import (
 )
 
 // ResultsOutput represents path to the file where benchmark results will be saved.
-const ResultsOutput = "./../../misc/results.txt"
+const ResultsOutput = "./../../misc/results.csv"
 
 // N-gram Size Constants
 const (
@@ -31,18 +31,18 @@ var csvHeader string
 
 func init() {
 	csvHeader = strings.Join([]string{
-		"id",
-		"algo",
-		"preIndexed",
-		"normalizedJumps",
-		"size",
-		"jumps",
-		"parallel",
-		"totalDocs",
-		"totalTime",
-		"avg10", "min10", "max10", "timeAvg10", "timeMin10", "timeMax10",
-		"avg20", "min20", "max20", "timeAvg20", "timeMin20", "timeMax20",
-		"avg40", "min40", "max40", "timeAvg40", "timeMin40", "timeMax40",
+		"TestID",
+		"Algorithm",
+		"Pre-Indexed",
+		"Normalized jumps",
+		"Grams size",
+		"Jumps size",
+		"Parallel",
+		"TotalDocs",
+		"TotalTime",
+		"AvgSpearmanSim10", "MinSpearmanSim10", "MaxSpearmanSim10", "AvgTime10", "MinTime10", "MaxTime10",
+		"AvgSpearmanSim20", "MinSpearmanSim20", "MaxSpearmanSim20", "AvgTime20", "MinTime20", "MaxTime20",
+		"AvgSpearmanSim40", "MinSpearmanSim40", "MaxSpearmanSim40", "AvgTime40", "MinTime40", "MaxTime40",
 	}, ",") + "\n"
 }
 
