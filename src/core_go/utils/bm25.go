@@ -260,6 +260,7 @@ func ComputeStringBM25(
 				continue
 			}
 			ngram = models.NewInverseUnigram(0, 0, w0.ID)
+			break
 		case 2:
 			w0, ok0 := cacheWords[word[0]]
 			w1, ok1 := cacheWords[word[1]]
@@ -267,6 +268,7 @@ func ComputeStringBM25(
 				continue
 			}
 			ngram = models.NewInverseBigram(0, 0, w0.ID, w1.ID, jumps[i][0])
+			break
 		case 3:
 			w0, ok0 := cacheWords[word[0]]
 			w1, ok1 := cacheWords[word[1]]
@@ -275,6 +277,7 @@ func ComputeStringBM25(
 				continue
 			}
 			ngram = models.NewInverseTrigram(0, 0, w0.ID, w1.ID, w2.ID, jumps[i][0], jumps[i][1])
+			break
 		default:
 			return nil, fmt.Errorf("invalid gramsSize: %d", gramsSize)
 		}

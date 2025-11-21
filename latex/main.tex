@@ -612,6 +612,29 @@
 
     \section{Trabalhos Relacionados}
 
+    \subsection{Comparação de Desempenho entre TF-IDF e Okapi BM25}
+
+    O trabalho influente de Robertson et al. (1995) \cite{robertson1995okapi} apresenta os resultados do sistema Okapi na TREC-3 e acaba servindo como uma das principais evidências empíricas da superioridade do BM25 sobre o TF-IDF tradicional. Os autores não buscavam criar um sistema novo, mas sim avaliar e aprimorar um modelo probabilístico de recuperação em um ambiente de testes rigoroso.
+
+    A metodologia consistiu em submeter o Okapi ao corpus padrão da TREC usando consultas de tópicos complexos cuja relevância já era conhecida. A eficácia dos algoritmos foi medida por métricas como Mean Average Precision e Precision@k, que verificam o quanto a ordenação dos resultados se aproxima do ideal.
+
+    O TF-IDF aparece como linha de base do estudo. Sua limitação mais clara é a normalização insuficiente em relação ao tamanho dos documentos. Em conjuntos muito variados, como o jurídico, textos longos acabam favorecidos, já que têm mais chances de repetir os termos da consulta e inflar artificialmente sua pontuação.
+
+    O Okapi BM25 é apresentado como a resposta probabilística a esse problema, usando dois parâmetros de calibração. O primeiro é o $k_1$, que controla a saturação da frequência do termo, evitando que aumentos repetitivos elevem a relevância de forma linear. O segundo é o $b$, que ajusta o efeito do comprimento do documento comparando seu tamanho com a média do corpus. Documentos muito maiores que a média recebem uma penalização que reduz ocorrências casuais.
+
+    Os resultados apresentados por Robertson et al. mostram uma vantagem consistente do BM25 sobre o TF-IDF em métricas de ordenação como a nDCG. A conexão com este TCC é direta, já que o estudo reforça empiricamente a escolha do BM25 como principal método estatístico usado na análise e o coloca como o modelo lexical mais consolidado para comparação com abordagens semânticas.
+
+    \subsection{Arquiteturas Preditivas para Representação Vetorial de Palavras}
+
+    O trabalho de Mikolov et al. (2013) \cite{mikolov2013efficient}, intitulado “Efficient Estimation of Word Representations in Vector Space”, introduz uma nova forma de representar palavras que estabeleceu a base da busca semântica moderna. O estudo questiona os modelos baseados em contagem, como o TF-IDF, que tratam palavras como unidades independentes e esparsas, e apresenta o toolkit Word2Vec. O objetivo é aprender vetores densos capazes de refletir o significado da palavra a partir de seu contexto em um corpus massivo.
+
+    Para alcançar esse resultado, os autores propõem duas arquiteturas de redes neurais rasas que resolvem tarefas opostas, CBOW e Skip-Gram.
+
+    A arquitetura CBOW prevê a palavra central a partir do contexto. O modelo recebe uma janela de palavras vizinhas, projeta seus vetores e calcula uma média que forma o vetor de contexto. A rede então tenta adivinhar a palavra omitida. Por trabalhar com médias, o CBOW costuma ser rápido e eficiente no aprendizado de relações sintáticas.
+
+    A arquitetura Skip-Gram faz o movimento inverso e tende a ser mais forte semanticamente. O modelo recebe uma única palavra e tenta prever as palavras ao seu redor, realizando várias predições por amostra. Essa abordagem é mais lenta no treino, mas o estudo mostra que ela captura nuances semânticas com mais precisão, especialmente em palavras raras ou termos técnicos. Esse comportamento é valioso em áreas como o direito, onde existe grande quantidade de expressões pouco frequentes.
+
+    Os autores concluem que existe um equilíbrio claro entre velocidade e qualidade. O CBOW é mais rápido, enquanto o Skip-Gram é mais robusto semanticamente. A relevância desse estudo para o TCC é essencial, pois ele demonstra por que embeddings são superiores a modelos de contagem para representar significado e estabelece as bases conceituais que depois permitiram o surgimento dos modelos transformers usados neste projeto.
 
 % --- CAPÍTULO 3: DESENVOLVIMENTO ---
     \chapter{Desenvolvimento}

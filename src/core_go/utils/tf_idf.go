@@ -235,11 +235,14 @@ func ComputeStringTFIDF(
 		switch gramsSize {
 		case 1:
 			ngram = models.NewInverseUnigram(0, 0, CacheWords[word[0]].ID)
+			break
 		case 2:
 			ngram = models.NewInverseBigram(0, 0, CacheWords[word[0]].ID, CacheWords[word[1]].ID, jumps[i][0])
+			break
 		case 3:
 			ngram = models.NewInverseTrigram(0, 0, CacheWords[word[0]].ID, CacheWords[word[1]].ID,
 				CacheWords[word[2]].ID, jumps[i][0], jumps[i][1])
+			break
 		default:
 			return nil, fmt.Errorf("invalid gramsSize: %d", gramsSize)
 		}

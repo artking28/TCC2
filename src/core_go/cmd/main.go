@@ -107,6 +107,7 @@ func main() {
 // BaseTest executes a full benchmark and validation cycle.
 // Records execution time and adds parameters and duration to the results slice.
 func BaseTest(testId int64, algo support.Algo, parallel, preIndexed, normalizeJumps bool, size, jumps int) string {
+	corpus.ResetCache()
 	name, db := corpus.CreateDatabaseCaches(testId, false, size, jumps)
 
 	legalInputs := "./../../misc/searchLegalInputs.json"

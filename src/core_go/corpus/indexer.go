@@ -29,6 +29,14 @@ var (
 	Docs           map[uint16][]interfaces.IGram
 )
 
+func ResetCache() {
+	CountAllNGrams = 0
+	CacheWords = nil
+	CacheDocs = nil
+	CacheGrams = nil
+	Docs = nil
+}
+
 func CreateDatabaseCaches(id int64, fromScratch bool, gramsSize int, jumpSize int) (string, *gorm.DB) {
 
 	targetFile, db := utils.InitDB(id, max(1, gramsSize%4), DbFile, fromScratch)
@@ -201,12 +209,15 @@ func IndexDocsGrams(db *gorm.DB, gramsSize, jumpSize int) (int, error) {
 			switch gramsSize {
 			case 1:
 				ngram = models.NewInverseUnigram(0, CacheDocs[f.Name()].ID, CacheWords[word[0]].ID)
+				break
 			case 2:
 				ngram = models.NewInverseBigram(0, CacheDocs[f.Name()].ID, CacheWords[word[0]].ID,
 					CacheWords[word[1]].ID, jumps[i][0])
+				break
 			case 3:
 				ngram = models.NewInverseTrigram(0, CacheDocs[f.Name()].ID, CacheWords[word[0]].ID,
 					CacheWords[word[1]].ID, CacheWords[word[2]].ID, jumps[i][0], jumps[i][1])
+				break
 			}
 			ngram.Increment()
 
