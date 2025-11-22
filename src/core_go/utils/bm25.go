@@ -50,7 +50,7 @@ func ComputeDocPreIndexedBM25(
 		if ngram.GetDocId() != docID {
 			return nil, fmt.Errorf("mismatched DocId: expected %d, got %d", docID, ngram.GetDocId())
 		}
-		key := ngram.GetCacheKey(normalizeJumps, true)
+		key := ngram.GetCacheKey(normalizeJumps, false)
 		tf[key]++
 	}
 
@@ -290,7 +290,7 @@ func ComputeStringBM25(
 	totalGramsDoc := len(grams)
 
 	for _, ngram := range grams {
-		key := ngram.GetCacheKey(normalizeJumps, true)
+		key := ngram.GetCacheKey(normalizeJumps, false)
 		tf[key]++
 	}
 

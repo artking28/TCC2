@@ -614,7 +614,7 @@
 
     \subsection{Comparação de Desempenho entre TF-IDF e Okapi BM25}
 
-    O trabalho influente de Robertson et al. (1995) \cite{robertson1995okapi} apresenta os resultados do sistema Okapi na TREC-3 e acaba servindo como uma das principais evidências empíricas da superioridade do BM25 sobre o TF-IDF tradicional. Os autores não buscavam criar um sistema novo, mas sim avaliar e aprimorar um modelo probabilístico de recuperação em um ambiente de testes rigoroso.
+    O trabalho influente de Robertson, \cite{robertson1995okapi} apresenta os resultados do sistema Okapi na TREC-3 e acaba servindo como uma das principais evidências empíricas da superioridade do BM25 sobre o TF-IDF tradicional. Os autores não buscavam criar um sistema novo, mas sim avaliar e aprimorar um modelo probabilístico de recuperação em um ambiente de testes rigoroso.
 
     A metodologia consistiu em submeter o Okapi ao corpus padrão da TREC usando consultas de tópicos complexos cuja relevância já era conhecida. A eficácia dos algoritmos foi medida por métricas como Mean Average Precision e Precision@k, que verificam o quanto a ordenação dos resultados se aproxima do ideal.
 
@@ -622,11 +622,11 @@
 
     O Okapi BM25 é apresentado como a resposta probabilística a esse problema, usando dois parâmetros de calibração. O primeiro é o $k_1$, que controla a saturação da frequência do termo, evitando que aumentos repetitivos elevem a relevância de forma linear. O segundo é o $b$, que ajusta o efeito do comprimento do documento comparando seu tamanho com a média do corpus. Documentos muito maiores que a média recebem uma penalização que reduz ocorrências casuais.
 
-    Os resultados apresentados por Robertson et al. mostram uma vantagem consistente do BM25 sobre o TF-IDF em métricas de ordenação como a nDCG. A conexão com este TCC é direta, já que o estudo reforça empiricamente a escolha do BM25 como principal método estatístico usado na análise e o coloca como o modelo lexical mais consolidado para comparação com abordagens semânticas.
+    Os resultados apresentados mostram uma vantagem consistente do BM25 sobre o TF-IDF em métricas de ordenação como a nDCG. A conexão com este TCC é direta, já que o estudo reforça empiricamente a escolha do BM25 como principal método estatístico usado na análise e o coloca como o modelo lexical mais consolidado para comparação com abordagens semânticas.
 
     \subsection{Arquiteturas Preditivas para Representação Vetorial de Palavras}
 
-    O trabalho de Mikolov et al. (2013) \cite{mikolov2013efficient}, intitulado “Efficient Estimation of Word Representations in Vector Space”, introduz uma nova forma de representar palavras que estabeleceu a base da busca semântica moderna. O estudo questiona os modelos baseados em contagem, como o TF-IDF, que tratam palavras como unidades independentes e esparsas, e apresenta o toolkit Word2Vec. O objetivo é aprender vetores densos capazes de refletir o significado da palavra a partir de seu contexto em um corpus massivo.
+    O trabalho de Mikolov et al, \cite{mikolov2013efficient}, intitulado “Efficient Estimation of Word Representations in Vector Space”, introduz uma nova forma de representar palavras que estabeleceu a base da busca semântica moderna. O estudo questiona os modelos baseados em contagem, como o TF-IDF, que tratam palavras como unidades independentes e esparsas, e apresenta o toolkit Word2Vec. O objetivo é aprender vetores densos capazes de refletir o significado da palavra a partir de seu contexto em um corpus massivo.
 
     Para alcançar esse resultado, os autores propõem duas arquiteturas de redes neurais rasas que resolvem tarefas opostas, CBOW e Skip-Gram.
 

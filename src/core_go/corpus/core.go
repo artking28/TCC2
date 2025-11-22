@@ -40,7 +40,11 @@ func ApplyLegalInputsDir(db *gorm.DB, legalInputs string, algo support.Algo, pre
 		var err error
 
 		elapsedPhrase := utils.Stopwatch(func() {
-			phraseVec, err = utils.ComputeStringTFIDF(phrase.Input, size, jumps, len(all), CacheGrams, CacheWords, normalizeJumps, parallel)
+			if algo == support.TdIdf {
+				phraseVec, err = utils.ComputeStringTFIDF(phrase.Input, size, jumps, len(all), CacheGrams, CacheWords, normalizeJumps, parallel)
+			} else {
+				phraseVec, err = utils.ComputeStringBM25(phrase.Input, size, jumps, len(all), CountAllNGrams, CacheGrams, CacheWords, normalizeJumps, parallel)
+			}
 			phraseCache[phrase.Input] = phraseVec
 		}).Microseconds()
 		if err != nil {
@@ -97,7 +101,12 @@ func ApplyLegalInputsDir(db *gorm.DB, legalInputs string, algo support.Algo, pre
 		for id, sim := range docSimAccum {
 			pairs = append(pairs, mgu.NewPair(id, sim))
 		}
-		sort.Slice(pairs, func(i, j int) bool { return pairs[i].Right > pairs[j].Right })
+		sort.Slice(pairs, func(i, j int) bool {
+			if pairs[i].Right == pairs[j].Right {
+				return pairs[i].Left < pairs[j].Left
+			}
+			return pairs[i].Right > pairs[j].Right
+		})
 
 		// calcula Spearman médio
 		list := mgu.VecMap(pairs, func(t mgu.Pair[uint16, float64]) uint16 { return t.Left })

@@ -12,6 +12,7 @@
 - Refazer o desenvolvimento
 - Fazer as consideracoes finais associando aos trabalhos associados
 - Fazer os trabalhos futuros
-- Adicionar capitalização e normalizacao de letras
 - Juntar embeddings com começo do TCC
 - Embeddings aplicado ao direito ou tirar ou mudar ordem
+
+

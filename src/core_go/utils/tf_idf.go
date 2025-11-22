@@ -44,7 +44,7 @@ func ComputeDocPreIndexedTFIDF(
 		if ngram.GetDocId() != expectedDocID {
 			return nil, fmt.Errorf("mismatched DocId: expected %d, got %d", expectedDocID, ngram.GetDocId())
 		}
-		key := ngram.GetCacheKey(normalizeJumps, true)
+		key := ngram.GetCacheKey(normalizeJumps, false)
 		tf[key]++
 	}
 
@@ -255,7 +255,7 @@ func ComputeStringTFIDF(
 	totalGrams := len(grams)
 
 	for _, ngram := range grams {
-		key := ngram.GetCacheKey(smoothJumps, true)
+		key := ngram.GetCacheKey(smoothJumps, false)
 		tf[key]++
 	}
 
