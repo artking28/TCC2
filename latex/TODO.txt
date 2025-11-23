@@ -7,11 +7,13 @@
 - Escrever o abstract ✅
 - Justificativa precisa ser mais fluida, mais paragrafos também 🔄
 - Introdução mais fluido é pelo menos 5 parágrafos e mais fluido ✅
-- Refazer as imagens com nossa própria autoria
+- Fazer os trabalhos futuros ✅
+- Terminar de fazer as imagens com nossa própria autoria
+- Adicionar mais imagens se possível
+- Adicionar seção de resultados
 - Limpar os trabalhos relacionados
-- Refazer o desenvolvimento
-- Fazer as consideracoes finais associando aos trabalhos associados
-- Fazer os trabalhos futuros
+- Terminar o desenvolvimento
+- Terminar consideracoes finais
 - Juntar embeddings com começo do TCC
 - Embeddings aplicado ao direito ou tirar ou mudar ordem
 

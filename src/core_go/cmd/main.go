@@ -48,6 +48,11 @@ func init() {
 	}, ",") + "\n"
 }
 
+// Converte bytes para MegaBytes (MB)
+func toMB(b uint64) float64 {
+	return float64(b) / 1024 / 1024
+}
+
 // main iterates over all parameter combinations and saves results to a JSON file.
 func main() {
 	mn, mx, avg := utils.MeasureMemory(mainShift)
@@ -74,48 +79,55 @@ func mainShift() {
 	for _, s := range sizes {
 		size, maxJumps := s.Left, s.Right // Unpacks n-gram size and jump limit.
 
-		// For each n-gram size, test all possible jump levels (from 0 to maxJumps).
-		for jump := 0; jump <= maxJumps; jump++ {
+		mn, mx, avg := utils.MeasureMemory(func() {
 
-			// --- OTIMIZAÇÃO: CRIA O AMBIENTE (DB + CACHE) UMA VEZ POR CONFIGURAÇÃO DE GRAM ---
-			fmt.Printf(">>> Inicializando Ambiente para Size: %d, Jump: %d\n", size, jump)
+			// For each n-gram size, test all possible jump levels (from 0 to maxJumps).
+			for jump := 0; jump <= maxJumps; jump++ {
 
-			// Limpa o cache de memória antes de criar o novo cenário
-			corpus.ResetCache()
+				// --- OTIMIZAÇÃO: CRIA O AMBIENTE (DB + CACHE) UMA VEZ POR CONFIGURAÇÃO DE GRAM ---
+				fmt.Printf(">>> Inicializando Ambiente para Size: %d, Jump: %d\n", size, jump)
 
-			// Cria o banco de dados físico apenas UMA vez para este grupo de testes
-			// Usamos o ID atual para nomear o arquivo, mas ele será reusado pelos próximos IDs
-			dbName, dbConn := corpus.CreateDatabaseCaches(id, false, size, jump)
+				// Limpa o cache de memória antes de criar o novo cenário
+				corpus.ResetCache()
 
-			// Loop interno para variações que NÃO exigem recriar o índice/banco
-			for _, normalize := range []bool{false, true} {
-				for _, parallel := range []bool{false, true} {
+				// Cria o banco de dados físico apenas UMA vez para este grupo de testes
+				// Usamos o ID atual para nomear o arquivo, mas ele será reusado pelos próximos IDs
+				dbName, dbConn := corpus.CreateDatabaseCaches(id, false, size, jump)
 
-					// Execute TF-IDF reusing the DB
-					strB.WriteString(BaseTest(id, dbConn, support.TdIdf, parallel, false, normalize, size, jump))
-					id++
+				// Loop interno para variações que NÃO exigem recriar o índice/banco
+				for _, normalize := range []bool{false, true} {
+					for _, parallel := range []bool{false, true} {
 
-					// Execute BM25 reusing the DB
-					strB.WriteString(BaseTest(id, dbConn, support.Bm25, parallel, false, normalize, size, jump))
-					id++
+						// Execute TF-IDF reusing the DB
+						strB.WriteString(BaseTest(id, dbConn, support.TdIdf, parallel, false, normalize, size, jump))
+						id++
+
+						// Execute BM25 reusing the DB
+						strB.WriteString(BaseTest(id, dbConn, support.Bm25, parallel, false, normalize, size, jump))
+						id++
+					}
 				}
-			}
 
-			// --- CLEANUP: Desmonta o ambiente antes de mudar o tamanho do Gram/Jump ---
+				// --- CLEANUP: Desmonta o ambiente antes de mudar o tamanho do Gram/Jump ---
 
-			// É crucial fechar a conexão SQL antes de tentar deletar o arquivo,
-			// principalmente em Windows (Lock de arquivo).
-			sqlDB, err := dbConn.DB()
-			if err == nil {
-				sqlDB.Close()
-			}
+				// É bom fechar a conexão SQL antes de tentar deletar o arquivo,
+				// principalmente em Windows (Lock de arquivo).
+				sqlDB, err := dbConn.DB()
+				if err == nil {
+					sqlDB.Close()
+				}
 
-			// Remove o arquivo físico do banco de dados criado para este grupo
-			if err := os.Remove(dbName); err != nil {
-				log.Printf("aviso: erro removendo arquivo de corpus %s: %v", dbName, err)
+				// Remove o arquivo físico do banco de dados criado para este grupo
+				if err = os.Remove(dbName); err != nil {
+					log.Printf("aviso: erro removendo arquivo de corpus %s: %v", dbName, err)
+				}
+				fmt.Printf("<<< Ambiente finalizado e limpo: %s\n", dbName)
 			}
-			fmt.Printf("<<< Ambiente finalizado e limpo: %s\n", dbName)
-		}
+		})
+		fmt.Println("\n=========================================================================")
+		fmt.Printf("RELATÓRIO DE USO DE MEMÓRIA PARA N-GRAM SIZE: %d\n", size)
+		fmt.Printf("Mínima registrada: %.2f MB | Média: %.2f MB | Máxima registrada: %.2f MB\n", toMB(mn), toMB(avg), toMB(mx))
+		fmt.Println("=========================================================================")
 	}
 
 	// --- Saving Results ---
