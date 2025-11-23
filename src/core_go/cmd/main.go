@@ -9,10 +9,12 @@ import (
 	mgu "github.com/artking28/myGoUtils"
 	"github.com/tcc2-davi-arthur/corpus"
 	"github.com/tcc2-davi-arthur/models/support"
+	"github.com/tcc2-davi-arthur/utils"
+	"gorm.io/gorm"
 )
 
 // ResultsOutput represents path to the file where benchmark results will be saved.
-const ResultsOutput = "./../../misc/results.csv"
+const ResultsOutput = "./../../misc/resultsT.csv"
 
 // N-gram Size Constants
 const (
@@ -48,9 +50,12 @@ func init() {
 
 // main iterates over all parameter combinations and saves results to a JSON file.
 func main() {
+	mn, mx, avg := utils.MeasureMemory(mainShift)
+	fmt.Printf("Memory usage: \n\tmin: %d\n\tmax: %d\n\tavg: %d\n", mn, mx, avg)
+}
 
+func mainShift() {
 	//corpus.StartScrapping(5000, 25, 500*time.Millisecond)
-
 	//corpus.TextProcessor(25)
 
 	var id int64 = 1 // Unique counter to identify each test.
@@ -61,7 +66,6 @@ func main() {
 		mgu.NewPair(Bigram, MaxBigramJumps),   // Bigram: up to 4 jumps.
 		mgu.NewPair(Trigram, MaxTrigramJumps), // Trigram: up to 2 jumps.
 	}
-	_, _ = sizes, id
 
 	strB := strings.Builder{}
 	strB.WriteString(csvHeader)
@@ -73,21 +77,44 @@ func main() {
 		// For each n-gram size, test all possible jump levels (from 0 to maxJumps).
 		for jump := 0; jump <= maxJumps; jump++ {
 
-			// For each pre-index mode, test jump normalization on and off.
-			for _, normalize := range []bool{false, true} {
+			// --- OTIMIZAÇÃO: CRIA O AMBIENTE (DB + CACHE) UMA VEZ POR CONFIGURAÇÃO DE GRAM ---
+			fmt.Printf(">>> Inicializando Ambiente para Size: %d, Jump: %d\n", size, jump)
 
-				// For each parallel mode, test multithreading.
+			// Limpa o cache de memória antes de criar o novo cenário
+			corpus.ResetCache()
+
+			// Cria o banco de dados físico apenas UMA vez para este grupo de testes
+			// Usamos o ID atual para nomear o arquivo, mas ele será reusado pelos próximos IDs
+			dbName, dbConn := corpus.CreateDatabaseCaches(id, false, size, jump)
+
+			// Loop interno para variações que NÃO exigem recriar o índice/banco
+			for _, normalize := range []bool{false, true} {
 				for _, parallel := range []bool{false, true} {
 
-					// Execute the test with this parameter combination
-					strB.WriteString(BaseTest(id, support.TdIdf, parallel, false, normalize, size, jump))
-					id++ // Increment test ID
+					// Execute TF-IDF reusing the DB
+					strB.WriteString(BaseTest(id, dbConn, support.TdIdf, parallel, false, normalize, size, jump))
+					id++
 
-					// Execute the test with this parameter combination
-					strB.WriteString(BaseTest(id, support.Bm25, parallel, false, normalize, size, jump))
-					id++ // Increment test ID
+					// Execute BM25 reusing the DB
+					strB.WriteString(BaseTest(id, dbConn, support.Bm25, parallel, false, normalize, size, jump))
+					id++
 				}
 			}
+
+			// --- CLEANUP: Desmonta o ambiente antes de mudar o tamanho do Gram/Jump ---
+
+			// É crucial fechar a conexão SQL antes de tentar deletar o arquivo,
+			// principalmente em Windows (Lock de arquivo).
+			sqlDB, err := dbConn.DB()
+			if err == nil {
+				sqlDB.Close()
+			}
+
+			// Remove o arquivo físico do banco de dados criado para este grupo
+			if err := os.Remove(dbName); err != nil {
+				log.Printf("aviso: erro removendo arquivo de corpus %s: %v", dbName, err)
+			}
+			fmt.Printf("<<< Ambiente finalizado e limpo: %s\n", dbName)
 		}
 	}
 
@@ -97,20 +124,22 @@ func main() {
 	fmt.Println()
 	fmt.Println(strB.String())
 
-	err := os.WriteFile(ResultsOutput, []byte(strB.String()), 0644) // 0644 are file permissions (read/write for owner, read for others).
+	err := os.WriteFile(ResultsOutput, []byte(strB.String()), 0644)
 	if err != nil {
-		// If saving fails, fail the test.
 		log.Fatalf("error saving results.json: %v", err)
 	}
 }
 
-// BaseTest executes a full benchmark and validation cycle.
-// Records execution time and adds parameters and duration to the results slice.
-func BaseTest(testId int64, algo support.Algo, parallel, preIndexed, normalizeJumps bool, size, jumps int) string {
-	corpus.ResetCache()
-	name, db := corpus.CreateDatabaseCaches(testId, false, size, jumps)
+// BaseTest executes a full benchmark and validation cycle using an EXISTING database connection.
+// It no longer creates or deletes the database, only runs the algo logic.
+func BaseTest(testId int64, db *gorm.DB, algo support.Algo, parallel, preIndexed, normalizeJumps bool, size, jumps int) string {
+
+	// Nota: Não chamamos ResetCache() aqui para aproveitar o "aquecimento" do cache entre execuções parecidas
+	// Nota: Não chamamos CreateDatabaseCaches() aqui, usamos o 'db' recebido
 
 	legalInputs := "./../../misc/searchLegalInputs.json"
+
+	// Passamos o DB já aberto
 	res, err := corpus.ApplyLegalInputsDir(db, legalInputs, algo, preIndexed, normalizeJumps, parallel, size, jumps)
 	if err != nil {
 		log.Fatalf(err.Error())
@@ -125,8 +154,5 @@ func BaseTest(testId int64, algo support.Algo, parallel, preIndexed, normalizeJu
 		testId, algo, preIndexed, normalizeJumps, size, jumps, parallel, clean,
 	)
 
-	if err = os.Remove(name); err != nil {
-		log.Fatalf("error removing corpus file: %v", err)
-	}
 	return csv
 }

@@ -33,7 +33,7 @@ func ApplyLegalInputsDir(db *gorm.DB, legalInputs string, algo support.Algo, pre
 
 	ret := models.NewTestConfigResult(len(all))
 	docCache := make(map[uint16]map[string]*float64)
-	phraseCache := make(map[string]map[string]*float64)
+	//phraseCache := make(map[string]map[string]*float64)
 
 	processPhrase := func(phrase support.Interaction, pushFunc func(float64, int64)) error {
 		var phraseVec map[string]*float64
@@ -45,7 +45,7 @@ func ApplyLegalInputsDir(db *gorm.DB, legalInputs string, algo support.Algo, pre
 			} else {
 				phraseVec, err = utils.ComputeStringBM25(phrase.Input, size, jumps, len(all), CountAllNGrams, CacheGrams, CacheWords, normalizeJumps, parallel)
 			}
-			phraseCache[phrase.Input] = phraseVec
+			_ = phraseVec
 		}).Microseconds()
 		if err != nil {
 			return err
@@ -110,7 +110,7 @@ func ApplyLegalInputsDir(db *gorm.DB, legalInputs string, algo support.Algo, pre
 
 		// calcula Spearman médio
 		list := mgu.VecMap(pairs, func(t mgu.Pair[uint16, float64]) uint16 { return t.Left })
-		spearmanSim, err := utils.Spearman(phrase.Glove, list)
+		spearmanSim, err := utils.Spearman(phrase.Bert, list)
 		if err != nil {
 			return err
 		}

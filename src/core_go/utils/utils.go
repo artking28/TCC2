@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 	"regexp"
+	"runtime"
 	"strings"
 	"time"
 	"unicode"
@@ -39,6 +40,43 @@ func Stopwatch(fn func()) time.Duration {
 	start := time.Now()
 	fn()
 	return time.Since(start)
+}
+
+func MeasureMemory(fn func()) (uint64, uint64, uint64) {
+	var minn, maxx, sum uint64
+	var count uint64
+
+	ticker := time.NewTicker(30 * time.Millisecond)
+	done := make(chan struct{})
+
+	go func() {
+		for range ticker.C {
+			var m runtime.MemStats
+			runtime.ReadMemStats(&m)
+			alloc := m.Alloc
+
+			if minn == 0 || alloc < minn {
+				minn = alloc
+			}
+			if alloc > maxx {
+				maxx = alloc
+			}
+			sum += alloc
+			count++
+		}
+	}()
+
+	fn() // executa a função-alvo
+
+	close(done)
+	ticker.Stop()
+
+	avg := uint64(0)
+	if count > 0 {
+		avg = sum / count
+	}
+
+	return minn, maxx, avg
 }
 
 func CleanText(input string) (string, error) {
