@@ -10,9 +10,9 @@
 - Fazer os trabalhos futuros ✅
 - Terminar de fazer as imagens com nossa própria autoria✅
 - Embeddings aplicado ao direito ou tirar ou mudar ordem✅
+- Limpar os trabalhos relacionados✅
 - Adicionar mais imagens se possível
 - Adicionar seção de resultados
-- Limpar os trabalhos relacionados
 - Terminar o desenvolvimento
 - Terminar consideracoes finais
 - Juntar embeddings com começo do TCC
