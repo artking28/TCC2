@@ -267,6 +267,7 @@
 %
 %    Esta pesquisa oferece uma análise quantitativa desse \textit{trade-off}. Ao comparar diretamente o desempenho, o tempo de resposta e o uso de recursos de diferentes abordagens — uma prática já adotada em trabalhos que avaliam modelos como BERT e ChatGPT por meio de métricas de acurácia, precisão e F1-score \cite{citacao66} — pretendemos fornecer dados concretos que auxiliem na tomada de decisão sobre qual tecnologia é mais adequada para diferentes necessidades do ecossistema jurídico, movendo o debate do campo teórico para uma avaliação de aplicabilidade prática.
 
+
     \section{Justificativa}
 
     A busca por maior precisão impulsionou o avanço da tecnologia jurídica e estimulou uma dependência crescente de modelos de Inteligência Artificial. Esse movimento ganhou força no Brasil, onde o uso dessas soluções no Judiciário aumentou 26\% entre 2022 e 2023 \cite{citacao63}. A ideia que sustenta esse crescimento é simples. Quanto mais sofisticado o modelo, melhores seriam os resultados. Só que essa expectativa costuma vir acompanhada de um custo elevado. O treinamento de grandes modelos depende de processamento intenso e de hardware especializado, o que envolve investimentos altos em infraestrutura e manutenção. Em muitos casos, o peso financeiro impede que instituições menores entrem nessa corrida tecnológica, mesmo quando há interesse.
@@ -276,6 +277,7 @@
     Essa percepção costuma levar a decisões pouco equilibradas. Por isso, a justificativa deste trabalho parte da necessidade de um olhar mais pragmático. Nem sempre o ganho marginal oferecido por um modelo semântico avançado compensa seu custo total de operação. Em ambientes com linguagem estável e previsível, como ocorre em grande parte dos documentos jurídicos, soluções mais simples podem alcançar resultados muito satisfatórios \cite{citacao65}. Em várias atividades do dia a dia, responder rápido e gastar menos pode ser mais importante do que captar nuances raras de ambiguidade.
 
     Dentro desse cenário, esta pesquisa busca oferecer uma análise quantitativa do equilíbrio entre custo e benefício. A proposta é comparar diferentes abordagens em termos de desempenho, tempo de resposta e uso de recursos. Trabalhos que analisam modelos como BERT e ChatGPT já fazem esse tipo de avaliação usando métricas como acurácia, precisão e F1-score \cite{citacao66}. Seguindo essa linha, pretendemos produzir dados concretos que ajudem a escolher a tecnologia mais adequada para cada necessidade do ecossistema jurídico. A intenção é mover a discussão para um campo mais objetivo, onde a escolha não dependa apenas do que é mais moderno, mas do que realmente funciona melhor dentro de cada contexto.
+
 
     \section{Objetivos}
 
@@ -582,6 +584,14 @@
 
     No contexto deste trabalho, o coeficiente de \textit{Spearman} fornecerá uma medida objetiva do grau de concordância entre as listas produzidas pelas abordagens estatísticas (TF-IDF, BM25) e semânticas (\textit{embeddings}). Conforme demonstrado em \citeonline{citacao71}, que utilizou essa métrica para comparar algoritmos de ranqueamento textual, o \textit{Spearman} é uma ferramenta eficaz para avaliar a correlação entre os resultados de diferentes sistemas de busca.
 
+    \begin{figure}[H]
+        \centering
+        \caption{\label{fig:SpearmanCalc}Demonstraçao do coeficiente de \textit{Spearman} aplicado à sequência de cores}
+        \includegraphics[width=0.8\textwidth]{assets/SpearmanCalc}
+        \legend {Fonte: Elaboração própria.}
+    \end{figure}
+
+
     \section{Programação Paralela e Escalabilidade}
 
     A programação paralela vem como uma das soluções propostas para os desafios modernos da computação. A ideia por trás dela foi impulsionada pela necessidade de otimizar o tempo de processamento através algoritmos eficientes para criar aplicações que sejam capazes de lidar com um grande volume de dados e cálculos intensivos \cite{citacao12}, coisa que os algoritmos sequenciais não são tão adequados.
@@ -610,6 +620,7 @@
 
     Com o avanço da computação, da engenharia de software, o surgimento de várias arquiteturas \textit{multicore} e sistemas distribuídos, a paralelização dentro dessas estruturas nos permite dividir tarefas complexas em subtarefas executadas simultaneamente, maximizando a eficiência e o desempenho. Contudo, o desenvolvimento de algoritmos paralelos exige lidar com questões como sincronização, concorrência e balanceamento de carga, tornando essa prática essencial para atender às demandas de rapidez e escalabilidade atualmente \cite{citacao13}.
 
+
     \section{Trabalhos Relacionados}
 
     \subsection{Comparação de Desempenho entre TF-IDF e Okapi BM25}
@@ -637,6 +648,8 @@
     Os autores concluem que existe um equilíbrio claro entre velocidade e qualidade. O CBOW é mais rápido, enquanto o Skip-Gram é mais robusto semanticamente. A relevância desse estudo para o TCC é essencial, pois ele demonstra por que embeddings são superiores a modelos de contagem para representar significado e estabelece as bases conceituais que depois permitiram o surgimento dos modelos transformers usados neste projeto.
 
 % --- CAPÍTULO 3: DESENVOLVIMENTO ---
+
+
     \chapter{Desenvolvimento}
 
     O desenvolvimento da solução foi guiado principalmente por requisitos de desempenho e escalabilidade, já que o sistema precisava lidar com um grande volume de documentos jurídicos de forma eficiente. Em vez de seguir uma arquitetura baseada em microsserviços, a aplicação foi estruturada em módulos bem definidos, onde cada um possui sua própria responsabilidade dentro do fluxo geral do sistema. Esses módulos não se comunicam por meio de APIs ou chamadas diretas, sendo conectados apenas por manipulação humana entre as etapas, o que simplifica a integração e o controle do processo.
@@ -646,6 +659,7 @@
     O Python foi empregado apenas em um ponto específico do processo, na geração das \textit{embeddings} e na ordenação dos documentos de acordo com o nível de similaridade semântica. Essa etapa fazia uso de bibliotecas consolidadas de Inteligência Artificial e Processamento de Linguagem Natural, que se encaixavam melhor no ecossistema Python.
 
     A seguir são apresentadas as principais tecnologias utilizadas, as estratégias adotadas na coleta de dados, o fluxo de limpeza e padronização textual e a forma como os algoritmos de busca foram implementados e integrados ao restante do sistema.
+
 
     \section{Aquisição de Dados}
 
@@ -664,6 +678,7 @@
         \item \textbf{Download e Persistência:} Os arquivos identificados são baixados via \textit{stream} e salvos diretamente no diretório local \texttt{./misc/corpus/pdf}, preservando a nomenclatura original para garantir a rastreabilidade dos dados.
     \end{enumerate}
 
+
     \section{Pré-processamento e Normalização Textual}
 
     Após a etapa de aquisição, o \textit{corpus} bruto constitui-se de milhares de arquivos em formato PDF. A utilização direta desses arquivos para fins de indexação ou vetorização é inviável devido à presença de formatação binária e, principalmente, de "ruído textual" — elementos que, embora necessários para a validade jurídica do documento (como cabeçalhos, numeração de autos, datas e assinaturas), não contribuem para a identificação do conteúdo semântico da matéria legislativa.
@@ -681,39 +696,59 @@
         \item \textbf{WaitGroup:} O mecanismo \texttt{sync.WaitGroup} assegura que o processo principal aguarde a conclusão de todas as tarefas de limpeza antes de encerrar a execução.
     \end{itemize}
 
-    \subsection{Extração de Texto (OCR e Conversão)}
+    \subsection{Extração de Texto}
 
     A primeira etapa do \textit{pipeline} é a extração do conteúdo textual. Devido à complexidade do \textit{layout} de documentos legislativos (frequentemente diagramados em colunas ou contendo quebras de página irregulares), bibliotecas nativas de leitura de PDF muitas vezes falham em manter a ordem lógica do texto.
 
-    Para garantir a fidelidade da extração, o sistema realiza uma chamada de sistema (\textit{syscall}) para a ferramenta externa \texttt{pdftotext} (parte do pacote \textit{poppler-utils}). A função \texttt{processPDF} executa este comando via \texttt{os/exec}, direcionando o fluxo de texto extraído (\textit{standard output}) diretamente para a memória da aplicação, evitando escritas intermediárias desnecessárias em disco nesta fase.
+    Para garantir a fidelidade da extração, o sistema realiza uma chamada de sistema para a ferramenta externa \texttt{pdftotext} (parte do pacote \textit{poppler-utils}). A função \texttt{processPDF} executa este comando via \texttt{os/exec}, direcionando o fluxo de texto extraído diretamente para a memória da aplicação, evitando escritas intermediárias desnecessárias em disco nesta fase.
 
-    \subsection{Pipeline de Higienização (Cleaning)}
+    \subsection{Pipeline de higienização}
 
-    O texto bruto extraído é submetido à função \texttt{CleanText}, localizada no pacote \texttt{utils}. Esta função aplica uma série de transformações destrutivas e normalizadoras, projetadas especificamente para o domínio jurídico. As etapas, executadas sequencialmente, são:
+    O texto bruto é processado pela função \texttt{CleanText}, no pacote \texttt{utils}. A função aplica uma sequência de transformações destrutivas e normalizadoras pensadas para documentos jurídicos.
 
-    \subsection{Normalização de Caixa (Case Folding)}
-    Todo o texto é convertido para letras minúsculas (\textit{lowercase}) utilizando a função \texttt{strings.ToLower}. Essa etapa reduz a dimensionalidade do vocabulário, garantindo que termos como "LEI", "Lei" e "lei" sejam tratados como a mesma entidade vetorial.
+    \subsubsection{Minúsculas}
 
-    \subsection{Remoção de Entidades Específicas via Regex}
-    Utilizando Expressões Regulares (\textit{Regular Expressions}), o sistema identifica e remove padrões que não agregam valor semântico à busca temática:
+    Todo o conteúdo é convertido para letras minúsculas com \texttt{strings.ToLower}, reduzindo variação do vocabulário e unificando termos como “LEI”, “Lei” e “lei”.
+
+    \subsubsection{Remoção por regex}
+
+    Usamos expressões regulares para identificar e remover padrões que não contribuem para a busca por assunto:
     \begin{enumerate}
-        \item \textbf{Numerais Romanos:} Expressões como "Inciso IV", "Capítulo XX" ou datas em numerais romanos são removidas. A regex \texttt{\^{}M\{0,3\}(CM|CD|D?C\{0,3\})...} foi empregada para cobrir a complexidade dessas formações. No contexto de busca semântica, saber que uma lei está no "Capítulo IV" é menos relevante do que o conteúdo do capítulo em si.
-        \item \textbf{URLs e Links:} Endereços web (\texttt{https?://...}) são removidos para evitar que o algoritmo indexe metadados de rodapé comuns em documentos digitais.
-        \item \textbf{Datas e Valores Numéricos:} Padrões de datas (ex: "12/05/2023") e valores monetários ou decimais são eliminados. A decisão de remover esses dados baseia-se no objetivo do sistema: encontrar documentos por \textit{similaridade de assunto}, não por metadados temporais ou quantitativos específicos.
+        \item \textbf{Numerais romanos:} elementos como “Inciso IV” ou “Capítulo XX” são removidos, já que a posição numérica não ajuda na similaridade semântica.
+        \item \textbf{URLs e links:} endereços (\texttt{https?://...}) são eliminados para evitar indexar rodapés e metadados.
+        \item \textbf{Datas e números:} datas e valores numéricos são retirados, pois o foco está na similaridade temática e não em dados específicos.
     \end{enumerate}
 
-    \subsection{Normalização de Pontuação e Caracteres}
-    A função realiza uma varredura caractere a caractere (\textit{rune-wise}), removendo qualquer elemento classificado como pontuação ou símbolo (\texttt{unicode.IsPunct}, \texttt{unicode.IsSymbol}). Hífens, travessões e \textit{underscores} são substituídos por espaços em branco para evitar a aglutinação indevida de palavras (ex: transformar "decreto-lei" em "decreto lei" e não "decretolei").
+    \subsubsection{Normalização de pontuação e caracteres}
 
-    \subsection{Canonicalização de Caracteres (Acentuação)}
-    A língua portuguesa possui uma rica variedade de caracteres acentuados que podem prejudicar a correspondência exata de termos. O sistema carrega um mapa de substituições a partir do arquivo \texttt{misc/replaces.json}.
-    Este arquivo define um mapeamento exaustivo de caracteres latinos estendidos para seus equivalentes ASCII simples (ex: "á", "ã", "à", "ä" $\rightarrow$ "a"; "ç" $\rightarrow$ "c"). Essa normalização é crítica para lidar com erros de digitação e inconsistências de codificação (UTF-8 vs Latin-1) comuns em sistemas legados do governo.
+    O texto é percorrido caractere a caractere, removendo pontuação e símbolos com \texttt{unicode.IsPunct} e \texttt{unicode.IsSymbol}. Hífens, travessões e \texttt{underscores} viram espaços para evitar palavras unidas.
+    A normalização de acentos usa um mapa carregado de \texttt{misc/replaces.json}, convertendo caracteres estendidos para equivalentes ASCII, o que reduz problemas de codificação e digitação.
 
-    \subsection{Filtragem de Stopwords}
-    Por fim, utiliza-se a biblioteca \texttt{bbalet/stopwords} para remover palavras funcionais da língua portuguesa (artigos, preposições, conectivos). A preservação destas palavras inflaria artificialmente a similaridade entre documentos distintos apenas pelo uso compartilhado da gramática básica, prejudicando a eficácia dos algoritmos TF-IDF e BM25.
+    \subsubsection{Remoção de stopwords}
 
-    O resultado final desse processo é um arquivo de texto limpo (salvo com sufixo \texttt{\_clean.txt}), contendo apenas os lexemas substantivos do documento, pronto para ser consumido pelos algoritmos de indexação e vetorização.
+    Por fim, a biblioteca \texttt{bbalet/stopwords} remove palavras funcionais do português, evitando que conectivos e artigos aumentem artificialmente a similaridade entre documentos e afetem TF-IDF ou BM25.
 
+    O resultado é um arquivo \texttt{\_clean.txt} contendo apenas os termos relevantes, pronto para indexação e vetorização.
+
+    \subsection{Geração de N-Gramas e Skip-Grams}
+
+    Uma vez que o conteúdo textual foi higienizado e normalizado, o documento deixa de ser tratado como uma \textit{string} única e passa a ser processado como uma sequência vetorial de \textit{tokens}. A etapa subsequente, e uma das mais críticas para a qualidade da indexação, é a segmentação dessa sequência em unidades de informação indexáveis, conhecidas como N-gramas.
+
+    Para realizar essa tarefa, foi implementada a função utilitária \texttt{GetGramsLim}, localizada no pacote \texttt{utils}. Diferente de implementações genéricas que utilizam recursão para gerar combinações de qualquer tamanho, o que poderia ocasionar estouro de pilha ou uso excessivo de memória em textos muito longos, optou-se por uma abordagem iterativa e explícita, otimizada especificamente para os limites operacionais do projeto: Unigramas, Bigramas e Trigramas, com uma distância máxima de dois saltos (\textit{jumps}) entre as palavras.
+
+    A função foi desenvolvida utilizando o recurso de \textit{Generics} do Go (\texttt{[T any]}), o que confere flexibilidade arquitetural ao sistema: o mesmo algoritmo é capaz de processar vetores de \textit{strings} (durante a fase de testes rápidos) ou vetores de inteiros (\texttt{uint16}), que representam os IDs das palavras no banco de dados de produção.
+
+    A lógica de segmentação varia conforme a cardinalidade do N-grama desejado:
+
+    \begin{enumerate}
+        \item \textbf{Unigramas ($N=1$):} O tratamento é trivial e linear. O algoritmo percorre o vetor de entrada de $0$ a $N$, encapsulando cada elemento individual como um grama independente.
+
+        \item \textbf{Bigramas com Saltos ($N=2$):} Para capturar relações entre palavras que não são necessariamente adjacentes (conceito de \textit{skip-gram}), o algoritmo emprega um laço aninhado. Enquanto o índice principal $i$ percorre as palavras do documento, um índice secundário $j$ projeta-se à frente, variando de $1$ até o limite configurado de \textit{jumps} ($jump+1$). Isso permite gerar pares como $(w_i, w_{i+1})$ (adjacente) ou $(w_i, w_{i+2})$ (com um salto), armazenando explicitamente a distância vetorial ($j$) entre os termos para fins de normalização posterior.
+
+        \item \textbf{Trigramas ($N=3$):} A complexidade aumenta para capturar o contexto estendido. Utiliza-se uma estrutura de três laços encadeados ($i, j, k$), onde $i$ é a palavra pivô, $j$ define a distância para o segundo termo e $k$ define a distância do segundo para o terceiro. Essa abordagem "força bruta controlada" garante que todas as combinações válidas dentro da janela de saltos — como $(w_i, w_{i+1}, w_{i+2})$ ou combinações mais esparsas como $(w_i, w_{i+2}, w_{i+4})$ — sejam geradas deterministicamente, sem a sobrecarga de chamadas recursivas.
+    \end{enumerate}
+
+    O retorno da função é uma estrutura dupla contendo tanto os gramas gerados quanto uma matriz de metadados (\texttt{retJumps}), que registra as distâncias relativas (\texttt{int8}) entre cada componente do grama. Esses metadados são essenciais para a estratégia de indexação, pois permitem ao motor de busca diferenciar, por exemplo, uma citação direta de uma menção espaçada no texto.
 
 
     \section{Modelagem de Dados e Persistência}
@@ -726,22 +761,33 @@
 
     A modelagem orientada a objetos do sistema reflete-se nas \textit{structs} definidas no pacote \texttt{models}. Cada \textit{struct} mapeia diretamente para uma tabela no banco de dados, seguindo as convenções do GORM.
 
-    \subsubsection{Entidade Documento}
-    A unidade fundamental do \textit{corpus} é representada pela \textit{struct} \texttt{Document}, definida no arquivo \texttt{models/Document.go}. Esta estrutura armazena tanto os metadados quanto o conteúdo textual em seus diferentes estágios de processamento.
+    \subsubsection{Entidade Documento e Estratégia de Armazenamento}
+
+    A unidade fundamental do \textit{corpus} é representada pela \textit{struct} \texttt{Document}, definida no arquivo \texttt{models/Document.go}. Contudo, diferentemente de sistemas tradicionais que armazenam o conteúdo completo (BLOBs ou Textos Longos) no banco de dados, este projeto adota uma abordagem híbrida focada em performance.
 
     \begin{verbatim}
-    type Document struct {
-	ID      uint16
-	Name    string
-	Size    uint16
-	Kind    DocKind
-	Content []byte // Atributo não persistido
+type Document struct {
+    gorm.Model
+    Title        string
+    Link         string
+    CleanTitle   string
+    // Content e CleanContent são processados em memória ou lidos do disco
 }
     \end{verbatim}
 
-    A inclusão de \texttt{gorm.Model} injeta automaticamente campos de controle como \texttt{ID} (chave primária autoincremental), \texttt{CreatedAt}, \texttt{UpdatedAt} e \texttt{DeletedAt}, facilitando a auditoria e o controle de versão dos registros. O campo \texttt{Content} armazena o texto bruto extraído do PDF, enquanto \texttt{CleanContent} preserva o resultado do pipeline de normalização descrito na seção anterior, servindo de base para a geração de N-gramas.
+    Para evitar o crescimento exponencial do arquivo do banco de dados SQLite — o que degradaria o tempo de resposta das consultas de índice —, o conteúdo textual integral dos documentos (\textit{Full Text}) \textbf{não é persistido no banco de dados} de forma permanente.
 
-    \subsubsection{Dicionário de Palavras (Vocabulary)}
+    A estratégia adotada consiste em:
+    \begin{enumerate}
+        \item \textbf{Persistência em Disco:} Os documentos originais e suas versões higienizadas (\texttt{.txt}) são salvos no sistema de arquivos local (\textit{File System}) da máquina de execução. Isso aproveita a velocidade de leitura sequencial do SSD/HDD e libera o banco de dados de gerenciar grandes volumes de dados não estruturados.
+        \item \textbf{Banco como Índice de Metadados:} A tabela \texttt{documents} no SQLite armazena apenas os metadados essenciais (Título, Link original, IDs de controle) e atua como um catálogo que referencia os arquivos em disco.
+        \item \textbf{Leitura sob Demanda (Lazy Loading):} Durante a execução dos testes de similaridade, o sistema carrega o conteúdo necessário diretamente dos arquivos para a memória RAM apenas para o cálculo dos vetores e geração dos N-gramas. Uma vez indexado o documento (geradas as tabelas de Unigramas/Trigramas), o texto bruto é descartado da memória, mantendo o \textit{footprint} de RAM do processo eficiente.
+    \end{enumerate}
+
+    Essa decisão arquitetural garante que o banco de dados permaneça compacto, contendo apenas as estruturas otimizadas de busca (Índice Invertido), enquanto o armazenamento "pesado" é delegado ao sistema operacional.
+
+    \subsection{Dicionário de Palavras}
+
     Para otimizar o armazenamento e as comparações, as palavras não são repetidas nas tabelas de índice. Em vez disso, utiliza-se uma tabela de vocabulário único, representada pela \textit{struct} \texttt{Word}.
 
     \begin{verbatim}
@@ -835,6 +881,7 @@ case 3:
 
     Isso assegura que as consultas de busca (\textit{SELECT}), que realizam junções pesadas entre o vocabulário e a tabela de ocorrências, sempre utilizem um índice de cobertura (\textit{Covering Index}) ou um índice B-Tree otimizado, reduzindo a complexidade da busca de $O(N)$ para $O(\log N)$.
 
+
     \section{Implementação dos Algoritmos de Busca e Recuperação}
     \label{sec:algoritmos_busca}
 
@@ -898,7 +945,41 @@ for key := range tf {
 
     \subsection{Pipeline Semântico: Vetorização via Transformers}
 
-    Enquanto os algoritmos anteriores (implementados em Go) operam no nível léxico exato, a busca semântica foi delegada a um microsserviço especializado em Python, localizado em \texttt{src/core\_python}. A escolha do Python deve-se à maturidade do ecossistema de Deep Learning, especificamente das bibliotecas \texttt{torch} e \texttt{sentence-transformers}.
+    Enquanto os algoritmos TF-IDF e BM25, implementados no núcleo em Go, operam no nível léxico, identificando a ocorrência exata de termos, a camada de busca semântica exigiu uma abordagem capaz de capturar a intenção e o significado contextual das consultas. Para essa tarefa, o processamento foi delegado a um módulo desenvolvido em Python (versão 3.11), escolha natural dada a predominância desta linguagem no ecossistema de Aprendizado Profundo (\textit{Deep Learning}), a maturidade de bibliotecas como \textit{PyTorch} e \textit{Hugging Face}, e a compatibilidade com as ferramentas necessárias para a vetorização.
+
+    \subsubsection{Arquitetura do Componente Semântico}
+
+    O componente, localizado no diretório \texttt{src/core\_python}, foi construído sobre o \textit{framework} \textbf{FastAPI}. A opção pelo FastAPI, em detrimento de alternativas mais tradicionais, deve-se à sua natureza assíncrona e de baixa latência, características ideais para que o desempenho do microsserviço não se tornasse um gargalo quando comparado ao módulo em Go de altíssima performance.
+
+    A integração entre os módulos ocorre de forma desacoplada, utilizando o sistema de arquivos para a troca de dados. O fluxo de execução foi orquestrado manualmente para garantir a integridade de cada etapa:
+
+    \begin{enumerate}
+        \item O módulo em Go realiza a limpeza e normalização de todo o texto, persistindo o resultado em um diretório específico.
+        \item O módulo em Python lê os arquivos processados e os submete à biblioteca \texttt{sentence-transformers}, que abstrai a complexidade da tokenização e da inferência na rede neural.
+        \item O modelo gera e armazena em cache todos os vetores multidimensionais correspondentes aos documentos.
+        \item O mesmo processo de vetorização é aplicado a cada frase de consulta definida nos testes.
+        \item Por fim, o código calcula a similaridade de cosseno entre o vetor da frase e os vetores de todos os documentos, gerando as listas ordenadas de relevância.
+    \end{enumerate}
+
+    \subsubsection{Seleção de Modelos e Mudança de Escopo}
+
+    Uma das decisões metodológicas mais importantes deste trabalho ocorreu durante a fase de definição dos modelos de IA. Inicialmente, o projeto de pesquisa previa uma análise comparativa ampla, confrontando não apenas algoritmos estatísticos, mas também três arquiteturas distintas de representação vetorial:
+    \begin{enumerate}
+        \item Um modelo \textit{Transformer} robusto e de grande porte (como o BERT-Large ou RoBERTa), visando a máxima precisão teórica.
+        \item O modelo Word2Vec, baseado em arquiteturas neurais preditivas rasas.
+        \item Um modelo GloVe, treinado com dados da rede social \textit{Twitter}, para avaliar o impacto de um vocabulário mais informal.
+    \end{enumerate}
+
+    No entanto, durante a fase exploratória e os testes preliminares, observou-se uma inconsistência significativa nos resultados. As variações nos \textit{rankings} de relevância gerados pelos três modelos para o \textit{corpus} jurídico apresentaram níveis de divergência (entropia) tão elevados que inviabilizariam uma comparação justa. Documentos considerados altamente relevantes por um modelo apareciam frequentemente como irrelevantes em outro, criando um cenário de incerteza que não justificava a complexidade de manter e orquestrar três ambientes de inferência pesados simultaneamente.
+
+    Diante dessa evidência, optou-se por uma mudança estratégica de escopo. Em vez de dispersar o foco da análise usando diversos modelos de IA, o trabalho concentrou-se na dicotomia principal: "Estatística (Go) versus Semântica Contextual (Python/BERT)".
+
+    Para representar o estado da arte na busca semântica eficiente, selecionou-se unicamente o modelo \texttt{paraphrase-multilingual-MiniLM-L12-v2} (baseado em BERT). A escolha deste modelo específico fundamentou-se em três pilares:
+    \begin{itemize}
+        \item \textbf{Eficiência de Inferência:} Sendo um modelo da família "MiniLM", ele possui apenas 12 camadas e gera vetores de 384 dimensões. Isso permitiu rodar a bateria massiva de testes (milhares de comparações de cosseno) em tempo hábil, sem exigir \textit{hardware} de supercomputação (GPUs dedicadas de alto custo).
+        \item \textbf{Suporte Multilíngue:} O modelo foi treinado em mais de 50 idiomas, demonstrando capacidade robusta de entender a sintaxe do português sem a necessidade de \textit{fine-tuning} específico.
+        \item \textbf{Espaço Vetorial Denso:} As 384 dimensões provaram ser suficientes para codificar as nuances dos textos legislativos, servindo como um "gabarito" confiável e estável para a avaliação dos algoritmos estatísticos.
+    \end{itemize}
 
     \section{Implementação dos Algoritmos de Busca}
 
@@ -911,6 +992,63 @@ for key := range tf {
 
     \subsection{Vetorização Semântica}
     Para a busca semântica, o módulo Python utiliza a biblioteca \texttt{sentence-transformers}. O modelo escolhido, \texttt{paraphrase-multilingual-MiniLM-L12-v2}, converte os textos limpos em vetores densos de 384 dimensões. A similaridade entre os documentos é então calculada através da métrica de Similaridade de Cosseno, permitindo identificar correspondências baseadas no significado e não apenas na coincidência exata de palavras.
+
+
+    \chapter{Considerações Finais}
+
+    Este trabalho avaliou, de forma prática, diferentes técnicas de recuperação de informação, comparando algoritmos estatísticos implementados em Go com um modelo vetorial baseado em \textit{transformers}. A análise, conduzida sobre um \textit{corpus} jurídico brasileiro extenso, buscou entender até que ponto é possível equilibrar custo computacional e precisão semântica em sistemas de busca especializados.
+
+
+    \section{Síntese dos Resultados e Contribuições}
+
+    Os experimentos — 72 cenários medidos pelo Coeficiente de Spearman — confirmaram hipóteses levantadas na revisão teórica e apontaram para um “ponto de equilíbrio” claro entre desempenho e qualidade no domínio jurídico.
+
+    \subsection{Velocidade: BM25 Superando o TF-IDF}
+
+    Um resultado marcante foi o desempenho superior do BM25 em tempo de execução, especialmente nos cenários com Bigramas e Trigramas. Embora o TF-IDF seja matematicamente mais simples, o BM25 se mostrou até \textbf{dez vezes mais rápido} em alguns testes.
+
+    Isso ocorreu por causa da otimização adotada na implementação (Seção 3.4), que evitou cálculos desnecessários ao descartar termos com frequência de documento igual a zero. Em N-gramas maiores, onde a esparsidade cresce, esse “atalho” reduz de forma significativa o processamento. Esse achado reforça que eficiência não depende apenas da fórmula, mas de como o algoritmo lida com o volume real de dados.
+
+    \subsection{O Custo da Indexação Contextual}
+
+    O consumo de memória aumentou de forma acentuada conforme o tamanho dos N-gramas cresceu:
+
+    \begin{itemize}
+        \item \textbf{Unigramas:} pico de 143 MB.
+        \item \textbf{Bigramas:} cerca de 2.33 GB.
+        \item \textbf{Trigramas:} quase 5 GB.
+    \end{itemize}
+
+    O salto entre unigramas e trigramas (aprox. 32 vezes) evidencia o custo elevado para manter índices mais ricos. Embora modelos de \textit{embeddings} ofereçam maior precisão, o investimento em \textit{hardware} torna-se um fator crítico. Assim, para sistemas de busca com restrições orçamentárias, unigramas ou bigramas acabam sendo as opções mais viáveis.
+
+
+    \section*{A Relação entre os Modelos e o Gabarito Semântico}
+
+    A comparação entre os rankings gerados pelos métodos estatísticos e pelo modelo semântico (Sentence-BERT) mostrou correlações baixas, ainda que positivas (média entre 0.02 e 0.04). Isso confirma que cada abordagem captura aspectos distintos:
+
+    \begin{itemize}
+        \item modelos estatísticos priorizam coincidência de termos específicos, algo comum em textos jurídicos;
+        \item o modelo \textit{transformer} prioriza intenção e significado, mais útil em consultas abertas.
+    \end{itemize}
+
+    Na prática, os rankings são diferentes o suficiente para não serem intercambiáveis.
+
+    \subsection{Estabilidade e o Papel dos \textit{Skip-grams}}
+
+    A variação do \textit{jump} nos N-gramas maiores pouco afetou o Spearman. Mesmo ampliando o salto, os resultados permaneceram praticamente iguais. Isso mostra que, no Direito, as combinações relevantes costumam ser adjacentes (“Recurso de Apelação”, “Ação Direta”), tornando caro e pouco útil indexar palavras separadas por um ou dois termos.
+
+
+    \section{Limitações e Trabalhos Futuros}
+
+    Algumas limitações direcionam caminhos para pesquisas futuras:
+
+    \begin{enumerate}
+        \item O gabarito semântico utilizado foi gerado por modelos \textit{transformer}, o que limita a avaliação da “verdadeira” precisão semântica. Um gabarito manual poderia fornecer uma base mais confiável.
+        \item O \textit{corpus} analisado é predominantemente legislativo. Ampliar o estudo para acórdãos e sentenças permitiria testar a robustez das técnicas sob estruturas textuais mais variadas.
+    \end{enumerate}
+
+    Em resumo, o trabalho demonstrou que algoritmos estatísticos atuais — em especial o BM25 — oferecem excelente eficiência computacional e podem sustentar sistemas de busca jurídica de baixo custo. Ao mesmo tempo, a baixa concordância com modelos semânticos reforça a necessidade de abordagens híbridas que combinem velocidade com profundidade contextual, especialmente em um domínio tão exigente quanto o jurídico.
+
 
 % ========================================================================
 % BIBLIOGRAFIA
