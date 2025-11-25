@@ -249,7 +249,7 @@
 
     A era digital transformou radicalmente o acesso à informação, gerando um volume de dados sem precedentes em praticamente todos os setores da sociedade. No campo do Direito, essa realidade se manifesta de forma contundente na digitalização massiva de processos, leis, jurisprudências e pareceres. O Judiciário brasileiro, por exemplo, vivenciou uma explosão documental ao receber mais de 250 milhões de processos em formato eletrônico nos últimos 15 anos \cite{citacao59}. Se por um lado essa digitalização representa um avanço inegável em termos de transparência e preservação, por outro, ela impõe um desafio monumental: a simples capacidade de armazenamento tornou-se insuficiente. O problema agora desloca-se para a navegabilidade e a extração de valor desse oceano de textos complexos e interconectados, criando uma demanda urgente não apenas por memória digital, mas por capacidade de processamento inteligente.
 
-    Para responder a essa necessidade de inteligência interpretativa, as técnicas de Processamento de Linguagem Natural (NLP), especialmente aquelas baseadas em Inteligência Artificial e aprendizado de máquina, emergiram como a fronteira tecnológica mais promissora. Diferentemente dos sistemas antigos de busca exata, os modelos de linguagem avançados prometem "ler" os documentos, compreendendo nuances semânticas e contextuais que escapam à busca por palavras-chave. Ferramentas que utilizam arquiteturas de \textit{transformers} e representações vetoriais (\textit{embeddings}) representam o atual estado da arte, buscando emular uma compreensão quase humana dos textos legais para resolver tarefas complexas, como a identificação de similaridade entre decisões e divergências jurisprudenciais \cite{citacao60}.
+    Para responder a essa necessidade de inteligência interpretativa, as técnicas de Processamento de Linguagem Natural (NLP), especialmente aquelas baseadas em Inteligência Artificial e aprendizado de máquina, emergiram como a fronteira tecnológica mais promissora. Diferentemente dos sistemas antigos de busca exata, os modelos de linguagem avançados — notadamente aqueles baseados na arquitetura \textit{Transformer}, como o BERT e o LEGAL-BERT — prometem "ler" os documentos, compreendendo nuances semânticas e contextuais que escapam à busca por palavras-chave. Ferramentas que utilizam arquiteturas de \textit{transformers} e representações vetoriais (\textit{embeddings}) representam o atual estado da arte, buscando emular uma compreensão quase humana dos textos legais para resolver tarefas complexas, como a identificação de similaridade entre decisões e divergências jurisprudenciais \cite{citacao60}.
 
     No entanto, o entusiasmo com a sofisticação da Inteligência Artificial muitas vezes ofusca uma barreira prática significativa: o custo computacional. A adoção dessas tecnologias de ponta não é gratuita; ela exige um esforço financeiro, técnico e energético considerável. O treinamento e, principalmente, a inferência de grandes modelos de linguagem demandam hardware especializado (GPUs) e infraestrutura robusta, o que pode tornar a solução inviável para muitas instituições. Conforme o uso de IA se expande, torna-se crítico não apenas buscar o modelo mais "inteligente", mas também aplicar métodos para otimizar e reduzir os custos de operação desses sistemas, garantindo sua sustentabilidade \cite{citacao61}.
 
@@ -302,29 +302,35 @@
 
     \section{Processamento de Linguagem Natural no Domínio Jurídico}
 
-    A crescente produção textual na sociedade contemporânea transformou a informação em um recurso abundante, porém desafiador de ser processado. No universo jurídico, esse fenômeno é ainda mais acentuado: contratos, decisões, pareceres, petições e legislações são produtos essencialmente linguísticos. O Direito, enquanto sistema normativo, é construído, operado e interpretado por meio da linguagem \cite{citacao42, citacao43}.
+    A crescente produção textual na sociedade contemporânea transformou a informação em um recurso abundante, porém de difícil processamento. No universo jurídico, esse fenômeno é ainda mais crítico, visto que contratos, decisões e legislações são produtos essencialmente linguísticos. O Direito, enquanto sistema normativo, é construído e operado exclusivamente por meio da linguagem, o que torna a precisão interpretativa um requisito fundamental \cite{citacao42, citacao43}.
 
-    Diante do volume exponencial de documentos jurídicos, o uso de ferramentas computacionais tornou-se uma necessidade. As limitações cognitivas humanas frente à grande quantidade de dados disponíveis exigem soluções capazes de automatizar parte do processamento textual. Técnicas de NLP surgem como abordagem consolidada para enfrentar esse desafio \cite{citacao17, citacao44}.
+    Para lidar com esse volume exponencial de documentos, que excede as limitações cognitivas humanas, o uso de ferramentas computacionais deixou de ser opcional para se tornar uma necessidade. Nesse cenário, as técnicas de Processamento de Linguagem Natural (NLP) surgem não apenas como uma ferramenta de automação, mas como a abordagem consolidada para enfrentar o desafio de interpretar grandes massas de dados textuais \cite{citacao17, citacao44}.
 
-    O NLP, subárea da inteligência artificial, permite que máquinas compreendam, processem e operem sobre dados em linguagem natural. No contexto jurídico, essas técnicas viabilizam a identificação de padrões, a extração de informações relevantes, a sumarização de documentos e o suporte à tomada de decisão. Trata-se de uma evolução que não apenas automatiza tarefas, mas incorpora mecanismos capazes de operar diretamente sobre a base textual do Direito \cite{citacao45, citacao43}.
+    Diferentemente de sistemas rígidos baseados em regras, o NLP permite que as máquinas compreendam e operem diretamente sobre a base textual do Direito. Essas técnicas viabilizam desde a extração de informações relevantes e identificação de padrões até a sumarização de documentos e suporte à tomada de decisão, incorporando uma camada de "inteligência" ao processamento bruto de dados \cite{citacao45, citacao43}.
 
-    Atualmente, modelos computacionais já demonstram aplicações práticas no ambiente jurídico, como análise de jurisprudência, redação assistida e busca semântica em bases normativas. No contexto brasileiro, estudos como os de \citeonline{citacao17} evidenciam a consolidação dessas tecnologias no setor jurídico.
+    Essa evolução tecnológica já se traduz em aplicações práticas robustas no ambiente jurídico, como a análise preditiva de jurisprudência e a busca semântica em bases normativas. No contexto brasileiro, estudos como os de \citeonline{citacao17} evidenciam que essas tecnologias já estão consolidadas, estabelecendo um novo padrão de referência para a recuperação e análise de informação no setor.
 
     \subsection{Características dos textos jurídicos}
 
-    A aplicação de técnicas de NLP no domínio jurídico envolve desafios particulares, uma vez que os textos jurídicos apresentam propriedades distintas em relação a outros gêneros textuais. Em primeiro lugar, são documentos altamente especializados, redigidos com vocabulário técnico e linguagem formal, frequentemente estruturados de modo padronizado. Termos como \textit{vossa excelência}, \textit{ex positis} ou \textit{ad nutum} não apenas indicam jargão, mas também desempenham papel semântico e pragmático central na construção do sentido legal de um texto \cite{citacao42,citacao44}.
+    A aplicação de técnicas de recuperação de informação no domínio jurídico envolve desafios particulares, uma vez que os textos legais apresentam propriedades distintas de outros gêneros textuais. Em primeiro lugar, são documentos altamente especializados, redigidos com vocabulário técnico e linguagem formal. Termos como \textit{vossa excelência}, \textit{ex positis} ou \textit{ad nutum} desempenham papel semântico central \cite{citacao42,citacao44}. Para sistemas de busca, essa especificidade lexical gera efeitos distintos dependendo da abordagem: favorece métodos baseados em palavras-chave (devido à raridade dos termos), mas pode confundir modelos semânticos genéricos que não foram treinados nesse vocabulário específico.
 
-    Além disso, esses textos apresentam um alto grau de ambiguidade controlada --- ou seja, ambiguidade tolerada e, muitas vezes, intencional. Palavras como \textit{poderá}, \textit{deverá} ou \textit{caberá} têm significados normativos específicos que impactam diretamente a interpretação e aplicação das normas. Essa polissemia exige que modelos de NLP sejam sensíveis ao contexto jurídico para evitar erros semânticos que possam comprometer a análise automatizada \cite{citacao17,citacao45}.
+    Além disso, esses textos apresentam um alto grau de ambiguidade controlada. Palavras como \textit{poderá}, \textit{deverá} ou \textit{caberá} têm significados normativos específicos que impactam diretamente a interpretação das normas. Essa polissemia representa um desafio de desambiguação: métodos estatísticos tendem a tratar essas palavras apenas como \textit{tokens} distintos, ignorando sua carga normativa, enquanto modelos semânticos precisam de um ajuste fino robusto para diferenciar o "sentido jurídico" do uso coloquial \cite{citacao17,citacao45}.
 
-    Outro aspecto relevante é a intertextualidade jurídica. Leis, contratos, petições e sentenças costumam referenciar outros documentos legais, criando dependências explícitas entre normas, jurisprudências e atos administrativos. Essa característica impõe a necessidade de modelos capazes de capturar relações entre documentos --- como citações, remissões e precedentes --- o que exige abordagens sofisticadas para modelagem de contexto e representação semântica \cite{citacao17}.
+    Outro aspecto crítico, e talvez o mais desafiador para a recuperação de informação, é a intertextualidade jurídica. Leis, contratos e sentenças não existem no vácuo; eles referenciam constantemente outros documentos. Isso cria um cenário onde a relevância de um documento muitas vezes depende de uma referência externa exata, e não apenas do seu conteúdo semântico interno. Esse fenômeno desafia a lógica dos \textit{embeddings}, que buscam similaridade de significado e podem perder a precisão da referência exata, e também impõe dificuldades aos métodos estatísticos, que tratam citações complexas apenas como sequências de caracteres \cite{citacao17}.
 
-    Também é importante considerar a estrutura argumentativa dos textos jurídicos. Documentos como sentenças e pareceres possuem uma lógica discursiva específica, geralmente organizada em premissas, fundamentações e conclusões. Essa organização influencia tanto a segmentação quanto a priorização de informações nos sistemas de NLP aplicados ao Direito \cite{citacao43}.
+    Também é importante considerar a estrutura argumentativa dos textos. Documentos como sentenças possuem uma lógica discursiva específica. A informação mais relevante para uma busca nem sempre está distribuída uniformemente pelo texto. Isso afeta diretamente a performance dos algoritmos: o TF-IDF pode supervalorizar a repetição de termos na fundamentação, enquanto um modelo de \textit{embedding} que faz a média vetorial do documento inteiro pode diluir o "sinal" da decisão final contida na conclusão \cite{citacao43}.
 
-    \subsection{Desafios específicos em português}
+    \subsection{Desafios de Processamento e Representação em Português}
 
-    Ao aplicar técnicas de NLP à língua portuguesa, especialmente no domínio jurídico, surgem obstáculos adicionais que não estão presentes em línguas com estruturas morfossintáticas mais simples, como o inglês. O português brasileiro apresenta uma morfologia altamente flexiva, com ampla variação de formas verbais, nominais e pronominais, o que torna tarefas como tokenização e lematização consideravelmente mais complexas \cite{citacao17}.
+    Ao aplicar técnicas de NLP à língua portuguesa, especialmente no domínio jurídico, surgem obstáculos que permeiam desde a análise morfossintática até a representação semântica vetorial. Diferentemente do inglês, o português brasileiro apresenta uma morfologia altamente flexiva, com ampla variação de formas verbais, nominais e pronominais, o que eleva a complexidade de tarefas fundamentais como a tokenização e a lematização \cite{citacao17}.
 
-    No contexto jurídico, essa complexidade é intensificada pelo uso recorrente de locuções e expressões idiomáticas específicas da tradição normativa. Frases como \textit{sem prejuízo do disposto}, \textit{salvo disposição em contrário} ou \textit{nos termos da legislação aplicável} não podem ser analisadas isoladamente por palavra. Tais construções funcionam como unidades semânticas coesas, exigindo abordagens capazes de identificar e preservar o significado completo durante o pré-processamento textual \cite{citacao44,citacao17}.
+    No contexto jurídico, essa complexidade é intensificada pelo uso recorrente de locuções e expressões idiomáticas. Construções como \textit{sem prejuízo do disposto}, \textit{salvo disposição em contrário} ou \textit{nos termos da legislação aplicável} funcionam como unidades semânticas coesas. Analisá-las isoladamente, palavra por palavra, pode fragmentar o sentido original, exigindo abordagens de pré-processamento capazes de identificar e preservar o significado completo dessas expressões \cite{citacao44}.
+
+    Essa especificidade linguística impõe desafios práticos imediatos na etapa de tokenização. O tratamento da pontuação, por exemplo, exige regras de exceção: elementos como números de processo (ex: 1234567-89.2023.8.26.0100) devem ser preservados como um único \textit{token}, dada sua importância identificadora, enquanto a pontuação gramatical comum deve ser removida \cite{citacao17}. Da mesma forma, o uso de hífens em palavras compostas (ex: \textit{auto-aplicável}) e a presença de entidades nomeadas complexas (ex: \textit{Ministério Público}, \textit{Poder Judiciário}) demandam estratégias de segmentação que evitem a perda de informação semântica, um problema bem documentado na literatura de NLP aplicada ao direito brasileiro \cite{citacao17}.
+
+    Além da segmentação e limpeza, há o desafio da representação vetorial (\textit{embeddings}). Para que algoritmos possam realizar tarefas como busca jurisprudencial ou classificação, os textos precisam ser convertidos em vetores numéricos. No entanto, modelos de \textit{embeddings} genéricos, treinados com textos da web, frequentemente falham em capturar as nuances da linguagem técnica e formal do Direito \cite{citacao39}.
+
+    Modelos especializados, como a família LEGAL-BERT \cite{citacao39}, que são pré-treinados ou ajustados (\textit{fine-tuned}) especificamente em corpora jurídicos, mostram-se mais eficazes na captação desse vocabulário especializado e das estruturas discursivas recorrentes. Contudo, o uso desses modelos introduz um novo obstáculo: o alto custo computacional de treinamento e inferência. Isso levanta a questão central do \textit{trade-off} entre a precisão semântica oferecida por modelos de linguagem pesados e a eficiência de métodos mais simples, cerne da investigação deste trabalho \cite{citacao35, citacao40}.
 
     \subsection{Modelos de Linguagem para o Domínio Jurídico}
 
@@ -352,21 +358,9 @@
     \begin{figure}[H]
         \centering
         \caption{\label{fig:tokenizacao}Exemplo de \textit{tokenização}.}
-        \includegraphics[width=0.8\textwidth]{assets/tokenizacao.png}
-        \legend {Fonte: \cite{citacao10}}
+        \includegraphics[width=\textwidth]{assets/tokenizacao.png}
+        \legend {Fonte: Elaboração própria.}
     \end{figure}
-
-    \subsubsection{Desafios específicos no contexto jurídico em português}
-
-    A tokenização de textos jurídicos em língua portuguesa apresenta desafios particulares que precisam ser considerados para evitar a perda de informação ou a distorção semântica. Um dos principais aspectos envolve o tratamento da pontuação. Embora seja comum a remoção de sinais de pontuação na maioria dos sistemas de pré-processamento textual, certos elementos, como os números de processo — por exemplo, 1234567-89.2023.8.26.0100 — devem ser preservados como um único \textit{token}, dada sua importância semântica e recorrência em documentos legais \cite{citacao17}.
-
-    Outro desafio é o manejo de contrações e apóstrofos. Expressões como \textit{d’água} exigem normalização ou adaptação conforme a estratégia do sistema de NLP adotado, a fim de evitar a fragmentação de termos relevantes ou a exclusão de significados culturalmente marcados. Esse tipo de problema é particularmente sensível em português, dada a frequência de contrações e formas elípticas presentes na linguagem formal e jurídica \cite{citacao17}.
-
-    A presença de hífen também demanda atenção, especialmente em palavras compostas. Termos como \textit{auto-aplicável} podem ser mantidos como uma única unidade ou separados, dependendo do contexto e do domínio de aplicação. Em geral, recomenda-se a separação de prefixos curtos em termos técnicos, mas a preservação do hífen em nomes próprios, como em \textit{Hewlett-Packard}. Esse problema é bem documentado tanto na literatura geral de processamento de linguagem quanto nos trabalhos específicos aplicados ao domínio jurídico brasileiro, que destacam como a segmentação incorreta impacta diretamente na qualidade da indexação e da recuperação de informação \cite{citacao17}.
-
-    Além disso, há a necessidade de identificar e manter unidas expressões fixas e nomes compostos, tais como \textit{Ministério Público}, \textit{Poder Judiciário} ou \textit{São Paulo}. Essas unidades semânticas são especialmente relevantes quando se lida com consultas baseadas em frases, nas quais a separação pode comprometer a precisão dos resultados. Modelos jurídicos treinados para o português, como os apresentados no projeto NLP Legal Brasil, reforçam a necessidade desse tipo de pré-processamento especializado, visto que expressões compostas carregam um valor semântico muito superior ao de seus termos isolados \cite{citacao17}.
-
-    Por fim, entidades estruturadas como endereços de e-mail, URLs, datas e identificadores numéricos — incluindo CPF e CNPJ — devem ser reconhecidas e tratadas como \textit{tokens} indivisíveis. Esses elementos são frequentemente objeto direto de busca em sistemas jurídicos informatizados, e sua fragmentação pode prejudicar seriamente a eficácia dos mecanismos de recuperação de informação. A literatura destaca que a preservação de entidades estruturadas é uma das práticas essenciais para garantir a robustez de sistemas de busca no domínio jurídico, especialmente em bases documentais complexas como acervos de jurisprudência ou diários oficiais \cite{citacao17}.
 
     \subsection{Remoção de Stopwords}
 
@@ -377,8 +371,8 @@
     \begin{figure}[H]
         \centering
         \caption{Exemplo de remoção de \textit{stopwords}}
-        \includegraphics[width=0.8\textwidth]{assets/Stopwords.png}
-        \legend{Fonte: \cite{citacao25}}
+        \includegraphics[width=\textwidth]{assets/Stopwords.png}
+        \legend{Fonte: Elaboração própria.}
     \end{figure}
 
     \subsection{Lematização e Stemização}
@@ -390,8 +384,8 @@
     \begin{figure}[H]
         \centering
         \caption{Exemplo de diferenças entre Stemização e Lematização.}
-        \includegraphics[width=1.0\textwidth]{assets/lem_stem.png}
-        \legend{Fonte: elaboração própria, inspirada em \cite{citacao18}.}
+        \includegraphics[width=\textwidth]{assets/lem_stem.png}
+        \legend{Fonte: Elaboração própria, inspirada em \cite{citacao18}.}
     \end{figure}
 
     A lematização proporciona maior fidelidade semântica, sendo mais indicada para tarefas que exigem compreensão precisa dos textos, como análise e busca em documentos jurídicos. Essa abordagem, por depender de análise linguística completa e regras morfológicas, costuma ter maior custo computacional e necessidade de recursos linguísticos bem estruturados, especialmente em idiomas como o português, que possui alta complexidade morfológica \cite{citacao17}.
@@ -441,7 +435,7 @@
         \centering
         \caption{Exemplo da aplicação do TF-IDF em frases.}
         \includegraphics[width=\textwidth]{assets/TF_IDF.png}
-        \legend{Fonte: \cite{citacao41}}
+        \legend{Fonte: Elaboração própria, inspirada em \cite{citacao41}}
     \end{figure}
 
     O modelo TF--IDF é amplamente utilizado em tarefas de recuperação de informação, classificação e agrupamento de textos, justamente por sua simplicidade e eficácia. Seu principal mérito reside na combinação da frequência local com a raridade global dos termos, permitindo destacar palavras que são relevantes para o conteúdo específico de um documento, enquanto penaliza termos genéricos e pouco informativos \cite{citacao10}.
@@ -476,7 +470,7 @@
         \centering
         \caption{\label{fig:Indice} No índice inverso quem mapeia são os termos e n.}
         \includegraphics[width=\textwidth]{assets/Indice.png}
-        \legend {Fonte: Elaboração própria}
+        \legend {Fonte: Elaboração própria.}
     \end{figure}
 
     Uma forma de otimizar o uso de memória do índice inverso é por meio da compressão das listas de ocorrências (\textit{postings lists}). Técnicas comuns incluem a codificação de diferenças (\textit{gap encoding} ou \textit{delta encoding}), onde apenas a diferença entre IDs de documentos consecutivos é armazenada, e codificações de inteiros como \textit{varint} (\textit{Variable Byte coding}) ou \textit{Golomb coding}, que reduzem o espaço ocupado por números pequenos. Além de economizar memória, a compressão pode acelerar consultas, já que menos dados precisam ser carregados da memória ou disco, sendo uma prática padrão em motores de busca de larga escala \cite{citacao67}.
@@ -550,7 +544,7 @@
         \centering
         \caption{\label{fig:vetores} O ângulo entre os vetores é diretamente proporcional à sua similaridade.}
         \includegraphics[width=\textwidth]{assets/vetores.png}
-        \legend {Fonte: \cite{citacao38}}
+        \legend {Fonte: Elaboração própria, inspirada em \cite{citacao38}}
     \end{figure}
 
     A vantagem da similaridade cosseno sobre outras métricas, como a distância euclidiana, está no fato de que ela é invariável à magnitude dos vetores. Isso significa que dois vetores com direções similares, mas comprimentos diferentes (por exemplo, textos curtos vs. longos com mesmo conteúdo), ainda podem ser considerados semanticamente similares. Isso é particularmente útil em tarefas de busca semântica e recuperação de informações, onde a intenção é encontrar conteúdos com sentido próximo, independentemente da sua extensão textual \cite{citacao67}.
@@ -558,12 +552,6 @@
     Na prática, ao aplicar essa métrica, os textos são primeiro convertidos em vetores numéricos usando técnicas de \textit{embeddings} (como Word2Vec, BERT ou Sentence-BERT), e depois esses vetores são comparados utilizando a similaridade cosseno para ranquear ou agrupar documentos. Essa abordagem é a base de diversos sistemas modernos de busca jurídica, recomendação de jurisprudência e agrupamento de decisões semelhantes \cite{citacao35}.
 
     É importante ressaltar que o cosseno não capta relações mais complexas como ironia, polissemia ou implicaturas contextuais — para esses casos, a escolha do modelo de \textit{embedding} (estático ou contextualizado) é determinante para que os vetores usados na comparação contenham essas nuances semânticas. Ainda assim, a similaridade cosseno continua sendo uma escolha padrão e eficaz em aplicações de NLP por sua simplicidade, desempenho e capacidade de generalização \cite{citacao10}.
-
-    \subsubsection{\textit{Embeddings} aplicados ao Direito}
-
-    No contexto jurídico, \textit{embeddings} vêm sendo utilizados para representar textos legais em formato vetorial, permitindo a aplicação de algoritmos de NLP em tarefas como busca jurisprudencial, classificação de documentos, extração de entidades e verificação de similaridade entre decisões. Ao converter petições, sentenças, leis e pareceres em vetores numéricos, torna-se possível aplicar modelos de aprendizado para identificar padrões, sugerir documentos similares ou agrupar textos por temas jurídicos \cite{citacao39}.
-
-    Uma das principais vantagens dos \textit{embeddings} nesse domínio é a capacidade de lidar com a linguagem técnica e formal do Direito. Modelos genéricos, treinados com textos da web, podem não capturar as nuances de termos jurídicos. Por isso, modelos da família LEGAL-BERT \cite{citacao39}, que são pré-treinados ou ajustados (\textit{fine-tuned}) especificamente em corpora jurídicos, tornam-se mais eficazes na captação de vocabulário especializado e estruturas discursivas recorrentes. Contudo, o treinamento e a inferência desses modelos demandam alto custo computacional, o que levanta questões sobre o \textit{trade-off} entre precisão semântica e eficiência, cerne da investigação deste trabalho \cite{citacao35, citacao40}.
 
 
     \section{Algoritmos}
@@ -603,7 +591,7 @@
     \begin{figure}[H]
         \centering
         \caption{\label{fig:AlgSequenciais}Algoritmos sequenciais}
-        \includegraphics[width=0.8\textwidth]{assets/Algoritmos sequenciais.png}
+        \includegraphics[width=\textwidth]{assets/Algoritmos sequenciais.png}
         \legend {Fonte: Elaboração própria.}
     \end{figure}
 
@@ -614,7 +602,7 @@
     \begin{figure}[H]
         \centering
         \caption{\label{fig:AlgParalelos}Algoritmos paralelos}
-        \includegraphics[width=0.8\textwidth]{assets/Algoritmos paralelos.png}
+        \includegraphics[width=\textwidth]{assets/Algoritmos paralelos.png}
         \legend {Fonte: Elaboração própria.}
     \end{figure}
 
