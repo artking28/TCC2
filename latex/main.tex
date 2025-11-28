@@ -142,15 +142,18 @@
         \vspace*{\fill}
         \centering
         \noindent
-        \textit{ Texto da dedicatória.} \vspace*{\fill}
+        \textit{ Dedicamos este trabalho aos nossos pais, que sempre foram nosso alicerce, oferecendo o apoio incondicional e o incentivo necessário para que pudéssemos trilhar este caminho de aprendizado. A todos que acreditaram no nosso potencial e nos motivaram a nunca desistir dos nossos sonhos.} \vspace*{\fill}
     \end{dedicatoria}
 
 % ========================================================================
 % AGRADECIMENTOS
 % ========================================================================
     \begin{agradecimentos}
-        Texto de agradecimento.
+        Primeiramente, agradecemos aos nossos pais, nossa eterna gratidão pelo amor, paciência e apoio incondicional. Vocês são a base de todas as nossas conquistas.
 
+        Ao nosso orientador, Professor Afonso Lelis, e ao Centro Universitário Senac, agradecemos pela orientação segura, pela estrutura oferecida e pelos conhecimentos compartilhados, que foram essenciais para o desenvolvimento deste trabalho e para a nossa formação profissional.
+
+        Por fim, aos amigos e colegas de curso, obrigado pelo companheirismo e pela troca de experiências que tornaram essa caminhada mais leve.
     \end{agradecimentos}
 
 % ========================================================================
@@ -159,7 +162,7 @@
     \begin{epigrafe}
         \vspace*{\fill}
         \begin{flushright}
-            \textit{``A beleza é realmente um bom dom de Deus; mas que os bons não pensem que ela é um grande bem, pois Deus a distribui mesmo para os maus. \\
+            \textit{``A beleza é realmente um bom dom de Deus; mas que os bons não pensem que ela é um grande bem, pois Deus a distribui mesmo para os maus.``\\
             (Santo Agostinho)}
         \end{flushright}
     \end{epigrafe}
@@ -170,9 +173,9 @@
     \setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
     \begin{resumo}
 
-        A digitalização massiva do setor jurídico brasileiro resultou em um volume sem precedentes de documentos textuais, como PLs, PECs etc. A recuperação de informação neste cenário enfrenta um desafio central: enquanto modelos modernos de Inteligência Artificial baseados em \textit{embeddings} oferecem alta precisão semântica, seu custo computacional de implementação e inferência é significativamente elevado. Este trabalho investiga o \textit{trade-off} pragmático entre a complexidade semântica e a eficiência computacional. Para isso, foi desenvolvido um sistema de avaliação comparativa que implementa, do zero na linguagem Go, os algoritmos estatísticos clássicos TF-IDF e Okapi BM25. Um \textit{corpus} de aproximadamente 5.000 páginas de documentos legislativos de diversos temas coletados do Portal da Câmara dos Deputados através de um \textit{scraping} e submetido a um rigoroso \textit{pipeline} de higienização textual. A persistência dos dados foi otimizada em SQLite, utilizando um esquema dinâmico que instancia bancos de dados isolados por tipo de N-grama (Unigrama, Bigrama e Trigrama) para maximizar a performance, variando o tamanho dos saltos(skip-grams) e adicionando normalização deles. Por fim, os resultados de relevância gerados pelos métodos estatísticos são comparados aos de um modelo \textit{transformer} (Sentence-BERT), utilizando o Coeficiente de Correlação de Spearman para medir a similaridade ordinal dos \textit{rankings}. O estudo fornece uma análise quantitativa que auxilia na tomada de decisão sobre a arquitetura de custo-benefício mais adequada para sistemas de busca jurídica.
+        A digitalização massiva do setor jurídico brasileiro impõe desafios críticos de recuperação de informação. Enquanto modelos de Inteligência Artificial baseados em \textit{embeddings} oferecem alta precisão semântica, seu custo computacional é elevado. Este trabalho investiga o \textit{trade-off} pragmático entre complexidade semântica e eficiência estatística. Para isso, foi desenvolvido um sistema comparativo em linguagem Go, implementando os algoritmos TF-IDF e Okapi BM25, confrontados com um modelo \textit{transformer} (Sentence-BERT) em Python. Os testes, realizados sobre um \textit{corpus} legislativo de aproximadamente 5.000 documentos, revelaram que a busca estatística é significativamente mais eficiente: o uso de Unigramas exigiu apenas 143 MB de memória RAM, contra 4,7 GB na configuração de Trigramas. Em termos de velocidade, o algoritmo BM25 mostrou-se até 10 vezes mais rápido que o TF-IDF em cenários complexos. A análise qualitativa via Coeficiente de Spearman indicou uma correlação baixa (entre 0,02 e 0,06) entre os \textit{rankings} estatísticos e semânticos, sugerindo que as abordagens capturam aspectos distintos da relevância. Conclui-se que, para o domínio jurídico, métodos estatísticos oferecem um custo-benefício superior para filtragem inicial, sendo a arquitetura híbrida a solução ideal.
 
-        \textbf{Palavras-chave}: Processamento de Linguagem Natural, Recuperação de Informação, Busca Jurídica, \textit{Skip-grams}, TF-IDF, BM25, Embeddings, Coeficiente de Spearman.
+        \textbf{Palavras-chave}: Processamento de Linguagem Natural. Recuperação de Informação. Busca Jurídica. TF-IDF. BM25. Embeddings.
     \end{resumo}
 
 % ========================================================================
@@ -180,9 +183,9 @@
 % ========================================================================
     \begin{resumo}[Abstract]
         \begin{otherlanguage*}{english}
-            \textit{The massive digitization of the Brazilian legal sector has resulted in an unprecedented volume of textual documents, such as PLs and PECs. Information retrieval in this scenario faces a central challenge: while modern Artificial Intelligence models based on embeddings offer high semantic accuracy, their computational cost of implementation and inference is significantly elevated. This work investigates the pragmatic trade-off between semantic complexity and computational efficiency. To this end, a comparative evaluation system was developed, implementing the classic statistical algorithms TF-IDF and Okapi BM25 from scratch in the Go language. A corpus of approximately 5,000 pages of legislative documents on diverse topics was collected from the Chamber of Deputies' portal via scraping and submitted to a rigorous textual sanitization pipeline. Data persistence was optimized using SQLite, employing a dynamic schema that instantiates isolated databases by N-gram type (Unigram, Bigram, and Trigram) to maximize performance, varying the jump sizes (skip-grams) and applying normalization to them. Finally, the relevance results generated by the statistical methods are compared to those of a transformer model (Sentence-BERT), using the Spearman Correlation Coefficient to measure the ordinal similarity of the rankings. The study provides a quantitative analysis that assists in decision-making regarding the most appropriate cost-benefit architecture for legal search systems.}
+            The massive digitization of the Brazilian legal sector imposes critical information retrieval challenges. While AI models based on embeddings offer high semantic precision, their computational cost is high. This work investigates the pragmatic trade-off between semantic complexity and statistical efficiency. To this end, a comparative system was developed in Go, implementing TF-IDF and Okapi BM25 algorithms, confronted with a transformer model (Sentence-BERT) in Python. Tests performed on a legislative corpus of approximately 5,000 documents revealed that statistical search is significantly more efficient: using Unigrams required only 143 MB of RAM, versus 4.7 GB in the Trigram configuration. In terms of speed, the BM25 algorithm proved to be up to 10 times faster than TF-IDF in complex scenarios. Qualitative analysis via Spearman's Coefficient indicated a low correlation (between 0.02 and 0.06) between statistical and semantic rankings, suggesting that the approaches capture distinct aspects of relevance. It is concluded that, for the legal domain, statistical methods offer superior cost-benefit for initial filtering, with hybrid architecture being the ideal solution.
 
-            \textit{\textbf{Key-words}: Natural Language Processing, Information Retrieval, Legal Search, Skip-grams, TF-IDF, BM25, Embeddings, Spearman Coefficient.}
+            \textbf{Key-words}: Natural Language Processing. Information Retrieval. Legal Search. TF-IDF. BM25. Embeddings.
         \end{otherlanguage*}
     \end{resumo}
 
@@ -280,17 +283,16 @@
 
     \subsection{Objetivo Geral}
 
-    Avaliar computacionalmente e contextualmente comparando o desempenho de métodos estatísticos puro e embeddings para a indexação e busca de informações em documentos jurídicos, analisando o \textit{trade-off} entre a complexidade de ambos.
+    Avaliar comparativamente o desempenho computacional e a relevância semântica de métodos estatísticos, especificamente o \textbf{TF-IDF e o BM25}, frente a modelos baseados em \textit{embeddings} como o \textbf{Sentence-BERT}, visando analisar o \textit{trade-off} entre eficiência e precisão na recuperação de informação em documentos legislativos.
 
     \subsection{Objetivos Específicos}
 
     \begin{enumerate}
-        \item Realizar o \textit{scrapping} de documentos jurídicos afim de construir uma forte e extensa base de documentos.
-        \item Retirar \textit{stop-words}, capitalizar letras e normalizar as letras do corpus de documentos para criar uma base de testes consistente para ambas as abordagens.
-        \item Implementar um pipeline de busca baseado em \textit{embeddings} de sentenças, utilizando a similaridade de cosseno para ranquear os resultados de acordo com a proximidade semântica.
-        \item Implementar um pipeline de busca baseado no modelo estatístico TF-IDF e BM25 para criar uma representação vetorial baseada na frequência de termos e ranqueá-los através da similaridade de cosseno.
-        \item Definir e aplicar um conjunto de métricas para avaliar e comparar o desempenho das diferentes abordagens, considerando precisão, tempo de resposta.
-        \item Analisar criticamente os resultados obtidos para identificar as vantagens, desvantagens e os cenários de aplicação mais adequados para cada método no contexto específico dos textos jurídicos.
+        \item Construir um \textit{corpus} textual robusto a partir da coleta automatizada via \textit{scraping} e da higienização de documentos legislativos, com foco em Propostas de Lei e Propostas de Emenda à Constituição obtidas do portal da Câmara dos Deputados.
+        \item Implementar e parametrizar os algoritmos de busca estatística \textbf{TF-IDF e BM25}, bem como a abordagem semântica via \textbf{Sentence-BERT}, estruturando estratégias de indexação com diferentes configurações de N-gramas.
+        \item Definir um protocolo experimental para mensurar o consumo de recursos, incluindo tempo de CPU e uso de memória RAM, bem como a latência de indexação e busca em diferentes cenários de carga.
+        \item Aplicar o Coeficiente de Correlação de Spearman para quantificar o grau de concordância entre os \textit{rankings} gerados pelos métodos estatísticos e o gabarito semântico.
+        \item Analisar quantitativamente os resultados para determinar em quais cenários o custo computacional dos modelos de IA se justifica frente à eficiência dos métodos clássicos.
     \end{enumerate}
 
 
@@ -608,29 +610,41 @@
 
     \section{Trabalhos Relacionados}
 
-    \subsection{Comparação de Desempenho entre TF-IDF e Okapi BM25}
+    % \subsection{Comparação de Desempenho entre TF-IDF e Okapi BM25}
 
-    O trabalho influente de \citeonline{robertson1995okapi} apresenta os resultados do sistema Okapi na TREC-3 e acaba servindo como uma das principais evidências empíricas da superioridade do BM25 sobre o TF-IDF tradicional. Os autores não buscavam criar um sistema novo, mas sim avaliar e aprimorar um modelo probabilístico de recuperação em um ambiente de testes rigoroso.
+    % O trabalho influente de \citeonline{robertson1995okapi} apresenta os resultados do sistema Okapi na TREC-3 e acaba servindo como uma das principais evidências empíricas da superioridade do BM25 sobre o TF-IDF tradicional. Os autores não buscavam criar um sistema novo, mas sim avaliar e aprimorar um modelo probabilístico de recuperação em um ambiente de testes rigoroso.
 
-    A metodologia consistiu em submeter o Okapi ao corpus padrão da TREC usando consultas de tópicos complexos cuja relevância já era conhecida. A eficácia dos algoritmos foi medida por métricas como Mean Average Precision e Precision@k, que verificam o quanto a ordenação dos resultados se aproxima do ideal.
+    % A metodologia consistiu em submeter o Okapi ao corpus padrão da TREC usando consultas de tópicos complexos cuja relevância já era conhecida. A eficácia dos algoritmos foi medida por métricas como Mean Average Precision e Precision@k, que verificam o quanto a ordenação dos resultados se aproxima do ideal.
 
-    O TF-IDF aparece como linha de base do estudo. Sua limitação mais clara é a normalização insuficiente em relação ao tamanho dos documentos. Em conjuntos muito variados, como o jurídico, textos longos acabam favorecidos, já que têm mais chances de repetir os termos da consulta e inflar artificialmente sua pontuação.
+    % O TF-IDF aparece como linha de base do estudo. Sua limitação mais clara é a normalização insuficiente em relação ao tamanho dos documentos. Em conjuntos muito variados, como o jurídico, textos longos acabam favorecidos, já que têm mais chances de repetir os termos da consulta e inflar artificialmente sua pontuação.
 
-    O Okapi BM25 é apresentado como a resposta probabilística a esse problema, usando dois parâmetros de calibração. O primeiro é o $k_1$, que controla a saturação da frequência do termo, evitando que aumentos repetitivos elevem a relevância de forma linear. O segundo é o $b$, que ajusta o efeito do comprimento do documento comparando seu tamanho com a média do corpus. Documentos muito maiores que a média recebem uma penalização que reduz ocorrências casuais.
+    % O Okapi BM25 é apresentado como a resposta probabilística a esse problema, usando dois parâmetros de calibração. O primeiro é o $k_1$, que controla a saturação da frequência do termo, evitando que aumentos repetitivos elevem a relevância de forma linear. O segundo é o $b$, que ajusta o efeito do comprimento do documento comparando seu tamanho com a média do corpus. Documentos muito maiores que a média recebem uma penalização que reduz ocorrências casuais.
 
-    Os resultados apresentados mostram uma vantagem consistente do BM25 sobre o TF-IDF em métricas de ordenação como a nDCG. A conexão com este TCC é direta, já que o estudo reforça empiricamente a escolha do BM25 como principal método estatístico usado na análise e o coloca como o modelo lexical mais consolidado para comparação com abordagens semânticas.
+    % Os resultados apresentados mostram uma vantagem consistente do BM25 sobre o TF-IDF em métricas de ordenação como a nDCG. A conexão com este TCC é direta, já que o estudo reforça empiricamente a escolha do BM25 como principal método estatístico usado na análise e o coloca como o modelo lexical mais consolidado para comparação com abordagens semânticas.
 
-    \subsection{Arquiteturas Preditivas para Representação Vetorial de Palavras}
+    % \subsection{Arquiteturas Preditivas para Representação Vetorial de Palavras}
 
-    O trabalho de \citeonline{mikolov2013efficient}, intitulado “Efficient Estimation of Word Representations in Vector Space”, introduz uma nova forma de representar palavras que estabeleceu a base da busca semântica moderna. O estudo questiona os modelos baseados em contagem, como o TF-IDF, que tratam palavras como unidades independentes e esparsas, e apresenta o toolkit Word2Vec. O objetivo é aprender vetores densos capazes de refletir o significado da palavra a partir de seu contexto em um corpus massivo.
+    % O trabalho de \citeonline{mikolov2013efficient}, intitulado “Efficient Estimation of Word Representations in Vector Space”, introduz uma nova forma de representar palavras que estabeleceu a base da busca semântica moderna. O estudo questiona os modelos baseados em contagem, como o TF-IDF, que tratam palavras como unidades independentes e esparsas, e apresenta o toolkit Word2Vec. O objetivo é aprender vetores densos capazes de refletir o significado da palavra a partir de seu contexto em um corpus massivo.
 
-    Para alcançar esse resultado, os autores propõem duas arquiteturas de redes neurais rasas que resolvem tarefas opostas, CBOW e Skip-Gram.
+    % Para alcançar esse resultado, os autores propõem duas arquiteturas de redes neurais rasas que resolvem tarefas opostas, CBOW e Skip-Gram.
 
-    A arquitetura CBOW prevê a palavra central a partir do contexto. O modelo recebe uma janela de palavras vizinhas, projeta seus vetores e calcula uma média que forma o vetor de contexto. A rede então tenta adivinhar a palavra omitida. Por trabalhar com médias, o CBOW costuma ser rápido e eficiente no aprendizado de relações sintáticas.
+    % A arquitetura CBOW prevê a palavra central a partir do contexto. O modelo recebe uma janela de palavras vizinhas, projeta seus vetores e calcula uma média que forma o vetor de contexto. A rede então tenta adivinhar a palavra omitida. Por trabalhar com médias, o CBOW costuma ser rápido e eficiente no aprendizado de relações sintáticas.
 
-    A arquitetura Skip-Gram faz o movimento inverso e tende a ser mais forte semanticamente. O modelo recebe uma única palavra e tenta prever as palavras ao seu redor, realizando várias predições por amostra. Essa abordagem é mais lenta no treino, mas o estudo mostra que ela captura nuances semânticas com mais precisão, especialmente em palavras raras ou termos técnicos. Esse comportamento é valioso em áreas como o direito, onde existe grande quantidade de expressões pouco frequentes.
+    % A arquitetura Skip-Gram faz o movimento inverso e tende a ser mais forte semanticamente. O modelo recebe uma única palavra e tenta prever as palavras ao seu redor, realizando várias predições por amostra. Essa abordagem é mais lenta no treino, mas o estudo mostra que ela captura nuances semânticas com mais precisão, especialmente em palavras raras ou termos técnicos. Esse comportamento é valioso em áreas como o direito, onde existe grande quantidade de expressões pouco frequentes.
 
-    Os autores concluem que existe um equilíbrio claro entre velocidade e qualidade. O CBOW é mais rápido, enquanto o Skip-Gram é mais robusto semanticamente. A relevância desse estudo para o TCC é essencial, pois ele demonstra por que embeddings são superiores a modelos de contagem para representar significado e estabelece as bases conceituais que depois permitiram o surgimento dos modelos transformers usados neste projeto.
+    % Os autores concluem que existe um equilíbrio claro entre velocidade e qualidade. O CBOW é mais rápido, enquanto o Skip-Gram é mais robusto semanticamente. A relevância desse estudo para o TCC é essencial, pois ele demonstra por que embeddings são superiores a modelos de contagem para representar significado e estabelece as bases conceituais que depois permitiram o surgimento dos modelos transformers usados neste projeto.
+
+    \subsection{A Consolidação do BM25 (Robertson et al., 1995)}
+
+    O trabalho fundamental de \citeonline{robertson1995okapi} na conferência TREC-3 estabeleceu o Okapi BM25 como o estado da arte em modelos probabilísticos. Ao comparar o BM25 com o tradicional TF-IDF em um corpus diversificado, os autores demonstraram que a normalização pelo tamanho do documento e a saturação da frequência de termos corrigiam distorções de relevância em textos longos.
+
+    \subsection{Eficiência em Representações Vetoriais (Mikolov et al., 2013)}
+
+    Em “Efficient Estimation of Word Representations in Vector Space”, \citeonline{mikolov2013efficient} mudaram o paradigma da busca semântica ao propor o Word2Vec. O estudo focou no \textit{trade-off} computacional, comparando as arquiteturas CBOW (mais rápida) e Skip-Gram (mais precisa semanticamente). Os autores concluíram que é possível treinar modelos de alta qualidade em corpora massivos com custos de CPU aceitáveis, desde que a arquitetura seja simplificada (removendo camadas ocultas não lineares).
+
+    \subsection{Comparação no Domínio Jurídico Brasileiro (Santos, 2023)}
+
+    Mais recentemente, no contexto nacional, \citeonline{citacao62} investigou a classificação de petições jurídicas comparando modelos clássicos, como Naive Bayes e SVM com TF-IDF, contra modelos baseados em \textit{Transformers} (BERT). Os resultados mostraram que, embora o BERT ofereça vantagens em tarefas complexas, modelos mais simples baseados em frequência de termos ainda apresentam desempenho competitivo com um custo computacional drasticamente menor.
 
 % --- CAPÍTULO 3: DESENVOLVIMENTO ---
 
