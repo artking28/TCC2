@@ -18,11 +18,12 @@
 - Fazer texto dedicatoria ✅
 - Fazer texto agradecimentos ✅
 - Terminar o desenvolvimento ✅
-- Juntar embeddings com começo do TCC
 
+Sugestoes professor:
 
-- Reescrever Objetivos: corrigir erros de redação ("scrapping", "afim"), separar tarefas operacionais de objetivos científicos, definir métricas e corrigir o objetivo geral truncado.✅
+- Reescrever Objetivos: corrigir erros de redação ("scrapping", "afim"), separar tarefas operacionais de objetivos
+  científicos, definir métricas e corrigir o objetivo geral truncado.✅
 - Atualizar Resumo/Abstract incluindo 1 a 2 resultados quantitativos chave e descrevendo o recorte metodológico real.✅
 - Refazer a seção de Trabalhos Relacionados para ser mais curta e direta. 🔄
-- Criar capítulos de Metodologia e Resultados explicando corpus, consultas, hardware, parametrização e tabelas/gráficos para embasar os números da conclusão.
-- Consolidar a seção de Implementação, removendo a duplicação de texto (linhas 873-982) e corrigindo a referência quebrada à "Seção 3.4".
+- Criar capítulos de Metodologia explicando corpus, consultas, hardware, parametrização e tabelas/gráficos para embasar
+  os números da conclusão.
