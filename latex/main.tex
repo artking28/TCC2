@@ -94,7 +94,7 @@
     pdfauthor={\@author},
     pdfsubject={\imprimirpreambulo},
     pdfcreator={LaTeX with abnTeX2},
-    pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico},
+    pdfkeywords={NLP}{Direito}{Recuperação de Informação}{BM25}{Embeddings},
     colorlinks=true,            % false: boxed links; true: colored links
     linkcolor=black,            % color of internal links
     citecolor=black,                % color of links to bibliography
@@ -185,7 +185,7 @@
         \begin{otherlanguage*}{english}
             The massive digitization of the Brazilian legal sector imposes critical information retrieval challenges. While AI models based on embeddings offer high semantic precision, their computational cost is high. This work investigates the pragmatic trade-off between semantic complexity and statistical efficiency. To this end, a comparative system was developed in Go, implementing TF-IDF and Okapi BM25 algorithms, confronted with a transformer model (Sentence-BERT) in Python. Tests performed on a legislative corpus of approximately 5,000 documents revealed that statistical search is significantly more efficient: using Unigrams required only 143 MB of RAM, versus 4.7 GB in the Trigram configuration. In terms of speed, the BM25 algorithm proved to be up to 10 times faster than TF-IDF in complex scenarios. Qualitative analysis via Spearman's Coefficient indicated a low correlation (between 0.02 and 0.06) between statistical and semantic rankings, suggesting that the approaches capture distinct aspects of relevance. It is concluded that, for the legal domain, statistical methods offer superior cost-benefit for initial filtering, with hybrid architecture being the ideal solution.
 
-            \textbf{Key-words}: Natural Language Processing. Information Retrieval. Legal Search. TF-IDF. BM25. Embeddings.
+            \textbf{Keywords}: Natural Language Processing. Information Retrieval. Legal Search. TF-IDF. BM25. Embeddings.
         \end{otherlanguage*}
     \end{resumo}
 
@@ -366,7 +366,7 @@
 
     A remoção de \textit{stopwords} é uma das etapas principais do pré-processamento textual e consiste na exclusão de palavras que ocorrem com alta frequência, mas que carregam pouco ou nenhum valor semântico individual — como \textit{de}, \textit{que}, \textit{em}, \textit{o} e \textit{a}. Esse tipo de filtragem é comumente utilizado para reduzir o vocabulário e acelerar os algoritmos, sem perda significativa de informação relevante para a maioria das tarefas de recuperação e classificação textual. \cite{citacao67}
 
-    Apesar de a remoção de \textit{stopwords} ser uma prática comum em tarefas de processamento de linguagem natural, no contexto jurídico é necessário cautela. Isso porque palavras funcionais(geralmente ignoradas em outros domínios), podem conter informações fundamentais para a interpretação de dispositivos legais, como apontado por \citeauthor{citacao17} (\citeyear{citacao17}), que optaram por não removê-las durante o treinamento de seus modelos linguísticos, justamente para preservar a integridade semântica dos textos judiciais.
+    Apesar de a remoção de \textit{stopwords} ser uma prática comum em tarefas de processamento de linguagem natural, no contexto jurídico é necessário cautela. Isso porque palavras funcionais (geralmente ignoradas em outros domínios), podem conter informações fundamentais para a interpretação de dispositivos legais, como apontado por \citeauthor{citacao17} (\citeyear{citacao17}), que optaram por não removê-las durante o treinamento de seus modelos linguísticos, justamente para preservar a integridade semântica dos textos judiciais.
 
     \begin{figure}[H]
         \centering
@@ -538,7 +538,7 @@
 
     onde ${\vec{A} \cdot \vec{B}}$ é o produto escalar entre os vetores, e ${||\vec{A}||}$ e ${||\vec{B}|| }$ são as normas (módulos) dos respectivos vetores. O resultado varia entre -1 e 1, mas no contexto de NLP, os valores geralmente estão entre 0 (sem similaridade) e 1 (similaridade máxima), já que os vetores de \textit{embeddings} costumam estar em um espaço de dimensão positiva.
 
-    O resultado da similaridade de cosseno varia entre -1 e 1, pois esse é o intervalo natural da função cosseno. Valores próximos de 1 indicam que os vetores estão quase na mesma direção, sugerindo alta similaridade. Se o valor estiver perto de 0, significa que os vetores são ortogonais, ou seja, não têm relação direta. Já valores próximos de -1 indicam direções opostas, o que representa dissimilaridade, como mostra a imagem abaixo em uma simplificação 2D:
+    Valores próximos de 1 indicam que os vetores estão quase na mesma direção, sugerindo alta similaridade. Se o valor estiver perto de 0, significa que os vetores são ortogonais, ou seja, não têm relação direta. Já valores próximos de -1 indicam direções opostas, o que representa dissimilaridade, como mostra a imagem abaixo em uma simplificação 2D:
 
     \begin{figure}[H]
         \centering
@@ -556,7 +556,7 @@
 
     \section{Algoritmos}
 
-    Algoritmos são conjuntos finitos de instruções bem definidas, ordenadas e executáveis que visam resolver um problema ou realizar uma tarefa específica. Conforme definido por Cormen e outros. \cite{citacao26}, “um algoritmo é qualquer procedimento computacional bem definido que toma algum valor ou conjunto de valores como entrada e produz algum valor ou conjunto de valores como saída”. Segundo o dicionário Michaelis \cite{citacao27}, algoritmo é “Conjunto de regras e operações e procedimentos, definidos e ordenados usados na solução de um problema”. Dessa forma, os algoritmos constituem a base do raciocínio computacional e do desenvolvimento de software, estruturando a lógica para a execução de tarefas de maneira clara e eficiente.
+    Algoritmos são conjuntos finitos de instruções bem definidas, ordenadas e executáveis que visam resolver um problema ou realizar uma tarefa específica. Conforme definido por Cormen et al. \cite{citacao26}, “um algoritmo é qualquer procedimento computacional bem definido que toma algum valor ou conjunto de valores como entrada e produz algum valor ou conjunto de valores como saída”. Segundo o dicionário Michaelis \cite{citacao27}, algoritmo é “Conjunto de regras e operações e procedimentos, definidos e ordenados usados na solução de um problema”. Dessa forma, os algoritmos constituem a base do raciocínio computacional e do desenvolvimento de software, estruturando a lógica para a execução de tarefas de maneira clara e eficiente.
 
     \subsection{Avaliação de algoritmos: Coeficiente de \textit{Spearman}}
 
@@ -574,7 +574,7 @@
 
     \begin{figure}[H]
         \centering
-        \caption{\label{fig:SpearmanCalc}Demonstraçao do coeficiente de \textit{Spearman} aplicado à sequência de cores}
+        \caption{\label{fig:SpearmanCalc}Demonstração do coeficiente de \textit{Spearman} aplicado à sequência de cores}
         \includegraphics[width=0.8\textwidth]{assets/SpearmanCalc}
         \legend {Fonte: Elaboração própria.}
     \end{figure}
@@ -586,7 +586,7 @@
 
     \subsection{Algoritmos Sequenciais e Limitações}
 
-    Algoritmos sequenciais representam o início da computação, onde processadores e algoritmos tinham a premissa da restrição a ordem das instruções, ou seja, uma operação de cada vez, o fim de uma representa o início da próxima. Seguindo assim uma sequência lógica e clara \cite{citacao13} como é representado na imagem abaixo.
+    Algoritmos sequenciais representam o início da computação, onde processadores e algoritmos tinham a premissa da restrição a ordem das instruções, ou seja, uma operação de cada vez, o fim de uma representa o início da próxima. Seguindo assim uma sequência lógica e clara \cite{citacao13} como é representado na Figura \ref{fig:AlgSequenciais}.
 
     \begin{figure}[H]
         \centering
@@ -611,43 +611,60 @@
 
     \section{Trabalhos Relacionados}
 
-    % \subsection{Comparação de Desempenho entre TF-IDF e Okapi BM25}
-
-    % O trabalho influente de \citeonline{robertson1995okapi} apresenta os resultados do sistema Okapi na TREC-3 e acaba servindo como uma das principais evidências empíricas da superioridade do BM25 sobre o TF-IDF tradicional. Os autores não buscavam criar um sistema novo, mas sim avaliar e aprimorar um modelo probabilístico de recuperação em um ambiente de testes rigoroso.
-
-    % A metodologia consistiu em submeter o Okapi ao corpus padrão da TREC usando consultas de tópicos complexos cuja relevância já era conhecida. A eficácia dos algoritmos foi medida por métricas como Mean Average Precision e Precision@k, que verificam o quanto a ordenação dos resultados se aproxima do ideal.
-
-    % O TF-IDF aparece como linha de base do estudo. Sua limitação mais clara é a normalização insuficiente em relação ao tamanho dos documentos. Em conjuntos muito variados, como o jurídico, textos longos acabam favorecidos, já que têm mais chances de repetir os termos da consulta e inflar artificialmente sua pontuação.
-
-    % O Okapi BM25 é apresentado como a resposta probabilística a esse problema, usando dois parâmetros de calibração. O primeiro é o $k_1$, que controla a saturação da frequência do termo, evitando que aumentos repetitivos elevem a relevância de forma linear. O segundo é o $b$, que ajusta o efeito do comprimento do documento comparando seu tamanho com a média do corpus. Documentos muito maiores que a média recebem uma penalização que reduz ocorrências casuais.
-
-    % Os resultados apresentados mostram uma vantagem consistente do BM25 sobre o TF-IDF em métricas de ordenação como a nDCG. A conexão com este TCC é direta, já que o estudo reforça empiricamente a escolha do BM25 como principal método estatístico usado na análise e o coloca como o modelo lexical mais consolidado para comparação com abordagens semânticas.
-
-    % \subsection{Arquiteturas Preditivas para Representação Vetorial de Palavras}
-
-    % O trabalho de \citeonline{mikolov2013efficient}, intitulado “Efficient Estimation of Word Representations in Vector Space”, introduz uma nova forma de representar palavras que estabeleceu a base da busca semântica moderna. O estudo questiona os modelos baseados em contagem, como o TF-IDF, que tratam palavras como unidades independentes e esparsas, e apresenta o toolkit Word2Vec. O objetivo é aprender vetores densos capazes de refletir o significado da palavra a partir de seu contexto em um corpus massivo.
-
-    % Para alcançar esse resultado, os autores propõem duas arquiteturas de redes neurais rasas que resolvem tarefas opostas, CBOW e Skip-Gram.
-
-    % A arquitetura CBOW prevê a palavra central a partir do contexto. O modelo recebe uma janela de palavras vizinhas, projeta seus vetores e calcula uma média que forma o vetor de contexto. A rede então tenta adivinhar a palavra omitida. Por trabalhar com médias, o CBOW costuma ser rápido e eficiente no aprendizado de relações sintáticas.
-
-    % A arquitetura Skip-Gram faz o movimento inverso e tende a ser mais forte semanticamente. O modelo recebe uma única palavra e tenta prever as palavras ao seu redor, realizando várias predições por amostra. Essa abordagem é mais lenta no treino, mas o estudo mostra que ela captura nuances semânticas com mais precisão, especialmente em palavras raras ou termos técnicos. Esse comportamento é valioso em áreas como o direito, onde existe grande quantidade de expressões pouco frequentes.
-
-    % Os autores concluem que existe um equilíbrio claro entre velocidade e qualidade. O CBOW é mais rápido, enquanto o Skip-Gram é mais robusto semanticamente. A relevância desse estudo para o TCC é essencial, pois ele demonstra por que embeddings são superiores a modelos de contagem para representar significado e estabelece as bases conceituais que depois permitiram o surgimento dos modelos transformers usados neste projeto.
-
-    \subsection{A Consolidação do BM25 (Robertson et al., 1995)}
+    \subsection{A Consolidação do BM25}
 
     O trabalho fundamental de \citeonline{robertson1995okapi} na conferência TREC-3 estabeleceu o Okapi BM25 como o estado da arte em modelos probabilísticos. Ao comparar o BM25 com o tradicional TF-IDF em um corpus diversificado, os autores demonstraram que a normalização pelo tamanho do documento e a saturação da frequência de termos corrigiam distorções de relevância em textos longos.
 
-    \subsection{Eficiência em Representações Vetoriais (Mikolov et al., 2013)}
+    \subsection{Eficiência em Representações Vetoriais}
 
     Em “Efficient Estimation of Word Representations in Vector Space”, \citeonline{mikolov2013efficient} mudaram o paradigma da busca semântica ao propor o Word2Vec. O estudo focou no \textit{trade-off} computacional, comparando as arquiteturas CBOW (mais rápida) e Skip-Gram (mais precisa semanticamente). Os autores concluíram que é possível treinar modelos de alta qualidade em corpora massivos com custos de CPU aceitáveis, desde que a arquitetura seja simplificada (removendo camadas ocultas não lineares).
 
-    \subsection{Comparação no Domínio Jurídico Brasileiro (Santos, 2023)}
+    \subsection{Comparação no Domínio Jurídico Brasileiro}
 
     Mais recentemente, no contexto nacional, \citeonline{citacao62} investigou a classificação de petições jurídicas comparando modelos clássicos, como Naive Bayes e SVM com TF-IDF, contra modelos baseados em \textit{Transformers} (BERT). Os resultados mostraram que, embora o BERT ofereça vantagens em tarefas complexas, modelos mais simples baseados em frequência de termos ainda apresentam desempenho competitivo com um custo computacional drasticamente menor.
 
-% --- CAPÍTULO 3: DESENVOLVIMENTO ---
+    \chapter{Metodologia}
+
+    \section{Corpus e Pré-processamento}
+
+    O corpus reúne cerca de 5.000 páginas de documentos legislativos (Projetos de Lei e Propostas de Emenda à Constituição), obtidos via \emph{web scraping} do Portal da Câmara dos Deputados. A extração de texto dos PDFs para texto simples foi feita de forma concorrente em Go.
+
+    \section{Parametrização do Motor de Busca e Hardware}
+
+    \subsection{Algoritmos de Ranqueamento e Indexação}
+
+    Os modelos TF-IDF e Okapi BM25 foram implementados em Go.
+
+    A indexação testou diferentes granularidades: unigramas, bigramas, trigramas e variações de skip-grams com até dois saltos. O índice invertido foi armazenado em SQLite.
+
+    Para o BM25, foram usados os hiperparâmetros fixos: $\mathbf{k_1 = 1.5}$ e $\mathbf{b = 0.75}$.
+
+    \subsection{Queries e Modelo de Gabarito}
+
+    As \textit{queries} de teste foram geradas pelos modelos ChatGPT e Grok.
+
+    O gabarito semântico usado na avaliação foi o Sentence-BERT (\texttt{paraphrase-multilingual-MiniLM-L12-v2}), aplicando Similaridade de Cosseno para medir relevância.
+
+    \subsection{Hardware}
+
+    Os testes foram executados no seguinte hardware:
+
+    \begin{itemize}
+
+        \item \textbf{Processador:} Apple M1 (2020)
+
+        \item \textbf{RAM:} 16 GB a 4266 MHz
+
+    \end{itemize}
+
+    \subsection{Métricas de Avaliação}
+
+    A eficácia do ranqueamento foi medida pelo coeficiente de Spearman ($\rho$), comparando o ranqueamento estatístico com o semântico.
+
+    A eficiência computacional foi avaliada pelo tempo de execução (latência de busca) e pico de uso de memória em cada cenário.
+
+
+% --- CAPÍTULO 4: DESENVOLVIMENTO ---
 
 
     \chapter{Desenvolvimento}
@@ -669,14 +686,9 @@
 
     Para a extração das informações, utilizou-se a biblioteca \texttt{goquery}. Esta ferramenta permite realizar o \textit{parsing} das páginas HTML retornadas pelo portal e navegar pela árvore DOM utilizando seletores CSS, facilitando a identificação precisa dos \textit{links} para os arquivos PDF em meio à estrutura complexa do site da Câmara.
 
-    O fluxo de coleta foi estruturado da seguinte forma:
+    O fluxo de coleta é iniciado pela definição do escopo, etapa na qual o algoritmo varre as páginas de resultados do portal para identificar os documentos disponíveis com base nas categorias legislativas de interesse. A execução ocorre de forma paralela, disparando múltiplas requisições simultâneas para maximizar o uso da banda. No entanto, para mitigar riscos de bloqueio de IP por excesso de requisições (\textit{throttling}) ou a interpretação do tráfego como um ataque de Negação de Serviço (DoS), implementou-se um mecanismo de \textit{rate limiting} com um intervalo de segurança fixo de 500 milissegundos entre as chamadas, garantindo a estabilidade e o respeito às políticas do portal governamental.
 
-    \begin{enumerate}
-        \item \textbf{Definição do Escopo:} O algoritmo inicia o processo varrendo as páginas de resultados do portal com base nas categorias legislativas de interesse, identificando os documentos disponíveis para coleta.
-        \item \textbf{Execução Paralela e \textit{Rate Limiting}:} O sistema dispara múltiplas requisições simultâneas para maximizar o uso da banda. Contudo, para evitar que o servidor de origem interprete o tráfego intenso como um ataque de Negação de Serviço (DoS) ou bloqueie o endereço IP da aplicação por excesso de requisições (\textit{throttling}), foi implementado um intervalo de segurança (\textit{delay}) fixo de 500 milissegundos entre as chamadas de rede. Essa estratégia garante a estabilidade do processo de coleta e respeita as políticas de uso do portal governamental.
-        \item \textbf{Extração de Links:} O conteúdo HTML de cada página processada é analisado pelo \texttt{goquery}, que filtra e extrai apenas as URLs que apontam para o inteiro teor dos documentos (arquivos com extensão \texttt{.pdf}).
-        \item \textbf{Download e Persistência:} Os arquivos identificados são baixados via \textit{stream} e salvos diretamente no diretório local \texttt{./misc/corpus/pdf}, preservando a nomenclatura original para garantir a rastreabilidade dos dados.
-    \end{enumerate}
+    Na etapa de processamento do conteúdo, a biblioteca \texttt{goquery} analisa o HTML de cada página para filtrar e extrair apenas as URLs que apontam para o inteiro teor dos documentos em formato \texttt{.pdf}. Concluída a identificação, os arquivos são baixados via \textit{stream} e salvos diretamente no diretório local \texttt{./misc/corpus/pdf}. Este processo de persistência mantém a nomenclatura original dos arquivos, um requisito essencial para garantir a futura rastreabilidade dos dados no \textit{corpus}.
 
 
     \section{Pré-processamento e Normalização Textual}
@@ -689,12 +701,9 @@
 
     Dada a alta carga de I/O exigida para a leitura e conversão de milhares de arquivos PDF, a implementação não seguiu uma abordagem sequencial. Em vez disso, utilizou-se o padrão de projeto \textit{Worker Pool} nativo da linguagem Go.
 
-    A função orquestradora, \texttt{TextProcessor}, define um limite de concorrência controlado pela variável \texttt{maxWorkers}. O funcionamento baseia-se em três primitivas de sincronização:
-    \begin{itemize}
-        \item \textbf{Channels (Canais):} Um canal buferizado (\texttt{workerLimit}) atua como um semáforo, bloqueando a criação de novas \textit{goroutines} quando o limite de processos simultâneos é atingido. Isso impede a exaustão de recursos do sistema operacional, como descritores de arquivos e memória RAM.
-        \item \textbf{Goroutines:} Cada documento é processado em sua própria \textit{thread} leve, permitindo que enquanto um arquivo aguarda a operação de disco, a CPU possa processar a limpeza textual de outro.
-        \item \textbf{WaitGroup:} O mecanismo \texttt{sync.WaitGroup} assegura que o processo principal aguarde a conclusão de todas as tarefas de limpeza antes de encerrar a execução.
-    \end{itemize}
+    A função orquestradora, \texttt{TextProcessor}, define um limite de concorrência controlado pela variável \texttt{maxWorkers}. 
+
+    O funcionamento do sistema baseia-se em três primitivas de sincronização essenciais. Um canal buferizado (\texttt{workerLimit}) atua como um semáforo para controlar a concorrência, bloqueando a criação de novas \textit{goroutines} quando o limite de processos simultâneos é atingido, o que previne a exaustão de recursos do sistema operacional como memória RAM e descritores de arquivos. O processamento de cada documento ocorre em sua própria \textit{thread} leve, ou \textit{goroutine}, permitindo que a CPU realize a limpeza textual de um arquivo enquanto outro aguarda operações de disco. Para garantir a completude do fluxo, o mecanismo \texttt{sync.WaitGroup} assegura que o processo principal aguarde a finalização de todas as tarefas de limpeza antes de encerrar a execução.
 
     \subsection{Extração de Texto}
 
@@ -738,15 +747,9 @@
 
     A função foi desenvolvida utilizando o recurso de \textit{Generics} do Go (\texttt{[T any]}), o que confere flexibilidade arquitetural ao sistema: o mesmo algoritmo é capaz de processar vetores de \textit{strings} (durante a fase de testes rápidos) ou vetores de inteiros (\texttt{uint16}), que representam os IDs das palavras no banco de dados de produção.
 
-    A lógica de segmentação varia conforme a cardinalidade do N-grama desejado:
+    A lógica de segmentação adapta-se dinamicamente à cardinalidade do N-grama desejado. Para o caso dos Unigramas ($N=1$), o tratamento é linear e trivial, percorrendo o vetor de entrada de $0$ a $N$ para encapsular cada elemento como uma unidade independente. Já na geração de Bigramas ($N=2$), o algoritmo expande-se para capturar relações entre palavras não necessariamente adjacentes, aplicando o conceito de \textit{skip-gram}. Utiliza-se um laço aninhado onde, enquanto o índice principal $i$ percorre o documento, um índice secundário $j$ projeta-se à frente até o limite de \textit{jumps} ($jump+1$). Isso possibilita a criação de pares adjacentes $(w_i, w_{i+1})$ ou distantes $(w_i, w_{i+2})$, armazenando explicitamente a distância vetorial $j$ para normalização posterior.
 
-    \begin{enumerate}
-        \item \textbf{Unigramas ($N=1$):} O tratamento é trivial e linear. O algoritmo percorre o vetor de entrada de $0$ a $N$, encapsulando cada elemento individual como um grama independente.
-
-        \item \textbf{Bigramas com Saltos ($N=2$):} Para capturar relações entre palavras que não são necessariamente adjacentes (conceito de \textit{skip-gram}), o algoritmo emprega um laço aninhado. Enquanto o índice principal $i$ percorre as palavras do documento, um índice secundário $j$ projeta-se à frente, variando de $1$ até o limite configurado de \textit{jumps} ($jump+1$). Isso permite gerar pares como $(w_i, w_{i+1})$ (adjacente) ou $(w_i, w_{i+2})$ (com um salto), armazenando explicitamente a distância vetorial ($j$) entre os termos para fins de normalização posterior.
-
-        \item \textbf{Trigramas ($N=3$):} A complexidade aumenta para capturar o contexto estendido. Utiliza-se uma estrutura de três laços encadeados ($i, j, k$), onde $i$ é a palavra pivô, $j$ define a distância para o segundo termo e $k$ define a distância do segundo para o terceiro. Essa abordagem "força bruta controlada" garante que todas as combinações válidas dentro da janela de saltos (como $(w_i, w_{i+1}, w_{i+2})$ ou combinações mais esparsas como $(w_i, w_{i+2}, w_{i+4})$) sejam geradas deterministicamente, sem a sobrecarga de chamadas recursivas.
-    \end{enumerate}
+    A complexidade aumenta significativamente para os Trigramas ($N=3$), visando a captura de um contexto estendido. Para isso, emprega-se uma estrutura de três laços encadeados ($i, j, k$), onde $i$ atua como a palavra pivô, $j$ define a distância para o segundo termo e $k$ determina a distância para o terceiro. Essa abordagem, que pode ser descrita como uma "força bruta controlada", garante que todas as combinações válidas dentro da janela de saltos — desde as sequenciais $(w_i, w_{i+1}, w_{i+2})$ até as mais esparsas $(w_i, w_{i+2}, w_{i+4})$ — sejam geradas de forma determinística, eliminando a sobrecarga de memória que ocorreria com o uso de chamadas recursivas.
 
     O retorno da função é uma estrutura dupla contendo tanto os gramas gerados quanto uma matriz de metadados (\texttt{retJumps}), que registra as distâncias relativas (\texttt{int8}) entre cada componente do grama. Esses metadados são essenciais para a estratégia de indexação, pois permitem ao motor de busca diferenciar, por exemplo, uma citação direta de uma menção espaçada no texto.
 
@@ -777,12 +780,9 @@ type Document struct {
 
     Para evitar o crescimento exponencial do arquivo do banco de dados SQLite, o que degradaria o tempo de resposta das consultas de índice, o conteúdo textual integral dos documentos (\textit{Full Text}) \textbf{não é persistido no banco de dados} de forma permanente.
 
-    A estratégia adotada consiste em:
-    \begin{enumerate}
-        \item \textbf{Persistência em Disco:} Os documentos originais e suas versões higienizadas (\texttt{.txt}) são salvos no sistema de arquivos local (\textit{File System}) da máquina de execução. Isso aproveita a velocidade de leitura sequencial do SSD/HDD e libera o banco de dados de gerenciar grandes volumes de dados não estruturados.
-        \item \textbf{Banco como Índice de Metadados:} A tabela \texttt{documents} no SQLite armazena apenas os metadados essenciais (Título, Link original, IDs de controle) e atua como um catálogo que referencia os arquivos em disco.
-        \item \textbf{Leitura sob Demanda (Lazy Loading):} Durante a execução dos testes de similaridade, o sistema carrega o conteúdo necessário diretamente dos arquivos para a memória RAM apenas para o cálculo dos vetores e geração dos N-gramas. Uma vez indexado o documento (geradas as tabelas de Unigramas/Trigramas), o texto bruto é descartado da memória, mantendo o \textit{footprint} de RAM do processo eficiente.
-    \end{enumerate}
+    A estratégia adotada fundamenta-se na persistência em disco, onde os documentos originais e suas versões higienizadas (\texttt{.txt}) são salvos diretamente no sistema de arquivos local (\textit{File System}). Essa abordagem aproveita a velocidade de leitura sequencial de dispositivos SSD/HDD e libera o banco de dados da tarefa de gerenciar grandes volumes de dados não estruturados. Nesse arranjo, a tabela \texttt{documents} no SQLite funciona exclusivamente como um índice de metadados, armazenando apenas informações essenciais como Título, Link original e IDs de controle, atuando como um catálogo leve que referencia os arquivos físicos.
+
+    Complementarmente, utiliza-se a técnica de leitura sob demanda (\textit{Lazy Loading}) para otimizar o consumo de recursos. Durante a execução dos testes de similaridade, o sistema carrega o conteúdo necessário dos arquivos para a memória RAM estritamente para o cálculo dos vetores e a geração dos N-gramas. Imediatamente após a indexação do documento e a geração das tabelas de Unigramas ou Trigramas, o texto bruto é descartado da memória, assegurando que o \textit{footprint} de RAM do processo permaneça eficiente.
 
     Essa decisão arquitetural garante que o banco de dados permaneça compacto, contendo apenas as estruturas otimizadas de busca (Índice Invertido), enquanto o armazenamento "pesado" é delegado ao sistema operacional.
 
@@ -833,15 +833,11 @@ type InverseTrigram struct {
 }
     \end{verbatim}
 
-    Nesta modelagem, destacam-se decisões de \textit{design} focadas em integridade e performance:
+    Nesta modelagem, destaca-se primeiramente o uso de um Índice Composto (\textit{Composite Index}). Conforme definido pelas \textit{tags} do GORM (\texttt{uniqueIndex:compositeindex}), os seis primeiros atributos — que abrangem as palavras, o identificador do documento e as distâncias — constituem, em conjunto, uma chave única composta. Essa estratégia assegura a integridade dos dados ao impedir a duplicação de registros para a mesma ocorrência semântica e, simultaneamente, materializa um índice B-Tree otimizado no SQLite, resultando em uma aceleração drástica nas operações de leitura.
 
-    \begin{itemize}
-        \item \textbf{Índice Composto (Composite Index):} Conforme observado nas \textit{tags} do GORM (\texttt{uniqueIndex:compositeindex}), os seis primeiros atributos (as três palavras, o documento e as duas distâncias) formam, em conjunto, uma chave única composta. Isso impede a duplicação de registros para a mesma ocorrência semântica e cria um índice B-Tree otimizado no SQLite, acelerando drasticamente as operações de leitura.
+    Para otimização de armazenamento, adotou-se o uso de Chaves Estrangeiras Virtuais Leves. Os campos de referência à tabela de vocabulário (\texttt{Wd...Id}) armazenam estritamente inteiros sem sinal de 16 bits (\texttt{uint16}). Embora essa tipagem imponha um limite técnico de 65.535 termos únicos e documentos — quantidade suficiente após a etapa de limpeza agressiva —, ela garante que cada linha do índice ocupe uma fração mínima de espaço em disco quando comparada ao armazenamento de \textit{strings}, maximizando a densidade de informação.
 
-        \item \textbf{Chaves Estrangeiras Virtuais Leves:} Os campos \texttt{Wd...Id} referenciam a tabela de vocabulário, mas armazenam apenas inteiros sem sinal de 16 bits (\texttt{uint16}). Isso limita o vocabulário a 65.535 termos únicos (suficiente após a limpeza agressiva) e o \textit{corpus} a 65.535 documentos, mas garante que cada linha do índice ocupe uma fração mínima de espaço em disco comparado ao armazenamento de \textit{strings}.
-
-        \item \textbf{Conceito de "Jumps" (\textit{Skip-Grams}):} Diferente de implementações simples que exigem adjacência estrita, as estruturas \texttt{Bigram} e \texttt{Trigram} utilizam inteiros de 8 bits (\texttt{int8}) para armazenar a distância entre as palavras (\texttt{Jump}). Isso permite indexar padrões não contíguos (ex: "recurso \textit{de} apelação" pode ser capturado como um bigrama "recurso apelação" com \texttt{Jump=1}), aumentando a flexibilidade semântica da busca exata sem perder a precisão da ordem dos termos.
-    \end{itemize}
+    Por fim, incorpora-se o conceito de "Jumps" (\textit{Skip-Grams}) para superar a limitação da adjacência estrita. As estruturas de \texttt{Bigram} e \texttt{Trigram} utilizam inteiros de 8 bits (\texttt{int8}) para registrar a distância entre palavras (\texttt{Jump}). Isso viabiliza a indexação de padrões não contíguos; por exemplo, a expressão "recurso \textit{de} apelação" pode ser capturada como o bigrama "recurso apelação" com um salto de 1 (\texttt{Jump=1}). Essa abordagem amplia a flexibilidade semântica da busca exata sem sacrificar a precisão posicional dos termos.
 
     \subsection{Estratégia de Isolamento e Duplicação}
 
@@ -974,53 +970,9 @@ for key := range tf {
 
     Diante dessa evidência, optou-se por uma mudança estratégica de escopo. Em vez de dispersar o foco da análise usando diversos modelos de IA, o trabalho concentrou-se na dicotomia principal: "Estatística (Go) versus Semântica Contextual (Python/BERT)".
 
-    Para representar o estado da arte na busca semântica eficiente, selecionou-se unicamente o modelo \texttt{paraphrase-multilingual-MiniLM-L12-v2} (baseado em BERT). A escolha deste modelo específico fundamentou-se em três pilares:
-    \begin{itemize}
-        \item \textbf{Eficiência de Inferência:} Sendo um modelo da família "MiniLM", ele possui apenas 12 camadas e gera vetores de 384 dimensões. Isso permitiu rodar a bateria massiva de testes (milhares de comparações de cosseno) em tempo hábil, sem exigir \textit{hardware} de supercomputação (GPUs dedicadas de alto custo).
-        \item \textbf{Suporte Multilíngue:} O modelo foi treinado em mais de 50 idiomas, demonstrando capacidade robusta de entender a sintaxe do português sem a necessidade de \textit{fine-tuning} específico.
-        \item \textbf{Espaço Vetorial Denso:} As 384 dimensões provaram ser suficientes para codificar as nuances dos textos legislativos, servindo como um "gabarito" confiável e estável para a avaliação dos algoritmos estatísticos.
-    \end{itemize}
-
-
-    \chapter{Metodologia}
-
-    \section{Corpus e Pré-processamento}
-
-    O corpus reúne cerca de 5.000 páginas de documentos legislativos (Projetos de Lei e Propostas de Emenda à Constituição), obtidos via \emph{web scraping} do Portal da Câmara dos Deputados. A extração de texto dos PDFs para texto simples foi feita de forma concorrente em Go.
-
-    \section{Parametrização do Motor de Busca e Hardware}
-
-    \subsection{Algoritmos de Ranqueamento e Indexação}
-
-    Os modelos TF-IDF e Okapi BM25 foram implementados em Go.
-
-    A indexação testou diferentes granularidades: unigramas, bigramas, trigramas e variações de skip-grams com até dois saltos. O índice invertido foi armazenado em SQLite.
-
-    Para o BM25, foram usados os hiperparâmetros fixos: $\mathbf{k_1 = 1.5}$ e $\mathbf{b = 0.75}$.
-
-    \subsection{Queries e Modelo de Gabarito}
-
-    As \textit{queries} de teste foram geradas pelos modelos ChatGPT e Grok.
-
-    O gabarito semântico usado na avaliação foi o Sentence-BERT (\texttt{paraphrase-multilingual-MiniLM-L12-v2}), aplicando Similaridade de Cosseno para medir relevância.
-
-    \subsection{Hardware}
-
-    Os testes foram executados no seguinte hardware:
-
-    \begin{itemize}
-
-        \item \textbf{Processador:} Apple M1 (2020)
-
-        \item \textbf{RAM:} 16 GB a 4266 MHz
-
-    \end{itemize}
-
-    \subsection{Métricas de Avaliação}
-
-    A eficácia do ranqueamento foi medida pelo coeficiente de Spearman ($\rho$), comparando o ranqueamento estatístico com o semântico.
-
-    A eficiência computacional foi avaliada pelo tempo de execução (latência de busca) e pico de uso de memória em cada cenário.
+    Para representar o estado da arte na busca semântica eficiente, selecionou-se unicamente o modelo \texttt{paraphrase-multilingual-MiniLM-L12-v2} (baseado em BERT).
+    
+    A escolha deste modelo específico fundamentou-se em três pilares essenciais. O primeiro é a eficiência de inferência: por pertencer à família "MiniLM", com apenas 12 camadas e vetores de 384 dimensões, o modelo viabilizou a execução de uma bateria massiva de testes em tempo hábil, dispensando o uso de \textit{hardware} de supercomputação como GPUs dedicadas. O segundo pilar é o suporte multilíngue, dado que o treinamento prévio em mais de 50 idiomas conferiu ao modelo uma capacidade robusta de interpretar a sintaxe do português sem a necessidade de ajustes finos (\textit{fine-tuning}). Por fim, destaca-se a densidade do espaço vetorial, onde as 384 dimensões demonstraram ser suficientes para codificar as nuances dos textos legislativos, estabelecendo um "gabarito" confiável e estável para a avaliação dos algoritmos estatísticos.
 
     \chapter{Apresentação dos Resultados e Considerações Finais}
 
@@ -1033,13 +985,13 @@ for key := range tf {
 
     Antes de aprofundarmos a análise qualitativa é fundamental destacar os números mais expressivos que emergiram durante a fase de testes pois eles resumem os extremos de performance e consumo que definem os limites arquiteturais do sistema proposto.
 
-    O indicador mais alarmante foi o pico de consumo de memória RAM que atingiu a marca de aproximadamente cinco gigabytes quando o sistema foi configurado para processar Trigramas. Esse valor contrasta com o cenário de Unigramas onde o consumo foi de apenas cento e quarenta e três megabytes. Essa diferença de magnitude ilustra o custo oculto da complexidade linguística.
+    O indicador mais alarmante foi o pico de consumo de memória RAM que atingiu a marca de aproximadamente 5 GB quando o sistema foi configurado para processar Trigramas. Esse valor contrasta com o cenário de Unigramas onde o consumo foi de apenas 143 MB. Essa diferença de magnitude ilustra o custo oculto da complexidade linguística.
 
-    No que tange à velocidade de processamento observamos uma inversão de expectativas onde o algoritmo BM25 chegou a ser dez vezes mais rápido que o TF-IDF em cenários complexos. Isso derruba a intuição de que fórmulas matemáticas mais simples resultam necessariamente em softwares mais rápidos e coloca em evidência a importância da otimização de fluxo de código.
+    No que tange à velocidade de processamento observamos uma inversão de expectativas onde o algoritmo BM25 chegou a ser 10 vezes mais rápido que o TF-IDF em cenários complexos. Isso derruba a intuição de que fórmulas matemáticas mais simples resultam necessariamente em softwares mais rápidos e coloca em evidência a importância da otimização de fluxo de código.
 
-    Outro ponto de destaque negativo foi a performance da camada de persistência em disco. O uso do banco de dados SQLite para consultas em tempo real mostrou-se entre dez a quarenta vezes mais lento do que as operações realizadas em cache de memória. Esse gargalo inviabilizou o uso do disco para o processamento dos Trigramas e forçou uma mudança de estratégia para o uso exclusivo de memória RAM durante os testes de carga.
+    Outro ponto de destaque negativo foi a performance da camada de persistência em disco. O uso do banco de dados SQLite para consultas em tempo real mostrou-se entre 10 a 40 vezes mais lento do que as operações realizadas em cache de memória. Esse gargalo inviabilizou o uso do disco para o processamento dos Trigramas e forçou uma mudança de estratégia para o uso exclusivo de memória RAM durante os testes de carga.
 
-    Por fim vale ressaltar a escala do experimento que envolveu o processamento e indexação de 1648 documentos legislativos completos. As métricas de qualidade medidas pelo coeficiente de Spearman flutuaram majoritariamente entre zero vírgula zero dois e zero vírgula zero quatro o que evidencia matematicamente a distinção fundamental entre a busca estatística e a busca semântica.
+    Por fim, vale ressaltar a escala do experimento, que envolveu o processamento e indexação de 1.648 documentos legislativos completos. As métricas de qualidade, medidas pelo coeficiente de Spearman, flutuaram majoritariamente entre 0,02 e 0,04, o que evidencia matematicamente a distinção fundamental entre a busca estatística e a busca semântica.
 
     \subsection{Indicadores}
 
@@ -1050,13 +1002,13 @@ for key := range tf {
         O algoritmo BM25 configurado para processar Bigramas simples sem saltos registrou o tempo de execução mais rápido de toda a bateria e completou a tarefa em \textbf{80 milissegundos}. Esse valor destaca a eficiência da estratégia de poda de dados para índices esparsos.
 
         \item \textbf{O Cenário de Maior Lentidão} \\
-        No outro extremo a configuração de Trigramas normalizados com o uso de saltos máximos elevou o tempo de processamento para cerca de \textbf{7,5 segundos}. Isso representa uma execução quase cem vezes mais lenta do que o melhor cenário e evidencia o custo computacional da complexidade linguística excessiva.
+        No outro extremo a configuração de Trigramas normalizados com o uso de saltos máximos elevou o tempo de processamento para cerca de \textbf{7,5 segundos}. Isso representa uma execução quase 100 vezes mais lenta do que o melhor cenário e evidencia o custo computacional da complexidade linguística excessiva.
 
         \item \textbf{Eficiência de Memória} \\
-        Para sistemas com poucos recursos o uso de Unigramas provou ser extremamente leve exigindo apenas \textbf{143 megabytes} de memória RAM no seu pico. Isso viabiliza a execução da busca até mesmo em hardwares modestos ou contêineres de nuvem básicos.
+        Para sistemas com poucos recursos o uso de Unigramas provou ser extremamente leve exigindo apenas \textbf{143 MB} de memória RAM no seu pico. Isso viabiliza a execução da busca até mesmo em hardwares modestos ou contêineres de nuvem básicos.
 
         \item \textbf{O Custo do Contexto} \\
-        Em contraste a indexação de Trigramas exigiu um pico de \textbf{4,72 gigabytes} de memória. Esse salto de trinta e duas vezes no consumo em relação aos Unigramas serve como um alerta importante sobre a escalabilidade de índices contextuais em memória.
+        Em contraste a indexação de Trigramas exigiu um pico de \textbf{4,72 GB} de memória. Esse salto de 32 vezes no consumo em relação aos Unigramas serve como um alerta importante sobre a escalabilidade de índices contextuais em memória.
 
         \item \textbf{Melhor Aproximação Semântica} \\
         Curiosamente a maior correlação positiva com o gabarito do Sentence-BERT foi encontrada nos testes de Unigramas que atingiram um pico de similaridade de \textbf{0,06}. Isso sugere que para este corpus específico a coincidência de palavras-chave simples alinha-se melhor com a intenção semântica do que as tentativas de capturar frases complexas.
@@ -1066,7 +1018,7 @@ for key := range tf {
 
     Um capítulo à parte nesta análise diz respeito ao comportamento do banco de dados. Durante o planejamento inicial do sistema a arquitetura previa o uso do SQLite para realizar consultas em tempo real e persistir os índices de N-gramas. No entanto a realidade dos testes de carga impôs uma mudança de estratégia.
 
-    Observamos que as operações de leitura direta no disco foram de \textbf{dez a quarenta vezes mais lentas} do que as operações realizadas no cache de memória. Esse gargalo tornou-se proibitivo especialmente nos cenários de Bigramas e Trigramas onde a explosão combinatória de termos gerava milhares de consultas SQL por segundo. O disco simplesmente não conseguia acompanhar a velocidade do processador o que criava uma fila de espera que travava a execução do algoritmo.
+    Observamos que as operações de leitura direta no disco foram de \textbf{10 a 40 vezes mais lentas} do que as operações realizadas no cache de memória. Esse gargalo tornou-se proibitivo especialmente nos cenários de Bigramas e Trigramas onde a explosão combinatória de termos gerava milhares de consultas SQL por segundo. O disco simplesmente não conseguia acompanhar a velocidade do processador o que criava uma fila de espera que travava a execução do algoritmo.
 
     Por essa razão optamos por retirar o banco de dados do caminho crítico da busca em tempo real. Apesar disso a implementação não foi descartada e permanece funcional. Ela assumiu um papel vital como ferramenta de auditoria e segurança servindo como um repositório confiável para recuperação de dados em caso de falhas. Para trabalhos futuros a substituição do SQLite por tecnologias orientadas a colunas ou motores de busca dedicados como o Elasticsearch poderia mitigar essa latência e permitir uma arquitetura híbrida mais eficiente.
 
@@ -1091,9 +1043,9 @@ for key := range tf {
 
     Um dos aspectos mais críticos que observamos durante os experimentos foi a demanda de memória necessária para manter os índices invertidos operando com alta performance. Como a decisão de arquitetura priorizou carregar as estruturas de busca na memória RAM para garantir a velocidade das respostas o tamanho do vocabulário e das combinações de termos teve um impacto direto na viabilidade técnica da solução.
 
-    Os relatórios de monitoramento revelaram um crescimento que não se comportou de forma linear mas sim exponencial à medida que aumentamos a complexidade da indexação. Quando o sistema operou apenas com Unigramas indexando palavras isoladas o consumo de memória foi extremamente modesto e eficiente ficando em torno de cento e quarenta e três megabytes no seu pico de utilização. Esse dado é extremamente positivo pois demonstra que para buscas simples baseadas apenas em palavras-chave o custo de infraestrutura é muito baixo e acessível até para servidores de entrada ou máquinas pessoais.
+    Os relatórios de monitoramento revelaram um crescimento que não se comportou de forma linear mas sim exponencial à medida que aumentamos a complexidade da indexação. Quando o sistema operou apenas com Unigramas indexando palavras isoladas o consumo de memória foi extremamente modesto e eficiente ficando em torno de 143 MB no seu pico de utilização. Esse dado é extremamente positivo pois demonstra que para buscas simples baseadas apenas em palavras-chave o custo de infraestrutura é muito baixo e acessível até para servidores de entrada ou máquinas pessoais.
 
-    A situação mudou de figura de forma drástica ao introduzirmos os Bigramas. A necessidade de armazenar pares de palavras e suas respectivas distâncias fez o consumo saltar para um pico de dois vírgula três gigabytes de memória. Esse valor representa um aumento de mais de dezesseis vezes em relação ao cenário anterior e já começa a exigir máquinas com maior capacidade. O cenário tornou-se ainda mais crítico com os Trigramas onde o sistema exigiu quase cinco gigabytes de memória RAM para operar corretamente.
+    A situação mudou de figura de forma drástica ao introduzirmos os Bigramas. A necessidade de armazenar pares de palavras e suas respectivas distâncias fez o consumo saltar para um pico de 2,3 GB de memória. Esse valor representa um aumento de mais de 16 vezes em relação ao cenário anterior e já começa a exigir máquinas com maior capacidade. O cenário tornou-se ainda mais crítico com os Trigramas onde o sistema exigiu quase 5 GB de memória RAM para operar corretamente.
 
     \begin{figure}[h]
         \centering
@@ -1149,7 +1101,7 @@ for key := range tf {
 
     A análise dos dados revelou que o tempo de processamento cresce de forma linear em relação ao tamanho da frase. Isso era esperado pois cada palavra adicional na consulta exige que o algoritmo calcule o peso e a frequência de novos N-gramas. No entanto o que chamou a atenção foi como a execução paralela se comportou diante desse aumento de carga.
 
-    Para frases curtas de dez palavras o custo de iniciar múltiplas rotinas de processamento quase anulou os ganhos de velocidade o que manteve o modo sequencial altamente competitivo. Contudo à medida que a frase cresceu a vantagem do paralelismo não tornou-se perceptível. Nos testes com Trigramas e quarenta palavras o processamento paralelo não conseguiu ser mais rápido que a execução sequencial. Isso demonstra que o uso da concorrência deve ser condicional ativando-se apenas dentro de cenários estudados, caso contrario não haverão ganhos que compensem a sobrecarga de gerenciar as \textit{threads} pelo volume de trabalho.
+    Para frases curtas de dez palavras o custo de iniciar múltiplas rotinas de processamento quase anulou os ganhos de velocidade o que manteve o modo sequencial altamente competitivo. Contudo à medida que a frase cresceu a vantagem do paralelismo não tornou-se perceptível. Nos testes com Trigramas e quarenta palavras o processamento paralelo não conseguiu ser mais rápido que a execução sequencial. Isso demonstra que o uso da concorrência deve ser condicional ativando-se apenas dentro de cenários estudados, caso contrário não haverá ganhos que compensem a sobrecarga de gerenciar as \textit{threads} pelo volume de trabalho.
 
     \begin{figure}[h]
         \centering
