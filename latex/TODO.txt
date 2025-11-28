@@ -14,10 +14,10 @@
 - Terminar consideracoes finais ✅
 - Adicionar mais imagens se possível ✅
 - Revisar siglas ✅
-- Adicionar seção de resultados
+- Adicionar seção de resultados ✅
 - Fazer texto dedicatoria
 - Fazer texto agradecimentos
-- Terminar o desenvolvimento
+- Terminar o desenvolvimento ✅
 - Juntar embeddings com começo do TCC
 
 

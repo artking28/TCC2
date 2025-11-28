@@ -966,19 +966,6 @@ for key := range tf {
         \item \textbf{Espaço Vetorial Denso:} As 384 dimensões provaram ser suficientes para codificar as nuances dos textos legislativos, servindo como um "gabarito" confiável e estável para a avaliação dos algoritmos estatísticos.
     \end{itemize}
 
-
-    \section{Implementação dos Algoritmos de Busca}
-
-    A lógica de recuperação de informação foi implementada do zero em Go, permitindo um controle granular sobre as estruturas de dados e o gerenciamento de memória.
-
-    \subsection{Modelo TF-IDF e BM25}
-    Para os algoritmos estatísticos, o sistema utiliza um índice invertido persistido em um banco de dados SQLite via GORM. A implementação dos cálculos de TF-IDF e Okapi BM25 ocorre no pacote \texttt{utils}.
-
-    Um destaque da implementação é o suporte ao cálculo paralelo da frequência de documentos (DF). Dado que o cálculo de relevância exige saber em quantos documentos cada termo do \textit{corpus} aparece, essa operação pode se tornar um gargalo. O código utiliza \textit{goroutines} e \textit{channels} para paralelizar essas consultas ao banco de dados, limitando a concorrência através de um mecanismo de semáforo (buffer de canal) para não exaurir as conexões com o banco.
-
-    \subsection{Vetorização Semântica}
-    Para a busca semântica, o módulo Python utiliza a biblioteca \texttt{sentence-transformers}. O modelo escolhido, \texttt{paraphrase-multilingual-MiniLM-L12-v2}, converte os textos limpos em vetores densos de 384 dimensões. A similaridade entre os documentos é então calculada através da métrica de Similaridade de Cosseno, permitindo identificar correspondências baseadas no significado e não apenas na coincidência exata de palavras.
-
     \chapter{Apresentação dos Resultados e Considerações Finais}
 
     A etapa de validação experimental deste trabalho não consistiu apenas na execução mecânica de algoritmos mas sim em uma investigação sobre o comportamento de sistemas de recuperação de informação sob condições de estresse computacional. Para garantir a robustez dos dados executamos uma bateria de setenta e dois cenários de teste distintos onde cada um foi feito para isolar variáveis críticas do sistema. O objetivo central foi submeter a implementação desenvolvida na linguagem Go a diferentes pressões de configuração para entendermos de que maneira fatores como o tamanho dos N-gramas e a presença de saltos entre palavras influenciam tanto o desempenho da máquina quanto a qualidade da informação entregue ao usuário final.
