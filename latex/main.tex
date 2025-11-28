@@ -170,7 +170,7 @@
     \setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
     \begin{resumo}
 
-        A digitalização massiva do setor jurídico brasileiro resultou em um volume sem precedentes de documentos textuais, como Projetos de Lei (PL), Propostas de Emenda à Constituição (PEC) etc. A recuperação de informação neste cenário enfrenta um desafio central: enquanto modelos modernos de Inteligência Artificial baseados em \textit{embeddings} oferecem alta precisão semântica, seu custo computacional de implementação e inferência é significativamente elevado. Este trabalho investiga o \textit{trade-off} pragmático entre a complexidade semântica e a eficiência computacional. Para isso, foi desenvolvido um sistema de avaliação comparativa que implementa, do zero na linguagem Go, os algoritmos estatísticos clássicos TF-IDF e Okapi BM25. Um \textit{corpus} de aproximadamente 5.000 páginas de documentos legislativos de diversos temas coletados do Portal da Câmara dos Deputados através de um \textit{scraping} e submetido a um rigoroso \textit{pipeline} de higienização textual. A persistência dos dados foi otimizada em SQLite, utilizando um esquema dinâmico que instancia bancos de dados isolados por tipo de N-grama (Unigrama, Bigrama e Trigrama) para maximizar a performance, variando o tamanho dos saltos(skip-grams) e adicionando normalização deles. Por fim, os resultados de relevância gerados pelos métodos estatísticos são comparados aos de um modelo \textit{transformer} (Sentence-BERT), utilizando o Coeficiente de Correlação de Spearman para medir a similaridade ordinal dos \textit{rankings}. O estudo fornece uma análise quantitativa que auxilia na tomada de decisão sobre a arquitetura de custo-benefício mais adequada para sistemas de busca jurídica.
+        A digitalização massiva do setor jurídico brasileiro resultou em um volume sem precedentes de documentos textuais, como PLs, PECs etc. A recuperação de informação neste cenário enfrenta um desafio central: enquanto modelos modernos de Inteligência Artificial baseados em \textit{embeddings} oferecem alta precisão semântica, seu custo computacional de implementação e inferência é significativamente elevado. Este trabalho investiga o \textit{trade-off} pragmático entre a complexidade semântica e a eficiência computacional. Para isso, foi desenvolvido um sistema de avaliação comparativa que implementa, do zero na linguagem Go, os algoritmos estatísticos clássicos TF-IDF e Okapi BM25. Um \textit{corpus} de aproximadamente 5.000 páginas de documentos legislativos de diversos temas coletados do Portal da Câmara dos Deputados através de um \textit{scraping} e submetido a um rigoroso \textit{pipeline} de higienização textual. A persistência dos dados foi otimizada em SQLite, utilizando um esquema dinâmico que instancia bancos de dados isolados por tipo de N-grama (Unigrama, Bigrama e Trigrama) para maximizar a performance, variando o tamanho dos saltos(skip-grams) e adicionando normalização deles. Por fim, os resultados de relevância gerados pelos métodos estatísticos são comparados aos de um modelo \textit{transformer} (Sentence-BERT), utilizando o Coeficiente de Correlação de Spearman para medir a similaridade ordinal dos \textit{rankings}. O estudo fornece uma análise quantitativa que auxilia na tomada de decisão sobre a arquitetura de custo-benefício mais adequada para sistemas de busca jurídica.
 
         \textbf{Palavras-chave}: Processamento de Linguagem Natural, Recuperação de Informação, Busca Jurídica, \textit{Skip-grams}, TF-IDF, BM25, Embeddings, Coeficiente de Spearman.
     \end{resumo}
@@ -180,7 +180,7 @@
 % ========================================================================
     \begin{resumo}[Abstract]
         \begin{otherlanguage*}{english}
-            \textit{The massive digitization of the Brazilian legal sector has resulted in an unprecedented volume of textual documents, such as Bills of Law (PL) and Constitutional Amendment Proposals (PEC). Information retrieval in this scenario faces a central challenge: while modern Artificial Intelligence models based on embeddings offer high semantic accuracy, their computational cost of implementation and inference is significantly elevated. This work investigates the pragmatic trade-off between semantic complexity and computational efficiency. To this end, a comparative evaluation system was developed, implementing the classic statistical algorithms TF-IDF and Okapi BM25 from scratch in the Go language. A corpus of approximately 5,000 pages of legislative documents on diverse topics was collected from the Chamber of Deputies' portal via scraping and submitted to a rigorous textual sanitization pipeline. Data persistence was optimized using SQLite, employing a dynamic schema that instantiates isolated databases by N-gram type (Unigram, Bigram, and Trigram) to maximize performance, varying the jump sizes (skip-grams) and applying normalization to them. Finally, the relevance results generated by the statistical methods are compared to those of a transformer model (Sentence-BERT), using the Spearman Correlation Coefficient to measure the ordinal similarity of the rankings. The study provides a quantitative analysis that assists in decision-making regarding the most appropriate cost-benefit architecture for legal search systems.}
+            \textit{The massive digitization of the Brazilian legal sector has resulted in an unprecedented volume of textual documents, such as PLs and PECs. Information retrieval in this scenario faces a central challenge: while modern Artificial Intelligence models based on embeddings offer high semantic accuracy, their computational cost of implementation and inference is significantly elevated. This work investigates the pragmatic trade-off between semantic complexity and computational efficiency. To this end, a comparative evaluation system was developed, implementing the classic statistical algorithms TF-IDF and Okapi BM25 from scratch in the Go language. A corpus of approximately 5,000 pages of legislative documents on diverse topics was collected from the Chamber of Deputies' portal via scraping and submitted to a rigorous textual sanitization pipeline. Data persistence was optimized using SQLite, employing a dynamic schema that instantiates isolated databases by N-gram type (Unigram, Bigram, and Trigram) to maximize performance, varying the jump sizes (skip-grams) and applying normalization to them. Finally, the relevance results generated by the statistical methods are compared to those of a transformer model (Sentence-BERT), using the Spearman Correlation Coefficient to measure the ordinal similarity of the rankings. The study provides a quantitative analysis that assists in decision-making regarding the most appropriate cost-benefit architecture for legal search systems.}
 
             \textit{\textbf{Key-words}: Natural Language Processing, Information Retrieval, Legal Search, Skip-grams, TF-IDF, BM25, Embeddings, Spearman Coefficient.}
         \end{otherlanguage*}
@@ -206,8 +206,6 @@
     \begin{siglas}
         \item[API] Application Programming Interface
         \item[BERT] Bidirectional Encoder Representations from Transformers
-        \item[BMSS] Boyer-Moore String Search
-        \item[KMP] Knuth Morris Pratt
         \item[CBOW] Continuous Bag-of-Words
         \item[CNJ] Conselho Nacional de Justiça
         \item[CPU] Computing Processing Unit
@@ -227,8 +225,18 @@
         \item[RAG] Retrieval-Augmented Generation
         \item[REST] Representational State Transfer
         \item[TF-IDF] Term Frequency-Inverse Document Frequency
+        \item[ORM] Object-Relational Mapping
+        \item[GORM] Golang ORM
+        \item[I/O] Input/Output
+        \item[HTML] HyperText Markup Language
+        \item[PL] Proposta de lei
+        \item[PEC] Proposta de Emenda à Constituição
+        \item[SSD] Solid-State Drive
+        \item[HDD] Hard Disk Drive
+        \item[RAM] Random Access Memory
+        \item[NVMe] Non-Volatile Memory Express
+        \item[SQL] Structured Query Language
     \end{siglas}
-
 % ========================================================================
 % SUMÁRIO
 % ========================================================================
@@ -256,17 +264,6 @@
     Essa tensão entre a performance semântica e o custo computacional nos leva diretamente ao cerne da investigação proposta neste trabalho. Diante de um cenário onde recursos são finitos, é imperativo questionar até que ponto a complexidade dos modelos de \textit{machine learning} é estritamente indispensável para a tarefa de busca em documentos jurídicos. Surge, então, uma dúvida metodológica relevante: será que métodos estatísticos e algoritmos de busca mais clássicos, se bem parametrizados e aplicados, não poderiam alcançar resultados comparáveis aos da IA moderna, mas consumindo apenas uma fração dos recursos?
 
     Este estudo se propõe, portanto, a explorar essa fronteira de eficiência. A literatura já aponta indícios nessa direção, como observado por \citeonline{citacao62}, que demonstra que modelos distribucionais complexos como o BERT não apresentam, necessariamente, um desempenho superior em todas as tarefas de classificação jurídica quando comparados a abordagens mais simples. O objetivo deste trabalho não é desenvolver uma nova ferramenta, mas sim realizar uma análise crítica e comparativa rigorosa, buscando compreender e quantificar o verdadeiro \textit{trade-off} entre a precisão semântica oferecida pela IA e a eficiência computacional dos métodos estatísticos no domínio específico do Direito.
-
-    %    \section{Justificativa}
-%
-%    A busca incessante por precisão levou o campo da tecnologia jurídica a uma crescente dependência de modelos de Inteligência Artificial, cujo uso no Judiciário brasileiro cresceu 26\% apenas entre 2022 e 2023 \cite{citacao63}. A premissa é clara: quanto mais "inteligente" o modelo, melhores os resultados. No entanto, essa corrida pela sofisticação muitas vezes ignora os custos práticos associados. O treinamento de grandes modelos de linguagem exige poder de processamento massivo, geralmente dependente de hardware especializado como GPUs, o que se traduz em altos custos de infraestrutura, energia e manutenção. Para muitas instituições, essa barreira pode ser intransponível.
-%
-%    Paralelamente, a evolução do hardware, com o advento das arquiteturas \textit{multicore}, não beneficiou apenas os modelos de IA. Algoritmos clássicos, antes limitados por execuções sequenciais, podem hoje ter seu desempenho drasticamente otimizado por meio de paralelismo, explorando múltiplos núcleos de processamento para aumentar a performance das aplicações \cite{citacao64}. Técnicas estatísticas como o TF-IDF e algoritmos de busca de padrões, como o Boyer-Moore, são computacionalmente mais leves e mais simples de implementar, mas seu potencial em hardware moderno é frequentemente subestimado.
-%
-%    A justificativa deste trabalho reside, portanto, em uma necessidade de pragmatismo. É preciso questionar se o ganho marginal de relevância oferecido por um modelo semântico complexo justifica sua implementação em todos os cenários. Em domínios com linguagem controlada e previsível, como é o caso dos documentos jurídicos, abordagens mais simples, baseadas em regras, podem se mostrar altamente eficazes \cite{citacao65}. Em muitas tarefas cotidianas, a velocidade de resposta e o baixo custo operacional podem ser mais valiosos do que a capacidade de interpretar uma ambiguidade sutil em um texto.
-%
-%    Esta pesquisa oferece uma análise quantitativa desse \textit{trade-off}. Ao comparar diretamente o desempenho, o tempo de resposta e o uso de recursos de diferentes abordagens — uma prática já adotada em trabalhos que avaliam modelos como BERT e ChatGPT por meio de métricas de acurácia, precisão e F1-score \cite{citacao66} — pretendemos fornecer dados concretos que auxiliem na tomada de decisão sobre qual tecnologia é mais adequada para diferentes necessidades do ecossistema jurídico, movendo o debate do campo teórico para uma avaliação de aplicabilidade prática.
-
 
     \section{Justificativa}
 
@@ -366,7 +363,7 @@
 
     A remoção de \textit{stopwords} é uma das etapas principais do pré-processamento textual e consiste na exclusão de palavras que ocorrem com alta frequência, mas que carregam pouco ou nenhum valor semântico individual — como \textit{de}, \textit{que}, \textit{em}, \textit{o} e \textit{a}. Esse tipo de filtragem é comumente utilizado para reduzir o vocabulário e acelerar os algoritmos, sem perda significativa de informação relevante para a maioria das tarefas de recuperação e classificação textual. \cite{citacao67}
 
-    Apesar de a remoção de \textit{stopwords} ser uma prática comum em tarefas de processamento de linguagem natural, no contexto jurídico é necessário cautela. Isso porque palavras funcionais — geralmente ignoradas em outros domínios — podem conter informações fundamentais para a interpretação de dispositivos legais, como apontado por \citeauthor{citacao17} (\citeyear{citacao17}), que optaram por não removê-las durante o treinamento de seus modelos linguísticos, justamente para preservar a integridade semântica dos textos judiciais.
+    Apesar de a remoção de \textit{stopwords} ser uma prática comum em tarefas de processamento de linguagem natural, no contexto jurídico é necessário cautela. Isso porque palavras funcionais(geralmente ignoradas em outros domínios), podem conter informações fundamentais para a interpretação de dispositivos legais, como apontado por \citeauthor{citacao17} (\citeyear{citacao17}), que optaram por não removê-las durante o treinamento de seus modelos linguísticos, justamente para preservar a integridade semântica dos textos judiciais.
 
     \begin{figure}[H]
         \centering
@@ -405,7 +402,7 @@
 
     \subsection{TF-IDF}
 
-    Após o pré-processamento, uma das técnicas mais consolidadas para representar documentos como vetores numéricos é o TF-IDF (\textit{Term Frequency--Inverse Document Frequency}). Esse método associa a cada termo um peso que reflete tanto sua importância local — baseada na frequência com que aparece no documento — quanto sua importância global — determinada pela raridade do termo na coleção como um todo \cite{citacao10, citacao67}.
+    Após o pré-processamento, uma das técnicas mais consolidadas para representar documentos como vetores numéricos é o TF-IDF (\textit{Term Frequency--Inverse Document Frequency}). Esse método associa a cada termo um peso que reflete tanto sua importância local(baseada na frequência com que aparece no documento), quanto sua importância global, que é determinada pela raridade do termo na coleção como um todo \cite{citacao10, citacao67}.
 
     O cálculo do TF--IDF é composto por duas etapas fundamentais. A primeira consiste na determinação da frequência de termo \textit{Term Frequency} (TF), que quantifica o número de vezes que um termo \(t\) aparece em um documento \(d\), representado por \(\mathit{tf}_{t,d}\). Para evitar que termos muito frequentes dominem a representação, especialmente em documentos longos, é comum aplicar uma normalização logarítmica, definida como:
     \[
@@ -491,7 +488,7 @@
 
     Historicamente, os sistemas de NLP eram baseados em regras linguísticas definidas manualmente, o que exigia muito esforço e apresentava limitações para lidar com a complexidade da linguagem. Com o avanço do aprendizado de máquina, especialmente dos modelos de aprendizado profundo, o campo evoluiu significativamente. Modelos modernos, como os baseados em arquiteturas \textit{transformers}, têm a capacidade de capturar relações contextuais complexas em textos, o que melhorou muito o desempenho em tarefas essenciais do NLP, como tradução automática, análise de sentimentos, reconhecimento de fala, extração de informações, sumarização automática e respostas a perguntas \cite{citacao35}. Essas técnicas permitem que sistemas interpretem o significado de frases, reconheçam intenções e até gerem textos coerentes, facilitando a interação entre humanos e máquinas.
 
-    O NLP precisa lidar com desafios como a ambiguidade das palavras — onde uma mesma palavra pode ter vários significados dependendo do contexto —, a variação linguística entre diferentes regiões e falantes, e a necessidade de entender o contexto mais amplo para interpretar corretamente expressões e intenções. Além disso, o desenvolvimento de sistemas eficientes depende da disponibilidade de grandes volumes de dados anotados para treinar esses modelos, o que nem sempre é fácil para línguas menos representadas \cite{citacao52}.
+    O NLP precisa lidar com desafios como a ambiguidade das palavras(onde uma mesma palavra pode ter vários significados dependendo do contexto), a variação linguística entre diferentes regiões e falantes, e a necessidade de entender o contexto mais amplo para interpretar corretamente expressões e intenções. Além disso, o desenvolvimento de sistemas eficientes depende da disponibilidade de grandes volumes de dados anotados para treinar esses modelos, o que nem sempre é fácil para línguas menos representadas \cite{citacao52}.
 
     Na prática, o NLP está presente em muitas aplicações que usamos diariamente, desde assistentes virtuais como Siri e Alexa, passando por sistemas de tradução automática, \textit{chatbots} para atendimento ao cliente, até ferramentas que ajudam a analisar opiniões em redes sociais. Essa popularização faz do NLP uma área essencial para a interação entre humanos e máquinas, impulsionando a transformação digital em diversos setores \cite{citacao35}.
 
@@ -505,7 +502,7 @@
 
     Os primeiros modelos que popularizaram os \textit{embeddings} foram o \textit{Word2Vec} \cite{citacao53} e o \textit{GloVe} \cite{citacao54}. O \textit{Word2Vec} é baseado em aprendizado preditivo local, utilizando duas arquiteturas principais: \textit{Skip-Gram} e \textit{Continuous Bag-of-Words} (CBOW). O modelo \textit{Skip-Gram} tenta prever as palavras de contexto (vizinhas) a partir de uma palavra central. Inversamente, o CBOW tenta prever a palavra central com base em seu contexto. Por outro lado, o \textit{GloVe} adota uma abordagem baseada em contagem, construindo vetores a partir de estatísticas globais de coocorrência de palavras em todo o corpus.
 
-    A principal característica — e limitação — desses modelos é que eles geram \textit{embeddings estáticos}. Cada palavra no vocabulário é mapeada para um único vetor, independentemente do contexto em que ela é usada. Isso significa que a palavra "banco" teria a mesma representação vetorial em "sentei no banco da praça" e em "fui ao banco depositar dinheiro". Essa incapacidade de lidar com a polissemia (múltiplos significados) foi a principal motivação para o desenvolvimento da próxima geração de modelos.
+    A principal característica e limitação desses modelos é que eles geram \textit{embeddings estáticos}. Cada palavra no vocabulário é mapeada para um único vetor, independentemente do contexto em que ela é usada. Isso significa que a palavra "banco" teria a mesma representação vetorial em "sentei no banco da praça" e em "fui ao banco depositar dinheiro". Essa incapacidade de lidar com a polissemia (múltiplos significados) foi a principal motivação para o desenvolvimento da próxima geração de modelos.
 
     \subsubsubsection{Embeddings Contextuais: BERT e a Revolução \textit{Transformer}}
 
@@ -524,7 +521,7 @@
     \subsubsection{Recuperação e Medidas de Similaridade}
 % (Esta seção foi mantida como estava, pois já era muito boa)
 
-    A recuperação de informações em contextos de linguagem natural depende da capacidade que temos de medir similaridade entre todas estas representações textuais. Com o uso de \textit{embeddings}, textos são convertidos em vetores numéricos em espaços de alta dimensão, nos permitindo aplicar técnicas matemáticas e equações para comparar conteúdos. Entre as diversas medidas de similaridade existentes — como a distância euclidiana, de \textit{Jaccard} ou de \textit{Manhattan} — a similaridade de cosseno destaca-se por sua robustez e simplicidade, sendo amplamente adotada em tarefas de busca semântica e ranqueamento de documentos. Na subseção a seguir, detalha-se seu funcionamento e aplicação no contexto de NLP e jurídico.
+    A recuperação de informações em contextos de linguagem natural depende da capacidade que temos de medir similaridade entre todas estas representações textuais. Com o uso de \textit{embeddings}, textos são convertidos em vetores numéricos em espaços de alta dimensão, nos permitindo aplicar técnicas matemáticas e equações para comparar conteúdos. Entre as diversas medidas de similaridade existentes, como a distância euclidiana, de \textit{Jaccard} ou de \textit{Manhattan}, a similaridade de cosseno destaca-se por sua robustez e simplicidade, sendo amplamente adotada em tarefas de busca semântica e ranqueamento de documentos. Na subseção a seguir, detalha-se seu funcionamento e aplicação no contexto de NLP e jurídico.
 
     \subsubsubsection{Similaridade de cosseno}
 
@@ -551,7 +548,7 @@
 
     Na prática, ao aplicar essa métrica, os textos são primeiro convertidos em vetores numéricos usando técnicas de \textit{embeddings} (como Word2Vec, BERT ou Sentence-BERT), e depois esses vetores são comparados utilizando a similaridade cosseno para ranquear ou agrupar documentos. Essa abordagem é a base de diversos sistemas modernos de busca jurídica, recomendação de jurisprudência e agrupamento de decisões semelhantes \cite{citacao35}.
 
-    É importante ressaltar que o cosseno não capta relações mais complexas como ironia, polissemia ou implicaturas contextuais — para esses casos, a escolha do modelo de \textit{embedding} (estático ou contextualizado) é determinante para que os vetores usados na comparação contenham essas nuances semânticas. Ainda assim, a similaridade cosseno continua sendo uma escolha padrão e eficaz em aplicações de NLP por sua simplicidade, desempenho e capacidade de generalização \cite{citacao10}.
+    É importante ressaltar que o cosseno não capta relações mais complexas como ironia, polissemia ou implicaturas contextuais, para esses casos, a escolha do modelo de \textit{embedding} (estático ou contextualizado) é determinante para que os vetores usados na comparação contenham essas nuances semânticas. Ainda assim, a similaridade cosseno continua sendo uma escolha padrão e eficaz em aplicações de NLP por sua simplicidade, desempenho e capacidade de generalização \cite{citacao10}.
 
 
     \section{Algoritmos}
@@ -651,7 +648,7 @@
 
     \section{Aquisição de Dados}
 
-    A construção do \textit{corpus} documental baseou-se na coleta massiva de textos legislativos diretamente do Portal da Câmara dos Deputados. O objetivo foi compilar uma base de dados robusta e representativa, totalizando aproximadamente 5.000 documentos, abrangendo principalmente Projetos de Lei (PL) e Propostas de Emenda à Constituição (PEC).
+    A construção do \textit{corpus} documental baseou-se na coleta massiva de textos legislativos diretamente do Portal da Câmara dos Deputados. O objetivo foi compilar uma base de dados robusta e representativa, totalizando aproximadamente 5.000 documentos, abrangendo principalmente PLs e PECs.
 
     Dada a magnitude do volume de dados, uma abordagem sequencial seria inviável devido à latência de rede. Portanto, a solução foi implementada em Go, localizada no pacote \texttt{corpus}, explorando o modelo de concorrência da linguagem (\textit{goroutines}) para realizar o \textit{download} dos documentos de forma paralela e assíncrona.
 
@@ -669,13 +666,13 @@
 
     \section{Pré-processamento e Normalização Textual}
 
-    Após a etapa de aquisição, o \textit{corpus} bruto constitui-se de milhares de arquivos em formato PDF. A utilização direta desses arquivos para fins de indexação ou vetorização é inviável devido à presença de formatação binária e, principalmente, de "ruído textual" — elementos que, embora necessários para a validade jurídica do documento (como cabeçalhos, numeração de autos, datas e assinaturas), não contribuem para a identificação do conteúdo semântico da matéria legislativa.
+    Após a etapa de aquisição, o \textit{corpus} bruto constitui-se de milhares de arquivos em formato PDF. A utilização direta desses arquivos para fins de indexação ou vetorização é inviável devido à presença de formatação binária e, principalmente, de "ruído textual", elementos que, embora necessários para a validade jurídica do documento (como cabeçalhos, numeração de autos, datas e assinaturas), não contribuem para a identificação do conteúdo semântico da matéria legislativa.
 
     Para mitigar esse problema, foi implementado um módulo robusto de processamento textual em Go, localizado no pacote \texttt{corpus}. Este módulo opera como um \textit{pipeline} de transformação, convertendo documentos não estruturados em sequências de \textit{tokens} normalizados.
 
     \subsection{Arquitetura de Processamento Concorrente}
 
-    Dada a alta carga de I/O (Entrada/Saída) exigida para a leitura e conversão de milhares de arquivos PDF, a implementação não seguiu uma abordagem sequencial. Em vez disso, utilizou-se o padrão de projeto \textit{Worker Pool} nativo da linguagem Go.
+    Dada a alta carga de I/O exigida para a leitura e conversão de milhares de arquivos PDF, a implementação não seguiu uma abordagem sequencial. Em vez disso, utilizou-se o padrão de projeto \textit{Worker Pool} nativo da linguagem Go.
 
     A função orquestradora, \texttt{TextProcessor}, define um limite de concorrência controlado pela variável \texttt{maxWorkers}. O funcionamento baseia-se em três primitivas de sincronização:
     \begin{itemize}
@@ -733,7 +730,7 @@
 
         \item \textbf{Bigramas com Saltos ($N=2$):} Para capturar relações entre palavras que não são necessariamente adjacentes (conceito de \textit{skip-gram}), o algoritmo emprega um laço aninhado. Enquanto o índice principal $i$ percorre as palavras do documento, um índice secundário $j$ projeta-se à frente, variando de $1$ até o limite configurado de \textit{jumps} ($jump+1$). Isso permite gerar pares como $(w_i, w_{i+1})$ (adjacente) ou $(w_i, w_{i+2})$ (com um salto), armazenando explicitamente a distância vetorial ($j$) entre os termos para fins de normalização posterior.
 
-        \item \textbf{Trigramas ($N=3$):} A complexidade aumenta para capturar o contexto estendido. Utiliza-se uma estrutura de três laços encadeados ($i, j, k$), onde $i$ é a palavra pivô, $j$ define a distância para o segundo termo e $k$ define a distância do segundo para o terceiro. Essa abordagem "força bruta controlada" garante que todas as combinações válidas dentro da janela de saltos — como $(w_i, w_{i+1}, w_{i+2})$ ou combinações mais esparsas como $(w_i, w_{i+2}, w_{i+4})$ — sejam geradas deterministicamente, sem a sobrecarga de chamadas recursivas.
+        \item \textbf{Trigramas ($N=3$):} A complexidade aumenta para capturar o contexto estendido. Utiliza-se uma estrutura de três laços encadeados ($i, j, k$), onde $i$ é a palavra pivô, $j$ define a distância para o segundo termo e $k$ define a distância do segundo para o terceiro. Essa abordagem "força bruta controlada" garante que todas as combinações válidas dentro da janela de saltos (como $(w_i, w_{i+1}, w_{i+2})$ ou combinações mais esparsas como $(w_i, w_{i+2}, w_{i+4})$) sejam geradas deterministicamente, sem a sobrecarga de chamadas recursivas.
     \end{enumerate}
 
     O retorno da função é uma estrutura dupla contendo tanto os gramas gerados quanto uma matriz de metadados (\texttt{retJumps}), que registra as distâncias relativas (\texttt{int8}) entre cada componente do grama. Esses metadados são essenciais para a estratégia de indexação, pois permitem ao motor de busca diferenciar, por exemplo, uma citação direta de uma menção espaçada no texto.
@@ -743,7 +740,7 @@
 
     A eficiência de um sistema de recuperação de informação depende intrinsecamente de como os dados são estruturados e persistidos. Para este projeto, optou-se por uma abordagem híbrida que combina a rigidez de um esquema relacional para manter a integridade dos documentos com a flexibilidade de estruturas de índice invertido para a busca rápida.
 
-    A camada de persistência foi construída sobre o banco de dados SQLite, utilizando o ORM (\textit{Object-Relational Mapping}) GORM para a manipulação das entidades em Go. A escolha do SQLite justifica-se pela sua arquitetura \textit{serverless} de arquivo único, eliminando a latência de rede típica de conexões cliente-servidor (como em PostgreSQL ou MySQL) e permitindo um desempenho de leitura extremamente elevado quando o arquivo do banco reside em discos SSD NVMe modernos.
+    A camada de persistência foi construída sobre o banco de dados SQLite, utilizando o GORM para a manipulação das entidades em Go. A escolha do SQLite justifica-se pela sua arquitetura \textit{serverless} de arquivo único, eliminando a latência de rede típica de conexões cliente-servidor (como em PostgreSQL ou MySQL) e permitindo um desempenho de leitura extremamente elevado quando o arquivo do banco reside em discos SSD NVMe modernos.
 
     \subsection{Definição das Estruturas de Dados (Structs)}
 
@@ -763,7 +760,7 @@ type Document struct {
 }
     \end{verbatim}
 
-    Para evitar o crescimento exponencial do arquivo do banco de dados SQLite — o que degradaria o tempo de resposta das consultas de índice —, o conteúdo textual integral dos documentos (\textit{Full Text}) \textbf{não é persistido no banco de dados} de forma permanente.
+    Para evitar o crescimento exponencial do arquivo do banco de dados SQLite, o que degradaria o tempo de resposta das consultas de índice, o conteúdo textual integral dos documentos (\textit{Full Text}) \textbf{não é persistido no banco de dados} de forma permanente.
 
     A estratégia adotada consiste em:
     \begin{enumerate}
@@ -865,7 +862,7 @@ case 3:
 
     \subsection{Indexação Dinâmica}
 
-    Complementando a estratégia de esquema único, a criação de índices também é realizada dinamicamente via execução de SQL bruto (\textit{Raw SQL}) no momento da inicialização. O sistema executa o comando \texttt{CREATE INDEX} ajustado para as colunas específicas do n-grama selecionado (conforme a variável \texttt{index} definida no trecho de código acima).
+    Complementando a estratégia de esquema único, a criação de índices também é realizada dinamicamente via execução de SQL puro no momento da inicialização. O sistema executa o comando \texttt{CREATE INDEX} ajustado para as colunas específicas do n-grama selecionado (conforme a variável \texttt{index} definida no trecho de código acima).
 
     Isso assegura que as consultas de busca (\textit{SELECT}), que realizam junções pesadas entre o vocabulário e a tabela de ocorrências, sempre utilizem um índice de cobertura (\textit{Covering Index}) ou um índice B-Tree otimizado, reduzindo a complexidade da busca de $O(N)$ para $O(\log N)$.
 
@@ -888,7 +885,7 @@ case 3:
 
     \begin{enumerate}
         \item \textbf{Cálculo do TF (Local):} O algoritmo itera sobre a lista de trigramas (\texttt{trigramList}) do documento, acumulando a frequência bruta de cada termo em um mapa em memória (\texttt{tf}).
-        \item \textbf{Cálculo do DF (Global) Concorrente:} A etapa mais custosa é determinar em quantos documentos do \textit{corpus} cada termo aparece ($df_t$). Para evitar que essa operação I/O-bound bloqueie o processamento, utilizou-se o padrão de \textit{fan-out/fan-in} com \textit{goroutines}.
+        \item \textbf{Cálculo do DF (Global) Concorrente:} A etapa mais custosa é determinar em quantos documentos do \textit{corpus} cada termo aparece ($df_t$). Para evitar que essa operação bloqueie o processamento, utilizou-se o padrão de \textit{fan-out/fan-in} com \textit{goroutines}.
     \end{enumerate}
 
     \textbf{Otimização de Concorrência:}
@@ -969,46 +966,65 @@ for key := range tf {
         \item \textbf{Espaço Vetorial Denso:} As 384 dimensões provaram ser suficientes para codificar as nuances dos textos legislativos, servindo como um "gabarito" confiável e estável para a avaliação dos algoritmos estatísticos.
     \end{itemize}
 
+
     \section{Implementação dos Algoritmos de Busca}
 
     A lógica de recuperação de informação foi implementada do zero em Go, permitindo um controle granular sobre as estruturas de dados e o gerenciamento de memória.
 
     \subsection{Modelo TF-IDF e BM25}
-    Para os algoritmos estatísticos, o sistema utiliza um índice invertido persistido em um banco de dados SQLite via ORM GORM. A implementação dos cálculos de TF-IDF e Okapi BM25 ocorre no pacote \texttt{utils}.
+    Para os algoritmos estatísticos, o sistema utiliza um índice invertido persistido em um banco de dados SQLite via GORM. A implementação dos cálculos de TF-IDF e Okapi BM25 ocorre no pacote \texttt{utils}.
 
     Um destaque da implementação é o suporte ao cálculo paralelo da frequência de documentos (DF). Dado que o cálculo de relevância exige saber em quantos documentos cada termo do \textit{corpus} aparece, essa operação pode se tornar um gargalo. O código utiliza \textit{goroutines} e \textit{channels} para paralelizar essas consultas ao banco de dados, limitando a concorrência através de um mecanismo de semáforo (buffer de canal) para não exaurir as conexões com o banco.
 
     \subsection{Vetorização Semântica}
     Para a busca semântica, o módulo Python utiliza a biblioteca \texttt{sentence-transformers}. O modelo escolhido, \texttt{paraphrase-multilingual-MiniLM-L12-v2}, converte os textos limpos em vetores densos de 384 dimensões. A similaridade entre os documentos é então calculada através da métrica de Similaridade de Cosseno, permitindo identificar correspondências baseadas no significado e não apenas na coincidência exata de palavras.
 
+    \chapter{Apresentação dos Resultados e Considerações Finais}
 
-    \chapter{Considerações Finais}
+    A etapa de validação experimental deste trabalho não consistiu apenas na execução mecânica de algoritmos mas sim em uma investigação sobre o comportamento de sistemas de recuperação de informação sob condições de estresse computacional. Para garantir a robustez dos dados executamos uma bateria de setenta e dois cenários de teste distintos onde cada um foi feito para isolar variáveis críticas do sistema. O objetivo central foi submeter a implementação desenvolvida na linguagem Go a diferentes pressões de configuração para entendermos de que maneira fatores como o tamanho dos N-gramas e a presença de saltos entre palavras influenciam tanto o desempenho da máquina quanto a qualidade da informação entregue ao usuário final.
 
-    Este trabalho avaliou, de forma prática, diferentes técnicas de recuperação de informação, comparando algoritmos estatísticos implementados em Go com um modelo vetorial baseado em \textit{transformers}. A análise, conduzida sobre um \textit{corpus} jurídico brasileiro extenso, buscou entender até que ponto é possível equilibrar custo computacional e precisão semântica em sistemas de busca especializados.
+    Os dados coletados e apresentados a seguir oferecem uma visão clara e técnica sobre como os algoritmos clássicos se comportam quando são confrontados com a infraestrutura moderna e com a complexidade inerente à linguagem jurídica. Ao longo deste capítulo detalhamos os destaques numéricos e discutimos os gargalos de armazenamento em banco de dados além de analisar a correlação de qualidade obtida frente ao gabarito semântico gerado por inteligência artificial.
 
+    \section{Destaques e Indicadores de Performance }
 
-    \section{Síntese dos Resultados e Contribuições}
+    Antes de aprofundarmos a análise qualitativa é fundamental destacar os números mais expressivos que emergiram durante a fase de testes pois eles resumem os extremos de performance e consumo que definem os limites arquiteturais do sistema proposto.
 
-    Os experimentos — 72 cenários medidos pelo Coeficiente de Spearman — confirmaram hipóteses levantadas na revisão teórica e apontaram para um “ponto de equilíbrio” claro entre desempenho e qualidade no domínio jurídico.
+    O indicador mais alarmante foi o pico de consumo de memória RAM que atingiu a marca de aproximadamente cinco gigabytes quando o sistema foi configurado para processar Trigramas. Esse valor contrasta com o cenário de Unigramas onde o consumo foi de apenas cento e quarenta e três megabytes. Essa diferença de magnitude ilustra o custo oculto da complexidade linguística.
 
-    \subsection{Velocidade: BM25 Superando o TF-IDF}
+    No que tange à velocidade de processamento observamos uma inversão de expectativas onde o algoritmo BM25 chegou a ser dez vezes mais rápido que o TF-IDF em cenários complexos. Isso derruba a intuição de que fórmulas matemáticas mais simples resultam necessariamente em softwares mais rápidos e coloca em evidência a importância da otimização de fluxo de código.
 
-    Um resultado marcante foi o desempenho superior do BM25 em tempo de execução, especialmente nos cenários com Bigramas e Trigramas. Embora o TF-IDF seja matematicamente mais simples, o BM25 se mostrou até \textbf{dez vezes mais rápido} em alguns testes.
+    Outro ponto de destaque negativo foi a performance da camada de persistência em disco. O uso do banco de dados SQLite para consultas em tempo real mostrou-se entre dez a quarenta vezes mais lento do que as operações realizadas em cache de memória. Esse gargalo inviabilizou o uso do disco para o processamento dos Trigramas e forçou uma mudança de estratégia para o uso exclusivo de memória RAM durante os testes de carga.
 
-    Isso ocorreu por causa da otimização adotada na implementação (Seção 3.4), que evitou cálculos desnecessários ao descartar termos com frequência de documento igual a zero. Em N-gramas maiores, onde a esparsidade cresce, esse “atalho” reduz de forma significativa o processamento. Esse achado reforça que eficiência não depende apenas da fórmula, mas de como o algoritmo lida com o volume real de dados.
+    Por fim vale ressaltar a escala do experimento que envolveu o processamento e indexação de 1648 documentos legislativos completos. As métricas de qualidade medidas pelo coeficiente de Spearman flutuaram majoritariamente entre zero vírgula zero dois e zero vírgula zero quatro o que evidencia matematicamente a distinção fundamental entre a busca estatística e a busca semântica.
 
-    \subsection{O Custo da Indexação Contextual}
+    \subsection{Indicadores}
 
-    O consumo de memória aumentou de forma acentuada conforme o tamanho dos N-gramas cresceu:
+    Antes da análise qualitativa, alguns dos números que chamaram a atenção durante a fase de testes. Abaixo listamos os recordes e métricas que definem o perfil de desempenho da solução.
 
     \begin{itemize}
-        \item \textbf{Unigramas:} pico de 143 MB.
-        \item \textbf{Bigramas:} cerca de 2.33 GB.
-        \item \textbf{Trigramas:} quase 5 GB.
+        \item \textbf{O Campeão de Velocidade} \\
+        O algoritmo BM25 configurado para processar Bigramas simples sem saltos registrou o tempo de execução mais rápido de toda a bateria e completou a tarefa em \textbf{80 milissegundos}. Esse valor destaca a eficiência da estratégia de poda de dados para índices esparsos.
+
+        \item \textbf{O Cenário de Maior Lentidão} \\
+        No outro extremo a configuração de Trigramas normalizados com o uso de saltos máximos elevou o tempo de processamento para cerca de \textbf{7,5 segundos}. Isso representa uma execução quase cem vezes mais lenta do que o melhor cenário e evidencia o custo computacional da complexidade linguística excessiva.
+
+        \item \textbf{Eficiência de Memória} \\
+        Para sistemas com poucos recursos o uso de Unigramas provou ser extremamente leve exigindo apenas \textbf{143 megabytes} de memória RAM no seu pico. Isso viabiliza a execução da busca até mesmo em hardwares modestos ou contêineres de nuvem básicos.
+
+        \item \textbf{O Custo do Contexto} \\
+        Em contraste a indexação de Trigramas exigiu um pico de \textbf{4,72 gigabytes} de memória. Esse salto de trinta e duas vezes no consumo em relação aos Unigramas serve como um alerta importante sobre a escalabilidade de índices contextuais em memória.
+
+        \item \textbf{Melhor Aproximação Semântica} \\
+        Curiosamente a maior correlação positiva com o gabarito do Sentence-BERT foi encontrada nos testes de Unigramas que atingiram um pico de similaridade de \textbf{0,06}. Isso sugere que para este corpus específico a coincidência de palavras-chave simples alinha-se melhor com a intenção semântica do que as tentativas de capturar frases complexas.
     \end{itemize}
 
-    O salto entre unigramas e trigramas (aprox. 32 vezes) evidencia o custo elevado para manter índices mais ricos. Embora modelos de \textit{embeddings} ofereçam maior precisão, o investimento em \textit{hardware} torna-se um fator crítico. Assim, para sistemas de busca com restrições orçamentárias, unigramas ou bigramas acabam sendo as opções mais viáveis.
+    \subsection{O Desempenho da Persistência em Disco}
 
+    Um capítulo à parte nesta análise diz respeito ao comportamento do banco de dados. Durante o planejamento inicial do sistema a arquitetura previa o uso do SQLite para realizar consultas em tempo real e persistir os índices de N-gramas. No entanto a realidade dos testes de carga impôs uma mudança de estratégia.
+
+    Observamos que as operações de leitura direta no disco foram de \textbf{dez a quarenta vezes mais lentas} do que as operações realizadas no cache de memória. Esse gargalo tornou-se proibitivo especialmente nos cenários de Bigramas e Trigramas onde a explosão combinatória de termos gerava milhares de consultas SQL por segundo. O disco simplesmente não conseguia acompanhar a velocidade do processador o que criava uma fila de espera que travava a execução do algoritmo.
+
+    Por essa razão optamos por retirar o banco de dados do caminho crítico da busca em tempo real. Apesar disso a implementação não foi descartada e permanece funcional. Ela assumiu um papel vital como ferramenta de auditoria e segurança servindo como um repositório confiável para recuperação de dados em caso de falhas. Para trabalhos futuros a substituição do SQLite por tecnologias orientadas a colunas ou motores de busca dedicados como o Elasticsearch poderia mitigar essa latência e permitir uma arquitetura híbrida mais eficiente.
 
     \section*{A Relação entre os Modelos e o Gabarito Semântico}
 
@@ -1025,6 +1041,107 @@ for key := range tf {
 
     A variação do \textit{jump} nos N-gramas maiores pouco afetou o Spearman. Mesmo ampliando o salto, os resultados permaneceram praticamente iguais. Isso mostra que, no Direito, as combinações relevantes costumam ser adjacentes (“Recurso de Apelação”, “Ação Direta”), tornando caro e pouco útil indexar palavras separadas por um ou dois termos.
 
+    \section{Análise do Consumo de Memória RAM}
+
+    Um dos aspectos mais críticos que observamos durante os experimentos foi a demanda de memória necessária para manter os índices invertidos operando com alta performance. Como a decisão de arquitetura priorizou carregar as estruturas de busca na memória RAM para garantir a velocidade das respostas o tamanho do vocabulário e das combinações de termos teve um impacto direto na viabilidade técnica da solução.
+
+    Os relatórios de monitoramento revelaram um crescimento que não se comportou de forma linear mas sim exponencial à medida que aumentamos a complexidade da indexação. Quando o sistema operou apenas com Unigramas indexando palavras isoladas o consumo de memória foi extremamente modesto e eficiente ficando em torno de cento e quarenta e três megabytes no seu pico de utilização. Esse dado é extremamente positivo pois demonstra que para buscas simples baseadas apenas em palavras-chave o custo de infraestrutura é muito baixo e acessível até para servidores de entrada ou máquinas pessoais.
+
+    A situação mudou de figura de forma drástica ao introduzirmos os Bigramas. A necessidade de armazenar pares de palavras e suas respectivas distâncias fez o consumo saltar para um pico de dois vírgula três gigabytes de memória. Esse valor representa um aumento de mais de dezesseis vezes em relação ao cenário anterior e já começa a exigir máquinas com maior capacidade. O cenário tornou-se ainda mais crítico com os Trigramas onde o sistema exigiu quase cinco gigabytes de memória RAM para operar corretamente.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.6\linewidth]{assets/custoMemoria}
+        \caption{Consumo de memória para Unigramas, Bigramas e Trigramas}
+        \label{fig:memoria_ram}
+    \end{figure}
+
+    Esses números indicam claramente que existe um custo oculto elevado na busca por precisão lexical. Enquanto indexar palavras isoladas é uma operação barata tentar capturar o contexto através de sequências de três termos exige uma quantidade de memória que pode inviabilizar a execução do sistema em ambientes com recursos limitados como dispositivos móveis ou contêineres de nuvem com pouca memória alocada.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.6\linewidth]{assets/tradeOff}
+        \caption{Trade-off geral entre custo, memória e qualidade}
+        \label{fig:tradeoff_final }
+    \end{figure}
+
+    \section{Desempenho Temporal}
+
+    A análise do tempo de execução trouxe dois \textit{insights} fundamentais para o projeto que mudaram a nossa percepção sobre onde estão os verdadeiros gargalos de um sistema de busca. O primeiro diz respeito à eficiência dos algoritmos em memória e o segundo revela as limitações físicas do armazenamento em disco.
+
+    No que tange aos algoritmos a teoria clássica sugere que o BM25 é mais complexo matematicamente do que o TF-IDF pois sua fórmula envolve mais operações logarítmicas e o cálculo da média de tamanho dos documentos. Contudo os dados mostraram o oposto em cenários de alta complexidade. Nos testes com Bigramas e Trigramas o BM25 superou o TF-IDF com uma margem larga de vantagem sendo até dez vezes mais veloz em casos específicos.
+
+    A explicação para esse fenômeno reside na engenharia da implementação pois o código do BM25 permitiu uma otimização de fluxo conhecida como poda ou \textit{pruning}. Essa técnica descarta imediatamente termos que não aparecem no índice e economiza milhares de cálculos inúteis. Como o índice de Trigramas é muito esparso e a maioria das combinações de palavras não existe o BM25 consegue pular a maior parte do trabalho. O TF-IDF por sua vez acabou processando esses termos irrelevantes o que gerou um custo de processamento desnecessário e provou que a otimização de código é mais importante que a simplicidade da fórmula matemática.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.9\linewidth]{assets/tempoExecucao}
+        \caption{Tempo de execução comparando TF-IDF e BM25}
+        \label{fig:tempo_execucao}
+    \end{figure}
+
+    \subsection{A Performance do Banco de Dados versus Cache}
+
+    Um ponto que merece uma discussão aprofundada foi a performance decepcionante da camada de persistência em disco. Durante as fases iniciais de desenvolvimento o sistema foi projetado para realizar consultas diretas ao banco de dados SQLite para cada termo da busca visando economizar memória RAM. No entanto os testes de carga revelaram que essa abordagem se tornava um gargalo severo que travava a execução do sistema.
+
+    Observamos que as operações de leitura no banco de dados eram de dez a quarenta vezes mais lentas do que as operações realizadas diretamente no cache em memória. Essa degradação de performance foi especialmente notável nos cenários de Bigramas e Trigramas onde a quantidade de consultas SQL explodia exponencialmente para verificar cada combinação de palavras. Devido a essa latência proibitiva optamos por retirar o banco de dados do caminho crítico de execução dos testes principais focando os resultados na performance do processamento em memória.
+
+    Apesar de não ter performado bem para a busca em tempo real neste cenário de alta frequência a implementação do banco de dados não foi descartada do projeto. Ela permanece funcional e cumpre um papel vital como ferramenta de auditoria e recuperação de dados em caso de desastres. O banco garante que os dados persistidos estejam seguros e consistentes permitindo que o índice em memória seja reconstruído rapidamente se o servidor for reiniciado. Para trabalhos futuros a substituição do SQLite por bancos de dados orientados a colunas ou soluções de busca dedicadas como o Elasticsearch poderia mitigar esse gargalo de disco e permitir buscas híbridas mais eficientes.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.6\linewidth]{assets/paralelismoQuery}
+        \caption{Impacto do paralelismo na performance}
+        \label{fig:impacto_paralelismo_query}
+    \end{figure}
+
+    \section{A Influência da Extensão da Consulta no Desempenho}
+
+    Uma variável que se mostrou determinante para o comportamento do sistema foi a extensão da consulta realizada pelo usuário. Durante os testes variamos o tamanho das frases de entrada entre dez, vinte e quarenta palavras para simular desde buscas simples até a colagem de trechos inteiros de jurisprudência uma prática comum entre advogados.
+
+    A análise dos dados revelou que o tempo de processamento cresce de forma linear em relação ao tamanho da frase. Isso era esperado pois cada palavra adicional na consulta exige que o algoritmo calcule o peso e a frequência de novos N-gramas. No entanto o que chamou a atenção foi como a execução paralela se comportou diante desse aumento de carga.
+
+    Para frases curtas de dez palavras o custo de iniciar múltiplas rotinas de processamento quase anulou os ganhos de velocidade o que manteve o modo sequencial altamente competitivo. Contudo à medida que a frase cresceu a vantagem do paralelismo não tornou-se perceptível. Nos testes com Trigramas e quarenta palavras o processamento paralelo não conseguiu ser mais rápido que a execução sequencial. Isso demonstra que o uso da concorrência deve ser condicional ativando-se apenas dentro de cenários estudados, caso contrario não haverão ganhos que compensem a sobrecarga de gerenciar as \textit{threads} pelo volume de trabalho.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.6\linewidth]{assets/tamanhoFrases}
+        \caption{Comparação entre execução sequencial e paralela para diferentes tamanhos de consulta }
+        \label{fig:tamanho_consulta}
+    \end{figure}
+
+    Algoritmos paralelos podem ser mais lentos quando a sobrecarga de coordenação supera o ganho obtido pela divisão do trabalho. Isso inclui custos de criação e gerenciamento de threads, comunicação entre tarefas e sincronização frequente, que podem introduzir atrasos significativos. Além disso, quando as tarefas individuais são muito pequenas, o tempo gasto para distribuí-las e organizar sua execução pode ser maior que simplesmente executá-las de forma sequencial.
+
+    Outro fator importante é o acesso concorrente a recursos compartilhados, que pode gerar contenção, bloqueios e espera ativa. Desbalanceamento de carga também reduz eficiência, alguns núcleos podem ficar ociosos enquanto outros executam partes mais pesadas. Em sistemas com hardware limitado, como poucos núcleos ou baixa largura de banda de memória, o paralelismo pode até prejudicar o desempenho, tornando a versão paralela mais lenta do que a sequencial.
+
+    Além do tempo observamos também o impacto na qualidade. Curiosamente aumentar o tamanho da frase não garantiu uma correlação maior com o gabarito semântico. Isso indica que adicionar mais palavras não necessariamente resolve a ambiguidade se o modelo estatístico não for capaz de entender a relação entre elas o que reforça a necessidade de modelos híbridos para consultas complexas.
+
+    \section{Avaliação da Qualidade e Correlação Semântica}
+
+    A qualidade dos resultados foi medida comparando a ordem de relevância gerada pelos nossos algoritmos estatísticos com a ordem sugerida pelo modelo de inteligência artificial Sentence-BERT que serviu como nosso gabarito semântico. Utilizamos o coeficiente de Spearman para quantificar essa similaridade de posicionamento.
+
+    Os valores de correlação encontrados pelo coeficiente de Spearman foram consistentemente baixos e oscilaram próximos de zero na grande maioria dos testes. Isso é um achado científico importante pois confirma que a busca estatística e a busca semântica olham para características fundamentalmente diferentes do texto. Enquanto a busca estatística prioriza a presença exata de palavras raras e termos técnicos a busca semântica tenta entender o contexto geral e a intenção da frase. O fato de a correlação ser baixa indica que um método não substitui o outro mas sim que eles funcionam de formas complementares e capturam nuances distintas da relevância.
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\linewidth]{assets/graficoSpearmsn}
+        \caption{Estabilidade do coeficiente de Spearman em diferentes configurações}
+        \label{fig:estabilidade_spearman}
+    \end{figure}
+
+    Uma observação curiosa foi o comportamento dos índices ao variarmos o tamanho dos saltos ou \textit{jumps} entre palavras. A hipótese inicial era que permitir saltos melhoraria a qualidade da busca ao encontrar termos que não estivessem imediatamente colados uns aos outros como por exemplo encontrar "crime de responsabilidade" ao buscar "crime responsabilidade". Contudo os dados mostraram que aumentar o tamanho dos saltos de zero para dois não alterou o coeficiente de Spearman de maneira significativa nos testes com Trigramas.
+
+    Isso sugere que a linguagem jurídica é extremamente rígida e formal. Termos técnicos como "habeas corpus" ou "dano moral" quase sempre aparecem juntos e na mesma ordem exata. A ocorrência dessas palavras separadas por outros termos é tão rara que indexá-las com saltos apenas consumiu mais memória e processamento sem trazer nenhum ganho real de relevância para o usuário final. Essa descoberta permite otimizar futuros sistemas removendo a complexidade dos saltos sem medo de perder qualidade na busca.
+
+    \section{Considerações Finais}
+
+    Ao concluir este estudo podemos afirmar com segurança que o trabalho atingiu seu objetivo de avaliar de forma prática e quantitativa o equilíbrio entre custo e benefício na recuperação de informação jurídica. Os setenta e dois cenários testados desenham um caminho claro para a engenharia de software neste domínio específico.
+
+    Ficou evidente que o algoritmo BM25 é a escolha superior para a busca estatística entregando uma performance de velocidade muito acima do TF-IDF graças à sua capacidade de lidar com a esparsidade dos dados. Além disso identificamos que o "ponto ótimo" de infraestrutura reside na utilização de Bigramas sem saltos. Essa configuração oferece um contexto lexical suficiente sem incorrer no custo proibitivo de memória dos Trigramas ou na complexidade desnecessária dos \textit{skip-grams}.
+
+    Também concluímos que embora modelos de inteligência artificial ofereçam uma compreensão profunda do texto o seu custo computacional é elevado. A baixa correlação entre os resultados estatísticos e semânticos sugere que a arquitetura ideal para um sistema jurídico real deve ser híbrida. O sistema em Go com BM25 pode atuar como um filtro primário de altíssima velocidade e baixo custo entregando um subconjunto de documentos para que o modelo em Python realize um refinamento semântico final apenas onde for necessário.
+
+    Por fim as limitações encontradas especialmente no desempenho do banco de dados em disco abrem portas para investigações futuras. A substituição da camada de persistência por tecnologias mais robustas e a ampliação do \textit{corpus} para incluir jurisprudência são os próximos passos naturais para evoluir esta pesquisa. Este trabalho deixa como legado uma base sólida de dados e uma implementação modular capaz de guiar o desenvolvimento de soluções de busca eficientes para o judiciário brasileiro.
 
     \section{Limitações e Trabalhos Futuros}
 
@@ -1035,7 +1152,7 @@ for key := range tf {
         \item O \textit{corpus} analisado é predominantemente legislativo. Ampliar o estudo para acórdãos e sentenças permitiria testar a robustez das técnicas sob estruturas textuais mais variadas.
     \end{enumerate}
 
-    Em resumo, o trabalho demonstrou que algoritmos estatísticos atuais — em especial o BM25 — oferecem excelente eficiência computacional e podem sustentar sistemas de busca jurídica de baixo custo. Ao mesmo tempo, a baixa concordância com modelos semânticos reforça a necessidade de abordagens híbridas que combinem velocidade com profundidade contextual, especialmente em um domínio tão exigente quanto o jurídico.
+    Em resumo, o trabalho demonstrou que algoritmos estatísticos atuais, em especial o BM25, oferecem excelente eficiência computacional e podem sustentar sistemas de busca jurídica de baixo custo. Ao mesmo tempo, a baixa concordância com modelos semânticos reforça a necessidade de abordagens híbridas que combinem velocidade com profundidade contextual, especialmente em um domínio tão exigente quanto o jurídico.
 
 
 % ========================================================================

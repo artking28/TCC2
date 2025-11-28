@@ -11,10 +11,13 @@
 - Terminar de fazer as imagens com nossa própria autoria✅
 - Embeddings aplicado ao direito ou tirar ou mudar ordem✅
 - Limpar os trabalhos relacionados✅
-- Adicionar mais imagens se possível
+- Terminar consideracoes finais ✅
+- Adicionar mais imagens se possível ✅
+- Revisar siglas ✅
 - Adicionar seção de resultados
+- Fazer texto dedicatoria
+- Fazer texto agradecimentos
 - Terminar o desenvolvimento
-- Terminar consideracoes finais
 - Juntar embeddings com começo do TCC
 
 
