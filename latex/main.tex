@@ -268,6 +268,7 @@
 
     Este estudo se propõe, portanto, a explorar essa fronteira de eficiência. A literatura já aponta indícios nessa direção, como observado por \citeonline{citacao62}, que demonstra que modelos distribucionais complexos como o BERT não apresentam, necessariamente, um desempenho superior em todas as tarefas de classificação jurídica quando comparados a abordagens mais simples. O objetivo deste trabalho não é desenvolver uma nova ferramenta, mas sim realizar uma análise crítica e comparativa rigorosa, buscando compreender e quantificar o verdadeiro \textit{trade-off} entre a precisão semântica oferecida pela IA e a eficiência computacional dos métodos estatísticos no domínio específico do Direito.
 
+
     \section{Justificativa}
 
     A busca por maior precisão impulsionou o avanço da tecnologia jurídica e estimulou uma dependência crescente de modelos de Inteligência Artificial. Esse movimento ganhou força no Brasil, onde o uso dessas soluções no Judiciário aumentou 26\% entre 2022 e 2023 \cite{citacao63}. A ideia que sustenta esse crescimento é simples. Quanto mais sofisticado o modelo, melhores seriam os resultados. Só que essa expectativa costuma vir acompanhada de um custo elevado. O treinamento de grandes modelos depende de processamento intenso e de hardware especializado, o que envolve investimentos altos em infraestrutura e manutenção. Em muitos casos, o peso financeiro impede que instituições menores entrem nessa corrida tecnológica, mesmo quando há interesse.
@@ -980,11 +981,53 @@ for key := range tf {
         \item \textbf{Espaço Vetorial Denso:} As 384 dimensões provaram ser suficientes para codificar as nuances dos textos legislativos, servindo como um "gabarito" confiável e estável para a avaliação dos algoritmos estatísticos.
     \end{itemize}
 
+
+    \chapter{Metodologia}
+
+    \section{Corpus e Pré-processamento}
+
+    O corpus reúne cerca de 5.000 páginas de documentos legislativos (Projetos de Lei e Propostas de Emenda à Constituição), obtidos via \emph{web scraping} do Portal da Câmara dos Deputados. A extração de texto dos PDFs para texto simples foi feita de forma concorrente em Go.
+
+    \section{Parametrização do Motor de Busca e Hardware}
+
+    \subsection{Algoritmos de Ranqueamento e Indexação}
+
+    Os modelos TF-IDF e Okapi BM25 foram implementados em Go.
+
+    A indexação testou diferentes granularidades: unigramas, bigramas, trigramas e variações de skip-grams com até dois saltos. O índice invertido foi armazenado em SQLite.
+
+    Para o BM25, foram usados os hiperparâmetros fixos: $\mathbf{k_1 = 1.5}$ e $\mathbf{b = 0.75}$.
+
+    \subsection{Queries e Modelo de Gabarito}
+
+    As \textit{queries} de teste foram geradas pelos modelos ChatGPT e Grok.
+
+    O gabarito semântico usado na avaliação foi o Sentence-BERT (\texttt{paraphrase-multilingual-MiniLM-L12-v2}), aplicando Similaridade de Cosseno para medir relevância.
+
+    \subsection{Hardware}
+
+    Os testes foram executados no seguinte hardware:
+
+    \begin{itemize}
+
+        \item \textbf{Processador:} Apple M1 (2020)
+
+        \item \textbf{RAM:} 16 GB a 4266 MHz
+
+    \end{itemize}
+
+    \subsection{Métricas de Avaliação}
+
+    A eficácia do ranqueamento foi medida pelo coeficiente de Spearman ($\rho$), comparando o ranqueamento estatístico com o semântico.
+
+    A eficiência computacional foi avaliada pelo tempo de execução (latência de busca) e pico de uso de memória em cada cenário.
+
     \chapter{Apresentação dos Resultados e Considerações Finais}
 
     A etapa de validação experimental deste trabalho não consistiu apenas na execução mecânica de algoritmos mas sim em uma investigação sobre o comportamento de sistemas de recuperação de informação sob condições de estresse computacional. Para garantir a robustez dos dados executamos uma bateria de setenta e dois cenários de teste distintos onde cada um foi feito para isolar variáveis críticas do sistema. O objetivo central foi submeter a implementação desenvolvida na linguagem Go a diferentes pressões de configuração para entendermos de que maneira fatores como o tamanho dos N-gramas e a presença de saltos entre palavras influenciam tanto o desempenho da máquina quanto a qualidade da informação entregue ao usuário final.
 
     Os dados coletados e apresentados a seguir oferecem uma visão clara e técnica sobre como os algoritmos clássicos se comportam quando são confrontados com a infraestrutura moderna e com a complexidade inerente à linguagem jurídica. Ao longo deste capítulo detalhamos os destaques numéricos e discutimos os gargalos de armazenamento em banco de dados além de analisar a correlação de qualidade obtida frente ao gabarito semântico gerado por inteligência artificial.
+
 
     \section{Destaques e Indicadores de Performance }
 
@@ -1027,6 +1070,7 @@ for key := range tf {
 
     Por essa razão optamos por retirar o banco de dados do caminho crítico da busca em tempo real. Apesar disso a implementação não foi descartada e permanece funcional. Ela assumiu um papel vital como ferramenta de auditoria e segurança servindo como um repositório confiável para recuperação de dados em caso de falhas. Para trabalhos futuros a substituição do SQLite por tecnologias orientadas a colunas ou motores de busca dedicados como o Elasticsearch poderia mitigar essa latência e permitir uma arquitetura híbrida mais eficiente.
 
+
     \section*{A Relação entre os Modelos e o Gabarito Semântico}
 
     A comparação entre os rankings gerados pelos métodos estatísticos e pelo modelo semântico (Sentence-BERT) mostrou correlações baixas, ainda que positivas (média entre 0.02 e 0.04). Isso confirma que cada abordagem captura aspectos distintos:
@@ -1041,6 +1085,7 @@ for key := range tf {
     \subsection{Estabilidade e o Papel dos \textit{Skip-grams}}
 
     A variação do \textit{jump} nos N-gramas maiores pouco afetou o Spearman. Mesmo ampliando o salto, os resultados permaneceram praticamente iguais. Isso mostra que, no Direito, as combinações relevantes costumam ser adjacentes (“Recurso de Apelação”, “Ação Direta”), tornando caro e pouco útil indexar palavras separadas por um ou dois termos.
+
 
     \section{Análise do Consumo de Memória RAM}
 
@@ -1065,6 +1110,7 @@ for key := range tf {
         \caption{Trade-off geral entre custo, memória e qualidade}
         \label{fig:tradeoff_final }
     \end{figure}
+
 
     \section{Desempenho Temporal}
 
@@ -1096,6 +1142,7 @@ for key := range tf {
         \label{fig:impacto_paralelismo_query}
     \end{figure}
 
+
     \section{A Influência da Extensão da Consulta no Desempenho}
 
     Uma variável que se mostrou determinante para o comportamento do sistema foi a extensão da consulta realizada pelo usuário. Durante os testes variamos o tamanho das frases de entrada entre dez, vinte e quarenta palavras para simular desde buscas simples até a colagem de trechos inteiros de jurisprudência uma prática comum entre advogados.
@@ -1117,6 +1164,7 @@ for key := range tf {
 
     Além do tempo observamos também o impacto na qualidade. Curiosamente aumentar o tamanho da frase não garantiu uma correlação maior com o gabarito semântico. Isso indica que adicionar mais palavras não necessariamente resolve a ambiguidade se o modelo estatístico não for capaz de entender a relação entre elas o que reforça a necessidade de modelos híbridos para consultas complexas.
 
+
     \section{Avaliação da Qualidade e Correlação Semântica}
 
     A qualidade dos resultados foi medida comparando a ordem de relevância gerada pelos nossos algoritmos estatísticos com a ordem sugerida pelo modelo de inteligência artificial Sentence-BERT que serviu como nosso gabarito semântico. Utilizamos o coeficiente de Spearman para quantificar essa similaridade de posicionamento.
@@ -1134,6 +1182,7 @@ for key := range tf {
 
     Isso sugere que a linguagem jurídica é extremamente rígida e formal. Termos técnicos como "habeas corpus" ou "dano moral" quase sempre aparecem juntos e na mesma ordem exata. A ocorrência dessas palavras separadas por outros termos é tão rara que indexá-las com saltos apenas consumiu mais memória e processamento sem trazer nenhum ganho real de relevância para o usuário final. Essa descoberta permite otimizar futuros sistemas removendo a complexidade dos saltos sem medo de perder qualidade na busca.
 
+
     \section{Considerações Finais}
 
     Ao concluir este estudo podemos afirmar com segurança que o trabalho atingiu seu objetivo de avaliar de forma prática e quantitativa o equilíbrio entre custo e benefício na recuperação de informação jurídica. Os setenta e dois cenários testados desenham um caminho claro para a engenharia de software neste domínio específico.
@@ -1143,6 +1192,7 @@ for key := range tf {
     Também concluímos que embora modelos de inteligência artificial ofereçam uma compreensão profunda do texto o seu custo computacional é elevado. A baixa correlação entre os resultados estatísticos e semânticos sugere que a arquitetura ideal para um sistema jurídico real deve ser híbrida. O sistema em Go com BM25 pode atuar como um filtro primário de altíssima velocidade e baixo custo entregando um subconjunto de documentos para que o modelo em Python realize um refinamento semântico final apenas onde for necessário.
 
     Por fim as limitações encontradas especialmente no desempenho do banco de dados em disco abrem portas para investigações futuras. A substituição da camada de persistência por tecnologias mais robustas e a ampliação do \textit{corpus} para incluir jurisprudência são os próximos passos naturais para evoluir esta pesquisa. Este trabalho deixa como legado uma base sólida de dados e uma implementação modular capaz de guiar o desenvolvimento de soluções de busca eficientes para o judiciário brasileiro.
+
 
     \section{Limitações e Trabalhos Futuros}
 
