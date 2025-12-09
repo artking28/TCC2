@@ -1,4 +1,4 @@
 Errata
 - Nos objetivos, propusemos um trade-off entre custo e eficiência. O gráfico acabou não sendo utilizado, mas isso não foi explicado. A retirada se deve às diferenças na natureza dos algoritmos, que tornaram a eficiência pouco relevante e instável, resultando em um gráfico caótico, difícil de interpretar e pouco informativo.
 - Na justificativa, o algoritmo Boyer-Moore foi citado, podendo sugerir que faria parte do escopo do estudo — uma menção desnecessária e fora de contexto.
-- Após a entrega do TCC e durante a produção dos slides, percebeu-se que a explicação sobre os skip-grams (jumps) na revisão bibliográfica ficou superficial, o que pode prejudicar o entendimento do desenvolvimento.
+- As siglas CRF (Conditional Random Fields) e POS (Part-of-Speech) foram declaradas na lista de abreviaturas, porém não foram utilizadas no corpo do texto. Isso se deve à remoção, durante a revisão final, da seção que citava e contextualizava o uso dessas técnicas.
