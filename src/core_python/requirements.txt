@@ -1,8 +1,0 @@
-numpy<2
-faiss-cpu
-openai
-tqdm
-sentence-transformers
-transformers
-torch
-gensim
