@@ -21,7 +21,7 @@ python: venv
 latex:
 	cd latex; mkdir -p out && latexmk -pdf -silent -jobname=out/tcc main.tex; cd ..
 
-latex-live:
+live-tex:
 	cd latex; mkdir -p out && latexmk -pdf -pvc -silent -jobname=out/tcc main.tex; cd ..
 
 clean:

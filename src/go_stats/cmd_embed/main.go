@@ -77,7 +77,6 @@ func loadTexts(folder string) ([]string, []string, error) {
 }
 
 func main() {
-
 	log.Println("Inicializando ONNX Runtime...")
 	if err := utils.InitONNX(DylibPath); err != nil {
 		log.Fatal("Falha no InitONNX:", err)
@@ -98,19 +97,28 @@ func main() {
 	}
 	nDocs := len(files)
 
-	log.Println("Gerando embeddings...")
+	log.Println("Gerando embeddings dos documentos...")
 	docEmbeddings := make([][]float32, nDocs)
 
+	var totalDocsTime time.Duration // Acumulador de tempo
+
 	for i, text := range texts {
+
+		// CRONÔMETRO INÍCIO
+		start := time.Now()
+
 		emb, err := bert.Apply(text)
+
+		// CRONÔMETRO FIM
+		duration := time.Since(start)
+		totalDocsTime += duration
+
 		if err != nil {
 			log.Fatalf("Erro no doc %d: %v", i, err)
 		}
 		docEmbeddings[i] = emb
 
-		if i%100 == 0 && i > 0 {
-			fmt.Printf("Processados %d/%d...\r", i, nDocs)
-		}
+		fmt.Printf("Processados %d/%d...\r", i, nDocs)
 	}
 	fmt.Println("\nEmbeddings concluídos.")
 	log.Println("Lendo inputs...")
@@ -127,13 +135,29 @@ func main() {
 
 	finalOutput := make(SearchInputs)
 	groups := []string{"words10", "words20", "words40"}
+
+	// Map para guardar o tempo total por grupo
+	groupTimes := make(map[string]time.Duration)
+	groupCounts := make(map[string]int)
+
 	for _, group := range groups {
-		log.Printf("Grupo %s...", group)
+		log.Printf("Processando grupo %s...", group)
 		samples := inputs[group]
 		processedSamples := make([]InputSample, 0, len(samples))
 
+		var groupTotalTime time.Duration // Acumulador do grupo atual
+
 		for _, sample := range samples {
+
+			// CRONÔMETRO INÍCIO (QUERY)
+			start := time.Now()
+
 			qEmb, err := bert.Apply(sample.Input)
+
+			// CRONÔMETRO FIM (QUERY)
+			duration := time.Since(start)
+			groupTotalTime += duration
+
 			if err != nil {
 				log.Printf("Erro input: %v", err)
 				continue
@@ -145,11 +169,40 @@ func main() {
 			processedSamples = append(processedSamples, sample)
 		}
 		finalOutput[group] = processedSamples
+
+		groupTimes[group] = groupTotalTime
+		groupCounts[group] = len(samples)
 	}
 
 	outBytes, _ := json.MarshalIndent(finalOutput, "", "  ")
 	if err = os.WriteFile(OutputPath, outBytes, 0744); err != nil {
 		return
 	}
+
+	// --- 6. LOG DE ESTATÍSTICAS FINAIS ---
+	log.Println("--- RELATÓRIO DE PERFORMANCE (INFERÊNCIA BERT) ---")
+
+	// Stats Docs
+	if nDocs > 0 {
+		avgDoc := totalDocsTime / time.Duration(nDocs)
+		log.Printf("[Documentos] Total Docs: %d", nDocs)
+		log.Printf("[Documentos] Tempo Total: %v", totalDocsTime)
+		log.Printf("[Documentos] Média por Doc: %v", avgDoc)
+	}
+
+	log.Println("--------------------------------------------------")
+
+	// Stats Inputs por Grupo
+	for _, group := range groups {
+		count := groupCounts[group]
+		if count > 0 {
+			total := groupTimes[group]
+			avg := total / time.Duration(count)
+			log.Printf("[%s] Tempo Total: %v", group, total)
+			log.Printf("[%s] Média por Frase: %v", group, avg)
+			log.Println("-")
+		}
+	}
+
 	log.Println("Finalizado!")
 }

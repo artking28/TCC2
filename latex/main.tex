@@ -296,6 +296,75 @@
         \item Analisar quantitativamente os resultados para determinar em quais cenários o custo computacional dos modelos de IA se justifica frente à eficiência dos métodos clássicos.
     \end{enumerate}
 
+    \section{Metodologia}
+
+    Esta pesquisa segue um procedimento metodológico estruturado e replicável, detalhado nas etapas a seguir.
+
+    \subsection{Materiais e Ferramentas}
+    Para a execução dos experimentos e o processamento do volume de dados, foram utilizados os seguintes recursos:
+    \begin{itemize}
+        \item \textbf{Hardware:} MacBook Pro 2020, Chip M1, 16 GB de RAM (4266 MHz).
+        \item \textbf{Dados:} Base de dados pública da Câmara dos Deputados.
+        \item \textbf{Software:} Linguagem Go (Golang), versão 1.23.2.
+    \end{itemize}
+
+    \subsection{Configurações e Parâmetros}
+    Os modelos e algoritmos foram configurados com os seguintes parâmetros:
+    \begin{itemize}
+        \item O modelo BERT selecionado foi o \texttt{paraphrase-multilingual-MiniLM-L12-v2}.
+        \item Para o algoritmo BM25, os hiperparâmetros foram fixados em $k_1 = 1.5$ e $b = 0.75$.
+        \item Todos os resultados de \textit{embeddings} e os cálculos de similaridade de cosseno foram normalizados.
+        \item Na geração de n-gramas, definiu-se um limite de até 2 saltos (\textit{jumps}) para trigramas e 4 saltos para bigramas.
+    \end{itemize}
+
+    \subsection{Tratamento do Corpus}
+    \begin{enumerate}
+        \item \textbf{Definição:} O corpus é composto por 5 mil páginas de documentos em PDF, abrangendo Projetos de Lei (PL) e Propostas de Emenda à Constituição (PEC).
+        \item \textbf{Extração:} O conteúdo dos PDFs foi extraído e convertido para texto puro.
+        \item \textbf{Padronização:} Todo o texto foi convertido para letras minúsculas.
+        \item \textbf{Limpeza:} O corpus passou por um processo de limpeza seguindo esta ordem:
+        \subitem Remoção de URIs (conforme RFC 3986) e protocolos HTTP/TLS.
+        \subitem Remoção de numerais romanos, inteiros e decimais.
+        \subitem Substituição de travessões e \textit{underlines} por espaços.
+        \subitem Eliminação de pontuações e caracteres especiais restantes.
+        \item \textbf{Finalização:} Realizou-se a normalização de caracteres e a remoção de \textit{stop-words}.
+    \end{enumerate}
+
+    \subsection{Geração das Embeddings}
+    \begin{enumerate}
+        \item Foram elaborados 50 \textit{prompts} com tamanhos de 10, 20 e 40 palavras, simulando buscas reais de um operador do Direito.
+        \item Cada \textit{prompt} foi vetorizado via BERT em vetores de 384 pontos flutuantes. O tempo de cada operação foi registrado para extração de médias.
+        \item O mesmo processo de vetorização foi aplicado a todos os documentos do corpus.
+        \item A comparação entre as \textit{embeddings} dos documentos e dos \textit{prompts} foi realizada por meio da similaridade de cosseno.
+        \item Os documentos foram ordenados por relevância para cada \textit{prompt}, gerando um ranking final.
+    \end{enumerate}
+
+    \subsection{Geração de Vetores TF-IDF e BM25}
+    \begin{enumerate}
+        \item Os ambientes de teste foram isolados por tamanho de n-grama (uni, bi e trigramas), com o banco de dados sendo zerado a cada rodada para evitar interferências.
+        \item Foram gerados identificadores únicos para documentos, palavras e n-gramas.
+        \item Os n-gramas foram formados pela combinação dos IDs das palavras, saltos realizados, documento de origem e frequência.
+        \item Implementou-se um cache em duas camadas (\textit{Map[Chave do n-grama] $\rightarrow$ Map[ID do documento] $\rightarrow$ N-grama}) para otimização de performance.
+        \item Após o processamento do corpus e dos \textit{prompts}, os vetores TF-IDF e BM25 foram gerados, registrando-se os tempos de execução.
+        \item A similaridade de cosseno foi aplicada para ordenar os documentos conforme sua relevância em relação aos \textit{prompts}.
+    \end{enumerate}
+
+    \subsection{Análise dos Dados}
+
+    A análise dos resultados será realizada através de duas abordagens complementares, permitindo uma visão detalhada sobre a eficácia de cada método.
+
+    \subsubsection{Análise Qualitativa e Comparação de Rankings}
+    Para avaliar a proximidade entre os métodos (BERT, TF-IDF e BM25), utilizaremos o \textbf{Coeficiente de Correlação de Spearman}. Esta métrica é ideal para este estudo pois ela não olha apenas para os valores brutos de similaridade, mas sim para a ordenação (\textit{ranking}) dos documentos. Ao mensurar a diferença de posição dos documentos entre as listas geradas, o coeficiente de Spearman permite identificar o grau de convergência entre os algoritmos. Dessa forma, conseguimos medir qualitativamente se um método baseado em semântica (BERT) entrega resultados hierarquicamente próximos aos métodos baseados em frequência de termos (BM25/TF-IDF).
+
+    \subsubsection{Análise Quantitativa de Desempenho}
+    A vertente quantitativa focará na eficiência computacional. Utilizaremos os registros de tempo coletados durante as etapas de vetorização e comparação para analisar:
+    \begin{itemize}
+        \item O tempo médio de processamento por documento e por \textit{prompt}.
+        \item A soma total de tempo necessária para processar o corpus completo em cada abordagem.
+        \item A escalabilidade dos métodos em relação ao tamanho dos textos (10, 20 e 40 palavras).
+    \end{itemize}
+
+    O cruzamento desses dados permitirá identificar o custo-benefício de cada modelo, determinando qual técnica oferece a melhor relação entre precisão na busca e latência de resposta.
 
     \chapter{Revisão bibliográfica}
 
@@ -623,47 +692,6 @@
 
     Mais recentemente, no contexto nacional, \citeonline{citacao62} investigou a classificação de petições jurídicas comparando modelos clássicos, como Naive Bayes e SVM com TF-IDF, contra modelos baseados em \textit{Transformers} (BERT). Os resultados mostraram que, embora o BERT ofereça vantagens em tarefas complexas, modelos mais simples baseados em frequência de termos ainda apresentam desempenho competitivo com um custo computacional drasticamente menor.
 
-    \chapter{Metodologia}
-
-    \section{Corpus e Pré-processamento}
-
-    O corpus reúne cerca de 5.000 páginas de documentos legislativos (Projetos de Lei e Propostas de Emenda à Constituição), obtidos via \emph{web scraping} do Portal da Câmara dos Deputados. A extração de texto dos PDFs para texto simples foi feita de forma concorrente em Go.
-
-    \section{Parametrização do Motor de Busca e Hardware}
-
-    \subsection{Algoritmos de Ranqueamento e Indexação}
-
-    Os modelos TF-IDF e Okapi BM25 foram implementados em Go.
-
-    A indexação testou diferentes granularidades: unigramas, bigramas, trigramas e variações de skip-grams com até dois saltos. O índice invertido foi armazenado em SQLite.
-
-    Para o BM25, foram usados os hiperparâmetros fixos: $\mathbf{k_1 = 1.5}$ e $\mathbf{b = 0.75}$.
-
-    \subsection{Queries e Modelo de Gabarito}
-
-    As \textit{queries} de teste foram geradas pelos modelos ChatGPT e Grok.
-
-    O gabarito semântico usado na avaliação foi o Sentence-BERT (\texttt{paraphrase-multilingual-MiniLM-L12-v2}), aplicando Similaridade de Cosseno para medir relevância.
-
-    \subsection{Hardware}
-
-    Os testes foram executados no seguinte hardware:
-
-    \begin{itemize}
-
-        \item \textbf{Processador:} Apple M1 (2020)
-
-        \item \textbf{RAM:} 16 GB a 4266 MHz
-
-    \end{itemize}
-
-    \subsection{Métricas de Avaliação}
-
-    A eficácia do ranqueamento foi medida pelo coeficiente de Spearman ($\rho$), comparando o ranqueamento estatístico com o semântico.
-
-    A eficiência computacional foi avaliada pelo tempo de execução (latência de busca) e pico de uso de memória em cada cenário.
-
-
 % --- CAPÍTULO 4: DESENVOLVIMENTO ---
 
 
@@ -701,7 +729,7 @@
 
     Dada a alta carga de I/O exigida para a leitura e conversão de milhares de arquivos PDF, a implementação não seguiu uma abordagem sequencial. Em vez disso, utilizou-se o padrão de projeto \textit{Worker Pool} nativo da linguagem Go.
 
-    A função orquestradora, \texttt{TextProcessor}, define um limite de concorrência controlado pela variável \texttt{maxWorkers}. 
+    A função orquestradora, \texttt{TextProcessor}, define um limite de concorrência controlado pela variável \texttt{maxWorkers}.
 
     O funcionamento do sistema baseia-se em três primitivas de sincronização essenciais. Um canal buferizado (\texttt{workerLimit}) atua como um semáforo para controlar a concorrência, bloqueando a criação de novas \textit{goroutines} quando o limite de processos simultâneos é atingido, o que previne a exaustão de recursos do sistema operacional como memória RAM e descritores de arquivos. O processamento de cada documento ocorre em sua própria \textit{thread} leve, ou \textit{goroutine}, permitindo que a CPU realize a limpeza textual de um arquivo enquanto outro aguarda operações de disco. Para garantir a completude do fluxo, o mecanismo \texttt{sync.WaitGroup} assegura que o processo principal aguarde a finalização de todas as tarefas de limpeza antes de encerrar a execução.
 
@@ -971,7 +999,7 @@ for key := range tf {
     Diante dessa evidência, optou-se por uma mudança estratégica de escopo. Em vez de dispersar o foco da análise usando diversos modelos de IA, o trabalho concentrou-se na dicotomia principal: "Estatística (Go) versus Semântica Contextual (Python/BERT)".
 
     Para representar o estado da arte na busca semântica eficiente, selecionou-se unicamente o modelo \texttt{paraphrase-multilingual-MiniLM-L12-v2} (baseado em BERT).
-    
+
     A escolha deste modelo específico fundamentou-se em três pilares essenciais. O primeiro é a eficiência de inferência: por pertencer à família "MiniLM", com apenas 12 camadas e vetores de 384 dimensões, o modelo viabilizou a execução de uma bateria massiva de testes em tempo hábil, dispensando o uso de \textit{hardware} de supercomputação como GPUs dedicadas. O segundo pilar é o suporte multilíngue, dado que o treinamento prévio em mais de 50 idiomas conferiu ao modelo uma capacidade robusta de interpretar a sintaxe do português sem a necessidade de ajustes finos (\textit{fine-tuning}). Por fim, destaca-se a densidade do espaço vetorial, onde as 384 dimensões demonstraram ser suficientes para codificar as nuances dos textos legislativos, estabelecendo um "gabarito" confiável e estável para a avaliação dos algoritmos estatísticos.
 
     \chapter{Apresentação dos Resultados e Considerações Finais}
