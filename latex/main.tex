@@ -170,24 +170,24 @@
 % ========================================================================
 % RESUMO
 % ========================================================================
-    \setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
-    \begin{resumo}
+\setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
+\begin{resumo}
 
-        A digitalização massiva do setor jurídico brasileiro impõe desafios críticos de recuperação de informação. Enquanto modelos de Inteligência Artificial baseados em \textit{embeddings} oferecem alta precisão semântica, seu custo computacional é elevado. Este trabalho investiga o \textit{trade-off} pragmático entre complexidade semântica e eficiência estatística. Para isso, foi desenvolvido um sistema comparativo em linguagem Go, implementando os algoritmos TF-IDF e Okapi BM25, confrontados com um modelo \textit{transformer} (Sentence-BERT) em Python. Os testes, realizados sobre um \textit{corpus} legislativo de aproximadamente 5.000 documentos, revelaram que a busca estatística é significativamente mais eficiente: o uso de Unigramas exigiu apenas 143 MB de memória RAM, contra 4,7 GB na configuração de Trigramas. Em termos de velocidade, o algoritmo BM25 mostrou-se até 10 vezes mais rápido que o TF-IDF em cenários complexos. A análise qualitativa via Coeficiente de Spearman indicou uma correlação baixa (entre 0,02 e 0,06) entre os \textit{rankings} estatísticos e semânticos, sugerindo que as abordagens capturam aspectos distintos da relevância. Conclui-se que, para o domínio jurídico, métodos estatísticos oferecem um custo-benefício superior para filtragem inicial, sendo a arquitetura híbrida a solução ideal.
+    A digitalização massiva do setor jurídico brasileiro impõe desafios críticos de recuperação de informação. Enquanto modelos de Inteligência Artificial baseados em \textit{embeddings} oferecem alta precisão semântica, seu custo computacional é elevado. Este trabalho investiga o \textit{trade-off} pragmático entre complexidade semântica e eficiência estatística. Para isso, foi desenvolvido um sistema comparativo integralmente em linguagem Go, implementando os algoritmos TF-IDF e Okapi BM25, confrontados com um modelo \textit{transformer} (Sentence-BERT). Os testes, realizados sobre um \textit{corpus} legislativo de aproximadamente 5.000 documentos, revelaram que a busca estatística é significativamente mais eficiente: o uso de Unigramas exigiu apenas 143 MB de memória RAM, contra 4,7 GB na configuração de Trigramas. Em termos de velocidade, o algoritmo BM25 mostrou-se até 10 vezes mais rápido que o TF-IDF em cenários complexos. A análise qualitativa via Coeficiente de Spearman indicou uma correlação baixa (entre 0,02 e 0,06) entre os \textit{rankings} estatísticos e semânticos, sugerindo que as abordagens capturam aspectos distintos da relevância. Conclui-se que, para o domínio jurídico, métodos estatísticos oferecem um custo-benefício superior para filtragem inicial, sendo a arquitetura híbrida a solução ideal.
 
-        \textbf{Palavras-chave}: Processamento de Linguagem Natural. Recuperação de Informação. Busca Jurídica. TF-IDF. BM25. Embeddings.
-    \end{resumo}
+    \textbf{Palavras-chave}: Processamento de Linguagem Natural. Recuperação de Informação. Busca Jurídica. TF-IDF. BM25. Embeddings.
+\end{resumo}
 
 % ========================================================================
 % ABSTRACT
 % ========================================================================
-    \begin{resumo}[Abstract]
-        \begin{otherlanguage*}{english}
-            The massive digitization of the Brazilian legal sector imposes critical information retrieval challenges. While AI models based on embeddings offer high semantic precision, their computational cost is high. This work investigates the pragmatic trade-off between semantic complexity and statistical efficiency. To this end, a comparative system was developed in Go, implementing TF-IDF and Okapi BM25 algorithms, confronted with a transformer model (Sentence-BERT) in Python. Tests performed on a legislative corpus of approximately 5,000 documents revealed that statistical search is significantly more efficient: using Unigrams required only 143 MB of RAM, versus 4.7 GB in the Trigram configuration. In terms of speed, the BM25 algorithm proved to be up to 10 times faster than TF-IDF in complex scenarios. Qualitative analysis via Spearman's Coefficient indicated a low correlation (between 0.02 and 0.06) between statistical and semantic rankings, suggesting that the approaches capture distinct aspects of relevance. It is concluded that, for the legal domain, statistical methods offer superior cost-benefit for initial filtering, with hybrid architecture being the ideal solution.
+\begin{resumo}[Abstract]
+    \begin{otherlanguage*}{english}
+        The massive digitization of the Brazilian legal sector imposes critical information retrieval challenges. While AI models based on embeddings offer high semantic precision, their computational cost is high. This work investigates the pragmatic trade-off between semantic complexity and statistical efficiency. To this end, a comparative system was developed entirely in Go, implementing TF-IDF and Okapi BM25 algorithms, confronted with a transformer model (Sentence-BERT). Tests performed on a legislative corpus of approximately 5,000 documents revealed that statistical search is significantly more efficient: using Unigrams required only 143 MB of RAM, versus 4.7 GB in the Trigram configuration. In terms of speed, the BM25 algorithm proved to be up to 10 times faster than TF-IDF in complex scenarios. Qualitative analysis via Spearman's Coefficient indicated a low correlation (between 0.02 and 0.06) between statistical and semantic rankings, suggesting that the approaches capture distinct aspects of relevance. It is concluded that, for the legal domain, statistical methods offer superior cost-benefit for initial filtering, with hybrid architecture being the ideal solution.
 
-            \textbf{Keywords}: Natural Language Processing. Information Retrieval. Legal Search. TF-IDF. BM25. Embeddings.
-        \end{otherlanguage*}
-    \end{resumo}
+        \textbf{Keywords}: Natural Language Processing. Information Retrieval. Legal Search. TF-IDF. BM25. Embeddings.
+    \end{otherlanguage*}
+\end{resumo}
 
 % ========================================================================
 % LISTA DE ILISTRAÇÕES
@@ -695,29 +695,40 @@
 % --- CAPÍTULO 4: DESENVOLVIMENTO ---
 
 
-    \chapter{Desenvolvimento}
+\chapter{Desenvolvimento}
 
-    O desenvolvimento da solução foi guiado principalmente por requisitos de desempenho e escalabilidade, já que o sistema precisava lidar com um grande volume de documentos jurídicos de forma eficiente. Em vez de seguir uma arquitetura baseada em microsserviços, a aplicação foi estruturada em módulos bem definidos, onde cada um possui sua própria responsabilidade dentro do fluxo geral do sistema. Esses módulos não se comunicam por meio de APIs ou chamadas diretas, sendo conectados apenas por manipulação humana entre as etapas, o que simplifica a integração e o controle do processo.
+O desenvolvimento da solução foi guiado por requisitos não funcionais de alto desempenho e eficiência no uso de recursos, essenciais para o processamento de grandes volumes de dados jurídicos. A arquitetura do sistema foi projetada de forma monolitica e autocontida, visando eliminar a latência de rede típica de microsserviços e maximizar o aproveitamento da memória RAM.
 
-    Embora duas linguagens tenham sido utilizadas, o núcleo da aplicação foi desenvolvido em Go. Toda a parte de coleta de dados, assim como a lógica de orquestração e indexação dos documentos, foi implementada nessa linguagem. A escolha pelo Go se deu tanto pela preferência dos desenvolvedores quanto por suas características técnicas, já que é uma linguagem com um nível ergonômico muito alto e, ao mesmo tempo, excelente desempenho computacional. Essa combinação de praticidade e velocidade foi decisiva para o projeto.
+Para materializar essa arquitetura, optou-se pela utilização da linguagem Go. Essa escolha foi estritamente técnica, motivada pela capacidade da linguagem de gerar binários compilados nativos e pelo seu modelo eficiente de concorrência. No entanto, os conceitos e algoritmos aqui apresentados são agnósticos à tecnologia e poderiam ser reproduzidos em outras linguagens de sistema.
 
-    O Python foi empregado apenas em um ponto específico do processo, na geração das \textit{embeddings} e na ordenação dos documentos de acordo com o nível de similaridade semântica. Essa etapa fazia uso de bibliotecas consolidadas de Inteligência Artificial e Processamento de Linguagem Natural, que se encaixavam melhor no ecossistema Python.
+As seções seguintes descrevem o ciclo de vida da informação dentro do sistema, desde a estruturação do corpus até a execução dos algoritmos de similaridade.
 
-    A seguir são apresentadas as principais tecnologias utilizadas, as estratégias adotadas na coleta de dados, o fluxo de limpeza e padronização textual e a forma como os algoritmos de busca foram implementados e integrados ao restante do sistema.
+\section{Visão Geral do Ciclo de Desenvolvimento}
+
+Para atingir o objetivo de comparar a eficiência entre métodos estatísticos e semânticos, o desenvolvimento do sistema seguiu um fluxo linear de engenharia de dados, dividido em cinco etapas fundamentais. Esta abordagem garantiu que a comparação fosse realizada sobre uma base controlada e auditável:
+
+\begin{enumerate}
+    \item \textbf{Construção do Corpus (Etapa de Carga):} Obtenção dos documentos brutos (PLs e PECs) e sua persistência segura em disco, garantindo que ambos os métodos (estatístico e semântico) operassem sobre exatamente o mesmo conjunto de dados.
+    \item \textbf{Pipeline de Normalização (Etapa de Limpeza):} Transformação de arquivos PDF não estruturados em texto puro higienizado, removendo ruídos (cabeçalhos, rodapés, numerações) que poderiam distorcer os cálculos de frequência de termos.
+    \item \textbf{Estruturação de Índices (Etapa de Organização):} Implementação de estruturas de dados em memória e banco de dados (SQLite) para armazenar vocabulários e N-gramas, otimizando o tempo de acesso para a etapa de busca.
+    \item \textbf{Implementação dos Algoritmos (Etapa de Construção):} Codificação manual ("\textit{from scratch}") dos algoritmos TF-IDF e BM25 em linguagem Go, e integração com o modelo de IA (Sentence-BERT), permitindo controle total sobre métricas de tempo e memória.
+    \item \textbf{Experimentação e Coleta de Métricas (Etapa de Validação):} Execução de cenários de teste controlados para mensurar o tempo de resposta, o consumo de RAM e a correlação de rankings (Spearman).
+\end{enumerate}
+
+As seções a seguir detalham a implementação técnica de cada uma dessas etapas.
 
 
-    \section{Aquisição de Dados}
+    \section{Definição do Corpus Experimental}
 
-    A construção do \textit{corpus} documental baseou-se na coleta massiva de textos legislativos diretamente do Portal da Câmara dos Deputados. O objetivo foi compilar uma base de dados robusta e representativa, totalizando aproximadamente 5.000 documentos, abrangendo principalmente PLs e PECs.
+Para a realização dos experimentos comparativos, foi estabelecido um \textit{corpus} legislativo composto por documentos públicos oriundos do Portal da Câmara dos Deputados. A escolha por dados oficiais garante que os testes de desempenho e relevância reflitam a complexidade vocabular e estrutural real enfrentada por sistemas jurídicos em produção.
 
-    Dada a magnitude do volume de dados, uma abordagem sequencial seria inviável devido à latência de rede. Portanto, a solução foi implementada em Go, localizada no pacote \texttt{corpus}, explorando o modelo de concorrência da linguagem (\textit{goroutines}) para realizar o \textit{download} dos documentos de forma paralela e assíncrona.
+O conjunto de dados totaliza aproximadamente 5.000 documentos, abrangendo duas classes principais de proposições legislativas:
+\begin{itemize}
+    \item \textbf{Projetos de Lei (PL):} Textos normativos que propõem novas leis ou alterações na legislação existente.
+    \item \textbf{Propostas de Emenda à Constituição (PEC):} Textos de teor constitucional com alta densidade jurídica.
+\end{itemize}
 
-    Para a extração das informações, utilizou-se a biblioteca \texttt{goquery}. Esta ferramenta permite realizar o \textit{parsing} das páginas HTML retornadas pelo portal e navegar pela árvore DOM utilizando seletores CSS, facilitando a identificação precisa dos \textit{links} para os arquivos PDF em meio à estrutura complexa do site da Câmara.
-
-    O fluxo de coleta é iniciado pela definição do escopo, etapa na qual o algoritmo varre as páginas de resultados do portal para identificar os documentos disponíveis com base nas categorias legislativas de interesse. A execução ocorre de forma paralela, disparando múltiplas requisições simultâneas para maximizar o uso da banda. No entanto, para mitigar riscos de bloqueio de IP por excesso de requisições (\textit{throttling}) ou a interpretação do tráfego como um ataque de Negação de Serviço (DoS), implementou-se um mecanismo de \textit{rate limiting} com um intervalo de segurança fixo de 500 milissegundos entre as chamadas, garantindo a estabilidade e o respeito às políticas do portal governamental.
-
-    Na etapa de processamento do conteúdo, a biblioteca \texttt{goquery} analisa o HTML de cada página para filtrar e extrair apenas as URLs que apontam para o inteiro teor dos documentos em formato \texttt{.pdf}. Concluída a identificação, os arquivos são baixados via \textit{stream} e salvos diretamente no diretório local \texttt{./misc/corpus/pdf}. Este processo de persistência mantém a nomenclatura original dos arquivos, um requisito essencial para garantir a futura rastreabilidade dos dados no \textit{corpus}.
-
+Os arquivos foram obtidos e processados em seu formato original (PDF), preservando as características de dados não estruturados típicas do ambiente legal. Essa massa documental serviu como base idêntica tanto para a construção dos índices invertidos (nos algoritmos estatísticos) quanto para a geração dos vetores de \textit{embeddings} (na abordagem semântica), garantindo a validade da comparação.
 
     \section{Pré-processamento e Normalização Textual}
 
@@ -969,20 +980,21 @@ for key := range tf {
 
     \subsection{Pipeline Semântico: Vetorização via Transformers}
 
-    Enquanto os algoritmos TF-IDF e BM25, implementados no núcleo em Go, operam no nível léxico, identificando a ocorrência exata de termos, a camada de busca semântica exigiu uma abordagem capaz de capturar a intenção e o significado contextual das consultas. Para essa tarefa, o processamento foi delegado a um módulo desenvolvido em Python (versão 3.11), escolha natural dada a predominância desta linguagem no ecossistema de Aprendizado Profundo (\textit{Deep Learning}), a maturidade de bibliotecas como \textit{PyTorch} e \textit{Hugging Face}, e a compatibilidade com as ferramentas necessárias para a vetorização.
+    Enquanto os algoritmos TF-IDF e BM25 operam no nível léxico, identificando a ocorrência exata de termos, a camada de busca semântica exigiu uma abordagem capaz de capturar a intenção e o significado contextual das consultas. Para essa tarefa, integrou-se ao sistema um módulo de inferência baseado em modelos \textit{Transformer}.
+
+    Diferente de abordagens tradicionais que exigiriam serviços externos ou linguagens de \textit{scripting} separadas, a implementação em Go permitiu manter a arquitetura coesa e performática. O sistema carrega o modelo pré-treinado e realiza a tokenização e a vetorização diretamente na memória do processo principal, eliminando a latência de comunicação entre serviços e simplificando o \textit{deploy} da solução.
 
     \subsubsection{Arquitetura do Componente Semântico}
 
-    O componente, localizado no diretório \texttt{src/core\_python}, foi construído sobre o \textit{framework} \textbf{FastAPI}. A opção pelo FastAPI, em detrimento de alternativas mais tradicionais, deve-se à sua natureza assíncrona e de baixa latência, características ideais para que o desempenho do microsserviço não se tornasse um gargalo quando comparado ao módulo em Go de altíssima performance.
-
-    A integração entre os módulos ocorre de forma desacoplada, utilizando o sistema de arquivos para a troca de dados. O fluxo de execução foi orquestrado manualmente para garantir a integridade de cada etapa:
+    O componente de inferência foi desenhado para operar de forma desacoplada dos algoritmos estatísticos, mas compartilhando as mesmas estruturas de dados básicas. O fluxo de execução semântica segue as seguintes etapas:
 
     \begin{enumerate}
-        \item O módulo em Go realiza a limpeza e normalização de todo o texto, persistindo o resultado em um diretório específico.
-        \item O módulo em Python lê os arquivos processados e os submete à biblioteca \texttt{sentence-transformers}, que abstrai a complexidade da tokenização e da inferência na rede neural.
-        \item O modelo gera e armazena em cache todos os vetores multidimensionais correspondentes aos documentos.
-        \item O mesmo processo de vetorização é aplicado a cada frase de consulta definida nos testes.
-        \item Por fim, o código calcula a similaridade de cosseno entre o vetor da frase e os vetores de todos os documentos, gerando as listas ordenadas de relevância.
+        \item O módulo de pré-processamento realiza a limpeza e normalização do texto, preparando os insumos para a vetorização.
+        \item O sistema carrega o modelo \texttt{Sentence-BERT} e seus respectivos tokenizadores.
+        \item O conteúdo textual dos documentos é convertido em \textit{tokens} e submetido à rede neural, gerando vetores densos (embeddings) de 384 dimensões.
+        \item Esses vetores são armazenados em estruturas otimizadas em memória para permitir comparações rápidas.
+        \item No momento da busca, a frase de consulta passa pelo mesmo processo de vetorização.
+        \item Por fim, calcula-se a similaridade de cosseno entre o vetor da consulta e os vetores de todos os documentos, gerando as listas ordenadas de relevância semântica.
     \end{enumerate}
 
     \subsubsection{Seleção de Modelos e Mudança de Escopo}
@@ -1129,6 +1141,33 @@ for key := range tf {
 
     A análise dos dados revelou que o tempo de processamento cresce de forma linear em relação ao tamanho da frase. Isso era esperado pois cada palavra adicional na consulta exige que o algoritmo calcule o peso e a frequência de novos N-gramas. No entanto o que chamou a atenção foi como a execução paralela se comportou diante desse aumento de carga.
 
+    \begin{table}[H]
+\centering
+\caption{Tempo de inferência do modelo Sentence-BERT para diferentes tamanhos de consulta}
+\label{tab:bert_inferencia}
+\begin{tabular}{lcc}
+\hline
+\textbf{Configuração} & \textbf{Tempo Total} & \textbf{Tempo Médio} \\
+\hline
+Documentos (1.648) & 1m27,31s & 52,98 ms/doc \\
+Consulta -- 10 palavras & 2,53 s & 49,68 ms/frase \\
+Consulta -- 20 palavras & 2,49 s & 49,95 ms/frase \\
+Consulta -- 40 palavras & 2,50 s & 50,14 ms/frase \\
+\hline
+\end{tabular}
+\end{table}
+
+
+Apesar da aparente estabilidade no tempo médio de inferência do modelo Sentence-BERT
+independentemente do tamanho da consulta, os dados apresentados não permitem conclusões
+definitivas sobre a escalabilidade semântica do modelo. O conjunto de experimentos foi
+executado sob um número limitado de prompts, em um ambiente de hardware específico e
+com um único modelo de embedding. Dessa forma, os resultados devem ser interpretados
+como indicativos do comportamento observado neste cenário controlado, não sendo
+suficientes para generalizações amplas ou afirmações conclusivas sobre desempenho em
+ambientes de produção.
+
+
     Para frases curtas de dez palavras o custo de iniciar múltiplas rotinas de processamento quase anulou os ganhos de velocidade o que manteve o modo sequencial altamente competitivo. Contudo à medida que a frase cresceu a vantagem do paralelismo não tornou-se perceptível. Nos testes com Trigramas e quarenta palavras o processamento paralelo não conseguiu ser mais rápido que a execução sequencial. Isso demonstra que o uso da concorrência deve ser condicional ativando-se apenas dentro de cenários estudados, caso contrário não haverá ganhos que compensem a sobrecarga de gerenciar as \textit{threads} pelo volume de trabalho.
 
     \begin{figure}[h]
@@ -1169,7 +1208,7 @@ for key := range tf {
 
     Ficou evidente que o algoritmo BM25 é a escolha superior para a busca estatística entregando uma performance de velocidade muito acima do TF-IDF graças à sua capacidade de lidar com a esparsidade dos dados. Além disso identificamos que o "ponto ótimo" de infraestrutura reside na utilização de Bigramas sem saltos. Essa configuração oferece um contexto lexical suficiente sem incorrer no custo proibitivo de memória dos Trigramas ou na complexidade desnecessária dos \textit{skip-grams}.
 
-    Também concluímos que embora modelos de inteligência artificial ofereçam uma compreensão profunda do texto o seu custo computacional é elevado. A baixa correlação entre os resultados estatísticos e semânticos sugere que a arquitetura ideal para um sistema jurídico real deve ser híbrida. O sistema em Go com BM25 pode atuar como um filtro primário de altíssima velocidade e baixo custo entregando um subconjunto de documentos para que o modelo em Python realize um refinamento semântico final apenas onde for necessário.
+    Também concluímos que embora modelos de inteligência artificial ofereçam uma compreensão profunda do texto o seu custo computacional é elevado. A baixa correlação entre os resultados estatísticos e semânticos sugere que a arquitetura ideal para um sistema jurídico real deve ser híbrida. O sistema estatístico (BM25) pode atuar como um filtro primário de altíssima velocidade e baixo custo, entregando um subconjunto refinado de documentos para que o modelo semântico realize uma reordenação final apenas onde a precisão contextual for estritamente necessária.
 
     Por fim as limitações encontradas especialmente no desempenho do banco de dados em disco abrem portas para investigações futuras. A substituição da camada de persistência por tecnologias mais robustas e a ampliação do \textit{corpus} para incluir jurisprudência são os próximos passos naturais para evoluir esta pesquisa. Este trabalho deixa como legado uma base sólida de dados e uma implementação modular capaz de guiar o desenvolvimento de soluções de busca eficientes para o judiciário brasileiro.
 
@@ -1208,3 +1247,4 @@ for key := range tf {
 % \end{apendicesenv}
 
 \end{document}
+s
