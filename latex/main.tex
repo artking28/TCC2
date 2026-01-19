@@ -808,13 +808,13 @@ Os arquivos foram obtidos e processados em seu formato original (PDF), preservan
     A unidade fundamental do \textit{corpus} é representada pela \textit{struct} \texttt{Document}, definida no arquivo \texttt{models/Document.go}. Contudo, diferentemente de sistemas tradicionais que armazenam o conteúdo completo (BLOBs ou Textos Longos) no banco de dados, este projeto adota uma abordagem híbrida focada em performance.
 
     \begin{verbatim}
-type Document struct {
-    gorm.Model
-    Title        string
-    Link         string
-    CleanTitle   string
-    // Content e CleanContent são processados em memória ou lidos do disco
-}
+        type Document struct {
+            gorm.Model
+            Title        string
+            Link         string
+            CleanTitle   string
+            // Content e CleanContent são processados em memória ou lidos do disco
+        }
     \end{verbatim}
 
     Para evitar o crescimento exponencial do arquivo do banco de dados SQLite, o que degradaria o tempo de resposta das consultas de índice, o conteúdo textual integral dos documentos (\textit{Full Text}) \textbf{não é persistido no banco de dados} de forma permanente.
@@ -830,10 +830,10 @@ type Document struct {
     Para otimizar o armazenamento e as comparações, as palavras não são repetidas nas tabelas de índice. Em vez disso, utiliza-se uma tabela de vocabulário único, representada pela \textit{struct} \texttt{Word}.
 
     \begin{verbatim}
-type Word struct {
-    gorm.Model
-    Word string `gorm:"uniqueIndex"`
-}
+        type Word struct {
+            gorm.Model
+            Word string `gorm:"uniqueIndex"`
+        }
     \end{verbatim}
 
     A \textit{tag} \texttt{uniqueIndex} na coluna \texttt{Word} é crucial: ela garante que cada termo apareça apenas uma vez no banco de dados e cria um índice B-Tree físico no SQLite, permitindo que a conversão de uma \textit{string} para seu \texttt{WordID} ocorra em tempo logarítmico $O(\log N)$.
@@ -845,15 +845,15 @@ type Word struct {
     Para que os algoritmos de cálculo de relevância (TF-IDF e BM25) pudessem operar de forma agnóstica em relação ao tamanho do n-grama, definiu-se a interface polimórfica \texttt{IGram}, localizada no pacote \texttt{models/interfaces}.
 
     \begin{verbatim}
-type IGram interface {
-    GetCacheKey(jumps, doc bool) string
-    GetDocId() uint16
-    Increment()
-    GetCount() int
-    ApplyWordWheres(db *gorm.DB) *gorm.DB
-    ApplyJumpWheres(db *gorm.DB) *gorm.DB
-    schema.Tabler
-}
+        type IGram interface {
+            GetCacheKey(jumps, doc bool) string
+            GetDocId() uint16
+            Increment()
+            GetCount() int
+            ApplyWordWheres(db *gorm.DB) *gorm.DB
+            ApplyJumpWheres(db *gorm.DB) *gorm.DB
+            schema.Tabler
+        }
     \end{verbatim}
 
     Esta interface é crucial para a arquitetura do sistema, pois permite abstrair a complexidade das consultas SQL. Métodos como \texttt{ApplyWordWheres} e \texttt{ApplyJumpWheres} encapsulam a lógica de filtragem do banco de dados, permitindo que uma função de busca receba um \texttt{IGram} genérico e construa a \textit{query} correta dinamicamente, seja ela para um termo único ou uma frase de três palavras.
@@ -861,15 +861,15 @@ type IGram interface {
     A materialização dessa interface ocorre nas \textit{structs} concretas. A estrutura de um trigrama, denominada \texttt{InverseTrigram}, exemplifica a otimização de memória aplicada:
 
     \begin{verbatim}
-type InverseTrigram struct {
-    Wd0Id uint16 `gorm:"uniqueIndex:compositeindex"`
-    Wd1Id uint16 `gorm:"uniqueIndex:compositeindex"`
-    Wd2Id uint16 `gorm:"uniqueIndex:compositeindex"`
-    DocId uint16 `gorm:"uniqueIndex:compositeindex"`
-    Jump0 int8   `gorm:"uniqueIndex:compositeindex"`
-    Jump1 int8   `gorm:"uniqueIndex:compositeindex"`
-    Count int
-}
+        type InverseTrigram struct {
+            Wd0Id uint16 `gorm:"uniqueIndex:compositeindex"`
+            Wd1Id uint16 `gorm:"uniqueIndex:compositeindex"`
+            Wd2Id uint16 `gorm:"uniqueIndex:compositeindex"`
+            DocId uint16 `gorm:"uniqueIndex:compositeindex"`
+            Jump0 int8   `gorm:"uniqueIndex:compositeindex"`
+            Jump1 int8   `gorm:"uniqueIndex:compositeindex"`
+            Count int
+        }
     \end{verbatim}
 
     Nesta modelagem, destaca-se primeiramente o uso de um Índice Composto (\textit{Composite Index}). Conforme definido pelas \textit{tags} do GORM (\texttt{uniqueIndex:compositeindex}), os seis primeiros atributos — que abrangem as palavras, o identificador do documento e as distâncias — constituem, em conjunto, uma chave única composta. Essa estratégia assegura a integridade dos dados ao impedir a duplicação de registros para a mesma ocorrência semântica e, simultaneamente, materializa um índice B-Tree otimizado no SQLite, resultando em uma aceleração drástica nas operações de leitura.
@@ -895,17 +895,17 @@ type InverseTrigram struct {
     Para mitigar isso, a função \texttt{InitDB} utiliza uma estrutura de decisão (\texttt{switch gramSize}) para definir dinamicamente qual modelo será migrado para o banco de dados daquela execução específica:
 
     \begin{verbatim}
-switch gramSize {
-case 1:
-    gramModel = &models.InverseUnigram{}
-    index = "(wd0Id)"
-case 2:
-    gramModel = &models.InverseBigram{}
-    index = "(wd0Id, wd1Id)"
-case 3:
-    gramModel = &models.InverseTrigram{}
-    index = "(wd0Id, wd1Id, wd2Id)"
-}
+        switch gramSize {
+        case 1:
+            gramModel = &models.InverseUnigram{}
+            index = "(wd0Id)"
+        case 2:
+            gramModel = &models.InverseBigram{}
+            index = "(wd0Id, wd1Id)"
+        case 3:
+            gramModel = &models.InverseTrigram{}
+            index = "(wd0Id, wd1Id, wd2Id)"
+        }
     \end{verbatim}
 
     Dessa forma, se um teste avalia a performance de Trigramas, o banco de dados é instanciado contendo apenas a tabela \texttt{InverseTrigram}. Isso garante que a tabela de índices (\texttt{WORD\_DOC}) seja extremamente compacta e otimizada exclusivamente para as consultas daquele tamanho de grama, eliminando o \textit{overhead} de manutenção de índices não utilizados.
@@ -942,19 +942,19 @@ case 3:
     O trecho de código abaixo ilustra como o paralelismo foi controlado para evitar sobrecarga no banco de dados:
 
     \begin{verbatim}
-sem := make(chan struct{}, 25) // Semáforo de capacidade 25
-var wg sync.WaitGroup
+        sem := make(chan struct{}, 25) // Semáforo de capacidade 25
+        var wg sync.WaitGroup
 
-for key := range tf {
-    wg.Add(1)
-    sem <- struct{}{} // Adquire token
-    go func(key string) {
-        defer wg.Done()
-        defer func() { <-sem }() // Libera token
-        df := len(cacheN[key])   // Acesso thread-safe ao cache
-        dfChan <- dfResult{key: key, df: df}
-    }(key)
-}
+        for key := range tf {
+            wg.Add(1)
+            sem <- struct{}{} // Adquire token
+            go func(key string) {
+                defer wg.Done()
+                defer func() { <-sem }() // Libera token
+                df := len(cacheN[key])   // Acesso thread-safe ao cache
+                dfChan <- dfResult{key: key, df: df}
+            }(key)
+        }
     \end{verbatim}
 
     Um canal bufferizado (\texttt{sem}) atua como um semáforo limitador, garantindo que nunca haja mais de 25 \textit{goroutines} acessando o cache ou o banco de dados simultaneamente. Isso estabiliza o \textit{throughput} da CPU e previne condições de corrida em ambientes de alta carga.
@@ -1142,30 +1142,29 @@ for key := range tf {
     A análise dos dados revelou que o tempo de processamento cresce de forma linear em relação ao tamanho da frase. Isso era esperado pois cada palavra adicional na consulta exige que o algoritmo calcule o peso e a frequência de novos N-gramas. No entanto o que chamou a atenção foi como a execução paralela se comportou diante desse aumento de carga.
 
     \begin{table}[H]
-\centering
-\caption{Tempo de inferência do modelo Sentence-BERT para diferentes tamanhos de consulta}
-\label{tab:bert_inferencia}
-\begin{tabular}{lcc}
-\hline
-\textbf{Configuração} & \textbf{Tempo Total} & \textbf{Tempo Médio} \\
-\hline
-Documentos (1.648) & 1m27,31s & 52,98 ms/doc \\
-Consulta -- 10 palavras & 2,53 s & 49,68 ms/frase \\
-Consulta -- 20 palavras & 2,49 s & 49,95 ms/frase \\
-Consulta -- 40 palavras & 2,50 s & 50,14 ms/frase \\
-\hline
-\end{tabular}
-\end{table}
+        \centering
+        \caption{Tempo médio de busca para diferentes tamanhos de consulta}
+        \label{tab:tempo_busca_consulta}
+        \begin{tabular}{lccc}
+        \hline
+        \textbf{Modelo} & \textbf{10 palavras} & \textbf{20 palavras} & \textbf{40 palavras} \\
+        \hline
+        TF-IDF      & 33 µs   & 64 µs   & 128 µs  \\
+        BM25        & 23 µs   & 48 µs   & 100 µs  \\
+        Embeddings  & 1.053 ms & 1.054 ms & 1.044 ms \\
+        \hline
+        \end{tabular}
+    \end{table}
 
 
-Apesar da aparente estabilidade no tempo médio de inferência do modelo Sentence-BERT
-independentemente do tamanho da consulta, os dados apresentados não permitem conclusões
-definitivas sobre a escalabilidade semântica do modelo. O conjunto de experimentos foi
-executado sob um número limitado de prompts, em um ambiente de hardware específico e
-com um único modelo de embedding. Dessa forma, os resultados devem ser interpretados
-como indicativos do comportamento observado neste cenário controlado, não sendo
-suficientes para generalizações amplas ou afirmações conclusivas sobre desempenho em
-ambientes de produção.
+
+    Embora os resultados evidenciem diferenças significativas de desempenho entre abordagens
+    baseadas em modelos léxicos e embeddings, especialmente na ordem de grandeza do tempo
+    de busca, os dados apresentados não permitem conclusões definitivas sobre a escalabilidade
+    dos modelos. Os experimentos foram conduzidos em um ambiente controlado, com um número
+    limitado de consultas e parâmetros fixos, de modo que os resultados devem ser interpretados
+    como indicativos do comportamento observado neste cenário específico.
+
 
 
     Para frases curtas de dez palavras o custo de iniciar múltiplas rotinas de processamento quase anulou os ganhos de velocidade o que manteve o modo sequencial altamente competitivo. Contudo à medida que a frase cresceu a vantagem do paralelismo não tornou-se perceptível. Nos testes com Trigramas e quarenta palavras o processamento paralelo não conseguiu ser mais rápido que a execução sequencial. Isso demonstra que o uso da concorrência deve ser condicional ativando-se apenas dentro de cenários estudados, caso contrário não haverá ganhos que compensem a sobrecarga de gerenciar as \textit{threads} pelo volume de trabalho.
